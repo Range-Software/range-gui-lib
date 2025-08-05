@@ -725,7 +725,6 @@ void RCloudFileManagerWidget::onCloudFileSelectionChanged()
 {
     uint nLocalSelected = this->localFilesWidget->selectedItems().count();
     uint nCloudSelected = this->cloudFilesWidget->selectedItems().count();
-    this->cloudRefreshButton->setEnabled(nCloudSelected);
     this->cloudDeleteButton->setEnabled(nCloudSelected);
     this->cloudDownloadButton->setEnabled(nCloudSelected);
     this->cloudEditButton->setEnabled(nCloudSelected);
