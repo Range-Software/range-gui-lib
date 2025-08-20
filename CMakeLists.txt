@@ -105,15 +105,10 @@ target_include_directories(range-gui-lib
 )
 
 target_link_libraries(range-gui-lib
-    PRIVATE
-        Qt6::Core
-        Qt6::Concurrent
-        Qt6::HttpServer
-        Qt6::Network
+    PUBLIC
+        range-cloud-lib
         Qt6::Widgets
         common_defines
-        range-base-lib
-        range-cloud-lib
 )
 
 qt_add_translations(range-gui-lib
