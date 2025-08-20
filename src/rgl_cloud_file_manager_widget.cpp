@@ -547,11 +547,13 @@ void RCloudFileManagerWidget::downloadSelectedCloudFiles()
 {
     QDir localDirectory(this->localDirectoryPath);
 
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    for (const QTreeWidgetItem *selectedItem : this->cloudFilesWidget->selectedItems())
     {
+        QString _fileName = selectedItem->text(ColumnName);
+        QUuid _fileUuid = selectedItem->data(ColumnId,Qt::UserRole).toUuid();
         try
         {
-            QString filePath = localDirectory.absoluteFilePath(QFileInfo(selectedItem->text(ColumnName)).fileName());
+            QString filePath = localDirectory.absoluteFilePath(QFileInfo(_fileName).fileName());
             int retVal = RMessageBox::Yes;
             if (QFileInfo::exists(filePath))
             {
@@ -599,11 +601,11 @@ void RCloudFileManagerWidget::downloadSelectedCloudFiles()
                 progressDialog->setCancelButtonText(tr("Cancel"));
                 QObject::connect(progressDialog,&QProgressDialog::canceled,this->cloudClient,&RCloudClient::cancelTask);
 
-                progressDialog->setLabelText(tr("File download") + ": " + selectedItem->text(ColumnName));
+                progressDialog->setLabelText(tr("File download") + ": " + _fileName);
 
-                // this->progressDialog->setLabelText(tr("File download") + ":" + selectedItem->text(ColumnName));
+                // this->progressDialog->setLabelText(tr("File download") + ":" + _fileName);
 
-                RToolTask *task = this->cloudClient->requestFileDownload(filePath,selectedItem->data(ColumnId,Qt::UserRole).toUuid());
+                RToolTask *task = this->cloudClient->requestFileDownload(filePath,_fileUuid);
 
                 QObject::connect(task, &RToolTask::actionFinished, progressDialog, &QProgressDialog::deleteLater);
                 QObject::connect(task, &RToolTask::actionFailed, progressDialog, &QProgressDialog::deleteLater);
@@ -820,8 +822,8 @@ void RCloudFileManagerWidget::onUploadProgress(qint64 bytesSent, qint64 bytesTot
     {
         // this->progressDialog->setRange(0,bytesTotal+1);
         // this->progressDialog->setValue(bytesSent);
-
-        emit this->progressValueChanged(qRound((bytesSent/(bytesTotal+1))*100.0));
+        double fraction = (double(bytesSent)/double(bytesTotal+1))*100.0;
+        emit this->progressValueChanged(qRound(fraction));
     }
 }
 
@@ -830,9 +832,9 @@ void RCloudFileManagerWidget::onDownloadProgress(qint64 bytesReceived, qint64 by
     if (bytesTotal > 0)
     {
         // this->progressDialog->setRange(0,bytesTotal+1);
-        // this->progressDialog->setValue(bytesReceived);
-
-        emit this->progressValueChanged(qRound((bytesReceived/(bytesTotal+1))*100.0));
+        // this->progressDialog->setValue(bytesSent);
+        double fraction = (double(bytesReceived)/double(bytesTotal+1))*100.0;
+        emit this->progressValueChanged(qRound(fraction));
     }
 }
 
