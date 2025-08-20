@@ -318,7 +318,7 @@ void RApplication::onStarted()
         RLogger::info("%s\n",infoText.toUtf8().constData());
     }
     RLogger::unindent(false);
-    foreach (const QString &infoText, appInfo)
+    for (const QString &infoText : std::as_const(appInfo))
     {
         RLogger::info("%s\n",infoText.toUtf8().constData());
     }
@@ -339,7 +339,7 @@ void RApplication::onStarted()
 
         RFileUpdater *pFileUpdater = new RFileUpdater;
 
-        foreach (const QString &sourceName, this->updaterSourceDirs)
+        for (const QString &sourceName : std::as_const(this->updaterSourceDirs))
         {
 #ifdef Q_OS_DARWIN
             QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + "Resources" + QDir::separator() + sourceName)));
@@ -354,7 +354,7 @@ void RApplication::onStarted()
             if (dataSrcDir.exists())
             {
                 QStringList files = dataSrcDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::Readable, QDir::Name);
-                foreach (QString file, files)
+                for (const QString &file : std::as_const(files))
                 {
                     RLogger::info("Adding file: \'%s\' -> \'%s\'\n",dataSrcDir.filePath(file).toUtf8().constData(),dataDstDir.filePath(file).toUtf8().constData());
                     pFileUpdater->addFile(dataSrcDir.filePath(file),dataDstDir.filePath(file));
