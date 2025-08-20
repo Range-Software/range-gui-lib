@@ -237,7 +237,7 @@ void RCloudFileManagerWidget::populateLocalFiles(const QString &path, QTreeWidge
         }
     }
 
-    foreach (const QFileInfo &fileInfo, _fileInfoList)
+    for (const QFileInfo &fileInfo : std::as_const(_fileInfoList))
     {
         RCloudFileManagerWidget::updateFileListItem(new QTreeWidgetItem(treeWidget),fileInfo);
     }
@@ -340,7 +340,9 @@ void RCloudFileManagerWidget::uploadSelectedLocalFiles()
 {
     QDir localDirectory(this->localDirectoryPath);
 
-    foreach (const QTreeWidgetItem *selectedItem, this->localFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->localFilesWidget->selectedItems();
+
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         try
         {
@@ -401,7 +403,8 @@ void RCloudFileManagerWidget::updateSelectedLocalFiles()
 
 void RCloudFileManagerWidget::updateSelectedCloudFilesAccessOwner()
 {
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->cloudFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         RFileInfo fileInfo;
         fileInfo.setId(selectedItem->data(ColumnId,Qt::UserRole).toUuid());
@@ -431,7 +434,8 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesAccessOwner()
 
 void RCloudFileManagerWidget::updateSelectedCloudFilesAccessMode()
 {
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->cloudFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         RFileInfo fileInfo;
         fileInfo.setId(selectedItem->data(ColumnId,Qt::UserRole).toUuid());
@@ -461,7 +465,8 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesAccessMode()
 
 void RCloudFileManagerWidget::updateSelectedCloudFilesVersion()
 {
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->cloudFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         RFileInfo fileInfo;
         fileInfo.setId(selectedItem->data(ColumnId,Qt::UserRole).toUuid());
@@ -487,7 +492,8 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesVersion()
 
 void RCloudFileManagerWidget::updateSelectedCloudFilesTags()
 {
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->cloudFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         RFileInfo fileInfo;
         fileInfo.setId(selectedItem->data(ColumnId,Qt::UserRole).toUuid());
@@ -515,7 +521,8 @@ void RCloudFileManagerWidget::removeSelectedLocalFiles()
 {
     QString question = tr("Are you sure you want to remove selected local files?");
     question += "<ul>";
-    foreach (const QTreeWidgetItem *selectedItem, this->localFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->localFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         question += "<li><tt>" + selectedItem->text(ColumnName) + "</tt></li>";
     }
@@ -527,7 +534,7 @@ void RCloudFileManagerWidget::removeSelectedLocalFiles()
 
     QDir localDirectory(this->localDirectoryPath);
 
-    foreach (const QTreeWidgetItem *selectedItem, this->localFilesWidget->selectedItems())
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         QString filePath = localDirectory.absoluteFilePath(selectedItem->text(ColumnName));
 
@@ -547,7 +554,8 @@ void RCloudFileManagerWidget::downloadSelectedCloudFiles()
 {
     QDir localDirectory(this->localDirectoryPath);
 
-    for (const QTreeWidgetItem *selectedItem : this->cloudFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->cloudFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         QString _fileName = selectedItem->text(ColumnName);
         QUuid _fileUuid = selectedItem->data(ColumnId,Qt::UserRole).toUuid();
@@ -625,7 +633,8 @@ void RCloudFileManagerWidget::removeSelectedCloudFiles()
 {
     QString question = tr("Are you sure you want to remove selected Cloud files?");
     question += "<ul>";
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    QList<QTreeWidgetItem*> selectedItems = this->cloudFilesWidget->selectedItems();
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         question += "<li><tt>" + selectedItem->text(ColumnName) + "</tt> (" + selectedItem->text(ColumnId) + ")</li>";
     }
@@ -635,7 +644,7 @@ void RCloudFileManagerWidget::removeSelectedCloudFiles()
         return;
     }
 
-    foreach (const QTreeWidgetItem *selectedItem, this->cloudFilesWidget->selectedItems())
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
     {
         try
         {

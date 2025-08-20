@@ -116,13 +116,13 @@ class RApplicationSettings : public QSettings
         const RVersion &getStoredVersion() const;
 
         //! Return supported image formats (extensions).
-        static QList<QString> getSupportedImageFormats();
+        static QStringList getSupportedImageFormats();
 
         //! Return supported video formats (extensions).
-        static QList<QString> getSupportedVideoFormats();
+        static QStringList getSupportedVideoFormats();
 
         //! Return supported document formats (extensions).
-        static QList<QString> getSupportedDocumentFormats();
+        static QStringList getSupportedDocumentFormats();
 
         //! Return and construct directory path.
         static QString getDir(const QString &topDir, const QString &subDir);

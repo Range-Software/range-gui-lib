@@ -122,12 +122,12 @@ const RVersion &RApplicationSettings::getStoredVersion() const
     return this->storedVersion;
 }
 
-QList<QString> RApplicationSettings::getSupportedImageFormats()
+QStringList RApplicationSettings::getSupportedImageFormats()
 {
-    QList<QString> formats;
+    QStringList formats;
 
     QList<QByteArray> supportedFormats = QImageWriter::supportedImageFormats();
-    foreach (QString format, supportedFormats)
+    for (const QByteArray &format : std::as_const(supportedFormats))
     {
         formats.append(format.toLower());
     }
@@ -135,9 +135,9 @@ QList<QString> RApplicationSettings::getSupportedImageFormats()
     return formats;
 }
 
-QList<QString> RApplicationSettings::getSupportedVideoFormats()
+QStringList RApplicationSettings::getSupportedVideoFormats()
 {
-    QList<QString> formats;
+    QStringList formats;
 
     formats.append("3gp2");
     formats.append("3gpp");
@@ -154,9 +154,9 @@ QList<QString> RApplicationSettings::getSupportedVideoFormats()
     return formats;
 }
 
-QList<QString> RApplicationSettings::getSupportedDocumentFormats()
+QStringList RApplicationSettings::getSupportedDocumentFormats()
 {
-    QList<QString> formats;
+    QStringList formats;
 
     formats.append("txt");
     formats.append("log");
