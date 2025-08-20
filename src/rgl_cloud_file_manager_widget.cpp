@@ -17,6 +17,7 @@
 #include "rgl_file_tags_dialog.h"
 #include "rgl_cloud_file_manager_widget.h"
 #include "rgl_message_box.h"
+#include "rgl_progress_dialog.h"
 
 RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connectionHandler,
                                                  RApplicationSettings *applicationSettings,
@@ -25,18 +26,17 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
     : QWidget{parent}
     , applicationSettings{applicationSettings}
     , allowDirectorySelector{allowDirectorySelector}
-    , showProgress{false}
 {
     this->localDirectoryPath = this->applicationSettings->getDataDir();
 
     this->cloudClient = connectionHandler->createPrivateClient(this);
     this->cloudClient->setBlocking(false);
 
-    this->progressDialog = new QProgressDialog(this);
-    this->progressDialog->setRange(0,100);
-    this->progressDialog->setMinimumDuration(1000);
-    this->progressDialog->setCancelButtonText(tr("Cancel"));
-    QObject::connect(this->progressDialog,&QProgressDialog::canceled,this->cloudClient,&RCloudClient::cancelTask);
+    // this->progressDialog = new QProgressDialog(this);
+    // this->progressDialog->setRange(0,100);
+    // this->progressDialog->setMinimumDuration(1000);
+    // this->progressDialog->setCancelButtonText(tr("Cancel"));
+    // QObject::connect(this->progressDialog,&QProgressDialog::canceled,this->cloudClient,&RCloudClient::cancelTask);
 
     QIcon removeIcon(":/icons/cloud/pixmaps/range-remove.svg");
     QIcon refreshIcon(":/icons/cloud/pixmaps/range-refresh.svg");
@@ -327,7 +327,6 @@ void RCloudFileManagerWidget::refreshCloudFiles()
 {
     try
     {
-        this->showProgress = false;
         this->cloudClient->requestListFiles();
     }
     catch (const RError &rError)
@@ -345,9 +344,10 @@ void RCloudFileManagerWidget::uploadSelectedLocalFiles()
     {
         try
         {
-            this->progressDialog->setLabelText(tr("File upload") + ": " + selectedItem->text(ColumnName));
-            this->showProgress = true;
-            this->cloudClient->requestFileUpload(localDirectory.absoluteFilePath(selectedItem->text(ColumnName)),selectedItem->text(ColumnName));
+            // this->progressDialog->setLabelText(tr("File upload") + ": " + selectedItem->text(ColumnName));
+
+            RToolTask *task = this->cloudClient->requestFileUpload(localDirectory.absoluteFilePath(selectedItem->text(ColumnName)),selectedItem->text(ColumnName));
+
         }
         catch (const RError &rError)
         {
@@ -387,8 +387,7 @@ void RCloudFileManagerWidget::updateSelectedLocalFiles()
 
     try
     {
-        this->progressDialog->setLabelText(tr("File update") + ": " + localSelectedItems.at(0)->text(ColumnName));
-        this->showProgress = true;
+        // this->progressDialog->setLabelText(tr("File update") + ": " + localSelectedItems.at(0)->text(ColumnName));
         this->cloudClient->requestFileUpdate(localDirectory.absoluteFilePath(localSelectedItems.at(0)->text(ColumnName)),
                                              localSelectedItems.at(0)->text(ColumnName),
                                              cloudSelectedItems.at(0)->data(ColumnId,Qt::UserRole).toUuid());
@@ -418,8 +417,7 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesAccessOwner()
         {
             try
             {
-                this->progressDialog->setLabelText(tr("File access owner update") + ":" + selectedItem->text(ColumnName));
-                this->showProgress = true;
+                // this->progressDialog->setLabelText(tr("File access owner update") + ":" + selectedItem->text(ColumnName));
                 this->cloudClient->requestFileUpdateAccessOwner(cloudAccessOwnerDialog.getAccessOwner(),fileInfo.getId());
             }
             catch (const RError &rError)
@@ -449,8 +447,7 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesAccessMode()
         {
             try
             {
-                this->progressDialog->setLabelText(tr("File access mode update") + ":" + selectedItem->text(ColumnName));
-                this->showProgress = true;
+                // this->progressDialog->setLabelText(tr("File access mode update") + ":" + selectedItem->text(ColumnName));
                 this->cloudClient->requestFileUpdateAccessMode(cloudAccessModeDialog.getAccessMode(),fileInfo.getId());
             }
             catch (const RError &rError)
@@ -476,8 +473,7 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesVersion()
         {
             try
             {
-                this->progressDialog->setLabelText(tr("File version update") + ":" + selectedItem->text(ColumnName));
-                this->showProgress = true;
+                // this->progressDialog->setLabelText(tr("File version update") + ":" + selectedItem->text(ColumnName));
                 this->cloudClient->requestFileUpdateVersion(cloudFileVersionDialog.getVersion(),fileInfo.getId());
             }
             catch (const RError &rError)
@@ -503,8 +499,7 @@ void RCloudFileManagerWidget::updateSelectedCloudFilesTags()
         {
             try
             {
-                this->progressDialog->setLabelText(tr("File tags update") + ":" + selectedItem->text(ColumnName));
-                this->showProgress = true;
+                // this->progressDialog->setLabelText(tr("File tags update") + ":" + selectedItem->text(ColumnName));
                 this->cloudClient->requestFileUpdateTags(cloudFileTagsDialog.getTags(),fileInfo.getId());
             }
             catch (const RError &rError)
@@ -598,9 +593,22 @@ void RCloudFileManagerWidget::downloadSelectedCloudFiles()
             }
             if (retVal == RMessageBox::Yes)
             {
-                this->progressDialog->setLabelText(tr("File download") + ":" + selectedItem->text(ColumnName));
-                this->showProgress = true;
-                this->cloudClient->requestFileDownload(filePath,selectedItem->data(ColumnId,Qt::UserRole).toUuid());
+                RProgressDialog *progressDialog = new RProgressDialog(this);
+                progressDialog->setRange(0,100);
+                progressDialog->setMinimumDuration(1000);
+                progressDialog->setCancelButtonText(tr("Cancel"));
+                QObject::connect(progressDialog,&QProgressDialog::canceled,this->cloudClient,&RCloudClient::cancelTask);
+
+                progressDialog->setLabelText(tr("File download") + ": " + selectedItem->text(ColumnName));
+
+                // this->progressDialog->setLabelText(tr("File download") + ":" + selectedItem->text(ColumnName));
+
+                RToolTask *task = this->cloudClient->requestFileDownload(filePath,selectedItem->data(ColumnId,Qt::UserRole).toUuid());
+
+                QObject::connect(task, &RToolTask::actionFinished, progressDialog, &QProgressDialog::deleteLater);
+                QObject::connect(task, &RToolTask::actionFailed, progressDialog, &QProgressDialog::deleteLater);
+
+                QObject::connect(this, &RCloudFileManagerWidget::progressValueChanged, progressDialog, &RProgressDialog::setValue);
             }
         }
         catch (const RError &rError)
@@ -629,7 +637,6 @@ void RCloudFileManagerWidget::removeSelectedCloudFiles()
     {
         try
         {
-            this->showProgress = false;
             this->cloudClient->requestFileRemove(selectedItem->data(ColumnId,Qt::UserRole).toUuid());
         }
         catch (const RError &rError)
@@ -811,8 +818,10 @@ void RCloudFileManagerWidget::onUploadProgress(qint64 bytesSent, qint64 bytesTot
 {
     if (bytesTotal > 0)
     {
-        this->progressDialog->setRange(0,bytesTotal+1);
-        this->progressDialog->setValue(bytesSent);
+        // this->progressDialog->setRange(0,bytesTotal+1);
+        // this->progressDialog->setValue(bytesSent);
+
+        emit this->progressValueChanged(qRound((bytesSent/(bytesTotal+1))*100.0));
     }
 }
 
@@ -820,22 +829,24 @@ void RCloudFileManagerWidget::onDownloadProgress(qint64 bytesReceived, qint64 by
 {
     if (bytesTotal > 0)
     {
-        this->progressDialog->setRange(0,bytesTotal+1);
-        this->progressDialog->setValue(bytesReceived);
+        // this->progressDialog->setRange(0,bytesTotal+1);
+        // this->progressDialog->setValue(bytesReceived);
+
+        emit this->progressValueChanged(qRound((bytesReceived/(bytesTotal+1))*100.0));
     }
 }
 
 void RCloudFileManagerWidget::onClientSubmitted()
 {
-    this->progressDialog->setValue(this->progressDialog->minimum());
+    // this->progressDialog->setValue(this->progressDialog->minimum());
 }
 
 void RCloudFileManagerWidget::onClientFinished()
 {
-    this->progressDialog->setValue(this->progressDialog->maximum());
+    // this->progressDialog->setValue(this->progressDialog->maximum());
 }
 
 void RCloudFileManagerWidget::onClientFailed()
 {
-    this->progressDialog->setValue(this->progressDialog->maximum());
+    // this->progressDialog->setValue(this->progressDialog->maximum());
 }

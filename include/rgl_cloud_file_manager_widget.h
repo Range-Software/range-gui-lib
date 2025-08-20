@@ -60,8 +60,6 @@ class RCloudFileManagerWidget : public QWidget
 
         QTimer *refreshTimer;
 
-        bool showProgress;
-
     public:
 
         //! Constructor.
@@ -195,6 +193,9 @@ class RCloudFileManagerWidget : public QWidget
         void onClientFailed();
 
     signals:
+
+        //! Progress value has changed.
+        void progressValueChanged(int progress);
 
 };
 
