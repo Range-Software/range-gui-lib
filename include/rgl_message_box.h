@@ -31,6 +31,8 @@ class RMessageBox : public QDialog
                              RError::Type errorType = RError::None,
                              const QString &errorMessage = QString());
 
+        static int RunSync(QDialog *dialog);
+
     public:
 
         static RMessageBox::StandardButton critical(QWidget *parent, const QString &title, const QString &text, RError::Type errorType = RError::None, const QString &errorMessage = QString());

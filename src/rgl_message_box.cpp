@@ -5,6 +5,12 @@
 #include <QLabel>
 #include <QPushButton>
 
+//#define _USE_QDIALOG_EXEC
+
+#ifndef _USE_QDIALOG_EXEC
+#include <QWindow>
+#endif
+
 #include "rgl_message_box.h"
 #include "rgl_text_browser.h"
 
@@ -59,6 +65,46 @@ RMessageBox::RMessageBox(QWidget *parent,
     QObject::connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
+
+int RMessageBox::RunSync(QDialog *dialog)
+{
+#ifdef _USE_QDIALOG_EXEC
+    return dialog->exec();
+#else
+    QWidget *parent = nullptr;
+    if (dialog->parent() && dialog->parent()->isWidgetType()) {
+        parent = static_cast<QWidget*>(dialog->parent()); // safe after the check
+    }
+    if (parent)
+    {
+        dialog->setParent(parent);
+    }
+    dialog->setWindowModality(Qt::WindowModal);
+    dialog->setAttribute(Qt::WA_DeleteOnClose, false);   // important for stack-allocated dialogs
+
+    // Ensure transient parenting is fully established on Wayland
+    if (parent)
+    {
+        parent->winId();
+    }
+    // dialog->winId();
+    if (dialog->windowHandle() && parent && parent->windowHandle())
+    {
+        dialog->windowHandle()->setTransientParent(parent->windowHandle());
+    }
+
+    QEventLoop loop;
+    int code = QDialog::Rejected;
+
+    QObject::connect(dialog, &QDialog::finished, &loop, [&](int r){ code = r; loop.quit(); });
+    QObject::connect(dialog, &QObject::destroyed,       &loop, [&]{ code = QDialog::Rejected; loop.quit(); });
+
+    dialog->open(); // non-blocking show; Wayland config/placement happens here
+    loop.exec();    // blocks this function until finished/destroyed is emitted
+    return code;    // same codes as exec(): QDialog::Accepted/Rejected
+#endif
+}
+
 RMessageBox::StandardButton RMessageBox::critical(QWidget *parent,
                                                   const QString &title,
                                                   const QString &text,
@@ -66,28 +112,28 @@ RMessageBox::StandardButton RMessageBox::critical(QWidget *parent,
                                                   const QString &errorMessage)
 {
     RMessageBox dialog(parent,QIcon::fromTheme(QIcon::ThemeIcon::DialogError),title,text,QDialogButtonBox::Ok,errorType,errorMessage);
-    dialog.exec();
+    RMessageBox::RunSync(&dialog);
     return RMessageBox::Ok;
 }
 
 RMessageBox::StandardButton RMessageBox::information(QWidget *parent, const QString &title, const QString &text)
 {
     RMessageBox dialog(parent,QIcon::fromTheme(QIcon::ThemeIcon::DialogInformation),title,text,QDialogButtonBox::Ok);
-    dialog.exec();
+    RMessageBox::RunSync(&dialog);
     return RMessageBox::Ok;
 }
 
 RMessageBox::StandardButton RMessageBox::question(QWidget *parent, const QString &title, const QString &text)
 {
     RMessageBox dialog(parent,QIcon::fromTheme(QIcon::ThemeIcon::DialogQuestion),title,text,QDialogButtonBox::Yes|QDialogButtonBox::No);
-    int response = dialog.exec();
+    int response = RMessageBox::RunSync(&dialog);
     return (response == QDialog::Accepted) ? RMessageBox::Yes : RMessageBox::No;
 }
 
 RMessageBox::StandardButton RMessageBox::warning(QWidget *parent, const QString &title, const QString &text)
 {
     RMessageBox dialog(parent,QIcon::fromTheme(QIcon::ThemeIcon::DialogWarning),title,text,QDialogButtonBox::Ok);
-    dialog.exec();
+    RMessageBox::RunSync(&dialog);
     return RMessageBox::Ok;
 }
 
@@ -126,6 +172,6 @@ RMessageBox::StandardButton RMessageBox::quit(QWidget *parent, const QString &te
     QObject::connect(buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
     QObject::connect(buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
 
-    int response = dialog.exec();
+    int response = RMessageBox::RunSync(&dialog);
     return (response == QDialog::Accepted) ? RMessageBox::Yes : RMessageBox::No;
 }
