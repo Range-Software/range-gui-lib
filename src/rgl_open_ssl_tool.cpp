@@ -58,8 +58,14 @@ void ROpenSslTool::generateKey(const QString &keyPath, const QString &keyPasswor
     }
 }
 
+#include <QFileInfo>
 void ROpenSslTool::generateCsr(const QString &keyPath, const QString &keyPassword, const QMap<QString, QString> &subjectMap, const QString &csrPath) const
 {
+    if (!QFileInfo::exists(this->openSslToolSettings.getOpenSslCnfPath()))
+    {
+        throw RError(RError::Application,R_ERROR_REF,"OpenSSL configuration file \'%s\' does not exist.",this->openSslToolSettings.getOpenSslCnfPath().toUtf8().constData());
+    }
+
     QStringList subjectFlags =
     {
         CertificateSubject::Country::key,

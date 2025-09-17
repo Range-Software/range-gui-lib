@@ -5,7 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 
-//#define _USE_QDIALOG_EXEC
+#define _USE_QDIALOG_EXEC
 
 #ifndef _USE_QDIALOG_EXEC
 #include <QWindow>

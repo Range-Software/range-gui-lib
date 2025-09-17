@@ -4,6 +4,7 @@
 #include <QDialog>
 #include <QObject>
 #include <QLineEdit>
+#include <QComboBox>
 #include <QPushButton>
 
 #include <rcl_cloud_client.h>
@@ -28,7 +29,7 @@ class ROpenSslCsrDialog : public QDialog
         QString newCsrPath;
         QString newCertificatePath;
 
-        QLineEdit *countryEdit;
+        QComboBox *countryCombo;
         QLineEdit *stateEdit;
         QLineEdit *locationEdit;
         QLineEdit *organizationEdit;

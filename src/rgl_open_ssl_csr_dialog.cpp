@@ -91,9 +91,29 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     QFormLayout *subjectLayout = new QFormLayout;
     subjectGroupBox->setLayout(subjectLayout);
 
-    this->countryEdit = new QLineEdit(subjectMap.value(ROpenSslTool::CertificateSubject::Country::key));
-    this->countryEdit->setPlaceholderText(tr("Country"));
-    subjectLayout->addRow("C:",this->countryEdit);
+    this->countryCombo = new QComboBox;
+    this->countryCombo->setDuplicatesEnabled(false);
+    QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyTerritory);
+    QString currentTerritoryCode = subjectMap.value(ROpenSslTool::CertificateSubject::Country::key);
+    for(const QLocale &locale : std::as_const(allLocales))
+    {
+        QString territoryCode = QLocale::territoryToCode(locale.territory()).toUpper();
+
+        if (territoryCode.length() != 2 || this->countryCombo->findData(territoryCode) != -1)
+        {
+            continue;
+        }
+
+        QString currentText = QLocale::territoryToString(locale.territory()) + " (" + territoryCode + ")";
+
+        this->countryCombo->addItem(currentText,territoryCode);
+        if (currentTerritoryCode == territoryCode)
+        {
+            this->countryCombo->setCurrentText(currentText);
+        }
+    }
+    this->countryCombo->model()->sort(0);
+    subjectLayout->addRow("C:",this->countryCombo);
 
     this->stateEdit = new QLineEdit(subjectMap.value(ROpenSslTool::CertificateSubject::State::key));
     this->stateEdit->setPlaceholderText(tr("State"));
@@ -279,7 +299,7 @@ void ROpenSslCsrDialog::onNewCertificateFileNameChanged(const QString &fileName)
 void ROpenSslCsrDialog::onGenerateCsrClicked()
 {
     QStringList emptySubjectFields;
-    if (this->countryEdit->text().isEmpty())
+    if (this->countryCombo->currentData().isNull())
     {
         emptySubjectFields.append(QString("%1 (%2)").arg(ROpenSslTool::CertificateSubject::Country::key,
                                                          ROpenSslTool::CertificateSubject::Country::name));
@@ -322,7 +342,7 @@ void ROpenSslCsrDialog::onGenerateCsrClicked()
     }
 
     QMap<QString,QString> subjectMap;
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,this->countryEdit->text());
+    subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,this->countryCombo->currentData().toString());
     subjectMap.insert(ROpenSslTool::CertificateSubject::State::key,this->stateEdit->text());
     subjectMap.insert(ROpenSslTool::CertificateSubject::Location::key,this->locationEdit->text());
     subjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,this->organizationEdit->text());
