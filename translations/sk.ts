@@ -125,22 +125,22 @@
 <context>
     <name>RApplication</name>
     <message>
-        <location filename="../src/rgl_application.cpp" line="245"/>
+        <location filename="../src/rgl_application.cpp" line="250"/>
         <source>Application is already running</source>
         <translation>Aplikácia už beží</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="428"/>
+        <location filename="../src/rgl_application.cpp" line="433"/>
         <source>Following software updates are available</source>
         <translation>Sú dostupné následujúce aktualizácie softvéru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="438"/>
+        <location filename="../src/rgl_application.cpp" line="443"/>
         <source>Would you like to open the software manager?</source>
         <translation>Otvoriť správcu softvéru?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="440"/>
+        <location filename="../src/rgl_application.cpp" line="445"/>
         <source>Software updates available</source>
         <translation>Sú dostupné aktualizácie softvéru</translation>
     </message>
@@ -318,371 +318,353 @@
 <context>
     <name>RCloudFileManagerWidget</name>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="38"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="342"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="384"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="594"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="57"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="380"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="51"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="374"/>
         <source>Local</source>
         <translation>Toto zariadenie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="65"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="59"/>
         <source>Directory</source>
         <translation>Priečinok</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="100"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="174"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="94"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="168"/>
         <source>Delete</source>
         <translation>Zmazať</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="106"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="100"/>
         <source>Upload</source>
         <translation>Nahrať</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="110"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="104"/>
         <source>Update</source>
         <translation>Aktualizovať</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="120"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="381"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="114"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="375"/>
         <source>Cloud</source>
         <translation>Cloud</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="144"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="138"/>
         <source>Download</source>
         <translation>Stiahnuť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="148"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="142"/>
         <source>Edit</source>
         <translation>Upraviť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="155"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="149"/>
         <source>Access mode</source>
         <translation>Obmedzenia prístupu</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="158"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="318"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="152"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="310"/>
         <source>Owner</source>
         <translation>Vlastník</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="161"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="319"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="155"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="311"/>
         <source>Version</source>
         <translation>Verzia</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="164"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="320"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="158"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="312"/>
         <source>Tags</source>
         <translation>Značky</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="169"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="163"/>
         <source>Refresh</source>
         <translation>Obnoviť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="312"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="304"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="313"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="305"/>
         <source>Name</source>
         <translation>Názov</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="314"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="306"/>
         <source>Size</source>
         <translation>Veľkosť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="315"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="307"/>
         <source>Creation time</source>
         <translation>Čas vytvorenia</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="316"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="308"/>
         <source>Update time</source>
         <translation>Čas aktualizácie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="317"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="309"/>
         <source>Access rights</source>
         <translation>Prístupové práva</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="321"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="313"/>
         <source>Checksum</source>
         <translation>Kontrolný súčet</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="336"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="327"/>
         <source>Cloud transfer failed</source>
         <translation>Cloud prenos zlyhal</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="336"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="327"/>
         <source>List of files from Cloud has failed.</source>
         <translation>Výpis súborov z Cloudu sa nepodaril.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="348"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="342"/>
         <source>File upload</source>
-        <translation>Nahravanie súboru</translation>
+        <translation>Nahrávanie súboru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="355"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="399"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="349"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="392"/>
         <source>File upload failed</source>
-        <translation>Nahranie súboru zlyhalo</translation>
+        <translation>Nahrávanie súboru zlyhalo</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="355"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="399"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="349"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="392"/>
         <source>File upload to Cloud has failed.</source>
         <translation>Nahrávanie súboru do Cloudu zlyhalo.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="369"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="374"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="383"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="390"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="363"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="368"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="377"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="384"/>
         <source>File update</source>
         <translation>Aktualizácia súboru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="369"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="363"/>
         <source>Select a local file to be updated.</source>
         <translation>Označte miestny súbor ktorý sa má aktualizovať.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="374"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="368"/>
         <source>Select a Cloud file to be updated.</source>
         <translation>Označte súbor v Cloude ktorý má byť aktualizovaný.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="378"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="372"/>
         <source>Are you sure you want to update selected Cloud file with selected local file?</source>
         <translation>Naozaj chcete aktualizovať vybraný súbor v Cloude vybraným miestnym súborom?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="421"/>
-        <source>File access owner update</source>
-        <translation>Zmena vlastníka súboru</translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="428"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="420"/>
         <source>File access owner update failed</source>
         <translation>Zmena vlastníka súboru zlyhala</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="428"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="420"/>
         <source>File access owner update in Cloud has failed.</source>
         <translation>Zmena vlastníka súboru v Cloude zlyhala.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="452"/>
-        <source>File access mode update</source>
-        <translation>Zmena obmedzení prístupu k súboru</translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="459"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="450"/>
         <source>File access mode update failed</source>
         <translation>Zmena obmedzení prístupu k súboru zlyhala</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="459"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="450"/>
         <source>File access mode update in Cloud has failed.</source>
         <translation>Zmena obmedzení prístupu súboru v Cloude zlyhala.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="479"/>
-        <source>File version update</source>
-        <translation>Zmena verzie súboru</translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="486"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="476"/>
         <source>File version update failed</source>
         <translation>Zmena verzie súboru zlyhala</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="486"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="476"/>
         <source>File version update in Cloud has failed.</source>
         <translation>Zmena verzie súboru v Cloude zlyhala.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="506"/>
-        <source>File tags update</source>
-        <translation>Zmena značiek súboru</translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="513"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="502"/>
         <source>File tags update failed</source>
         <translation>Zmena značiek súboru zlyhala</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="513"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="502"/>
         <source>File tags update in Cloud has failed.</source>
         <translation>Zmena značiek súboru v Cloude zlyhala.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="521"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="510"/>
         <source>Are you sure you want to remove selected local files?</source>
         <translation>Naozaj odstrániť vybrané miestne súbory?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="528"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="623"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="518"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="616"/>
         <source>File remove</source>
         <translation>Odstrániť súbor</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="546"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="536"/>
         <source>File remove failed</source>
         <translation>Odstránenie súboru zlyhalo</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="546"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="536"/>
         <source>Local file remove has failed.</source>
         <translation>Odstránenie lokálneho súbory sa nepodarilo.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="563"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="556"/>
         <source>Local file already exists.</source>
         <translation>Súbor na tomto zariadení už existuje.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="564"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="557"/>
         <source>Would you like to overwrite it?</source>
         <translation>Prepísať súbor?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="565"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="596"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="601"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="558"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="589"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="594"/>
         <source>File download</source>
         <translation>Stiahnutie súboru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="595"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="588"/>
         <source>Would you like to store remote file under different name?</source>
         <translation>Uložiť súbor z Cloudu pod iným menom?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="609"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="601"/>
         <source>File download failed</source>
         <translation>Stiahnutie súboru zlyhalo</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="609"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="601"/>
         <source>File download from Cloud has failed.</source>
         <translation>Stiahnutie súboru z Cloudu zlyhalo.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="616"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="608"/>
         <source>Are you sure you want to remove selected Cloud files?</source>
         <translation>Naozaj chcete odstrániť vybrané súbory z Cloudu?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="638"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="630"/>
         <source>File removal failed</source>
         <translation>Odstránenie súboru zlyhalo</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="638"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="630"/>
         <source>File removal from Cloud has failed.</source>
         <translation>Odstránenie súboru z Cloudu zlyhalo.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="757"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="748"/>
         <source>File uploaded</source>
         <translation>Súbor bol nahraný</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="757"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="748"/>
         <source>File was uploaded successfully.</source>
         <translation>Súbor bol úspešne nahraný.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="764"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="755"/>
         <source>File updated</source>
         <translation>Súbor bol aktualizovaný</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="764"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="755"/>
         <source>File was updated successfully.</source>
         <translation>Súbor bol úspešne aktualizovaný.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="771"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="762"/>
         <source>File access mode updated</source>
         <translation>Obmedzenia prístupu k súboru boli zmenené</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="771"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="762"/>
         <source>File access mode was updated successfully.</source>
         <translation>Obmedzenia prístupu k súboru boli úspešne zmenené.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="778"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="769"/>
         <source>File access owner updated</source>
         <translation>Vlastník prístupu k súboru bol zmenený</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="778"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="769"/>
         <source>File access owner was updated successfully.</source>
         <translation>Vlastník prístupu k súboru bol úspešne zmenený.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="785"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="776"/>
         <source>File version updated</source>
         <translation>Verzia súboru bola zmenená</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="785"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="776"/>
         <source>File version was updated successfully.</source>
         <translation>Verzia súboru bola úspešne zmenená.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="792"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="783"/>
         <source>File tags updated</source>
         <translation>Tagy súboru boli zmenené</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="792"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="783"/>
         <source>File tags were updated successfully.</source>
         <translation>Tagy súboru boli úspešne zmenené.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="799"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="790"/>
         <source>File downloaded</source>
         <translation>Súbor bol stiahnutý</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="799"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="790"/>
         <source>File was downloaded successfully.</source>
         <translation>Súbor bol úspešne stiahnutý.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="806"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="797"/>
         <source>File removed</source>
         <translation>Súbor bol odstránený</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="806"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="797"/>
         <source>File was removed successfully.</source>
         <translation>Súbor bol úspešne odstránený.</translation>
     </message>
@@ -1085,32 +1067,32 @@
 <context>
     <name>RMessageBox</name>
     <message>
-        <location filename="../src/rgl_message_box.cpp" line="41"/>
+        <location filename="../src/rgl_message_box.cpp" line="47"/>
         <source>Error code</source>
         <translation>Kód chyby</translation>
     </message>
     <message>
-        <location filename="../src/rgl_message_box.cpp" line="42"/>
+        <location filename="../src/rgl_message_box.cpp" line="48"/>
         <source>Error message</source>
         <translation>Chybová hláška</translation>
     </message>
     <message>
-        <location filename="../src/rgl_message_box.cpp" line="100"/>
+        <location filename="../src/rgl_message_box.cpp" line="146"/>
         <source>Quit?</source>
         <translation>Skončiť?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_message_box.cpp" line="113"/>
+        <location filename="../src/rgl_message_box.cpp" line="159"/>
         <source>Are you sure you want to quit?</source>
         <translation>Naozaj chcete skončiť?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_message_box.cpp" line="120"/>
+        <location filename="../src/rgl_message_box.cpp" line="166"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_message_box.cpp" line="123"/>
+        <location filename="../src/rgl_message_box.cpp" line="169"/>
         <source>Quit</source>
         <translation>Skončiť</translation>
     </message>
@@ -1134,7 +1116,7 @@
     </message>
     <message>
         <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="78"/>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="401"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="421"/>
         <source>Password</source>
         <translation>Heslo</translation>
     </message>
@@ -1154,122 +1136,117 @@
         <translation>Predmet certifikátu</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="95"/>
-        <source>Country</source>
-        <translation>Krajina</translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="99"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="119"/>
         <source>State</source>
         <translation>Štát</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="103"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="123"/>
         <source>Location</source>
         <translation>Lokalita</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="107"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="127"/>
         <source>Organization</source>
         <translation>Organizácia</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="111"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="131"/>
         <source>Organization unit</source>
         <translation>Organizačná jednotka</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="115"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="135"/>
         <source>Common name</source>
         <translation>Bežný názov</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="118"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="138"/>
         <source>Certificate signing request</source>
         <translation>Žiadosť o podpis certifikátu</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="127"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="147"/>
         <source>Generate certificate signing request</source>
         <translation>Vygenerovať žiadosť o podpis certifikátu</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="133"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="153"/>
         <source>Direct request</source>
         <translation>Zažiadať napriamo</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="136"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="156"/>
         <source>Direct request (with token)</source>
         <translation>Zažiadať napriamo (pomocou tokenu)</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="139"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="159"/>
         <source>E-mail request</source>
         <translation>Zažiadať e-mailom</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="145"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="165"/>
         <source>Close</source>
         <translation>Zatvoriť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="314"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="334"/>
         <source>Following fields must not be empty</source>
         <translation>Následujúce hodnoty nesmú byť prázdne</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="320"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="340"/>
         <source>No value specified</source>
         <translation>Prázdne hodnoty</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="346"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="366"/>
         <source>Failed to generate private key and CSR using OpenSSL tool.</source>
         <translation>Vytvorenie súkromného kľúča a CSR pomocou OpenSSL nástroja zlyhalo.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="349"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="369"/>
         <source>CSR generation failed</source>
         <translation>Vytvorenie CSR zlyhalo</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="373"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="393"/>
         <source>Authentication token</source>
         <translation>Overovací token</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="373"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="393"/>
         <source>Token</source>
         <translation>Token</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="376"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="396"/>
         <source>Authentication token not provided</source>
         <translation>Overovací token nebol poskytnutý</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="376"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="396"/>
         <source>No authentication token was provided, therefore no request will be sent.</source>
         <translation>Nie je možné poslať žiadosť, keďže overovací token nebol poskytnutý.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="397"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="417"/>
         <source>Do you want to apply newly generated key and signed certificate?</source>
         <translation>Naozaj chceťe použiť novovygenerovaný kľúč a podpísaný certifikát?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="400"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="420"/>
         <source>Private key</source>
         <translation>Privátny kľúč</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="402"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="422"/>
         <source>Certificate</source>
         <translation>Certifikát</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="405"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="425"/>
         <source>Signed certificate</source>
         <translation>Podpísaný certifikát</translation>
     </message>
@@ -1328,97 +1305,102 @@
 <context>
     <name>RSoftwareManagerWidget</name>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="38"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="212"/>
         <source>Cancel</source>
         <translation>Zrušiť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="69"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="64"/>
         <source>Download and install</source>
         <translation>Stiahnuť a inštalovať</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="98"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="89"/>
         <source>Cloud transfer failed</source>
         <translation>Cloud prenos zlyhal</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="98"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="89"/>
         <source>List of files from Cloud has failed.</source>
         <translation>Výpis súborov z Cloudu sa nepodaril.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="106"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="97"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="107"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="98"/>
         <source>Name</source>
         <translation>Názov</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="108"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="99"/>
         <source>Size</source>
         <translation>Veľkosť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="109"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="100"/>
         <source>Creation time</source>
         <translation>Čas vytvorenia</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="110"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="101"/>
         <source>Update time</source>
         <translation>Čas aktualizácie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="111"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="102"/>
         <source>Access rights</source>
         <translation>Prístupové práva</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="112"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="103"/>
         <source>Owner</source>
         <translation>Vlastník</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="113"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="104"/>
         <source>Version</source>
         <translation>Verzia</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="114"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="105"/>
         <source>Tags</source>
         <translation>Značky</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="115"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="106"/>
         <source>Checksum</source>
         <translation>Kontrolný súčet</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="180"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="171"/>
         <source>Show all available software</source>
         <translation>Zobraziť všetok dostupný softvér</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="180"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="171"/>
         <source>Expected tags</source>
         <translation>Očákávané značky</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="233"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="212"/>
+        <source>Software download</source>
+        <translation>Sťahovanie softvéru</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="225"/>
         <source>Would you like to install downloaded software file?</source>
         <translation>Chcete inštalovať stiahnuý softvérový súbor?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="234"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="226"/>
         <source>File</source>
         <translation>Súbor</translation>
     </message>
     <message>
-        <location filename="../src/rgl_software_manager_widget.cpp" line="235"/>
+        <location filename="../src/rgl_software_manager_widget.cpp" line="227"/>
         <source>Install software?</source>
         <translation>Inštalovať softvér?</translation>
     </message>

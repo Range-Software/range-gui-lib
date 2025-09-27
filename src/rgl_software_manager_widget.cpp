@@ -9,6 +9,7 @@
 #include <rcl_cloud_session_manager.h>
 
 #include "rgl_message_box.h"
+#include "rgl_progress_dialog.h"
 #include "rgl_software_manager_widget.h"
 
 RSoftwareManagerWidget::RSoftwareManagerWidget(const RApplicationSettings *applicationSettings, QWidget *parent)
@@ -31,12 +32,6 @@ RSoftwareManagerWidget::RSoftwareManagerWidget(const RApplicationSettings *appli
     this->softwareManager->getCloudClient()->setBlocking(false);
 
     QObject::connect(applicationSettings,&RApplicationSettings::proxySettingsChanged,this,&RSoftwareManagerWidget::onProxySettingsChanged);
-
-    this->progressDialog = new QProgressDialog(this);
-    this->progressDialog->setRange(0,100);
-    this->progressDialog->setMinimumDuration(1000);
-    this->progressDialog->setCancelButtonText(tr("Cancel"));
-    QObject::connect(this->progressDialog,&QProgressDialog::canceled,this->softwareManager->getCloudClient(),&RCloudClient::cancelTask);
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
@@ -77,10 +72,6 @@ RSoftwareManagerWidget::RSoftwareManagerWidget(const RApplicationSettings *appli
 
     QObject::connect(this->softwareManager,&RSoftwareManager::softwareAvailable,this,&RSoftwareManagerWidget::onSoftwareAvailable);
     QObject::connect(this->softwareManager->getCloudClient(),&RCloudClient::fileDownloaded,this,&RSoftwareManagerWidget::onSoftwareDownloaded);
-    QObject::connect(this->softwareManager->getCloudClient(),&RCloudClient::downloadProgress,this,&RSoftwareManagerWidget::onDownloadProgress);
-    QObject::connect(this->softwareManager->getCloudClient(),&RCloudClient::submitted,this,&RSoftwareManagerWidget::onClientSubmitted);
-    QObject::connect(this->softwareManager->getCloudClient(),&RCloudClient::finished,this,&RSoftwareManagerWidget::onClientFinished);
-    QObject::connect(this->softwareManager->getCloudClient(),&RCloudClient::failed,this,&RSoftwareManagerWidget::onClientFailed);
 
     this->refreshCloudFiles();
 }
@@ -218,7 +209,8 @@ void RSoftwareManagerWidget::onInstallClicked()
 
         QString path(QDir(RApplicationSettings::getTmpDir()).absoluteFilePath(fileName));
 
-        this->softwareManager->downloadFile(path,id);
+        RProgressDialog *progressDialog = new RProgressDialog(tr("Software download") + ": <tt>" + fileName + "</tt>",tr("Cancel"),0,100,this);
+        progressDialog->setJob(this->softwareManager->downloadFile(path,id));
     }
 }
 
@@ -245,28 +237,4 @@ void RSoftwareManagerWidget::onProxySettingsChanged(RHttpProxySettings proxySett
     httpClientSettings.setProxySettings(proxySettings);
     softwareManagerSettings.setHttpClientSettings(httpClientSettings);
     this->softwareManager->setSoftwareManagerSettings(softwareManagerSettings);
-}
-
-void RSoftwareManagerWidget::onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
-{
-    if (bytesTotal > 0)
-    {
-        this->progressDialog->setRange(0,bytesTotal+1);
-        this->progressDialog->setValue(bytesReceived);
-    }
-}
-
-void RSoftwareManagerWidget::onClientSubmitted()
-{
-    this->progressDialog->setValue(this->progressDialog->minimum());
-}
-
-void RSoftwareManagerWidget::onClientFinished()
-{
-    this->progressDialog->setValue(this->progressDialog->maximum());
-}
-
-void RSoftwareManagerWidget::onClientFailed()
-{
-    this->progressDialog->setValue(this->progressDialog->maximum());
 }

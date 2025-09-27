@@ -1,7 +1,6 @@
 #ifndef RGL_SOFTWARE_MANAGER_WIDGET_H
 #define RGL_SOFTWARE_MANAGER_WIDGET_H
 
-#include <QProgressDialog>
 #include <QPushButton>
 #include <QCheckBox>
 
@@ -34,7 +33,6 @@ class RSoftwareManagerWidget : public QWidget
         };
 
         RTreeWidget *cloudFilesWidget;
-        QProgressDialog *progressDialog;
         QCheckBox *allSoftwareCheckBox;
         QPushButton *installButton;
 
@@ -80,20 +78,6 @@ class RSoftwareManagerWidget : public QWidget
 
         //! Proxy settings have changed.
         void onProxySettingsChanged(RHttpProxySettings proxySettings);
-
-        //! Download progress.
-        void onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
-
-        //! Client has submitted request.
-        void onClientSubmitted();
-
-        //! Client has finished.
-        void onClientFinished();
-
-        //! Client has failed.
-        void onClientFailed();
-
-    signals:
 
 };
 

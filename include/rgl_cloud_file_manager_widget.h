@@ -60,8 +60,6 @@ class RCloudFileManagerWidget : public QWidget
 
         QTimer *refreshTimer;
 
-        bool showProgress;
-
     public:
 
         //! Constructor.
@@ -179,12 +177,6 @@ class RCloudFileManagerWidget : public QWidget
         //! File was removed.
         void onFileRemoved(RFileInfo fileInfo);
 
-        //! Upload progress.
-        void onUploadProgress(qint64 bytesSent, qint64 bytesTotal);
-
-        //! Download progress.
-        void onDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
-
         //! Client has submitted request.
         void onClientSubmitted();
 
@@ -195,6 +187,9 @@ class RCloudFileManagerWidget : public QWidget
         void onClientFailed();
 
     signals:
+
+        //! Progress value has changed.
+        void progressValueChanged(int progress);
 
 };
 
