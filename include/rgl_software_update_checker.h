@@ -14,6 +14,8 @@ class RSoftwareUpdateChecker : public QObject
 
     protected:
 
+        const RApplicationSettings *applicationSettings;
+
         QList<RFileInfo> lastFileInfoList;
 
         RSoftwareManager *softwareManager;

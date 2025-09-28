@@ -41,7 +41,7 @@ RFirstRunDialog::RFirstRunDialog(QWidget *parent)
     mainLayout->addWidget(sendUsageInfoLabel);
 
     QCheckBox *sendUsageInfoCheck = new QCheckBox(tr("Send usage information"));
-    sendUsageInfoCheck->setCheckState(RApplication::instance()->getApplicationSettings()->getCloudSendUsageInfo()?Qt::Checked:Qt::Unchecked);
+    sendUsageInfoCheck->setCheckState(RApplication::instance()->getApplicationSettings()->getSoftwareSendUsageInfo()?Qt::Checked:Qt::Unchecked);
     mainLayout->addWidget(sendUsageInfoCheck);
 
     QObject::connect(sendUsageInfoCheck,&QCheckBox::toggled,this,&RFirstRunDialog::onSendUsageInfoToggled);
@@ -57,5 +57,5 @@ RFirstRunDialog::RFirstRunDialog(QWidget *parent)
 
 void RFirstRunDialog::onSendUsageInfoToggled(bool checked)
 {
-    RApplication::instance()->getApplicationSettings()->setCloudSendUsageInfo(checked);
+    RApplication::instance()->getApplicationSettings()->setSoftwareSendUsageInfo(checked);
 }

@@ -17,8 +17,9 @@
 #include "rgl_message_box.h"
 
 RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *applicationSettings, QWidget *parent)
-    : QWidget(parent)
-    , applicationSettings(applicationSettings)
+    : QWidget{parent}
+    , applicationSettings{applicationSettings}
+    , enablePersonalInfo{false}
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
@@ -68,31 +69,32 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
 
     appearanceLayout->addRow(new QWidget);
 
-#ifdef _R_PERSONAL_INFO_ENABLED
-    // Personal
+    if (this->enablePersonalInfo)
+    {
+        // Personal
 
-    QWidget *personalWidget = new QWidget;
-    this->tabWidget->addTab(personalWidget,tr("Personal"));
+        QWidget *personalWidget = new QWidget;
+        this->tabWidget->addTab(personalWidget,tr("Personal"));
 
-    QFormLayout *personalLayout = new QFormLayout;
-    personalWidget->setLayout(personalLayout);
+        QFormLayout *personalLayout = new QFormLayout;
+        personalWidget->setLayout(personalLayout);
 
-    this->personalNameEdit = new QLineEdit(this->applicationSettings->getPersonalName());
-    this->personalNameEdit->setPlaceholderText(tr("Jon Smith"));
+        this->personalNameEdit = new QLineEdit(this->applicationSettings->getPersonalName());
+        this->personalNameEdit->setPlaceholderText(tr("Jon Smith"));
 
-    personalLayout->addRow(tr("Full name") + ":",this->personalNameEdit);
+        personalLayout->addRow(tr("Full name") + ":",this->personalNameEdit);
 
-    this->personalEmailEdit = new QLineEdit(this->applicationSettings->getPersonalEmail());
-    this->personalEmailEdit->setPlaceholderText("example@domain.com");
+        this->personalEmailEdit = new QLineEdit(this->applicationSettings->getPersonalEmail());
+        this->personalEmailEdit->setPlaceholderText("example@domain.com");
 
-    QRegularExpression rex("^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$");
-    QValidator *emailValidator = new QRegularExpressionValidator(rex, this);
-    this->personalEmailEdit->setValidator(emailValidator);
+        QRegularExpression rex("^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$");
+        QValidator *emailValidator = new QRegularExpressionValidator(rex, this);
+        this->personalEmailEdit->setValidator(emailValidator);
 
-    personalLayout->addRow(tr("Personal e-mail") + ":",this->personalEmailEdit);
+        personalLayout->addRow(tr("Personal e-mail") + ":",this->personalEmailEdit);
 
-    personalLayout->addRow(new QWidget);
-#endif
+        personalLayout->addRow(new QWidget);
+    }
 
     // Network
 
@@ -125,12 +127,21 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     cloudLayout->addWidget(this->cloudRefreshTimeoutSpin,0,1,1,1);
     cloudLayout->addWidget(new QLabel("[seconds]"),0,2,1,1);
 
-#ifdef _R_CLOUD_SEND_USAGE_ENABLED
-    this->cloudSendUsageInfoCheckBox = new QCheckBox(tr("Send usage information"));
-    this->cloudSendUsageInfoCheckBox->setChecked(this->applicationSettings->getCloudSendUsageInfo());
+    QGroupBox *softwareGroupBox = new QGroupBox(tr("Software"));
+    networkLayout->addWidget(softwareGroupBox);
 
-    cloudLayout->addWidget(this->cloudSendUsageInfoCheckBox,1,0,1,3);
-#endif
+    QVBoxLayout *softwareLayout = new QVBoxLayout;
+    softwareGroupBox->setLayout(softwareLayout);
+
+    this->softwareSendUsageInfoCheckBox = new QCheckBox(tr("Send usage information"));
+    this->softwareSendUsageInfoCheckBox->setChecked(this->applicationSettings->getSoftwareSendUsageInfo());
+
+    softwareLayout->addWidget(this->softwareSendUsageInfoCheckBox);
+
+    this->softwareCheckUpdatesCheckBox = new QCheckBox(tr("Check for software update"));
+    this->softwareCheckUpdatesCheckBox->setChecked(this->applicationSettings->getSoftwareSendUsageInfo());
+
+    softwareLayout->addWidget(this->softwareCheckUpdatesCheckBox);
 
     networkLayout->addStretch(10);
 
@@ -170,13 +181,13 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->formatCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onFormatChanged);
     QObject::connect(this->proxySettingsWidget,&RProxySettingsWidget::proxyChanged,this,&RApplicationSettingsWidget::onProxyChanged);
     QObject::connect(this->cloudRefreshTimeoutSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudRefreshTimeoutChanged);
-#ifdef _R_CLOUD_SEND_USAGE_ENABLED
-    QObject::connect(this->cloudSendUsageInfoCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudSendUsageInfoChanged);
-#endif
-#ifdef _R_PERSONAL_INFO_ENABLED
-    QObject::connect(this->personalNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onPersonalNameChanged);
-    QObject::connect(this->personalEmailEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onPersonalEmailChanged);
-#endif
+    QObject::connect(this->softwareSendUsageInfoCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged);
+    QObject::connect(this->softwareCheckUpdatesCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged);
+    if (this->enablePersonalInfo)
+    {
+        QObject::connect(this->personalNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onPersonalNameChanged);
+        QObject::connect(this->personalEmailEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onPersonalEmailChanged);
+    }
     QObject::connect(this->helpDirectoryButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onHelpDirectoryChanged);
     QObject::connect(this->opensslToolFileButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onOpensslToolFileChanged);
     QObject::connect(this->keyboardShortcutsEdirotWidget,&RKeyboardShortcutsEditorWidget::shortcutChanged,this,&RApplicationSettingsWidget::onKeyboardShortcutChanged);
@@ -202,13 +213,9 @@ void RApplicationSettingsWidget::setDefaultValues()
 
     this->proxySettingsWidget->setDefaultValues();
     this->cloudRefreshTimeoutSpin->setValue(RApplicationSettings::getDefaultCloudRefreshTimeout()/1000);
-#ifdef _R_CLOUD_SEND_USAGE_ENABLED
-    this->cloudSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultCloudSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
-#endif
-#ifdef _R_PERSONAL_INFO_ENABLED
+    this->softwareSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
     this->personalNameEdit->setText(QString());
     this->personalEmailEdit->setText(QString());
-#endif
     this->helpDirectoryButton->setFileName(this->applicationSettings->findHelpDir());
     this->opensslToolFileButton->setFileName(this->applicationSettings->getDefaultOpensslToolPath());
     this->keyboardShortcutsEdirotWidget->resetToDefault();
@@ -241,14 +248,16 @@ void RApplicationSettingsWidget::onCloudRefreshTimeoutChanged(int cloudRefreshTi
     this->applicationSettings->setCloudRefreshTimeout(cloudRefreshTimeout*1000);
 }
 
-#ifdef _R_CLOUD_SEND_USAGE_ENABLED
-void RApplicationSettingsWidget::onCloudSendUsageInfoChanged(Qt::CheckState state)
+void RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged(Qt::CheckState state)
 {
-    this->applicationSettings->setCloudSendUsageInfo(state == Qt::Checked);
+    this->applicationSettings->setSoftwareSendUsageInfo(state == Qt::Checked);
 }
-#endif
 
-#ifdef _R_PERSONAL_INFO_ENABLED
+void RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged(Qt::CheckState state)
+{
+    this->applicationSettings->setSoftwareCheckUpdates(state == Qt::Checked);
+}
+
 void RApplicationSettingsWidget::onPersonalNameChanged(const QString &personalName)
 {
     this->applicationSettings->setPersonalName(personalName);
@@ -258,7 +267,6 @@ void RApplicationSettingsWidget::onPersonalEmailChanged(const QString &personalE
 {
     this->applicationSettings->setPersonalEmail(personalEmail);
 }
-#endif
 
 void RApplicationSettingsWidget::onHelpDirectoryChanged(const QString &directory)
 {

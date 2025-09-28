@@ -31,7 +31,8 @@ const QString RApplicationSettings::languageKey = "application/language";
 const QString RApplicationSettings::formatKey = "application/format";
 const QString RApplicationSettings::toolbarIconSizeKey = "application/toolbarIconSize";
 const QString RApplicationSettings::cloudRefreshTimeoutKey = "cloud/refreshTimeout";
-const QString RApplicationSettings::cloudSendUsageInfoKey = "cloud/sendUsageInfo";
+const QString RApplicationSettings::softwareSendUsageInfoKey = "cloud/softwareSendUsageInfo";
+const QString RApplicationSettings::softwareCheckUpdatesKey = "cloud/softwareCheckUpdates";
 const QString RApplicationSettings::proxyTypeKey = "proxy/proxyType";
 const QString RApplicationSettings::proxyHostKey = "proxy/proxyHost";
 const QString RApplicationSettings::proxyPortKey = "proxy/proxyPort";
@@ -259,15 +260,26 @@ void RApplicationSettings::setCloudRefreshTimeout(uint cloudRefreshTimeout)
     emit this->cloudRefreshTimeoutChanged(cloudRefreshTimeout);
 }
 
-uint RApplicationSettings::getCloudSendUsageInfo() const
+uint RApplicationSettings::getSoftwareSendUsageInfo() const
 {
-    return this->value(RApplicationSettings::cloudSendUsageInfoKey,RApplicationSettings::getDefaultCloudSendUsageInfo()).toBool();
+    return this->value(RApplicationSettings::softwareSendUsageInfoKey,RApplicationSettings::getDefaultSoftwareSendUsageInfo()).toBool();
 }
 
-void RApplicationSettings::setCloudSendUsageInfo(bool cloudSendUsageInfo)
+void RApplicationSettings::setSoftwareSendUsageInfo(bool cloudSendUsageInfo)
 {
-    this->setValue(RApplicationSettings::cloudSendUsageInfoKey, cloudSendUsageInfo);
+    this->setValue(RApplicationSettings::softwareSendUsageInfoKey, cloudSendUsageInfo);
     emit this->cloudSendUsageInfoChanged(cloudSendUsageInfo);
+}
+
+uint RApplicationSettings::getSoftwareCheckUpdates() const
+{
+    return this->value(RApplicationSettings::softwareCheckUpdatesKey,RApplicationSettings::getDefaultSoftwareCheckUpdates()).toBool();
+}
+
+void RApplicationSettings::setSoftwareCheckUpdates(bool checkSoftwareUpdates)
+{
+    this->setValue(RApplicationSettings::softwareCheckUpdatesKey, checkSoftwareUpdates);
+    emit this->cloudSendUsageInfoChanged(checkSoftwareUpdates);
 }
 
 RHttpProxySettings RApplicationSettings::getProxySettings() const
@@ -489,7 +501,12 @@ uint RApplicationSettings::getDefaultCloudRefreshTimeout()
     return 5000;
 }
 
-bool RApplicationSettings::getDefaultCloudSendUsageInfo()
+bool RApplicationSettings::getDefaultSoftwareSendUsageInfo()
+{
+    return true;
+}
+
+bool RApplicationSettings::getDefaultSoftwareCheckUpdates()
 {
     return true;
 }

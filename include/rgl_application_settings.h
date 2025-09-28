@@ -68,7 +68,8 @@ class RApplicationSettings : public QSettings
         static const QString formatKey;
         static const QString toolbarIconSizeKey;
         static const QString cloudRefreshTimeoutKey;
-        static const QString cloudSendUsageInfoKey;
+        static const QString softwareSendUsageInfoKey;
+        static const QString softwareCheckUpdatesKey;
         static const QString proxyTypeKey;
         static const QString proxyHostKey;
         static const QString proxyPortKey;
@@ -163,11 +164,17 @@ class RApplicationSettings : public QSettings
         //! Set cloud refresh timeout.
         void setCloudRefreshTimeout(uint cloudRefreshTimeout);
 
-        //! Return cloud send usage information.
-        uint getCloudSendUsageInfo() const;
+        //! Return software send usage information.
+        uint getSoftwareSendUsageInfo() const;
 
-        //! Set cloud send usage information.
-        void setCloudSendUsageInfo(bool cloudSendUsageInfo);
+        //! Set software send usage information.
+        void setSoftwareSendUsageInfo(bool cloudSendUsageInfo);
+
+        //! Return whether to check for software updates.
+        uint getSoftwareCheckUpdates() const;
+
+        //! Set to check for software updates.
+        void setSoftwareCheckUpdates(bool checkSoftwareUpdates);
 
         //! Return proxy settings.
         RHttpProxySettings getProxySettings() const;
@@ -263,7 +270,10 @@ class RApplicationSettings : public QSettings
         static uint getDefaultCloudRefreshTimeout();
 
         //! Return default cloud send usage information.
-        static bool getDefaultCloudSendUsageInfo();
+        static bool getDefaultSoftwareSendUsageInfo();
+
+        //! Return default scheck for software updates.
+        static bool getDefaultSoftwareCheckUpdates();
 
         //! Return default private key path.
         static const QString getDefaultPrivateKeyPath();

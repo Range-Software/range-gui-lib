@@ -365,6 +365,7 @@ void RApplication::onStarted()
         RJobManager::getInstance().submit(pFileUpdater);
     }
 
+    // Software update checker
     RSoftwareUpdateChecker *softwareUpdateChecker = new RSoftwareUpdateChecker(this->applicationSettings,this);
     QObject::connect(softwareUpdateChecker,&RSoftwareUpdateChecker::softwareAvailable,this,&RApplication::onSoftwareAvailable);
 

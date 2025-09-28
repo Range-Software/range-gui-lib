@@ -14,9 +14,6 @@
 #include "rgl_keyboard_shortcuts_editor_widget.h"
 #include "rgl_proxy_settings_widget.h"
 
-#undef _R_CLOUD_SEND_USAGE_ENABLED
-#undef _R_PERSONAL_INFO_ENABLED
-
 class RApplicationSettingsWidget : public QWidget
 {
     Q_OBJECT
@@ -26,6 +23,8 @@ class RApplicationSettingsWidget : public QWidget
         //! Application settings.
         RApplicationSettings *applicationSettings;
 
+        bool enablePersonalInfo;
+
         //! Tab widget.
         QTabWidget *tabWidget;
 
@@ -34,13 +33,10 @@ class RApplicationSettingsWidget : public QWidget
         QComboBox *formatCombo;
         RProxySettingsWidget *proxySettingsWidget;
         QSpinBox *cloudRefreshTimeoutSpin;
-#ifdef _R_CLOUD_SEND_USAGE_ENABLED
-        QCheckBox *cloudSendUsageInfoCheckBox;
-#endif
-#ifdef _R_PERSONAL_INFO_ENABLED
+        QCheckBox *softwareSendUsageInfoCheckBox;
+        QCheckBox *softwareCheckUpdatesCheckBox;
         QLineEdit *personalNameEdit;
         QLineEdit *personalEmailEdit;
-#endif
         RFileChooserButton *helpDirectoryButton;
         RFileChooserButton *opensslToolFileButton;
         RKeyboardShortcutsEditorWidget *keyboardShortcutsEdirotWidget;
@@ -72,18 +68,17 @@ class RApplicationSettingsWidget : public QWidget
         //! Cloud refresh timeout changed.
         void onCloudRefreshTimeoutChanged(int cloudRefreshTimeout);
 
-#ifdef _R_CLOUD_SEND_USAGE_ENABLED
-        //! Send cloud usage information.
-        void onCloudSendUsageInfoChanged(Qt::CheckState state);
-#endif
+        //! Send software usage information.
+        void onSoftwareSendUsageInfoChanged(Qt::CheckState state);
 
-#ifdef _R_PERSONAL_INFO_ENABLED
+        //! Check software updates.
+        void onSoftwareCheckUpdatesChanged(Qt::CheckState state);
+
         //! Personal name changed.
         void onPersonalNameChanged(const QString &personalName);
 
         //! Personal email changed.
         void onPersonalEmailChanged(const QString &personalEmail);
-#endif
 
         //! Help directory has changed.
         void onHelpDirectoryChanged(const QString &directory);

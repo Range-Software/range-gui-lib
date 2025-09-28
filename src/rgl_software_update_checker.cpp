@@ -7,6 +7,7 @@
 
 RSoftwareUpdateChecker::RSoftwareUpdateChecker(const RApplicationSettings *applicationSettings, QObject *parent)
     : QObject{parent}
+    , applicationSettings{applicationSettings}
 {
     RCloudSessionInfo rangeSession = RCloudSessionManager::getDefaultRangeSession();
 
@@ -14,7 +15,7 @@ RSoftwareUpdateChecker::RSoftwareUpdateChecker(const RApplicationSettings *appli
     httpClientSettings.setUrl(RHttpClient::buildUrl(rangeSession.getHostName(),rangeSession.getPublicPort()));
     httpClientSettings.setTimeout(rangeSession.getTimeout());
     httpClientSettings.setTlsTrustStore(rangeSession.getHostCertificate());
-    httpClientSettings.setProxySettings(applicationSettings->getProxySettings());
+    httpClientSettings.setProxySettings(this->applicationSettings->getProxySettings());
 
     RSoftwareManagerSettings softwareManagerSettings;
     softwareManagerSettings.setHttpClientSettings(httpClientSettings);
@@ -23,27 +24,30 @@ RSoftwareUpdateChecker::RSoftwareUpdateChecker(const RApplicationSettings *appli
     this->softwareManager = new RSoftwareManager(softwareManagerSettings,this);
     this->softwareManager->getCloudClient()->setBlocking(false);
 
-    QObject::connect(applicationSettings,&RApplicationSettings::proxySettingsChanged,this,&RSoftwareUpdateChecker::onProxySettingsChanged);
-    QObject::connect(applicationSettings,&RApplicationSettings::cloudRefreshTimeoutChanged,this,&RSoftwareUpdateChecker::onRefreshTimeoutChanged);
+    QObject::connect(this->applicationSettings,&RApplicationSettings::proxySettingsChanged,this,&RSoftwareUpdateChecker::onProxySettingsChanged);
+    QObject::connect(this->applicationSettings,&RApplicationSettings::cloudRefreshTimeoutChanged,this,&RSoftwareUpdateChecker::onRefreshTimeoutChanged);
     QObject::connect(this->softwareManager,&RSoftwareManager::softwareAvailable,this,&RSoftwareUpdateChecker::onSoftwareAvailable);
 
     this->refreshTimer = new QTimer(this);
     QObject::connect(this->refreshTimer,&QTimer::timeout,this,&RSoftwareUpdateChecker::onRefreshTimeout);
-    this->refreshTimer->start(applicationSettings->getCloudRefreshTimeout());
-    this->onRefreshTimeoutChanged(applicationSettings->getCloudRefreshTimeout());
+    this->refreshTimer->start(this->applicationSettings->getCloudRefreshTimeout());
+    this->onRefreshTimeoutChanged(this->applicationSettings->getCloudRefreshTimeout());
 
     this->refreshCloudFiles();
 }
 
 void RSoftwareUpdateChecker::refreshCloudFiles()
 {
-    try
+    if (this->applicationSettings->getSoftwareCheckUpdates())
     {
-        this->softwareManager->checkForUpdates();
-    }
-    catch (const RError &rError)
-    {
-        RLogger::error("Software update check has failed. %s\n",rError.getMessage().toUtf8().constData());
+        try
+        {
+            this->softwareManager->checkForUpdates();
+        }
+        catch (const RError &rError)
+        {
+            RLogger::error("Software update check has failed. %s\n",rError.getMessage().toUtf8().constData());
+        }
     }
 }
 
