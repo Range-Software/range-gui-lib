@@ -130,17 +130,17 @@
         <translation>Aplikácia už beží</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="433"/>
+        <location filename="../src/rgl_application.cpp" line="434"/>
         <source>Following software updates are available</source>
         <translation>Sú dostupné následujúce aktualizácie softvéru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="443"/>
+        <location filename="../src/rgl_application.cpp" line="444"/>
         <source>Would you like to open the software manager?</source>
         <translation>Otvoriť správcu softvéru?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="445"/>
+        <location filename="../src/rgl_application.cpp" line="446"/>
         <source>Software updates available</source>
         <translation>Sú dostupné aktualizácie softvéru</translation>
     </message>
@@ -148,17 +148,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="459"/>
+        <location filename="../src/rgl_application_settings.cpp" line="471"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="460"/>
+        <location filename="../src/rgl_application_settings.cpp" line="472"/>
         <source>POSIX</source>
         <translation>POSIX</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="462"/>
+        <location filename="../src/rgl_application_settings.cpp" line="474"/>
         <source>System</source>
         <translation>Nastavenia systému</translation>
     </message>
@@ -184,107 +184,117 @@
 <context>
     <name>RApplicationSettingsWidget</name>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="32"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="33"/>
         <source>Appearance</source>
         <translation>Vzhľad</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="47"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="48"/>
         <source>Style</source>
         <translation>Štýl</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="59"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="60"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="67"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="68"/>
         <source>Formats</source>
         <translation>Formáty</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="75"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="77"/>
         <source>Personal</source>
         <translation>Osobné</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="81"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="83"/>
         <source>Jon Smith</source>
         <translation>Ján Novák</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="83"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="85"/>
         <source>Full name</source>
         <translation>Celé meno</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="92"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="94"/>
         <source>Personal e-mail</source>
         <translation>Osobný e-mail</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="100"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="102"/>
         <source>Network</source>
         <translation>Sieť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="105"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="107"/>
         <source>Network proxy</source>
         <translation>Sieťové proxy</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="114"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="116"/>
         <source>Cloud</source>
         <translation>Cloud</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="124"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="126"/>
         <source>Refresh timeout</source>
         <translation>Časový limit obnovenia</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="129"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="130"/>
+        <source>Software</source>
+        <translation>Softvér</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="136"/>
         <source>Send usage information</source>
         <translation>Posielať údaje o používaní</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="140"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="141"/>
+        <source>Check for software update</source>
+        <translation>Overovanie aktualizácie softwéru</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="151"/>
         <source>Paths</source>
         <translation>Cesty</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="145"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="156"/>
         <source>Help directory</source>
         <translation>Cesta k dokumentom pomocníka</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="150"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="161"/>
         <source>OpenSSL tool</source>
         <translation>OpenSSL nástoj</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="160"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="171"/>
         <source>Keyboard shortcuts</source>
         <translation>Klávesové skratky</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="225"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="232"/>
         <source>Language change</source>
         <translation>Zmena jazyka</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="225"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="232"/>
         <source>Language change requires an application restart.</source>
         <translation>Zmena jazyka vyžaduje reštart aplikácie.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="231"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
         <source>Format change</source>
         <translation>Zmena formátu</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="231"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
         <source>Format change requires an application restart.</source>
         <translation>Zmena formátu vyžaduje reštart aplikácie.</translation>
     </message>
