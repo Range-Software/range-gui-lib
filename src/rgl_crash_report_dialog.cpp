@@ -18,20 +18,10 @@ RCrashReportDialog::RCrashReportDialog(RApplicationSettings *applicationSettings
                                        QWidget *parent)
     : QDialog{parent}
 {
-    RCloudSessionInfo rangeSession = RCloudSessionManager::getDefaultRangeSession();
+    this->reportSender = new RCloudReportSender(applicationSettings,this);
 
-    RHttpClientSettings httpClientSettings;
-    httpClientSettings.setUrl(RHttpClient::buildUrl(rangeSession.getHostName(),rangeSession.getPublicPort()));
-    httpClientSettings.setTimeout(rangeSession.getTimeout());
-    httpClientSettings.setTlsTrustStore(rangeSession.getHostCertificate());
-    httpClientSettings.setProxySettings(applicationSettings->getProxySettings());
-
-    this->cloudClient = new RCloudClient(RHttpClient::Public,httpClientSettings,parent);
-    this->cloudClient->setBlocking(false);
-
-    QObject::connect(this->cloudClient,&RCloudClient::reportSubmitted,this,&RCrashReportDialog::onSubmitReportFinished);
-    QObject::connect(this->cloudClient,&RCloudClient::actionFinished,this,&RCrashReportDialog::onCloudActionFinished);
-    QObject::connect(this->cloudClient,&RCloudClient::actionFailed,this,&RCrashReportDialog::onCloudActionFailed);
+    QObject::connect(this->reportSender,&RCloudReportSender::reportSent,this,&RCrashReportDialog::onReportSent);
+    QObject::connect(this->reportSender,&RCloudReportSender::reportFailed,this,&RCrashReportDialog::onReportFailed);
 
     bool hasLogFile = QFile::exists(logFile);
 
@@ -99,20 +89,16 @@ void RCrashReportDialog::onReportClicked()
     RReportRecord reportRecord;
     reportRecord.setReport(this->logBrowser->toPlainText());
     reportRecord.setComment(this->textEdit->toPlainText());
-    this->cloudClient->requestSubmitReport(reportRecord);
+    this->reportSender->sendReport(reportRecord);
 }
 
-void RCrashReportDialog::onSubmitReportFinished(QString message)
+void RCrashReportDialog::onReportSent(QString message)
 {
     RMessageBox::information(this,tr("Report sent"),message);
+    this->close();
 }
 
-void RCrashReportDialog::onCloudActionFinished()
-{
-
-}
-
-void RCrashReportDialog::onCloudActionFailed(RError::Type errorType, const QString &errorMessage, const QString &message)
+void RCrashReportDialog::onReportFailed(RError::Type errorType, const QString &errorMessage, const QString &message)
 {
     RMessageBox::critical(this,tr("Failed to send crash report"),message,errorType,errorMessage);
 }

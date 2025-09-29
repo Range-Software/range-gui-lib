@@ -4,9 +4,8 @@
 #include <QDialog>
 #include <QPlainTextEdit>
 
-#include <rcl_cloud_client.h>
-
 #include "rgl_application_settings.h"
+#include "rgl_cloud_report_sender.h"
 #include "rgl_log_browser.h"
 
 class RCrashReportDialog : public QDialog
@@ -16,12 +15,10 @@ class RCrashReportDialog : public QDialog
 
     protected:
 
-        //! Cloud client.
-        RCloudClient *cloudClient;
-
+        //! Report sender.
+        RCloudReportSender *reportSender;
         //! Log browser.
         RLogBrowser *logBrowser;
-
         //! Text edit;
         QPlainTextEdit *textEdit;
 
@@ -38,13 +35,10 @@ class RCrashReportDialog : public QDialog
         void onReportClicked();
 
         //! Process is finished.
-        void onSubmitReportFinished(QString message);
-
-        //! Cloud action has finished.
-        void onCloudActionFinished();
+        void onReportSent(QString message);
 
         //! Cloud action has failed.
-        void onCloudActionFailed(RError::Type errorType, const QString &errorMessage, const QString &message);
+        void onReportFailed(RError::Type errorType, const QString &errorMessage, const QString &message);
 
 };
 

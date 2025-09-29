@@ -130,17 +130,17 @@
         <translation>Aplikácia už beží</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="434"/>
+        <location filename="../src/rgl_application.cpp" line="480"/>
         <source>Following software updates are available</source>
         <translation>Sú dostupné následujúce aktualizácie softvéru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="444"/>
+        <location filename="../src/rgl_application.cpp" line="490"/>
         <source>Would you like to open the software manager?</source>
         <translation>Otvoriť správcu softvéru?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="446"/>
+        <location filename="../src/rgl_application.cpp" line="492"/>
         <source>Software updates available</source>
         <translation>Sú dostupné aktualizácie softvéru</translation>
     </message>
@@ -808,47 +808,47 @@
 <context>
     <name>RCrashReportDialog</name>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="41"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="31"/>
         <source>Crash report</source>
         <translation>Nalásenie havárie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="54"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="44"/>
         <source>Previous instance has terminated unexpectedly.</source>
         <translation>Predchádzajúca inštancia sa neočakávane ukončila.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="54"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="44"/>
         <source>Would you like to report the crash?</source>
         <translation>Nahlásiť haváriu?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="60"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="50"/>
         <source>Log file from crashed instance</source>
         <translation>Log súbor z havarovanej inštancie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="72"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="62"/>
         <source>Additional information</source>
         <translation>Dodatočné informácie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="86"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="76"/>
         <source>Close</source>
         <translation>Zatvoriť</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="89"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="79"/>
         <source>Send crash report</source>
         <translation>Poslať hlásenie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="107"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="97"/>
         <source>Report sent</source>
         <translation>Hlásenie bolo poslané</translation>
     </message>
     <message>
-        <location filename="../src/rgl_crash_report_dialog.cpp" line="117"/>
+        <location filename="../src/rgl_crash_report_dialog.cpp" line="103"/>
         <source>Failed to send crash report</source>
         <translation>Nepodarilo sa nahlásiť haváriu</translation>
     </message>

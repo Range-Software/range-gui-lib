@@ -110,7 +110,7 @@ void RApplication::applyTranslation(const QString &languageCode)
 
     this->applyFormat(this->applicationSettings->getFormat());
 
-    for (auto translatorName : this->translatorNames)
+    for (const QString &translatorName : std::as_const(this->translatorNames))
     {
         QString translatorFile = ":/i18n/" + translatorName + "/" + languageCode + ".qm";
 
@@ -373,6 +373,52 @@ void RApplication::onStarted()
     {
         RCrashReportDialog crashReportDialog(this->applicationSettings,rotatedLogFile,this->mainWindow);
         crashReportDialog.exec();
+    }
+    else
+    {
+        if (this->applicationSettings->getSoftwareSendUsageInfo())
+        {
+            // Send software usage report
+            if (QFile::exists(rotatedLogFile))
+            {
+                RLogger::info("Preparing a report from the log file \'%s\'.\n",rotatedLogFile.toUtf8().constData());
+
+                RReportRecord reportRecord;
+
+                QFile file(rotatedLogFile);
+                if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+                {
+                    return;
+                }
+
+                QString fileContent;
+                try
+                {
+                    QTextStream fileStream(&file);
+                    while (!fileStream.atEnd())
+                    {
+                        if (!fileContent.isEmpty())
+                        {
+                            fileContent.append('\n');
+                        }
+                        fileContent.append(fileStream.readLine());
+                    }
+                }
+                catch (...)
+                {
+                    RLogger::error("Unknown error while reading the log file.\n");
+                }
+                file.close();
+
+                reportRecord.setReport(fileContent);
+                reportRecord.setComment("Report from last run");
+                RCloudReportSender::sendReport(this->applicationSettings,reportRecord);
+            }
+            else
+            {
+                RLogger::warning("Cannot prepare a report because log file \'%s\' does not exist.\n",rotatedLogFile.toUtf8().constData());
+            }
+        }
     }
 }
 
