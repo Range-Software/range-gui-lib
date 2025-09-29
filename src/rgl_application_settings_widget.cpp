@@ -139,7 +139,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     softwareLayout->addWidget(this->softwareSendUsageInfoCheckBox);
 
     this->softwareCheckUpdatesCheckBox = new QCheckBox(tr("Check for software update"));
-    this->softwareCheckUpdatesCheckBox->setChecked(this->applicationSettings->getSoftwareSendUsageInfo());
+    this->softwareCheckUpdatesCheckBox->setChecked(this->applicationSettings->getSoftwareCheckUpdates());
 
     softwareLayout->addWidget(this->softwareCheckUpdatesCheckBox);
 
