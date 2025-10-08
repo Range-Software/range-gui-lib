@@ -215,8 +215,11 @@ void RApplicationSettingsWidget::setDefaultValues()
     this->cloudRefreshTimeoutSpin->setValue(RApplicationSettings::getDefaultCloudRefreshTimeout()/1000);
     this->softwareSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
     this->softwareCheckUpdatesCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareCheckUpdates() ? Qt::Checked : Qt::Unchecked);
-    this->personalNameEdit->setText(QString());
-    this->personalEmailEdit->setText(QString());
+    if (this->enablePersonalInfo)
+    {
+        this->personalNameEdit->setText(QString());
+        this->personalEmailEdit->setText(QString());
+    }
     this->helpDirectoryButton->setFileName(this->applicationSettings->findHelpDir());
     this->opensslToolFileButton->setFileName(this->applicationSettings->getDefaultOpensslToolPath());
     this->keyboardShortcutsEdirotWidget->resetToDefault();
