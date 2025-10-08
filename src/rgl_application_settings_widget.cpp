@@ -214,6 +214,7 @@ void RApplicationSettingsWidget::setDefaultValues()
     this->proxySettingsWidget->setDefaultValues();
     this->cloudRefreshTimeoutSpin->setValue(RApplicationSettings::getDefaultCloudRefreshTimeout()/1000);
     this->softwareSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
+    this->softwareCheckUpdatesCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareCheckUpdates() ? Qt::Checked : Qt::Unchecked);
     this->personalNameEdit->setText(QString());
     this->personalEmailEdit->setText(QString());
     this->helpDirectoryButton->setFileName(this->applicationSettings->findHelpDir());
