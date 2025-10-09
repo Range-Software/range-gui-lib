@@ -279,22 +279,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="232"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="236"/>
         <source>Language change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="232"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="236"/>
         <source>Language change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="242"/>
         <source>Format change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="242"/>
         <source>Format change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>

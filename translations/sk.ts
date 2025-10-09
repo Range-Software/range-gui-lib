@@ -279,22 +279,22 @@
         <translation>Klávesové skratky</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="232"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="236"/>
         <source>Language change</source>
         <translation>Zmena jazyka</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="232"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="236"/>
         <source>Language change requires an application restart.</source>
         <translation>Zmena jazyka vyžaduje reštart aplikácie.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="242"/>
         <source>Format change</source>
         <translation>Zmena formátu</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="242"/>
         <source>Format change requires an application restart.</source>
         <translation>Zmena formátu vyžaduje reštart aplikácie.</translation>
     </message>
