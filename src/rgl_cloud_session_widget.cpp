@@ -341,9 +341,26 @@ void RCloudSessionWidget::onClientCertificateViewClicked()
 
 void RCloudSessionWidget::onIdentityAvailable(const QString &keyPath, const QString &keyPassword, const QString &certificatePath)
 {
+    RLogger::info("Applying new identity (private key: \"%s\", certificate: \"%s\")\n",
+                  keyPath.toUtf8().constData(),
+                  certificatePath.toUtf8().constData());
+
+    bool clientPrivateKeyFileButtonSignals = this->clientPrivateKeyFileButton->signalsBlocked();
+    bool clientPrivateKeyPasswordEditSignals = this->clientPrivateKeyPasswordEdit->signalsBlocked();
+    bool clientCertificateFileButtonSignals = this->clientCertificateFileButton->signalsBlocked();
+
+    this->clientPrivateKeyFileButton->blockSignals(true);
+    this->clientPrivateKeyPasswordEdit->blockSignals(true);
+    this->clientCertificateFileButton->blockSignals(true);
+
     this->clientPrivateKeyFileButton->setFileName(keyPath);
     this->clientPrivateKeyPasswordEdit->setText(keyPassword);
     this->clientCertificateFileButton->setFileName(certificatePath);
+
+    this->clientPrivateKeyFileButton->blockSignals(clientPrivateKeyFileButtonSignals);
+    this->clientPrivateKeyPasswordEdit->blockSignals(clientPrivateKeyPasswordEditSignals);
+    this->clientCertificateFileButton->blockSignals(clientCertificateFileButtonSignals);
+    emit this->sessionInfoChanged(this->sessionInfo);
 }
 
 void RCloudSessionWidget::viewCertificates(const QString &certificatesPath)
