@@ -50,8 +50,9 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     this->publicCloudClient = connectionHandler->createPublicClient(this);
     this->privateCloudClient = connectionHandler->createPrivateClient(this);
 
-    QObject::connect(this->publicCloudClient,&RCloudClient::signedCertificateAvailable,this,&ROpenSslCsrDialog::onSignedCertificate);
     QObject::connect(this->privateCloudClient,&RCloudClient::signedCertificateAvailable,this,&ROpenSslCsrDialog::onSignedCertificate);
+    QObject::connect(this->publicCloudClient,&RCloudClient::signedCertificateAvailable,this,&ROpenSslCsrDialog::onSignedCertificate);
+    QObject::connect(this->publicCloudClient,&RCloudClient::userRegistered,this,&ROpenSslCsrDialog::onUserRegistered);
 
     QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
     QIcon generateIcon(":/icons/file/pixmaps/range-new.svg");
@@ -91,29 +92,8 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     QFormLayout *subjectLayout = new QFormLayout;
     subjectGroupBox->setLayout(subjectLayout);
 
-    this->countryCombo = new QComboBox;
-    this->countryCombo->setDuplicatesEnabled(false);
-    QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyTerritory);
-    QString currentTerritoryCode = subjectMap.value(ROpenSslTool::CertificateSubject::Country::key);
-    for(const QLocale &locale : std::as_const(allLocales))
-    {
-        QString territoryCode = QLocale::territoryToCode(locale.territory()).toUpper();
-
-        if (territoryCode.length() != 2 || this->countryCombo->findData(territoryCode) != -1)
-        {
-            continue;
-        }
-
-        QString currentText = QLocale::territoryToString(locale.territory()) + " (" + territoryCode + ")";
-
-        this->countryCombo->addItem(currentText,territoryCode);
-        if (currentTerritoryCode == territoryCode)
-        {
-            this->countryCombo->setCurrentText(currentText);
-        }
-    }
-    this->countryCombo->model()->sort(0);
-    subjectLayout->addRow("C:",this->countryCombo);
+    this->territoryCombo = new RTerritoryComboBox(subjectMap.value(ROpenSslTool::CertificateSubject::Country::key));
+    subjectLayout->addRow("C:",this->territoryCombo);
 
     this->stateEdit = new QLineEdit(subjectMap.value(ROpenSslTool::CertificateSubject::State::key));
     this->stateEdit->setPlaceholderText(tr("State"));
@@ -159,6 +139,9 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     this->emailRequestButton = new QPushButton(emailRequestIcon, tr("E-mail request"));
     requestLayout->addWidget(this->emailRequestButton);
 
+    this->registerUserButton = new QPushButton(emailRequestIcon, tr("Register new user"));
+    requestLayout->addWidget(this->registerUserButton);
+
     QDialogButtonBox *buttonBox = new QDialogButtonBox;
     mainLayout->addWidget(buttonBox);
 
@@ -177,6 +160,7 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     QObject::connect(this->directRequestButton,&QPushButton::clicked,this,&ROpenSslCsrDialog::onDirectRequestClicked);
     QObject::connect(this->directRequestWithTokenButton,&QPushButton::clicked,this,&ROpenSslCsrDialog::onDirectRequestWithTokenClicked);
     QObject::connect(this->emailRequestButton,&QPushButton::clicked,this,&ROpenSslCsrDialog::onEmailRequestClicked);
+    QObject::connect(this->registerUserButton,&QPushButton::clicked,this,&ROpenSslCsrDialog::onRegisterUserClicked);
 }
 
 QByteArray ROpenSslCsrDialog::loadKey(const QString &openSslToolPath,
@@ -299,7 +283,7 @@ void ROpenSslCsrDialog::onNewCertificateFileNameChanged(const QString &fileName)
 void ROpenSslCsrDialog::onGenerateCsrClicked()
 {
     QStringList emptySubjectFields;
-    if (this->countryCombo->currentData().isNull())
+    if (this->territoryCombo->currentTerritoryCode().isEmpty())
     {
         emptySubjectFields.append(QString("%1 (%2)").arg(ROpenSslTool::CertificateSubject::Country::key,
                                                          ROpenSslTool::CertificateSubject::Country::name));
@@ -342,7 +326,7 @@ void ROpenSslCsrDialog::onGenerateCsrClicked()
     }
 
     QMap<QString,QString> subjectMap;
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,this->countryCombo->currentData().toString());
+    subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,this->territoryCombo->currentTerritoryCode());
     subjectMap.insert(ROpenSslTool::CertificateSubject::State::key,this->stateEdit->text());
     subjectMap.insert(ROpenSslTool::CertificateSubject::Location::key,this->locationEdit->text());
     subjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,this->organizationEdit->text());
@@ -380,6 +364,7 @@ void ROpenSslCsrDialog::onCsrTextChanged()
     this->directRequestButton->setDisabled(csrIsEmpty);
     this->directRequestWithTokenButton->setDisabled(csrIsEmpty);
     this->emailRequestButton->setDisabled(csrIsEmpty);
+    this->registerUserButton->setDisabled(csrIsEmpty);
 }
 
 void ROpenSslCsrDialog::onDirectRequestClicked()
@@ -406,6 +391,11 @@ void ROpenSslCsrDialog::onEmailRequestClicked()
     QDesktopServices::openUrl(QUrl(QString("mailto:?to=csr@range-software.com&subject=Certification Signing Request&body=%1").arg(this->csrBrowser->toPlainText()), QUrl::TolerantMode));
 }
 
+void ROpenSslCsrDialog::onRegisterUserClicked()
+{
+    this->publicCloudClient->requestUserRegister(this->commonNameEdit->text());
+}
+
 void ROpenSslCsrDialog::onSignedCertificate(QSslCertificate certificate)
 {
     if (!RFileTools::writeBinaryFile(this->newCertificatePath,certificate.toPem()))
@@ -427,4 +417,27 @@ void ROpenSslCsrDialog::onSignedCertificate(QSslCertificate certificate)
     {
         emit this->identityAvailable(this->newKeyPath,this->newKeyPassword,this->newCertificatePath);
     }
+}
+
+void ROpenSslCsrDialog::onUserRegistered(std::tuple<RUserInfo, QList<RAuthToken> > registrationInfo)
+{
+    const RUserInfo &userInfo = std::get<0>(registrationInfo);
+    const QList<RAuthToken> &authTokens = std::get<1>(registrationInfo);
+
+    if (authTokens.empty())
+    {
+        RMessageBox::critical(this,tr("No tokens received"),tr("No authentication token was received."));
+        return;
+    }
+
+    QString noticeMessage = tr("New user was successfully registered.")
+                          + "<ul>"
+                          + "<li><b>" + tr("User name") + ":</b> <tt>" + userInfo.getName() + "</tt></li>"
+                          + "<li><b>" + tr("User groups") + ":</b> <tt>" + userInfo.getGroupNames().join(", ") + "</tt></li>"
+                          + "<li><b>" + tr("Authentication token") + ":</b> <tt>" + authTokens.at(0).getContent() + "</tt></li>"
+                          + "</ul>"
+                          + tr("Sending certificate signing request.");
+    RMessageBox::information(this,tr("User registered"),noticeMessage);
+
+    this->publicCloudClient->requestCsrProcess(this->csrBrowser->toPlainText().toUtf8().toBase64(),userInfo.getName(),authTokens.at(0).getContent());
 }

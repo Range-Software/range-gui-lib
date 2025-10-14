@@ -4,12 +4,12 @@
 #include <QDialog>
 #include <QObject>
 #include <QLineEdit>
-#include <QComboBox>
 #include <QPushButton>
 
 #include <rcl_cloud_client.h>
 
 #include "rgl_cloud_connection_handler.h"
+#include "rgl_territory_combo_box.h"
 #include "rgl_text_browser.h"
 
 class ROpenSslCsrDialog : public QDialog
@@ -29,7 +29,7 @@ class ROpenSslCsrDialog : public QDialog
         QString newCsrPath;
         QString newCertificatePath;
 
-        QComboBox *countryCombo;
+        RTerritoryComboBox *territoryCombo;
         QLineEdit *stateEdit;
         QLineEdit *locationEdit;
         QLineEdit *organizationEdit;
@@ -40,6 +40,7 @@ class ROpenSslCsrDialog : public QDialog
         QPushButton *directRequestButton;
         QPushButton *directRequestWithTokenButton;
         QPushButton *emailRequestButton;
+        QPushButton *registerUserButton;
 
         RCloudClient *publicCloudClient;
         RCloudClient *privateCloudClient;
@@ -95,8 +96,14 @@ class ROpenSslCsrDialog : public QDialog
         //! Email request clicked.
         void onEmailRequestClicked();
 
+        //! Register new user clicked.
+        void onRegisterUserClicked();
+
         //! Certificate was signed.
         void onSignedCertificate(QSslCertificate certificate);
+
+        //! User was registered.
+        void onUserRegistered(std::tuple<RUserInfo,QList<RAuthToken>> registrationInfo);
 
     signals:
 

@@ -260,7 +260,7 @@ void RCloudSessionWidget::onClientCertificateRequestClicked()
     QMap<QString,QString> subjectMap;
 
     subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,QLocale::territoryToCode(QLocale::system().territory()));
-    subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->applicationSettings->getPersonalEmail());
+    subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->applicationSettings->getUserEmail());
 
     const QList<QSslCertificate> clientCertificates = QSslCertificate::fromPath(this->sessionInfo.getClientCertificate(),QSsl::EncodingFormat::Pem);
     if (clientCertificates.size() > 0)
@@ -302,7 +302,7 @@ void RCloudSessionWidget::onClientCertificateRequestClicked()
 
     ROpenSslCsrDialog *openSslCsrDialog = new ROpenSslCsrDialog(this->connectionHandler,
                                                                 this->applicationSettings->getOpensslToolPath(),
-                                                                this->applicationSettings->findOpensslCnfFileName(),
+                                                                this->applicationSettings->getOpensslConfPath(),
                                                                 this->clientPrivateKeyFileButton->getFileName(),
                                                                 this->clientPrivateKeyPasswordEdit->text(),
                                                                 this->clientCertificateFileButton->getFileName(),

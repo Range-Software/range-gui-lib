@@ -75,9 +75,11 @@ class RApplicationSettings : public QSettings
         static const QString proxyPortKey;
         static const QString proxyUserKey;
         static const QString proxyPasswordKey;
-        static const QString personalNameKey;
-        static const QString personalEmailKey;
+        static const QString userFullNameKey;
+        static const QString userEmailKey;
+        static const QString userTerritoryKey;
         static const QString opensslToolPathKey;
+        static const QString opensslConfPathKey;
 
         //! Application path.
         QString applicationDirPath;
@@ -105,7 +107,10 @@ class RApplicationSettings : public QSettings
         QString findReleaseNotesFileName() const;
 
         //! Return openssl.cnf file name.
-        QString findOpensslCnfFileName() const;
+        QString findOpensslConfPath() const;
+
+        //! Return resources/etc directory path.
+        QString findEtcDir() const;
 
         //! Return help directory path.
         QString findHelpDir() const;
@@ -182,23 +187,35 @@ class RApplicationSettings : public QSettings
         //! Set new proxy settings.
         void setProxySettings(const RHttpProxySettings &proxySettings);
 
-        //! Return personal name.
-        QString getPersonalName() const;
+        //! Return user full name.
+        QString getUserFullName() const;
 
-        //! Set personal name.
-        void setPersonalName(const QString &personalName);
+        //! Set user full name.
+        void setUserFullName(const QString &userFullName);
 
-        //! Return personal email.
-        QString getPersonalEmail() const;
+        //! Return user email.
+        QString getUserEmail() const;
 
-        //! Set personal email.
-        void setPersonalEmail(const QString &personalEmail);
+        //! Set user email.
+        void setUserEmail(const QString &userEmail);
+
+        //! Return user territory.
+        QString getUserTerritory() const;
+
+        //! Set user territory.
+        void setUserTerritory(const QString &userTerritory);
 
         //! Return path to OpenSSL tool.
         QString getOpensslToolPath() const;
 
         //! Set path to OpenSSL tool.
         void setOpensslToolPath(const QString &opensslToolPath);
+
+        //! Return path to OpenSSL configuration file.
+        QString getOpensslConfPath() const;
+
+        //! Set path to OpenSSL configuration file.
+        void setOpensslConfPath(const QString &opensslConfPath);
 
         //! Return users home directory path.
         static QString getHomeDir();
@@ -274,6 +291,9 @@ class RApplicationSettings : public QSettings
 
         //! Return default scheck for software updates.
         static bool getDefaultSoftwareCheckUpdates();
+
+        //! Return default user territory.
+        static const QString getDefaultUserTerritory();
 
         //! Return default private key path.
         static const QString getDefaultPrivateKeyPath();

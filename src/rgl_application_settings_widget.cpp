@@ -19,7 +19,6 @@
 RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *applicationSettings, QWidget *parent)
     : QWidget{parent}
     , applicationSettings{applicationSettings}
-    , enablePersonalInfo{false}
 {
     QVBoxLayout *mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
@@ -69,32 +68,32 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
 
     appearanceLayout->addRow(new QWidget);
 
-    if (this->enablePersonalInfo)
-    {
-        // Personal
+    // User
 
-        QWidget *personalWidget = new QWidget;
-        this->tabWidget->addTab(personalWidget,tr("Personal"));
+    QWidget *userWidget = new QWidget;
+    this->tabWidget->addTab(userWidget,tr("User"));
 
-        QFormLayout *personalLayout = new QFormLayout;
-        personalWidget->setLayout(personalLayout);
+    QFormLayout *userLayout = new QFormLayout;
+    userWidget->setLayout(userLayout);
 
-        this->personalNameEdit = new QLineEdit(this->applicationSettings->getPersonalName());
-        this->personalNameEdit->setPlaceholderText(tr("Jon Smith"));
+    this->userFullNameEdit = new QLineEdit(this->applicationSettings->getUserFullName());
+    this->userFullNameEdit->setPlaceholderText(tr("Jon Smith"));
 
-        personalLayout->addRow(tr("Full name") + ":",this->personalNameEdit);
+    userLayout->addRow(tr("Full name") + ":",this->userFullNameEdit);
 
-        this->personalEmailEdit = new QLineEdit(this->applicationSettings->getPersonalEmail());
-        this->personalEmailEdit->setPlaceholderText("example@domain.com");
+    this->userEmailEdit = new QLineEdit(this->applicationSettings->getUserEmail());
+    this->userEmailEdit->setPlaceholderText("example@domain.com");
 
-        QRegularExpression rex("^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$");
-        QValidator *emailValidator = new QRegularExpressionValidator(rex, this);
-        this->personalEmailEdit->setValidator(emailValidator);
+    QRegularExpression rex("^[a-zA-Z0-9](?:[a-zA-Z0-9._%+-]*[a-zA-Z0-9])?@[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?\\.[a-zA-Z]{2,}$");
+    QValidator *emailValidator = new QRegularExpressionValidator(rex, this);
+    this->userEmailEdit->setValidator(emailValidator);
 
-        personalLayout->addRow(tr("Personal e-mail") + ":",this->personalEmailEdit);
+    userLayout->addRow(tr("E-mail") + ":",this->userEmailEdit);
 
-        personalLayout->addRow(new QWidget);
-    }
+    this->userTerritoryCombo = new RTerritoryComboBox(this->applicationSettings->getUserTerritory());
+    userLayout->addRow(tr("Country") + ":",this->userTerritoryCombo);
+
+    userLayout->addRow(new QWidget);
 
     // Network
 
@@ -163,6 +162,11 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->opensslToolFileButton->setSearchDirectory(QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation));
     pathsLayout->addWidget(this->opensslToolFileButton);
 
+    this->opensslConfFileButton = new RFileChooserButton(tr("OpenSSL configuration") + ":",RFileChooserButton::OpenFile);
+    this->opensslConfFileButton->setFileName(this->applicationSettings->getOpensslConfPath());
+    this->opensslConfFileButton->setSearchDirectory(this->applicationSettings->findEtcDir());
+    pathsLayout->addWidget(this->opensslConfFileButton);
+
     pathsLayout->addStretch(10);
 
     // Keyboard shortcuts
@@ -183,13 +187,12 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->cloudRefreshTimeoutSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudRefreshTimeoutChanged);
     QObject::connect(this->softwareSendUsageInfoCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged);
     QObject::connect(this->softwareCheckUpdatesCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged);
-    if (this->enablePersonalInfo)
-    {
-        QObject::connect(this->personalNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onPersonalNameChanged);
-        QObject::connect(this->personalEmailEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onPersonalEmailChanged);
-    }
+    QObject::connect(this->userFullNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onUserFullNameChanged);
+    QObject::connect(this->userEmailEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onUserEmailChanged);
+    QObject::connect(this->userTerritoryCombo,&RTerritoryComboBox::territorrySelected,this,&RApplicationSettingsWidget::onUserTerritorySelected);
     QObject::connect(this->helpDirectoryButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onHelpDirectoryChanged);
     QObject::connect(this->opensslToolFileButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onOpensslToolFileChanged);
+    QObject::connect(this->opensslConfFileButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onOpensslConfFileChanged);
     QObject::connect(this->keyboardShortcutsEdirotWidget,&RKeyboardShortcutsEditorWidget::shortcutChanged,this,&RApplicationSettingsWidget::onKeyboardShortcutChanged);
 }
 
@@ -215,11 +218,9 @@ void RApplicationSettingsWidget::setDefaultValues()
     this->cloudRefreshTimeoutSpin->setValue(RApplicationSettings::getDefaultCloudRefreshTimeout()/1000);
     this->softwareSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
     this->softwareCheckUpdatesCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareCheckUpdates() ? Qt::Checked : Qt::Unchecked);
-    if (this->enablePersonalInfo)
-    {
-        this->personalNameEdit->setText(QString());
-        this->personalEmailEdit->setText(QString());
-    }
+    this->userFullNameEdit->setText(QString());
+    this->userEmailEdit->setText(QString());
+    this->userTerritoryCombo->setCurrentTerritoryCode(RApplicationSettings::getDefaultUserTerritory());
     this->helpDirectoryButton->setFileName(this->applicationSettings->findHelpDir());
     this->opensslToolFileButton->setFileName(this->applicationSettings->getDefaultOpensslToolPath());
     this->keyboardShortcutsEdirotWidget->resetToDefault();
@@ -262,14 +263,19 @@ void RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged(Qt::CheckState st
     this->applicationSettings->setSoftwareCheckUpdates(state == Qt::Checked);
 }
 
-void RApplicationSettingsWidget::onPersonalNameChanged(const QString &personalName)
+void RApplicationSettingsWidget::onUserFullNameChanged(const QString &userFullName)
 {
-    this->applicationSettings->setPersonalName(personalName);
+    this->applicationSettings->setUserFullName(userFullName);
 }
 
-void RApplicationSettingsWidget::onPersonalEmailChanged(const QString &personalEmail)
+void RApplicationSettingsWidget::onUserEmailChanged(const QString &userEmail)
 {
-    this->applicationSettings->setPersonalEmail(personalEmail);
+    this->applicationSettings->setUserEmail(userEmail);
+}
+
+void RApplicationSettingsWidget::onUserTerritorySelected(const QString &userTerritory)
+{
+    this->applicationSettings->setUserTerritory(userTerritory);
 }
 
 void RApplicationSettingsWidget::onHelpDirectoryChanged(const QString &directory)
@@ -280,6 +286,11 @@ void RApplicationSettingsWidget::onHelpDirectoryChanged(const QString &directory
 void RApplicationSettingsWidget::onOpensslToolFileChanged(const QString &fileName)
 {
     this->applicationSettings->setOpensslToolPath(fileName);
+}
+
+void RApplicationSettingsWidget::onOpensslConfFileChanged(const QString &fileName)
+{
+    this->applicationSettings->setOpensslConfPath(fileName);
 }
 
 void RApplicationSettingsWidget::onKeyboardShortcutChanged(uint position, const QString &shortcut)

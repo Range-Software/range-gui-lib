@@ -14,6 +14,8 @@ RCloudSessionDialog::RCloudSessionDialog(const RCloudSessionInfo &sessionInfo,
     QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
     QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
 
+    this->setWindowTitle(tr("Cloud session"));
+
     QVBoxLayout *mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);
 

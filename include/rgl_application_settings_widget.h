@@ -13,6 +13,7 @@
 #include "rgl_file_chooser_button.h"
 #include "rgl_keyboard_shortcuts_editor_widget.h"
 #include "rgl_proxy_settings_widget.h"
+#include "rgl_territory_combo_box.h"
 
 class RApplicationSettingsWidget : public QWidget
 {
@@ -23,7 +24,7 @@ class RApplicationSettingsWidget : public QWidget
         //! Application settings.
         RApplicationSettings *applicationSettings;
 
-        bool enablePersonalInfo;
+        bool enableUserInfo;
 
         //! Tab widget.
         QTabWidget *tabWidget;
@@ -35,10 +36,12 @@ class RApplicationSettingsWidget : public QWidget
         QSpinBox *cloudRefreshTimeoutSpin;
         QCheckBox *softwareSendUsageInfoCheckBox;
         QCheckBox *softwareCheckUpdatesCheckBox;
-        QLineEdit *personalNameEdit;
-        QLineEdit *personalEmailEdit;
+        QLineEdit *userFullNameEdit;
+        QLineEdit *userEmailEdit;
+        RTerritoryComboBox *userTerritoryCombo;
         RFileChooserButton *helpDirectoryButton;
         RFileChooserButton *opensslToolFileButton;
+        RFileChooserButton *opensslConfFileButton;
         RKeyboardShortcutsEditorWidget *keyboardShortcutsEdirotWidget;
 
     public:
@@ -74,17 +77,23 @@ class RApplicationSettingsWidget : public QWidget
         //! Check software updates.
         void onSoftwareCheckUpdatesChanged(Qt::CheckState state);
 
-        //! Personal name changed.
-        void onPersonalNameChanged(const QString &personalName);
+        //! User full name changed.
+        void onUserFullNameChanged(const QString &userFullName);
 
-        //! Personal email changed.
-        void onPersonalEmailChanged(const QString &personalEmail);
+        //! User email changed.
+        void onUserEmailChanged(const QString &userEmail);
+
+        //! User teritory selected.
+        void onUserTerritorySelected(const QString &userTerritory);
 
         //! Help directory has changed.
         void onHelpDirectoryChanged(const QString &directory);
 
         //! OpenSSL tool file name changed.
         void onOpensslToolFileChanged(const QString &fileName);
+
+        //! OpenSSL configuration file name changed.
+        void onOpensslConfFileChanged(const QString &fileName);
 
         //! Keyboard shortcut changed.
         void onKeyboardShortcutChanged(uint position, const QString &shortcut);

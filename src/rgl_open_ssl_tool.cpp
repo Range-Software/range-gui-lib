@@ -1,4 +1,5 @@
 #include <QProcess>
+#include <QFileInfo>
 
 #include <rbl_error.h>
 #include <rbl_logger.h>
@@ -58,7 +59,6 @@ void ROpenSslTool::generateKey(const QString &keyPath, const QString &keyPasswor
     }
 }
 
-#include <QFileInfo>
 void ROpenSslTool::generateCsr(const QString &keyPath, const QString &keyPassword, const QMap<QString, QString> &subjectMap, const QString &csrPath) const
 {
     if (!QFileInfo::exists(this->openSslToolSettings.getOpenSslCnfPath()))

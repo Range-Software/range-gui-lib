@@ -38,9 +38,11 @@ const QString RApplicationSettings::proxyHostKey = "proxy/proxyHost";
 const QString RApplicationSettings::proxyPortKey = "proxy/proxyPort";
 const QString RApplicationSettings::proxyUserKey = "proxy/proxyUser";
 const QString RApplicationSettings::proxyPasswordKey = "proxy/proxyPassword";
-const QString RApplicationSettings::personalNameKey = "personal/email";
-const QString RApplicationSettings::personalEmailKey = "personal/email";
+const QString RApplicationSettings::userFullNameKey = "user/fullName";
+const QString RApplicationSettings::userEmailKey = "user/email";
+const QString RApplicationSettings::userTerritoryKey = "user/territory";
 const QString RApplicationSettings::opensslToolPathKey = "tools/opensslToolPath";
+const QString RApplicationSettings::opensslConfPathKey = "tools/opensslConfPath";
 
 RApplicationSettings::RApplicationSettings(QObject *parent)
     : QSettings(parent)
@@ -87,15 +89,20 @@ QString RApplicationSettings::findReleaseNotesFileName() const
     return dir.filePath(RApplicationSettings::releaseNotesFileName);
 }
 
-QString RApplicationSettings::findOpensslCnfFileName() const
+QString RApplicationSettings::findOpensslConfPath() const
+{
+    QDir dir(this->findEtcDir());
+    return dir.filePath(RApplicationSettings::opensslCnfFileName);
+}
+
+QString RApplicationSettings::findEtcDir() const
 {
     QDir dir(this->applicationDirPath);
     dir.cdUp();
 #ifdef Q_OS_DARWIN
     dir.cd("Resources");
 #endif
-    dir.cd("etc");
-    return dir.filePath(RApplicationSettings::opensslCnfFileName);
+    return dir.filePath("etc");
 }
 
 QString RApplicationSettings::findHelpDir() const
@@ -305,24 +312,34 @@ void RApplicationSettings::setProxySettings(const RHttpProxySettings &proxySetti
     emit this->proxySettingsChanged(proxySettings);
 }
 
-QString RApplicationSettings::getPersonalName() const
+QString RApplicationSettings::getUserFullName() const
 {
-    return this->value(RApplicationSettings::personalNameKey,QString()).toString();
+    return this->value(RApplicationSettings::userFullNameKey,QString()).toString();
 }
 
-void RApplicationSettings::setPersonalName(const QString &personalName)
+void RApplicationSettings::setUserFullName(const QString &userFullName)
 {
-    this->setValue(RApplicationSettings::personalNameKey, personalName);
+    this->setValue(RApplicationSettings::userFullNameKey, userFullName);
 }
 
-QString RApplicationSettings::getPersonalEmail() const
+QString RApplicationSettings::getUserEmail() const
 {
-    return this->value(RApplicationSettings::personalEmailKey,QString()).toString();
+    return this->value(RApplicationSettings::userEmailKey,QString()).toString();
 }
 
-void RApplicationSettings::setPersonalEmail(const QString &personalEmail)
+void RApplicationSettings::setUserEmail(const QString &userEmail)
 {
-    this->setValue(RApplicationSettings::personalEmailKey, personalEmail);
+    this->setValue(RApplicationSettings::userEmailKey, userEmail);
+}
+
+QString RApplicationSettings::getUserTerritory() const
+{
+    return this->value(RApplicationSettings::userTerritoryKey,RApplicationSettings::getDefaultUserTerritory()).toString();
+}
+
+void RApplicationSettings::setUserTerritory(const QString &userTerritory)
+{
+    this->setValue(RApplicationSettings::userTerritoryKey, userTerritory);
 }
 
 QString RApplicationSettings::getOpensslToolPath() const
@@ -333,6 +350,16 @@ QString RApplicationSettings::getOpensslToolPath() const
 void RApplicationSettings::setOpensslToolPath(const QString &opensslToolPath)
 {
     this->setValue(RApplicationSettings::opensslToolPathKey, opensslToolPath);
+}
+
+QString RApplicationSettings::getOpensslConfPath() const
+{
+    return this->value(RApplicationSettings::opensslConfPathKey,RApplicationSettings::findOpensslConfPath()).toString();
+}
+
+void RApplicationSettings::setOpensslConfPath(const QString &opensslConfPath)
+{
+    this->setValue(RApplicationSettings::opensslConfPathKey, opensslConfPath);
 }
 
 QString RApplicationSettings::getHomeDir()
@@ -509,6 +536,11 @@ bool RApplicationSettings::getDefaultSoftwareSendUsageInfo()
 bool RApplicationSettings::getDefaultSoftwareCheckUpdates()
 {
     return true;
+}
+
+const QString RApplicationSettings::getDefaultUserTerritory()
+{
+    return QLocale::territoryToCode(QLocale::system().territory()).toUpper();
 }
 
 const QString RApplicationSettings::getDefaultPrivateKeyPath()
