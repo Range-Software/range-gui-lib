@@ -436,7 +436,7 @@ void ROpenSslCsrDialog::onUserRegistered(std::tuple<RUserInfo, QList<RAuthToken>
                           + "<li><b>" + tr("User groups") + ":</b> <tt>" + userInfo.getGroupNames().join(", ") + "</tt></li>"
                           + "<li><b>" + tr("Authentication token") + ":</b> <tt>" + authTokens.at(0).getContent() + "</tt></li>"
                           + "</ul>"
-                          + tr("Sending certificate signing request.");
+                          + tr("Certificate signing request is ready to be sent.");
     RMessageBox::information(this,tr("User registered"),noticeMessage);
 
     this->publicCloudClient->requestCsrProcess(this->csrBrowser->toPlainText().toUtf8().toBase64(),userInfo.getName(),authTokens.at(0).getContent());
