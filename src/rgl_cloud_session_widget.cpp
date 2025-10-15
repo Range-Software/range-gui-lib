@@ -73,7 +73,7 @@ RCloudSessionWidget::RCloudSessionWidget(const RCloudSessionInfo &sessionInfo,
     hostLayout->addRow(tr("Certificate") + ":", hostCertificateLayout);
 
     this->hostCertificateFileButton = new RFileChooserButton(QString(),RFileChooserButton::OpenFile);
-    this->hostCertificateFileButton->setFileName(this->sessionInfo.getHostCertificate());
+    this->hostCertificateFileButton->setFileName(this->sessionInfo.getHostTrustStore().getCertificateFile());
     this->hostCertificateFileButton->setSearchDirectory(RApplicationSettings::getCertDir());
     hostCertificateLayout->addWidget(this->hostCertificateFileButton);
 
@@ -96,14 +96,14 @@ RCloudSessionWidget::RCloudSessionWidget(const RCloudSessionInfo &sessionInfo,
     clientLayout->addRow(tr("Private key") + ":",clientPrivateKeyLayout);
 
     this->clientPrivateKeyFileButton = new RFileChooserButton(QString(),RFileChooserButton::OpenFile);
-    this->clientPrivateKeyFileButton->setFileName(this->sessionInfo.getClientPrivateKey());
+    this->clientPrivateKeyFileButton->setFileName(this->sessionInfo.getClientKeyStore().getKeyFile());
     this->clientPrivateKeyFileButton->setSearchDirectory(RApplicationSettings::getCertDir());
     clientPrivateKeyLayout->addWidget(this->clientPrivateKeyFileButton);
 
     QPushButton *clientPrivateKeyViewButton = new QPushButton(tr("View"));
     clientPrivateKeyLayout->addWidget(clientPrivateKeyViewButton);
 
-    this->clientPrivateKeyPasswordEdit = new QLineEdit(this->sessionInfo.getClientPrivateKeyPassword());
+    this->clientPrivateKeyPasswordEdit = new QLineEdit(this->sessionInfo.getClientKeyStore().getPassword());
     this->clientPrivateKeyPasswordEdit->setEchoMode(QLineEdit::Password);
     clientLayout->addRow(tr("Private key password") + ":",this->clientPrivateKeyPasswordEdit);
 
@@ -111,7 +111,7 @@ RCloudSessionWidget::RCloudSessionWidget(const RCloudSessionInfo &sessionInfo,
     clientLayout->addRow(tr("Certificate") + ":",clientCertificateLayout);
 
     this->clientCertificateFileButton = new RFileChooserButton(QString(),RFileChooserButton::OpenFile);
-    this->clientCertificateFileButton->setFileName(this->sessionInfo.getClientCertificate());
+    this->clientCertificateFileButton->setFileName(this->sessionInfo.getClientKeyStore().getCertificateFile());
     this->clientCertificateFileButton->setSearchDirectory(RApplicationSettings::getCertDir());
     clientCertificateLayout->addWidget(this->clientCertificateFileButton);
 
@@ -156,10 +156,10 @@ void RCloudSessionWidget::setSessionInfo(const RCloudSessionInfo &sessionInfo)
     this->publicPortSpin->setValue(sessionInfo.getPublicPort());
     this->privatePortSpin->setValue(sessionInfo.getPrivatePort());
     this->timeoutSpin->setValue(sessionInfo.getTimeout());
-    this->hostCertificateFileButton->setFileName(sessionInfo.getHostCertificate());
-    this->clientPrivateKeyFileButton->setFileName(sessionInfo.getClientPrivateKey());
-    this->clientPrivateKeyPasswordEdit->setText(sessionInfo.getClientPrivateKeyPassword());
-    this->clientCertificateFileButton->setFileName(sessionInfo.getClientCertificate());
+    this->hostCertificateFileButton->setFileName(sessionInfo.getHostTrustStore().getCertificateFile());
+    this->clientPrivateKeyFileButton->setFileName(sessionInfo.getClientKeyStore().getKeyFile());
+    this->clientPrivateKeyPasswordEdit->setText(sessionInfo.getClientKeyStore().getPassword());
+    this->clientCertificateFileButton->setFileName(sessionInfo.getClientKeyStore().getCertificateFile());
 
     this->blockSignals(signalsBlockedSaved);
 }
@@ -195,25 +195,33 @@ void RCloudSessionWidget::onTimeoutChanged(int timeout)
 
 void RCloudSessionWidget::onHostCertificateFileChanged(const QString &fileName)
 {
-    this->sessionInfo.setHostCertificate(fileName);
+    RTlsTrustStore trustStore = this->sessionInfo.getHostTrustStore();
+    trustStore.setCertificateFile(fileName);
+    this->sessionInfo.setHostTrustStore(trustStore);
     emit this->sessionInfoChanged(this->sessionInfo);
 }
 
 void RCloudSessionWidget::onClientPrivateKeyFileChanged(const QString &fileName)
 {
-    this->sessionInfo.setClientPrivateKey(fileName);
+    RTlsKeyStore keyStore = this->sessionInfo.getClientKeyStore();
+    keyStore.setKeyFile(fileName);
+    this->sessionInfo.setClientKeyStore(keyStore);
     emit this->sessionInfoChanged(this->sessionInfo);
 }
 
 void RCloudSessionWidget::onClientPrivateKeyPasswordChanged(const QString &password)
 {
-    this->sessionInfo.setClientPrivateKeyPassword(password);
+    RTlsKeyStore keyStore = this->sessionInfo.getClientKeyStore();
+    keyStore.setPassword(password);
+    this->sessionInfo.setClientKeyStore(keyStore);
     emit this->sessionInfoChanged(this->sessionInfo);
 }
 
 void RCloudSessionWidget::onClientCertificateFileChanged(const QString &fileName)
 {
-    this->sessionInfo.setClientCertificate(fileName);
+    RTlsKeyStore keyStore = this->sessionInfo.getClientKeyStore();
+    keyStore.setCertificateFile(fileName);
+    this->sessionInfo.setClientKeyStore(keyStore);
     emit this->sessionInfoChanged(this->sessionInfo);
 }
 
@@ -262,7 +270,7 @@ void RCloudSessionWidget::onClientCertificateRequestClicked()
     subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,QLocale::territoryToCode(QLocale::system().territory()));
     subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->applicationSettings->getUserEmail());
 
-    const QList<QSslCertificate> clientCertificates = QSslCertificate::fromPath(this->sessionInfo.getClientCertificate(),QSsl::EncodingFormat::Pem);
+    const QList<QSslCertificate> clientCertificates = QSslCertificate::fromPath(this->sessionInfo.getClientKeyStore().getCertificateFile(),QSsl::EncodingFormat::Pem);
     if (clientCertificates.size() > 0)
     {
         QMap<QSslCertificate::SubjectInfo,QString> subjectInfoMap;

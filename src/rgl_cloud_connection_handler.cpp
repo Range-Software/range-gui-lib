@@ -76,31 +76,23 @@ RHttpClientSettings RCloudConnectionHandler::createPrivateHttpClientSettings(con
 
 RHttpClientSettings RCloudConnectionHandler::createPublicHttpClientSettings(const RCloudSessionInfo &sessionInfo, const RHttpProxySettings &proxySettings)
 {
-    RTlsTrustStore trustStore(sessionInfo.getHostCertificate());
-
     RHttpClientSettings publicHttpClientSettings;
     publicHttpClientSettings.setUrl(RHttpClient::buildUrl(sessionInfo.getHostName(),sessionInfo.getPublicPort()));
     publicHttpClientSettings.setTimeout(sessionInfo.getTimeout());
     publicHttpClientSettings.setProxySettings(proxySettings);
-    publicHttpClientSettings.setTlsTrustStore(trustStore);
+    publicHttpClientSettings.setTlsTrustStore(sessionInfo.getHostTrustStore());
 
     return publicHttpClientSettings;
 }
 
 RHttpClientSettings RCloudConnectionHandler::createPrivateHttpClientSettings(const RCloudSessionInfo &sessionInfo, const RHttpProxySettings &proxySettings)
 {
-    RTlsKeyStore keyStore(sessionInfo.getClientCertificate(),
-                          sessionInfo.getClientPrivateKey(),
-                          sessionInfo.getClientPrivateKeyPassword());
-
-    RTlsTrustStore trustStore(sessionInfo.getHostCertificate());
-
     RHttpClientSettings privateHttpClientSettings;
     privateHttpClientSettings.setUrl(RHttpClient::buildUrl(sessionInfo.getHostName(),sessionInfo.getPrivatePort()));
     privateHttpClientSettings.setTimeout(sessionInfo.getTimeout());
     privateHttpClientSettings.setProxySettings(proxySettings);
-    privateHttpClientSettings.setTlsKeyStore(keyStore);
-    privateHttpClientSettings.setTlsTrustStore(trustStore);
+    privateHttpClientSettings.setTlsKeyStore(sessionInfo.getClientKeyStore());
+    privateHttpClientSettings.setTlsTrustStore(sessionInfo.getHostTrustStore());
 
     return privateHttpClientSettings;
 }

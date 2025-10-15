@@ -14,7 +14,7 @@ RCloudReportSender::RCloudReportSender(const RApplicationSettings *applicationSe
     RHttpClientSettings httpClientSettings;
     httpClientSettings.setUrl(RHttpClient::buildUrl(rangeSession.getHostName(),rangeSession.getPublicPort()));
     httpClientSettings.setTimeout(rangeSession.getTimeout());
-    httpClientSettings.setTlsTrustStore(rangeSession.getHostCertificate());
+    httpClientSettings.setTlsTrustStore(rangeSession.getHostTrustStore());
     httpClientSettings.setProxySettings(applicationSettings->getProxySettings());
 
     this->cloudClient = new RCloudClient(RHttpClient::Public,httpClientSettings,this);

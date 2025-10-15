@@ -21,7 +21,7 @@ RSoftwareManagerWidget::RSoftwareManagerWidget(const RApplicationSettings *appli
     RHttpClientSettings httpClientSettings;
     httpClientSettings.setUrl(RHttpClient::buildUrl(rangeSession.getHostName(),rangeSession.getPublicPort()));
     httpClientSettings.setTimeout(rangeSession.getTimeout());
-    httpClientSettings.setTlsTrustStore(rangeSession.getHostCertificate());
+    httpClientSettings.setTlsTrustStore(rangeSession.getHostTrustStore());
     httpClientSettings.setProxySettings(applicationSettings->getProxySettings());
 
     RSoftwareManagerSettings softwareManagerSettings;
