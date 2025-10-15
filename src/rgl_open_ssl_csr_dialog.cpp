@@ -58,6 +58,8 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     QIcon generateIcon(":/icons/file/pixmaps/range-new.svg");
     QIcon directRequestIcon(":/icons/action/pixmaps/range-add.svg");
     QIcon emailRequestIcon(":/icons/action/pixmaps/range-add.svg");
+    QIcon registerUserIcon(":/icons/action/pixmaps/range-new.svg");
+
 
     this->setWindowTitle(tr("OpenSSL certificate signing request"));
 
@@ -65,6 +67,7 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     this->setLayout(mainLayout);
 
     QGroupBox *newFilesGroupBox = new QGroupBox(tr("New identity files"));
+    // newFilesGroupBox.set
     mainLayout->addWidget(newFilesGroupBox);
 
     QFormLayout *newFilesLayout = new QFormLayout;
@@ -97,7 +100,7 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
 
     this->stateEdit = new QLineEdit(subjectMap.value(ROpenSslTool::CertificateSubject::State::key));
     this->stateEdit->setPlaceholderText(tr("State"));
-    subjectLayout->addRow("ST:",this->stateEdit);
+    subjectLayout->addRow("ST:",stateEdit);
 
     this->locationEdit = new QLineEdit(subjectMap.value(ROpenSslTool::CertificateSubject::Location::key));
     this->locationEdit->setPlaceholderText(tr("Location"));
@@ -139,8 +142,8 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     this->emailRequestButton = new QPushButton(emailRequestIcon, tr("E-mail request"));
     requestLayout->addWidget(this->emailRequestButton);
 
-    this->registerUserButton = new QPushButton(emailRequestIcon, tr("Register new user"));
-    requestLayout->addWidget(this->registerUserButton);
+    this->registerUserButton = new QPushButton(registerUserIcon, tr("Register new user"));
+    csrLayout->addWidget(this->registerUserButton);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox;
     mainLayout->addWidget(buttonBox);
@@ -325,13 +328,13 @@ void ROpenSslCsrDialog::onGenerateCsrClicked()
         return;
     }
 
-    QMap<QString,QString> subjectMap;
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,this->territoryCombo->currentTerritoryCode());
-    subjectMap.insert(ROpenSslTool::CertificateSubject::State::key,this->stateEdit->text());
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Location::key,this->locationEdit->text());
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,this->organizationEdit->text());
-    subjectMap.insert(ROpenSslTool::CertificateSubject::OrganizationUnit::key,this->organizationUnitEdit->text());
-    subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->commonNameEdit->text());
+    QMap<QString,QString> newSubjectMap;
+    newSubjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,this->territoryCombo->currentTerritoryCode());
+    newSubjectMap.insert(ROpenSslTool::CertificateSubject::State::key,this->stateEdit->text());
+    newSubjectMap.insert(ROpenSslTool::CertificateSubject::Location::key,this->locationEdit->text());
+    newSubjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,this->organizationEdit->text());
+    newSubjectMap.insert(ROpenSslTool::CertificateSubject::OrganizationUnit::key,this->organizationUnitEdit->text());
+    newSubjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->commonNameEdit->text());
 
     ROpenSslToolSettings openSslToolSettings;
     openSslToolSettings.setOpenSslPath(this->openSslToolPath);
@@ -342,7 +345,7 @@ void ROpenSslCsrDialog::onGenerateCsrClicked()
     try
     {
         openSslTool.generateKey(this->newKeyPath,this->newKeyPassword);
-        openSslTool.generateCsr(this->newKeyPath,this->newKeyPassword,subjectMap,this->newCsrPath);
+        openSslTool.generateCsr(this->newKeyPath,this->newKeyPassword,newSubjectMap,this->newCsrPath);
     }
     catch (const RError &error)
     {
