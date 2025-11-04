@@ -36,6 +36,7 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
     QIcon refreshIcon(":/icons/cloud/pixmaps/range-refresh.svg");
     QIcon downloadIcon(":/icons/cloud/pixmaps/range-download.svg");
     QIcon uploadIcon(":/icons/cloud/pixmaps/range-upload.svg");
+    QIcon replaceIcon(":/icons/cloud/pixmaps/range-upload_replace.svg");
     QIcon updateIcon(":/icons/cloud/pixmaps/range-upload_update.svg");
     QIcon accessRightsIcon(":/icons/cloud/pixmaps/range-access_rights.svg");
 
@@ -101,11 +102,16 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
     this->localUploadButton->setDisabled(true);
     localButtonsLayout->addWidget(this->localUploadButton);
 
+    this->localReplaceButton = new QPushButton(uploadIcon,tr("Replace"));
+    this->localReplaceButton->setDisabled(true);
+    localButtonsLayout->addWidget(this->localReplaceButton);
+
     this->localUpdateButton = new QPushButton(updateIcon,tr("Update"));
     this->localUpdateButton->setDisabled(true);
     localButtonsLayout->addWidget(this->localUpdateButton);
 
     QObject::connect(this->localUploadButton,&QPushButton::clicked,this,&RCloudFileManagerWidget::onLocalUploadButtonClicked);
+    QObject::connect(this->localReplaceButton,&QPushButton::clicked,this,&RCloudFileManagerWidget::onLocalReplaceButtonClicked);
     QObject::connect(this->localUpdateButton,&QPushButton::clicked,this,&RCloudFileManagerWidget::onLocalUpdateButtonClicked);
     QObject::connect(this->localDeleteButton,&QPushButton::clicked,this,&RCloudFileManagerWidget::onLocalDeleteButtonClicked);
 
@@ -183,6 +189,7 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
 
     QObject::connect(this->cloudClient,&RCloudClient::configurationChanged,this,&RCloudFileManagerWidget::onClientConfigurationChanged);
     QObject::connect(this->cloudClient,&RCloudClient::fileUploaded,this,&RCloudFileManagerWidget::onFileUploaded);
+    QObject::connect(this->cloudClient,&RCloudClient::fileReplaced,this,&RCloudFileManagerWidget::onFileReplaced);
     QObject::connect(this->cloudClient,&RCloudClient::fileUpdated,this,&RCloudFileManagerWidget::onFileUpdated);
     QObject::connect(this->cloudClient,&RCloudClient::fileAccessModeUpdated,this,&RCloudFileManagerWidget::onFileAccessModeUpdated);
     QObject::connect(this->cloudClient,&RCloudClient::fileAccessOwnerUpdated,this,&RCloudFileManagerWidget::onFileAccessOwnerUpdated);
@@ -347,6 +354,29 @@ void RCloudFileManagerWidget::uploadSelectedLocalFiles()
         {
             RLogger::error("Failed to request file upload to Cloud. %s\n",rError.getMessage().toUtf8().constData());
             RMessageBox::critical(this,tr("File upload failed"),tr("File upload to Cloud has failed."));
+        }
+    }
+}
+
+void RCloudFileManagerWidget::replaceSelectedLocalFiles()
+{
+    QDir localDirectory(this->localDirectoryPath);
+
+    QList<QTreeWidgetItem*> selectedItems = this->localFilesWidget->selectedItems();
+
+    for (const QTreeWidgetItem *selectedItem : std::as_const(selectedItems))
+    {
+        QString _fileName = selectedItem->text(ColumnName);
+        try
+        {
+            RProgressDialog *progressDialog = new RProgressDialog(tr("File upload (replace)") + ": <tt>" + _fileName + "</tt>",tr("Cancel"),0,100,this);
+            progressDialog->setJob(this->cloudClient->requestFileReplace(localDirectory.absoluteFilePath(selectedItem->text(ColumnName)),selectedItem->text(ColumnName)));
+
+        }
+        catch (const RError &rError)
+        {
+            RLogger::error("Failed to request file upload and replace to Cloud. %s\n",rError.getMessage().toUtf8().constData());
+            RMessageBox::critical(this,tr("File replace failed"),tr("File upload and replace to Cloud has failed."));
         }
     }
 }
@@ -637,6 +667,11 @@ void RCloudFileManagerWidget::onLocalUploadButtonClicked()
     this->uploadSelectedLocalFiles();
 }
 
+void RCloudFileManagerWidget::onLocalReplaceButtonClicked()
+{
+        this->replaceSelectedLocalFiles();
+}
+
 void RCloudFileManagerWidget::onLocalUpdateButtonClicked()
 {
     this->updateSelectedLocalFiles();
@@ -710,6 +745,7 @@ void RCloudFileManagerWidget::onLocalFileSelectionChanged()
     uint nCloudSelected = this->cloudFilesWidget->selectedItems().count();
     this->localDeleteButton->setEnabled(nLocalSelected);
     this->localUploadButton->setEnabled(nLocalSelected);
+    this->localReplaceButton->setEnabled(nLocalSelected);
     this->localUpdateButton->setEnabled(nLocalSelected == 1 && nCloudSelected == 1);
 }
 
@@ -745,6 +781,15 @@ void RCloudFileManagerWidget::onFileListAvailable(QList<RFileInfo> fileInfoList)
 void RCloudFileManagerWidget::onFileUploaded(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file uploaded \'%s\'\n",fileInfo.getPath().toUtf8().constData());
+    RMessageBox::information(this,tr("File uploaded"),tr("File was uploaded successfully."));
+    this->refreshCloudFiles();
+}
+
+void RCloudFileManagerWidget::onFileReplaced(std::tuple<RFileInfo, QList<RFileInfo> > fileInfoList)
+{
+    RLogger::info("Cloud file replaced \'%s\' (%d files were removed)\n",
+                  std::get<0>(fileInfoList).getPath().toUtf8().constData(),
+                  std::get<1>(fileInfoList).size());
     RMessageBox::information(this,tr("File uploaded"),tr("File was uploaded successfully."));
     this->refreshCloudFiles();
 }

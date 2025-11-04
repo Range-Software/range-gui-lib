@@ -43,6 +43,7 @@ class RCloudFileManagerWidget : public QWidget
         RTreeWidget *cloudFilesWidget;
 
         QPushButton *localUploadButton;
+        QPushButton *localReplaceButton;
         QPushButton *localUpdateButton;
         QPushButton *localDeleteButton;
 
@@ -84,6 +85,8 @@ class RCloudFileManagerWidget : public QWidget
 
         void uploadSelectedLocalFiles();
 
+        void replaceSelectedLocalFiles();
+
         void updateSelectedLocalFiles();
 
         void updateSelectedCloudFilesAccessOwner();
@@ -104,6 +107,9 @@ class RCloudFileManagerWidget : public QWidget
 
         //! Upload file button clicked.
         void onLocalUploadButtonClicked();
+
+        //! Replace file button clicked.
+        void onLocalReplaceButtonClicked();
 
         //! Update file button clicked.
         void onLocalUpdateButtonClicked();
@@ -155,6 +161,9 @@ class RCloudFileManagerWidget : public QWidget
 
         //! File was uploaded.
         void onFileUploaded(RFileInfo fileInfo);
+
+        //! File was replaced.
+        void onFileReplaced(std::tuple<RFileInfo,QList<RFileInfo>> fileInfoList);
 
         //! File was updated.
         void onFileUpdated(RFileInfo fileInfo);

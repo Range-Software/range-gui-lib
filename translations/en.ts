@@ -312,12 +312,12 @@
 <context>
     <name>RCloudConnectionHandler</name>
     <message>
-        <location filename="../src/rgl_cloud_connection_handler.cpp" line="149"/>
+        <location filename="../src/rgl_cloud_connection_handler.cpp" line="141"/>
         <source>Public Cloud transfer failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_connection_handler.cpp" line="172"/>
+        <location filename="../src/rgl_cloud_connection_handler.cpp" line="164"/>
         <source>Private Cloud transfer failed</source>
         <translation type="unfinished"></translation>
     </message>
@@ -338,353 +338,376 @@
 <context>
     <name>RCloudFileManagerWidget</name>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="342"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="384"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="594"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="349"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="372"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="414"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="624"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="51"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="374"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="52"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="404"/>
         <source>Local</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="59"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="60"/>
         <source>Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="94"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="168"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="95"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="174"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="100"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="101"/>
         <source>Upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="104"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="105"/>
+        <source>Replace</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="109"/>
         <source>Update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="114"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="375"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="120"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="405"/>
         <source>Cloud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="138"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="144"/>
         <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="142"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="148"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="149"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="155"/>
         <source>Access mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="152"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="310"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="158"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="317"/>
         <source>Owner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="155"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="311"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="161"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="318"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="158"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="312"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="164"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="319"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="163"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="169"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="304"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="311"/>
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="305"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="312"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="306"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="313"/>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="307"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="314"/>
         <source>Creation time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="308"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="315"/>
         <source>Update time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="309"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="316"/>
         <source>Access rights</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="313"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="320"/>
         <source>Checksum</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="327"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="334"/>
         <source>Cloud transfer failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="327"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="334"/>
         <source>List of files from Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="342"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="349"/>
         <source>File upload</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="349"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="392"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="356"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="422"/>
         <source>File upload failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="349"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="392"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="356"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="422"/>
         <source>File upload to Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="363"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="368"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="377"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="384"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="372"/>
+        <source>File upload (replace)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="379"/>
+        <source>File replace failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="379"/>
+        <source>File upload and replace to Cloud has failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="393"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="398"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="407"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="414"/>
         <source>File update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="363"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="393"/>
         <source>Select a local file to be updated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="368"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="398"/>
         <source>Select a Cloud file to be updated.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="372"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="402"/>
         <source>Are you sure you want to update selected Cloud file with selected local file?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="420"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="450"/>
         <source>File access owner update failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="420"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="450"/>
         <source>File access owner update in Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="450"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="480"/>
         <source>File access mode update failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="450"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="480"/>
         <source>File access mode update in Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="476"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="506"/>
         <source>File version update failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="476"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="506"/>
         <source>File version update in Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="502"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="532"/>
         <source>File tags update failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="502"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="532"/>
         <source>File tags update in Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="510"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="540"/>
         <source>Are you sure you want to remove selected local files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="518"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="616"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="548"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="646"/>
         <source>File remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="536"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="566"/>
         <source>File remove failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="536"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="566"/>
         <source>Local file remove has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="556"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="586"/>
         <source>Local file already exists.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="557"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="587"/>
         <source>Would you like to overwrite it?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="558"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="589"/>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="594"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="588"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="619"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="624"/>
         <source>File download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="588"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="618"/>
         <source>Would you like to store remote file under different name?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="601"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="631"/>
         <source>File download failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="601"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="631"/>
         <source>File download from Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="608"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="638"/>
         <source>Are you sure you want to remove selected Cloud files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="630"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="660"/>
         <source>File removal failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="630"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="660"/>
         <source>File removal from Cloud has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="748"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="784"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="793"/>
         <source>File uploaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="748"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="784"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="793"/>
         <source>File was uploaded successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="755"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="800"/>
         <source>File updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="755"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="800"/>
         <source>File was updated successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="762"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="807"/>
         <source>File access mode updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="762"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="807"/>
         <source>File access mode was updated successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="769"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="814"/>
         <source>File access owner updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="769"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="814"/>
         <source>File access owner was updated successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="776"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="821"/>
         <source>File version updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="776"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="821"/>
         <source>File version was updated successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="783"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="828"/>
         <source>File tags updated</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="783"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="828"/>
         <source>File tags were updated successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="790"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="835"/>
         <source>File downloaded</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="790"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="835"/>
         <source>File was downloaded successfully.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="797"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="842"/>
         <source>File removed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="797"/>
+        <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="842"/>
         <source>File was removed successfully.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -757,7 +780,7 @@
     <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="73"/>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="111"/>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="385"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="393"/>
         <source>Certificate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -785,7 +808,7 @@
     </message>
     <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="96"/>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="326"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="334"/>
         <source>Private key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -800,22 +823,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="226"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="234"/>
         <source>Public Cloud is reachable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="240"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="248"/>
         <source>Private Cloud is reachable.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="250"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="258"/>
         <source>Public Cloud connection test</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="255"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="263"/>
         <source>Private Cloud connection test</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1125,194 +1148,194 @@
 <context>
     <name>ROpenSslCsrDialog</name>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="62"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="64"/>
         <source>OpenSSL certificate signing request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="67"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="69"/>
         <source>New identity files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="75"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="78"/>
         <source>Private key file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="79"/>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="411"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="82"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="414"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="83"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="86"/>
         <source>CSR file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="87"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="90"/>
         <source>Certificate file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="89"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="92"/>
         <source>Certificate subject field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="99"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="102"/>
         <source>State</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="103"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="106"/>
         <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="107"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="110"/>
         <source>Organization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="111"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="114"/>
         <source>Organization unit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="115"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="118"/>
         <source>Common name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="118"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="121"/>
         <source>Certificate signing request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="127"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="130"/>
         <source>Generate certificate signing request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="133"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="136"/>
         <source>Direct request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="136"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="139"/>
         <source>Direct request (with token)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="139"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="142"/>
         <source>E-mail request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="142"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="145"/>
         <source>Register new user</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="148"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="151"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="318"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="321"/>
         <source>Following fields must not be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="324"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="327"/>
         <source>No value specified</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="350"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="353"/>
         <source>Failed to generate private key and CSR using OpenSSL tool.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="353"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="356"/>
         <source>CSR generation failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="378"/>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="437"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="381"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="440"/>
         <source>Authentication token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="378"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="381"/>
         <source>Token</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="381"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="384"/>
         <source>Authentication token not provided</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="381"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="384"/>
         <source>No authentication token was provided, therefore no request will be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="407"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="410"/>
         <source>Do you want to apply newly generated key and signed certificate?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="410"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="413"/>
         <source>Private key</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="412"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="415"/>
         <source>Certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="415"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="418"/>
         <source>Signed certificate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="429"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="432"/>
         <source>No tokens received</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="429"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="432"/>
         <source>No authentication token was received.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="433"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="436"/>
         <source>New user was successfully registered.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="435"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="438"/>
         <source>User name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="436"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="439"/>
         <source>User groups</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="439"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="442"/>
         <source>Certificate signing request is ready to be sent.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="440"/>
+        <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="443"/>
         <source>User registered</source>
         <translation type="unfinished"></translation>
     </message>
