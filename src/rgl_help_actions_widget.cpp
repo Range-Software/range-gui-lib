@@ -3,8 +3,10 @@
 #include "rgl_help_actions_widget.h"
 
 RHelpActionsWidget::RHelpActionsWidget(const RActionList *actionList, const QString &searchPath, QWidget *parent)
-    : RDocumentWidget(searchPath,"action_index.html",parent)
+    : RDocumentWidget(searchPath,"action_index.md",parent)
 {
+    QDir docDir(searchPath);
+
     for (uint i=0;i<actionList->getNActions();i++)
     {
         const RAction *action = actionList->getAction(i);
@@ -24,7 +26,16 @@ RHelpActionsWidget::RHelpActionsWidget(const RActionList *actionList, const QStr
             icon = action->icon();
         }
 
-        QDir docDir(searchPath);
-        this->addListItem(icon, action->getGroupName() + " >> " + action->text(), docDir.filePath("action_" + action->getName() + ".html"));
+        QString htmlIndexFile = docDir.filePath("action_" + action->getName() + ".html");
+        QString mdIndexFile = docDir.filePath("action_" + action->getName() + ".md");
+
+        if (QFileInfo::exists(mdIndexFile))
+        {
+            this->addListItem(icon, action->getGroupName() + " >> " + action->text(), mdIndexFile);
+        }
+        else if (QFileInfo::exists(htmlIndexFile))
+        {
+            this->addListItem(icon, action->getGroupName() + " >> " + action->text(), htmlIndexFile);
+        }
     }
 }

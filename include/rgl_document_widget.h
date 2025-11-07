@@ -22,7 +22,7 @@ class RDocumentWidget : public QWidget
     public:
 
         //! Constructor
-        explicit RDocumentWidget(const QString &searchPath, const QString &defaultFileName = "index.html", QWidget *parent = nullptr);
+        explicit RDocumentWidget(const QString &searchPath, const QString &defaultFileName = "index.md", QWidget *parent = nullptr);
 
     protected:
 
