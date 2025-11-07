@@ -63,6 +63,7 @@ void RDocumentWidget::loadFile(const QString &fileName)
     }
     else
     {
+        QFileInfo fileInfo(fileName);
         QFile file(fileName);
         if (!file.open(QFile::ReadOnly | QFile::Text))
         {
@@ -75,7 +76,20 @@ void RDocumentWidget::loadFile(const QString &fileName)
         else
         {
             QTextStream in(&file);
-            this->textBrowser->setHtml(in.readAll());
+            QString fileContent = in.readAll();
+            if (fileInfo.suffix().toLower() == "md")
+            {
+                this->textBrowser->setMarkdown(fileContent);
+            }
+            else if (fileInfo.suffix().toLower() == "html" ||
+                     fileInfo.suffix().toLower() == "htm")
+            {
+                this->textBrowser->setHtml(fileContent);
+            }
+            else
+            {
+                this->textBrowser->setText(fileContent);
+            }
             file.close();
         }
     }
