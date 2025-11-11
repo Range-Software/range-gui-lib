@@ -61,7 +61,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->formatCombo = new QComboBox;
     for (int i=0;i<RApplicationSettings::Format::nFormats;i++)
     {
-        this->formatCombo->addItem(RApplicationSettings::formatToName(RApplicationSettings::Format(i)));
+        this->formatCombo->addItem(RApplicationSettings::formatToName(RApplicationSettings::Format(i)),RApplicationSettings::formatToCode(RApplicationSettings::Format(i)));
     }
     this->formatCombo->setCurrentIndex(this->applicationSettings->getFormat());
     appearanceLayout->addRow(tr("Formats") + ":",this->formatCombo);
@@ -203,6 +203,7 @@ void RApplicationSettingsWidget::setDefaultValues()
         if (this->styleCombo->itemText(i) == RApplicationSettings::getDefaultStyle())
         {
             this->styleCombo->setCurrentIndex(i);
+            break;
         }
     }
 
@@ -211,6 +212,16 @@ void RApplicationSettingsWidget::setDefaultValues()
         if (RApplicationSettings::languageNameToCode(this->languageCombo->itemText(i)) == RApplicationSettings::getDefaultLanguageCode())
         {
             this->languageCombo->setCurrentIndex(i);
+            break;
+        }
+    }
+
+    for (int i=0;i<this->formatCombo->count();i++)
+    {
+        if (this->formatCombo->itemData(i).toString() == RApplicationSettings::formatToCode(RApplicationSettings::Format(i)))
+        {
+            this->formatCombo->setCurrentIndex(i);
+            break;
         }
     }
 
