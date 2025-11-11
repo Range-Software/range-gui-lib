@@ -269,6 +269,8 @@ void RCloudSessionWidget::onClientCertificateRequestClicked()
 
     subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,QLocale::territoryToCode(QLocale::system().territory()));
     subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->applicationSettings->getUserEmail());
+    subjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,"Range Software");
+    subjectMap.insert(ROpenSslTool::CertificateSubject::OrganizationUnit::key,"Cloud");
 
     const QList<QSslCertificate> clientCertificates = QSslCertificate::fromPath(this->sessionInfo.getClientKeyStore().getCertificateFile(),QSsl::EncodingFormat::Pem);
     if (clientCertificates.size() > 0)
