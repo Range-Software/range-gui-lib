@@ -21,9 +21,6 @@ class ROpenSslCsrDialog : public QDialog
 
         QString openSslToolPath;
         QString openSslCnfPath;
-        QString keyPath;
-        QString keyPassword;
-        QString certificatePath;
         QString newKeyPath;
         QString newKeyPassword;
         QString newCsrPath;
@@ -51,9 +48,6 @@ class ROpenSslCsrDialog : public QDialog
         explicit ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
                                    const QString &openSslToolPath,
                                    const QString &openSslCnfPath,
-                                   const QString &keyPath,
-                                   const QString &keyPassword,
-                                   const QString &certificatePath,
                                    const QString &newKeyPath,
                                    const QString &newKeyPassword,
                                    const QString &newCsrPath,

@@ -27,9 +27,6 @@
 ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
                                      const QString &openSslToolPath,
                                      const QString &openSslCnfPath,
-                                     const QString &keyPath,
-                                     const QString &keyPassword,
-                                     const QString &certificatePath,
                                      const QString &newKeyPath,
                                      const QString &newKeyPassword,
                                      const QString &newCsrPath,
@@ -39,9 +36,6 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     : QDialog{parent}
     , openSslToolPath{openSslToolPath}
     , openSslCnfPath{openSslCnfPath}
-    , keyPath{keyPath}
-    , keyPassword{keyPassword}
-    , certificatePath{certificatePath}
     , newKeyPath{newKeyPath}
     , newKeyPassword{newKeyPassword}
     , newCsrPath{newCsrPath}
