@@ -34,6 +34,7 @@ class RApplicationSettingsWidget : public QWidget
         QComboBox *formatCombo;
         RProxySettingsWidget *proxySettingsWidget;
         QSpinBox *cloudRefreshTimeoutSpin;
+        QCheckBox *cloudSyncDataDirectoryCheckBox;
         QCheckBox *softwareSendUsageInfoCheckBox;
         QCheckBox *softwareCheckUpdatesCheckBox;
         QLineEdit *userFullNameEdit;
@@ -70,6 +71,9 @@ class RApplicationSettingsWidget : public QWidget
 
         //! Cloud refresh timeout changed.
         void onCloudRefreshTimeoutChanged(int cloudRefreshTimeout);
+
+        //! Cloud sync data directory changed.
+        void onCloudSyncDataDirectoryChanged(Qt::CheckState state);
 
         //! Send software usage information.
         void onSoftwareSendUsageInfoChanged(Qt::CheckState state);

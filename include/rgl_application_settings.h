@@ -68,6 +68,7 @@ class RApplicationSettings : public QSettings
         static const QString formatKey;
         static const QString toolbarIconSizeKey;
         static const QString cloudRefreshTimeoutKey;
+        static const QString cloudSyncDataDirectoryKey;
         static const QString softwareSendUsageInfoKey;
         static const QString softwareCheckUpdatesKey;
         static const QString proxyTypeKey;
@@ -168,6 +169,12 @@ class RApplicationSettings : public QSettings
 
         //! Set cloud refresh timeout.
         void setCloudRefreshTimeout(uint cloudRefreshTimeout);
+
+        //! Return cloud sync data directory.
+        bool getCloudSyncDataDirectory() const;
+
+        //! Set cloud sync data directory.
+        void setCloudSyncDataDirectory(bool cloudSyncDataDirectory);
 
         //! Return software send usage information.
         uint getSoftwareSendUsageInfo() const;
@@ -286,6 +293,9 @@ class RApplicationSettings : public QSettings
         //! Return default cloud refresh timeout.
         static uint getDefaultCloudRefreshTimeout();
 
+        //! Return default cloud sync data directory.
+        static bool getDefaultCloudSyncDataDirectory();
+
         //! Return default cloud send usage information.
         static bool getDefaultSoftwareSendUsageInfo();
 
@@ -322,7 +332,7 @@ class RApplicationSettings : public QSettings
         void languageChanged(const QString &language);
 
         //! Format has changed.
-        void formatChanged(const Format &format);
+        void formatChanged(const RApplicationSettings::Format &format);
 
         //! Toolbar icon size has changed.
         void toolbarIconSizeChanged(int toolbarIconSize);
@@ -332,6 +342,9 @@ class RApplicationSettings : public QSettings
 
         //! Cloud refresh timeout has changed.
         void cloudRefreshTimeoutChanged(uint cloudRefreshTimeout);
+
+        //! Cloud sync data directory has changed.
+        void cloudSyncDataDirectoryChanged(bool cloudSyncDataDirectory);
 
         //! Cloud send usage information has changed.
         void cloudSendUsageInfoChanged(bool cloudSenfUsageInfoChanged);

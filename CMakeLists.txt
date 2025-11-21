@@ -3,6 +3,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 
 qt_add_library(range-gui-lib
     STATIC
@@ -106,6 +107,7 @@ qt_add_library(range-gui-lib
 
 
         include/rgl_territory_combo_box.h src/rgl_territory_combo_box.cpp
+        include/rgl_cloud_file_manager.h src/rgl_cloud_file_manager.cpp
 )
 
 # Include directories
@@ -124,6 +126,7 @@ target_link_libraries(range-gui-lib PRIVATE Qt6::Core)
 target_link_libraries(range-gui-lib PRIVATE Qt6::Core)
 target_link_libraries(range-gui-lib PRIVATE Qt6::Widgets)
 target_link_libraries(range-gui-lib PRIVATE Qt6::Widgets)
+target_link_libraries(range-gui-lib PRIVATE Qt6::Core)
 
 qt_add_translations(range-gui-lib
     TS_FILES

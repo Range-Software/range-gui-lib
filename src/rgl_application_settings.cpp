@@ -31,6 +31,7 @@ const QString RApplicationSettings::languageKey = "application/language";
 const QString RApplicationSettings::formatKey = "application/format";
 const QString RApplicationSettings::toolbarIconSizeKey = "application/toolbarIconSize";
 const QString RApplicationSettings::cloudRefreshTimeoutKey = "cloud/refreshTimeout";
+const QString RApplicationSettings::cloudSyncDataDirectoryKey = "cloud/syncDataDirectory";
 const QString RApplicationSettings::softwareSendUsageInfoKey = "cloud/softwareSendUsageInfo";
 const QString RApplicationSettings::softwareCheckUpdatesKey = "cloud/softwareCheckUpdates";
 const QString RApplicationSettings::proxyTypeKey = "proxy/proxyType";
@@ -265,6 +266,17 @@ void RApplicationSettings::setCloudRefreshTimeout(uint cloudRefreshTimeout)
 {
     this->setValue(RApplicationSettings::cloudRefreshTimeoutKey, cloudRefreshTimeout);
     emit this->cloudRefreshTimeoutChanged(cloudRefreshTimeout);
+}
+
+bool RApplicationSettings::getCloudSyncDataDirectory() const
+{
+    return this->value(RApplicationSettings::cloudSyncDataDirectoryKey,RApplicationSettings::getDefaultCloudSyncDataDirectory()).toBool();
+}
+
+void RApplicationSettings::setCloudSyncDataDirectory(bool cloudSyncDataDirectory)
+{
+    this->setValue(RApplicationSettings::cloudSyncDataDirectoryKey, cloudSyncDataDirectory);
+    emit this->cloudSyncDataDirectoryChanged(cloudSyncDataDirectory);
 }
 
 uint RApplicationSettings::getSoftwareSendUsageInfo() const
@@ -526,6 +538,11 @@ int RApplicationSettings::getDefaultToolbarIconSize()
 uint RApplicationSettings::getDefaultCloudRefreshTimeout()
 {
     return 5000;
+}
+
+bool RApplicationSettings::getDefaultCloudSyncDataDirectory()
+{
+    return true;
 }
 
 bool RApplicationSettings::getDefaultSoftwareSendUsageInfo()

@@ -15,6 +15,7 @@
 #include <rbl_version.h>
 
 #include "rgl_application.h"
+#include "rgl_cloud_file_manager.h"
 #include "rgl_crash_report_dialog.h"
 #include "rgl_file_updater.h"
 #include "rgl_locker_handler.h"
@@ -368,6 +369,9 @@ void RApplication::onStarted()
     // Software update checker
     RSoftwareUpdateChecker *softwareUpdateChecker = new RSoftwareUpdateChecker(this->applicationSettings,this);
     QObject::connect(softwareUpdateChecker,&RSoftwareUpdateChecker::softwareAvailable,this,&RApplication::onSoftwareAvailable);
+
+    // Cloud file manager
+    RCloudFileManager *cloudFileManager = new RCloudFileManager(this->cloudConnectionHandler,this->applicationSettings,this);
 
     if (previousLockStillValid)
     {

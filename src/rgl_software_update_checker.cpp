@@ -124,6 +124,6 @@ void RSoftwareUpdateChecker::onRefreshTimeoutChanged(uint refreshTimeout)
     }
     else
     {
-        this->refreshTimer->start(refreshTimeout);
+        this->refreshTimer->start(refreshTimeout*1000);
     }
 }
