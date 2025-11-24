@@ -69,6 +69,7 @@ class RApplicationSettings : public QSettings
         static const QString toolbarIconSizeKey;
         static const QString cloudRefreshTimeoutKey;
         static const QString cloudSyncDataDirectoryKey;
+        static const QString cloudSyncDataCachePathKey;
         static const QString softwareSendUsageInfoKey;
         static const QString softwareCheckUpdatesKey;
         static const QString proxyTypeKey;
@@ -175,6 +176,12 @@ class RApplicationSettings : public QSettings
 
         //! Set cloud sync data directory.
         void setCloudSyncDataDirectory(bool cloudSyncDataDirectory);
+
+        //! Return cloud sync cache path.
+        QString getCloudSyncDataCachePath() const;
+
+        //! Set cloud sync cache path.
+        void setCloudSyncDataCachePath(const QString &cloudSyncDataCachePath);
 
         //! Return software send usage information.
         uint getSoftwareSendUsageInfo() const;
@@ -296,6 +303,9 @@ class RApplicationSettings : public QSettings
         //! Return default cloud sync data directory.
         static bool getDefaultCloudSyncDataDirectory();
 
+        //! Return default cloud sync data cache path.
+        static QString getDefaultCloudSyncDataCachePath();
+
         //! Return default cloud send usage information.
         static bool getDefaultSoftwareSendUsageInfo();
 
@@ -345,6 +355,9 @@ class RApplicationSettings : public QSettings
 
         //! Cloud sync data directory has changed.
         void cloudSyncDataDirectoryChanged(bool cloudSyncDataDirectory);
+
+        //! Cloud sync data directory has changed.
+        void cloudSyncDataCachePathChanged(const QString &cloudSyncDataCachePath);
 
         //! Cloud send usage information has changed.
         void cloudSendUsageInfoChanged(bool cloudSenfUsageInfoChanged);

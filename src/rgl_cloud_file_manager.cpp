@@ -28,7 +28,7 @@ RFileManagerSettings RCloudFileManager::generateFileManaferSettings(const RAppli
     RFileManagerSettings fileManagerSetting;
     fileManagerSetting.setFileTags({RVendor::packageName()});
     fileManagerSetting.setLocalDirectory(applicationSettings->getDataDir());
-
+    fileManagerSetting.setCacheFile(applicationSettings->getCloudSyncDataCachePath());
     return fileManagerSetting;
 }
 
@@ -41,15 +41,25 @@ void RCloudFileManager::restartRefreshTimer()
     }
     else
     {
-        RLogger::info("Stop cloud files refres timer\n");
-        this->refreshTimer->stop();
+        if (this->refreshTimer->isActive())
+        {
+            RLogger::info("Stop cloud files refres timer\n");
+            this->refreshTimer->stop();
+        }
     }
 }
 
 void RCloudFileManager::onRefreshTimeout()
 {
-    RLogger::info("Refresh cloud files list\n");
-    this->fileManager->requestSyncFiles();
+    if (this->fileManager->getNRunningActions() > 0)
+    {
+        RLogger::warning("Cannot sync files because previous sync has not yet finished (running actions = %u)).\n",this->fileManager->getNRunningActions());
+    }
+    else
+    {
+        RLogger::info("Refresh cloud files list\n");
+        this->fileManager->requestSyncFiles();
+    }
 }
 
 void RCloudFileManager::onRefreshTimeoutChanged(uint refreshTimeout)

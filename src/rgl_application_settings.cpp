@@ -32,6 +32,7 @@ const QString RApplicationSettings::formatKey = "application/format";
 const QString RApplicationSettings::toolbarIconSizeKey = "application/toolbarIconSize";
 const QString RApplicationSettings::cloudRefreshTimeoutKey = "cloud/refreshTimeout";
 const QString RApplicationSettings::cloudSyncDataDirectoryKey = "cloud/syncDataDirectory";
+const QString RApplicationSettings::cloudSyncDataCachePathKey = "cloud/syncDataCachePath";
 const QString RApplicationSettings::softwareSendUsageInfoKey = "cloud/softwareSendUsageInfo";
 const QString RApplicationSettings::softwareCheckUpdatesKey = "cloud/softwareCheckUpdates";
 const QString RApplicationSettings::proxyTypeKey = "proxy/proxyType";
@@ -277,6 +278,17 @@ void RApplicationSettings::setCloudSyncDataDirectory(bool cloudSyncDataDirectory
 {
     this->setValue(RApplicationSettings::cloudSyncDataDirectoryKey, cloudSyncDataDirectory);
     emit this->cloudSyncDataDirectoryChanged(cloudSyncDataDirectory);
+}
+
+QString RApplicationSettings::getCloudSyncDataCachePath() const
+{
+    return this->value(RApplicationSettings::cloudSyncDataCachePathKey,RApplicationSettings::getDefaultCloudSyncDataCachePath()).toString();
+}
+
+void RApplicationSettings::setCloudSyncDataCachePath(const QString &cloudSyncDataCachePath)
+{
+    this->setValue(RApplicationSettings::cloudSyncDataCachePathKey, cloudSyncDataCachePath);
+    emit this->cloudSyncDataCachePathChanged(cloudSyncDataCachePath);
 }
 
 uint RApplicationSettings::getSoftwareSendUsageInfo() const
@@ -543,6 +555,12 @@ uint RApplicationSettings::getDefaultCloudRefreshTimeout()
 bool RApplicationSettings::getDefaultCloudSyncDataDirectory()
 {
     return true;
+}
+
+QString RApplicationSettings::getDefaultCloudSyncDataCachePath()
+{
+    QDir tmpDir(RApplicationSettings::getTmpDir());
+    return tmpDir.absoluteFilePath("cloud-sync-cache.json");
 }
 
 bool RApplicationSettings::getDefaultSoftwareSendUsageInfo()
