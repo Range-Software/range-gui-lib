@@ -16,8 +16,10 @@ qt_add_library(range-gui-lib
         src/rgl_application_settings_dialog.cpp
         src/rgl_application_settings_widget.cpp
         src/rgl_cloud_connection_handler.cpp
+        src/rgl_cloud_file_manager.cpp
         src/rgl_cloud_file_manager_dialog.cpp
         src/rgl_cloud_file_manager_widget.cpp
+        src/rgl_cloud_report_sender.cpp
         src/rgl_cloud_session_dialog.cpp
         src/rgl_cloud_session_widget.cpp
         src/rgl_crash_report_dialog.cpp
@@ -45,12 +47,14 @@ qt_add_library(range-gui-lib
         src/rgl_open_ssl_tool.cpp
         src/rgl_open_ssl_tool_settings.cpp
         src/rgl_progress_bar.cpp
+        src/rgl_progress_dialog.cpp
         src/rgl_progress_handler.cpp
         src/rgl_proxy_settings_widget.cpp
         src/rgl_software_manager_dialog.cpp
         src/rgl_software_manager_widget.cpp
         src/rgl_software_update_checker.cpp
         src/rgl_style.cpp
+        src/rgl_territory_combo_box.cpp
         src/rgl_text_browser.cpp
         src/rgl_text_browser_dialog.cpp
         src/rgl_tree_widget.cpp
@@ -60,12 +64,14 @@ qt_add_library(range-gui-lib
         include/rgl_action.h
         include/rgl_action_list.h
         include/rgl_application.h
-        include/rgl_application_settings_dialog.h
         include/rgl_application_settings.h
+        include/rgl_application_settings_dialog.h
         include/rgl_application_settings_widget.h
         include/rgl_cloud_connection_handler.h
+        include/rgl_cloud_file_manager.h
         include/rgl_cloud_file_manager_dialog.h
         include/rgl_cloud_file_manager_widget.h
+        include/rgl_cloud_report_sender.h
         include/rgl_cloud_session_dialog.h
         include/rgl_cloud_session_widget.h
         include/rgl_crash_report_dialog.h
@@ -85,29 +91,25 @@ qt_add_library(range-gui-lib
         include/rgl_keyboard_shortcuts_editor_widget.h
         include/rgl_label_widget.h
         include/rgl_locker_handler.h
-        include/rgl_log_browser_dialog.h
         include/rgl_log_browser.h
+        include/rgl_log_browser_dialog.h
         include/rgl_logger_handler.h
         include/rgl_message_box.h
         include/rgl_open_ssl_csr_dialog.h
         include/rgl_open_ssl_tool.h
         include/rgl_open_ssl_tool_settings.h
         include/rgl_progress_bar.h
+        include/rgl_progress_dialog.h
         include/rgl_progress_handler.h
         include/rgl_proxy_settings_widget.h
         include/rgl_software_manager_dialog.h
         include/rgl_software_manager_widget.h
         include/rgl_software_update_checker.h
         include/rgl_style.h
-        include/rgl_text_browser_dialog.h
+        include/rgl_territory_combo_box.h
         include/rgl_text_browser.h
+        include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
-        include/rgl_progress_dialog.h src/rgl_progress_dialog.cpp
-        include/rgl_cloud_report_sender.h src/rgl_cloud_report_sender.cpp
-
-
-        include/rgl_territory_combo_box.h src/rgl_territory_combo_box.cpp
-        include/rgl_cloud_file_manager.h src/rgl_cloud_file_manager.cpp
 )
 
 # Include directories
