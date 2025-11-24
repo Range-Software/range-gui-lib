@@ -78,6 +78,7 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
 
     this->localFilesWidget = new RTreeWidget(localColumnInfo);
     this->localFilesWidget->setSelectionMode(QTreeWidget::ExtendedSelection);
+    this->localFilesWidget->sortItems(ColumnType::ColumnName,Qt::AscendingOrder);
     RCloudFileManagerWidget::populateLocalFiles(this->localDirectoryPath,this->localFilesWidget);
     localLayout->addWidget(this->localFilesWidget);
 
@@ -136,6 +137,7 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
 
     this->cloudFilesWidget = new RTreeWidget(cloudColumnInfo);
     this->cloudFilesWidget->setSelectionMode(QTreeWidget::ExtendedSelection);
+    this->cloudFilesWidget->sortItems(ColumnType::ColumnName,Qt::AscendingOrder);
     cloudLayout->addWidget(this->cloudFilesWidget);
 
     QHBoxLayout *cloudButtonsLayout = new QHBoxLayout;
