@@ -14,11 +14,10 @@ class RCloudFileManager : public QObject
 
     protected:
 
+        //! Const pointer to application setting.
         const RApplicationSettings *applicationSettings;
-
+        //! Cloud file manager.
         RFileManager *fileManager;
-
-        QTimer *refreshTimer;
 
     public:
 
@@ -34,9 +33,6 @@ class RCloudFileManager : public QObject
         void restartRefreshTimer();
 
     private slots:
-
-        //! Refresh timeout.
-        void onRefreshTimeout();
 
         //! Refresh timeout has changed.
         void onRefreshTimeoutChanged(uint refreshTimeout);

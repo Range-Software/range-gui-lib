@@ -14,9 +14,6 @@ RCloudFileManager::RCloudFileManager(RCloudConnectionHandler *connectionHandler,
 
     this->fileManager = new RFileManager(RCloudFileManager::generateFileManaferSettings(this->applicationSettings),cloudClient,this);
 
-    this->refreshTimer = new QTimer(this);
-    QObject::connect(this->refreshTimer,&QTimer::timeout,this,&RCloudFileManager::onRefreshTimeout);
-
     QObject::connect(this->applicationSettings,&RApplicationSettings::cloudRefreshTimeoutChanged,this,&RCloudFileManager::onRefreshTimeoutChanged);
     QObject::connect(this->applicationSettings,&RApplicationSettings::cloudSyncDataDirectoryChanged,this,&RCloudFileManager::onSyncDataDirectoryChanged);
 
@@ -36,29 +33,16 @@ void RCloudFileManager::restartRefreshTimer()
 {
     if (this->applicationSettings->getCloudRefreshTimeout() > 0 && this->applicationSettings->getCloudSyncDataDirectory())
     {
-        RLogger::info("Start cloud files refres timer\n");
-        this->refreshTimer->start(this->applicationSettings->getCloudRefreshTimeout());
+        RLogger::info("Start cloud file manager\n");
+        this->fileManager->start(this->applicationSettings->getCloudRefreshTimeout());
     }
     else
     {
-        if (this->refreshTimer->isActive())
+        if (this->fileManager->isActive())
         {
-            RLogger::info("Stop cloud files refres timer\n");
-            this->refreshTimer->stop();
+            RLogger::info("Stop cloud file manager\n");
+            this->fileManager->stop();
         }
-    }
-}
-
-void RCloudFileManager::onRefreshTimeout()
-{
-    if (this->fileManager->getNRunningActions() > 0)
-    {
-        RLogger::warning("Cannot sync files because previous sync has not yet finished (running actions = %u)).\n",this->fileManager->getNRunningActions());
-    }
-    else
-    {
-        RLogger::info("Refresh cloud files list\n");
-        this->fileManager->requestSyncFiles();
     }
 }
 
@@ -69,9 +53,5 @@ void RCloudFileManager::onRefreshTimeoutChanged(uint refreshTimeout)
 
 void RCloudFileManager::onSyncDataDirectoryChanged(bool syncDataDirectory)
 {
-    if (syncDataDirectory)
-    {
-        this->onRefreshTimeout();
-    }
     this->restartRefreshTimer();
 }
