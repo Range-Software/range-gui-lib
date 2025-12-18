@@ -3,6 +3,7 @@
 #include <QTimer>
 #include <QNetworkProxy>
 #include <QGuiApplication>
+#include <QLibraryInfo>
 #include <QDir>
 #include <QStyle>
 #include <QStyleHints>
@@ -300,6 +301,16 @@ void RApplication::onStarted()
     sysInfo.append(QString("Machine precision (float):  %14g").arg(double(RConstants::findMachineFloatEpsilon())));
     sysInfo.append(QString("Machine precision (double): %14g").arg(RConstants::findMachineDoubleEpsilon()));
 
+    QStringList qtInfo;
+    qtInfo.append(QString("Version: %1").arg(QLibraryInfo::version().toString()));
+    qtInfo.append(QString("Plugins paths: %1").arg(QLibraryInfo::paths(QLibraryInfo::PluginsPath).join(",")));
+    qtInfo.append(QString("Libraries paths: %1").arg(QLibraryInfo::paths(QLibraryInfo::LibrariesPath).join(",")));
+    qtInfo.append(QString("Library executables paths: %1").arg(QLibraryInfo::paths(QLibraryInfo::LibraryExecutablesPath).join(",")));
+    qtInfo.append(QString("Application library paths: %1").arg(QCoreApplication::libraryPaths().join(",")));
+    qtInfo.append(QString("SSL support: %1").arg(QSslSocket::supportsSsl()?"true":"false"));
+    qtInfo.append(QString("SSL available backends: %1").arg(QSslSocket::availableBackends().join(",")));
+    qtInfo.append(QString("SSL active backend: %1").arg(QSslSocket::activeBackend()));
+
     QStringList appInfo;
     appInfo.append(QString("Application directory: \"%1\"").arg(this->applicationDirPath()));
     appInfo.append(QString("Data directory: \"%1\"").arg(this->applicationSettings->getDataDir()));
@@ -315,6 +326,13 @@ void RApplication::onStarted()
     RLogger::info("System information\n");
     RLogger::indent();
     for (const QString &infoText : sysInfo)
+    {
+        RLogger::info("%s\n",infoText.toUtf8().constData());
+    }
+    RLogger::unindent(false);
+    RLogger::info("Qt library information\n");
+    RLogger::indent();
+    for (const QString &infoText : std::as_const(qtInfo))
     {
         RLogger::info("%s\n",infoText.toUtf8().constData());
     }
@@ -371,7 +389,7 @@ void RApplication::onStarted()
     QObject::connect(softwareUpdateChecker,&RSoftwareUpdateChecker::softwareAvailable,this,&RApplication::onSoftwareAvailable);
 
     // Cloud file manager
-    RCloudFileManager *cloudFileManager = new RCloudFileManager(this->cloudConnectionHandler,this->applicationSettings,this);
+    new RCloudFileManager(this->cloudConnectionHandler,this->applicationSettings,this);
 
     if (previousLockStillValid)
     {
@@ -383,44 +401,45 @@ void RApplication::onStarted()
         if (this->applicationSettings->getSoftwareSendUsageInfo())
         {
             // Send software usage report
-            if (QFile::exists(rotatedLogFile))
+            if (!QFile::exists(rotatedLogFile))
+            {
+                RLogger::warning("Cannot prepare a report because log file \'%s\' does not exist.\n",rotatedLogFile.toUtf8().constData());
+            }
+            else
             {
                 RLogger::info("Preparing a report from the log file \'%s\'.\n",rotatedLogFile.toUtf8().constData());
-
-                RReportRecord reportRecord;
 
                 QFile file(rotatedLogFile);
                 if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
                 {
-                    return;
+                    RLogger::error("Failed to opent the log file \'%s\'.\n",rotatedLogFile.toUtf8().constData());
                 }
-
-                QString fileContent;
-                try
+                else
                 {
-                    QTextStream fileStream(&file);
-                    while (!fileStream.atEnd())
+                    QString fileContent;
+                    try
                     {
-                        if (!fileContent.isEmpty())
+                        QTextStream fileStream(&file);
+                        while (!fileStream.atEnd())
                         {
-                            fileContent.append('\n');
+                            if (!fileContent.isEmpty())
+                            {
+                                fileContent.append('\n');
+                            }
+                            fileContent.append(fileStream.readLine());
                         }
-                        fileContent.append(fileStream.readLine());
-                    }
-                }
-                catch (...)
-                {
-                    RLogger::error("Unknown error while reading the log file.\n");
-                }
-                file.close();
 
-                reportRecord.setReport(fileContent);
-                reportRecord.setComment("Report from last run");
-                RCloudReportSender::sendReport(this->applicationSettings,reportRecord);
-            }
-            else
-            {
-                RLogger::warning("Cannot prepare a report because log file \'%s\' does not exist.\n",rotatedLogFile.toUtf8().constData());
+                        RReportRecord reportRecord;
+                        reportRecord.setReport(fileContent);
+                        reportRecord.setComment("Report from last run");
+                        RCloudReportSender::sendReport(this->applicationSettings,reportRecord);
+                    }
+                    catch (...)
+                    {
+                        RLogger::error("Unknown error while reading the log file.\n");
+                    }
+                    file.close();
+                }
             }
         }
     }
