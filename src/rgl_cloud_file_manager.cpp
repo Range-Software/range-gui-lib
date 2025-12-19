@@ -17,7 +17,7 @@ RCloudFileManager::RCloudFileManager(RCloudConnectionHandler *connectionHandler,
     QObject::connect(this->applicationSettings,&RApplicationSettings::cloudRefreshTimeoutChanged,this,&RCloudFileManager::onRefreshTimeoutChanged);
     QObject::connect(this->applicationSettings,&RApplicationSettings::cloudSyncDataDirectoryChanged,this,&RCloudFileManager::onSyncDataDirectoryChanged);
 
-    this->restartRefreshTimer();
+    this->restartRefreshTimer(false);
 }
 
 RFileManagerSettings RCloudFileManager::generateFileManaferSettings(const RApplicationSettings *applicationSettings)
@@ -29,8 +29,13 @@ RFileManagerSettings RCloudFileManager::generateFileManaferSettings(const RAppli
     return fileManagerSetting;
 }
 
-void RCloudFileManager::restartRefreshTimer()
+void RCloudFileManager::restartRefreshTimer(bool clearCache)
 {
+    if (clearCache)
+    {
+        RLogger::info("Clearing file manager cache\n");
+        this->fileManager->clearCache();
+    }
     if (this->applicationSettings->getCloudRefreshTimeout() > 0 && this->applicationSettings->getCloudSyncDataDirectory())
     {
         RLogger::info("Start cloud file manager\n");
@@ -48,10 +53,10 @@ void RCloudFileManager::restartRefreshTimer()
 
 void RCloudFileManager::onRefreshTimeoutChanged(uint refreshTimeout)
 {
-    this->restartRefreshTimer();
+    this->restartRefreshTimer(false);
 }
 
 void RCloudFileManager::onSyncDataDirectoryChanged(bool syncDataDirectory)
 {
-    this->restartRefreshTimer();
+    this->restartRefreshTimer(syncDataDirectory);
 }

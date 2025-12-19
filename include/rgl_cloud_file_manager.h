@@ -30,7 +30,7 @@ class RCloudFileManager : public QObject
         static RFileManagerSettings generateFileManaferSettings(const RApplicationSettings *applicationSettings);
 
         //! Restart the refresh timer.
-        void restartRefreshTimer();
+        void restartRefreshTimer(bool clearCache);
 
     private slots:
 
