@@ -554,7 +554,7 @@ uint RApplicationSettings::getDefaultCloudRefreshTimeout()
 
 bool RApplicationSettings::getDefaultCloudSyncDataDirectory()
 {
-    return true;
+    return false;
 }
 
 QString RApplicationSettings::getDefaultCloudSyncDataCachePath()
