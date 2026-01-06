@@ -107,7 +107,7 @@ class RApplication : public QApplication
         void onStyleChanged(const QString &styleName);
 
         //! Catch color scheme changed signal.
-        void onColorSchemeChanged(const Qt::ColorScheme &);
+        void onColorSchemeChanged(Qt::ColorScheme colorScheme);
 
         //! Catch language changed signal.
         void onLanguageChanged(const QString &languageCode);

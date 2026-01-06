@@ -12,7 +12,9 @@ class RStyle
 
     public:
 
-        static void applyStyle(const QString &styleName);
+        static void applyStyle(const QString &styleName, Qt::ColorScheme colorScheme = Qt::ColorScheme::Unknown);
+
+        static QString colorSchemeToText(Qt::ColorScheme colorScheme);
 
 };
 

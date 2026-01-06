@@ -125,22 +125,22 @@
 <context>
     <name>RApplication</name>
     <message>
-        <location filename="../src/rgl_application.cpp" line="251"/>
+        <location filename="../src/rgl_application.cpp" line="254"/>
         <source>Application is already running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="484"/>
+        <location filename="../src/rgl_application.cpp" line="508"/>
         <source>Following software updates are available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="494"/>
+        <location filename="../src/rgl_application.cpp" line="518"/>
         <source>Would you like to open the software manager?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="496"/>
+        <location filename="../src/rgl_application.cpp" line="520"/>
         <source>Software updates available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,17 +148,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="522"/>
+        <location filename="../src/rgl_application_settings.cpp" line="542"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="523"/>
+        <location filename="../src/rgl_application_settings.cpp" line="543"/>
         <source>POSIX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="525"/>
+        <location filename="../src/rgl_application_settings.cpp" line="545"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -184,132 +184,137 @@
 <context>
     <name>RApplicationSettingsWidget</name>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="32"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="33"/>
         <source>Appearance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="47"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="48"/>
         <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="59"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="69"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="67"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="77"/>
         <source>Formats</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="80"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="90"/>
         <source>Jon Smith</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="82"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="92"/>
         <source>Full name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="74"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="84"/>
         <source>User</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="91"/>
-        <source>E-mail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="94"/>
-        <source>Country</source>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="57"/>
+        <source>Color scheme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="101"/>
+        <source>E-mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="104"/>
+        <source>Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="111"/>
         <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="106"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="116"/>
         <source>Network proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="115"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="125"/>
         <source>Cloud</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="125"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="135"/>
         <source>Refresh timeout</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="129"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="139"/>
         <source>Synchronize data directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="134"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="144"/>
         <source>Software</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="140"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="150"/>
         <source>Send usage information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="145"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="155"/>
         <source>Check for software update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="155"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="165"/>
         <source>Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="160"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
         <source>Help directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="165"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="175"/>
         <source>OpenSSL tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="180"/>
         <source>OpenSSL configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="180"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="190"/>
         <source>Keyboard shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="255"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="271"/>
         <source>Language change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="255"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="271"/>
         <source>Language change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="261"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="277"/>
         <source>Format change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="261"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="277"/>
         <source>Format change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1496,6 +1501,24 @@
     <message>
         <location filename="../src/rgl_software_manager_widget.cpp" line="227"/>
         <source>Install software?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RStyle</name>
+    <message>
+        <location filename="../src/rgl_style.cpp" line="125"/>
+        <source>Light</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_style.cpp" line="129"/>
+        <source>Dark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_style.cpp" line="133"/>
+        <source>System</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

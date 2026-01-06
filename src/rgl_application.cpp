@@ -210,13 +210,15 @@ void RApplication::onStarted()
         return;
     }
 
-    RStyle::applyStyle(this->applicationSettings->getStyle());
+    RStyle::applyStyle(this->applicationSettings->getStyle(),this->applicationSettings->getColorScheme());
     this->applyTranslation(this->applicationSettings->getLanguageCode());
 
     // Connect to aboutToQuit signal
     QObject::connect(this,&RApplication::aboutToQuit,this,&RApplication::onAboutToQuit);
     // Connect to style changed signal
     QObject::connect(this->applicationSettings,&RApplicationSettings::styleChanged,this,&RApplication::onStyleChanged);
+    // Connect to color scheme changed signal.
+    QObject::connect(this->applicationSettings,&RApplicationSettings::colorSchemeChanged,this,&RApplication::onColorSchemeChanged);
     // Connect to color scheme changed signal.
     QObject::connect(QGuiApplication::styleHints(),&QStyleHints::colorSchemeChanged,this,&RApplication::onColorSchemeChanged);
     // Connect to language changed signal
@@ -298,6 +300,7 @@ void RApplication::onStarted()
     sysInfo.append(QString("Product Name: %1").arg(QSysInfo::prettyProductName()));
     sysInfo.append(QString("Product Type: %1").arg(QSysInfo::productType()));
     sysInfo.append(QString("Product Version: %1").arg(QSysInfo::productVersion()));
+    sysInfo.append(QString("Platform: %1").arg(QGuiApplication::platformName()));
     sysInfo.append(QString("Machine precision (float):  %14g").arg(double(RConstants::findMachineFloatEpsilon())));
     sysInfo.append(QString("Machine precision (double): %14g").arg(RConstants::findMachineDoubleEpsilon()));
 
@@ -312,6 +315,8 @@ void RApplication::onStarted()
     qtInfo.append(QString("SSL active backend: %1").arg(QSslSocket::activeBackend()));
 
     QStringList appInfo;
+    appInfo.append(QString("Style: %1").arg(QApplication::style()->objectName()));
+    appInfo.append(QString("Color scheme: %1").arg(RStyle::colorSchemeToText(QGuiApplication::styleHints()->colorScheme())));
     appInfo.append(QString("Application directory: \"%1\"").arg(this->applicationDirPath()));
     appInfo.append(QString("Data directory: \"%1\"").arg(this->applicationSettings->getDataDir()));
     appInfo.append(QString("Certificates directory: \"%1\"").arg(this->applicationSettings->getCertDir()));
@@ -473,17 +478,17 @@ void RApplication::onAboutToQuit()
 
 void RApplication::onStyleChanged(const QString &styleName)
 {
-    RStyle::applyStyle(styleName);
+    RStyle::applyStyle(styleName,this->applicationSettings->getColorScheme());
 }
 
-void RApplication::onColorSchemeChanged(const Qt::ColorScheme &)
+void RApplication::onColorSchemeChanged(Qt::ColorScheme colorScheme)
 {
     QString styleName(this->style()->name());
     if (styleName.isEmpty())
     {
         styleName = this->applicationSettings->getStyle();
     }
-    RStyle::applyStyle(styleName);
+    RStyle::applyStyle(styleName,colorScheme);
 }
 
 void RApplication::onLanguageChanged(const QString &languageCode)

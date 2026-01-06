@@ -3,16 +3,13 @@
 #include <QDesktopServices>
 #include <QImageWriter>
 #include <QStandardPaths>
+#include <QGuiApplication>
+#include <QStyleHints>
 
 #include <rbl_logger.h>
 #include <rbl_utils.h>
 
 #include "rgl_application_settings.h"
-
-const QString RApplicationSettings::Style::WindowsDark = "Windows-Dark";
-const QString RApplicationSettings::Style::FusionDark = "Fusion-Dark";
-const QString RApplicationSettings::Style::FusionRange = "Fusion-Range";
-const QString RApplicationSettings::Style::Fusion = "Fusion";
 
 const QString RApplicationSettings::Language::En::Code = "en";
 const QString RApplicationSettings::Language::En::Name = "English";
@@ -27,6 +24,7 @@ const QString RApplicationSettings::opensslCnfFileName("openssl.cnf");
 
 const QString RApplicationSettings::helpDirKey = "application/helpDir";
 const QString RApplicationSettings::styleKey = "application/style";
+const QString RApplicationSettings::colorSchemeKey = "application/colorScheme";
 const QString RApplicationSettings::languageKey = "application/language";
 const QString RApplicationSettings::formatKey = "application/format";
 const QString RApplicationSettings::toolbarIconSizeKey = "application/toolbarIconSize";
@@ -221,6 +219,17 @@ void RApplicationSettings::setStyle(const QString &style)
     QString newStyle = RApplicationSettings::getStyles().contains(style) ? style : RApplicationSettings::getDefaultStyle();
     this->setValue(RApplicationSettings::styleKey, newStyle);
     emit this->styleChanged(newStyle);
+}
+
+Qt::ColorScheme RApplicationSettings::getColorScheme() const
+{
+    return Qt::ColorScheme(this->value(RApplicationSettings::colorSchemeKey,int(RApplicationSettings::getDefaultColorScheme())).toInt());
+}
+
+void RApplicationSettings::setColorScheme(Qt::ColorScheme colorScheme)
+{
+    this->setValue(RApplicationSettings::colorSchemeKey,int(colorScheme));
+    emit this->colorSchemeChanged(colorScheme);
 }
 
 QString RApplicationSettings::getLanguageCode() const
@@ -439,11 +448,20 @@ QString RApplicationSettings::getSessionDir()
 QStringList RApplicationSettings::getStyles()
 {
     QStringList styles = QStyleFactory::keys();
-    styles.append(RApplicationSettings::Style::FusionDark);
-    styles.append(RApplicationSettings::Style::FusionRange);
-    styles.append(RApplicationSettings::Style::WindowsDark);
+    // styles.append(RApplicationSettings::Style::FusionDark);
+    // styles.append(RApplicationSettings::Style::FusionRange);
+    // styles.append(RApplicationSettings::Style::WindowsDark);
     styles.sort();
     return styles;
+}
+
+QList<Qt::ColorScheme> RApplicationSettings::getColorSchemes()
+{
+    QList<Qt::ColorScheme> colorSchemes;
+    colorSchemes.append(Qt::ColorScheme::Unknown);
+    colorSchemes.append(Qt::ColorScheme::Light);
+    colorSchemes.append(Qt::ColorScheme::Dark);
+    return colorSchemes;
 }
 
 QStringList RApplicationSettings::getLanguageCodes()
@@ -529,7 +547,11 @@ QString RApplicationSettings::formatToName(Format format)
 QString RApplicationSettings::getDefaultStyle()
 {
     return RApplicationSettings::getStyles().at(0);
-    //    return MainSettings::SystemDefault;
+}
+
+Qt::ColorScheme RApplicationSettings::getDefaultColorScheme()
+{
+    return Qt::ColorScheme::Unknown;
 }
 
 QString RApplicationSettings::getDefaultLanguageCode()
@@ -616,19 +638,7 @@ const QString RApplicationSettings::getDefaultOpensslToolPath()
 
 QColor RApplicationSettings::getDefaultBackgroundColor(const QString &style)
 {
-    if (style == RApplicationSettings::Style::Fusion)
-    {
-        return QColor(34,68,102);
-    }
-    else if (style == RApplicationSettings::Style::FusionRange)
-    {
-        return QColor(48,0,0);
-    }
-    else if (style == RApplicationSettings::Style::FusionDark)
-    {
-        return QColor(53,53,53);
-    }
-    else if (style == RApplicationSettings::Style::WindowsDark)
+    if (QGuiApplication::styleHints()->colorScheme() == Qt::ColorScheme::Dark)
     {
         return QColor(53,53,53);
     }

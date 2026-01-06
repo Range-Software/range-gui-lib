@@ -15,6 +15,7 @@
 #include "rgl_application_settings_widget.h"
 #include "rgl_application.h"
 #include "rgl_message_box.h"
+#include "rgl_style.h"
 
 RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *applicationSettings, QWidget *parent)
     : QWidget{parent}
@@ -45,6 +46,15 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
         }
     }
     appearanceLayout->addRow(tr("Style") + ":",this->styleCombo);
+
+    QList<Qt::ColorScheme> colorSchemes(RApplicationSettings::getColorSchemes());
+    this->colorSchemeCombo = new QComboBox;
+    for (int i=0;i<colorSchemes.size();i++)
+    {
+        this->colorSchemeCombo->addItem(RStyle::colorSchemeToText(colorSchemes.at(i)),int(colorSchemes.at(i)));
+    }
+    this->colorSchemeCombo->setCurrentIndex(int(this->applicationSettings->getColorScheme()));
+    appearanceLayout->addRow(tr("Color scheme") + ":",this->colorSchemeCombo);
 
     QStringList languageNames(RApplicationSettings::getLanguageNames());
     this->languageCombo = new QComboBox;
@@ -186,6 +196,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     keyboardShortcutsLayout->addWidget(this->keyboardShortcutsEdirotWidget);
 
     QObject::connect(this->styleCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onStyleChanged);
+    QObject::connect(this->colorSchemeCombo,&QComboBox::currentIndexChanged,this,&RApplicationSettingsWidget::onColorSchemeChanged);
     QObject::connect(this->languageCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onLanguageChanged);
     QObject::connect(this->formatCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onFormatChanged);
     QObject::connect(this->proxySettingsWidget,&RProxySettingsWidget::proxyChanged,this,&RApplicationSettingsWidget::onProxyChanged);
@@ -247,6 +258,11 @@ void RApplicationSettingsWidget::setDefaultValues()
 void RApplicationSettingsWidget::onStyleChanged(const QString &style)
 {
     this->applicationSettings->setStyle(style);
+}
+
+void RApplicationSettingsWidget::onColorSchemeChanged(int currentIndex)
+{
+    this->applicationSettings->setColorScheme(Qt::ColorScheme(currentIndex));
 }
 
 void RApplicationSettingsWidget::onLanguageChanged(const QString &languageName)

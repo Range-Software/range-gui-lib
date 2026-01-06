@@ -15,18 +15,6 @@ class RApplicationSettings : public QSettings
 
     public:
 
-        struct Style
-        {
-            //! Windows-dark style constant.
-            static const QString WindowsDark;
-            //! Fusion-dark style constant.
-            static const QString FusionDark;
-            //! Fusion-range style constant.
-            static const QString FusionRange;
-            //! Fusion style constant.
-            static const QString Fusion;
-        };
-
         struct Language
         {
             struct En
@@ -64,6 +52,7 @@ class RApplicationSettings : public QSettings
 
         static const QString helpDirKey;
         static const QString styleKey;
+        static const QString colorSchemeKey;
         static const QString languageKey;
         static const QString formatKey;
         static const QString toolbarIconSizeKey;
@@ -146,6 +135,12 @@ class RApplicationSettings : public QSettings
 
         //! Set style.
         void setStyle(const QString &style);
+
+        //! Return color scheme.
+        Qt::ColorScheme getColorScheme() const;
+
+        //! Set color scheme.
+        void setColorScheme(Qt::ColorScheme colorScheme);
 
         //! Return language code.
         QString getLanguageCode() const;
@@ -264,6 +259,9 @@ class RApplicationSettings : public QSettings
         //! Return list of styles.
         static QStringList getStyles();
 
+        //! Return list of color schemes.
+        static QList<Qt::ColorScheme> getColorSchemes();
+
         //! Return list of language codes.
         static QStringList getLanguageCodes();
 
@@ -287,6 +285,9 @@ class RApplicationSettings : public QSettings
 
         //! Return default style.
         static QString getDefaultStyle();
+
+        //! Return default color scheme.
+        static Qt::ColorScheme getDefaultColorScheme();
 
         //! Return default language code.
         static QString getDefaultLanguageCode();
@@ -337,6 +338,9 @@ class RApplicationSettings : public QSettings
 
         //! Style has changed.
         void styleChanged(const QString &style);
+
+        //! Color scheme has changed.
+        void colorSchemeChanged(Qt::ColorScheme colorScheme);
 
         //! Language has changed.
         void languageChanged(const QString &language);

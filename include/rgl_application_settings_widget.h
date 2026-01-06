@@ -30,6 +30,7 @@ class RApplicationSettingsWidget : public QWidget
         QTabWidget *tabWidget;
 
         QComboBox *styleCombo;
+        QComboBox *colorSchemeCombo;
         QComboBox *languageCombo;
         QComboBox *formatCombo;
         RProxySettingsWidget *proxySettingsWidget;
@@ -59,6 +60,9 @@ class RApplicationSettingsWidget : public QWidget
 
         //! Style combo selection changed.
         void onStyleChanged(const QString &style);
+
+        //! Color scheme selection changed.
+        void onColorSchemeChanged(int currentIndex);
 
         //! Language combo selection changed.
         void onLanguageChanged(const QString &languageName);
