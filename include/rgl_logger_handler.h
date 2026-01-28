@@ -35,16 +35,16 @@ class RLoggerHandler : public QObject
     signals:
 
         //! Signal containing info message.
-        void infoPrinted(const QString &message);
+        void infoPrinted(const RMessage &message);
 
         //! Signal containing notice message.
-        void noticePrinted(const QString &message);
+        void noticePrinted(const RMessage &message);
 
         //! Signal containing warning message.
-        void warningPrinted(const QString &message);
+        void warningPrinted(const RMessage &message);
 
         //! Signal containing error message.
-        void errorPrinted(const QString &message);
+        void errorPrinted(const RMessage &message);
 };
 
 #endif /* RGL_LOGGER_HANDLER_H */

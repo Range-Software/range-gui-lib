@@ -351,7 +351,7 @@ void RApplication::onStarted()
     RLogger::indent();
     RLogger::info("Last used version: %s\n",this->applicationSettings->getStoredVersion().toString().toUtf8().constData());
     RLogger::info("Currently used version: %s\n",RVendor::version().toString().toUtf8().constData());
-    RLogger::unindent();
+    RLogger::unindent(false);
 
     if (RVendor::version() > this->applicationSettings->getStoredVersion())
     {
