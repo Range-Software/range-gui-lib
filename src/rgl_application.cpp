@@ -4,6 +4,7 @@
 #include <QNetworkProxy>
 #include <QGuiApplication>
 #include <QLibraryInfo>
+#include <QLoggingCategory>
 #include <QDir>
 #include <QStyle>
 #include <QStyleHints>
@@ -163,6 +164,8 @@ void RApplication::onStarted()
     try
     {
         QList<RArgumentOption> validOptions;
+        validOptions.append(RArgumentOption("log-qt",RArgumentOption::Switch,QVariant(),"Switch on qt debug log level",RArgumentOption::Logger,false));
+        validOptions.append(RArgumentOption("log-ssl",RArgumentOption::Switch,QVariant(),"Switch on ssl debug log level",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("log-debug",RArgumentOption::Switch,QVariant(),"Switch on debug log level",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("log-trace",RArgumentOption::Switch,QVariant(),"Switch on trace log level",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("log-threads",RArgumentOption::Switch,QVariant(),"Enable printing thread IDs",RArgumentOption::Logger,false));
@@ -195,6 +198,30 @@ void RApplication::onStarted()
         if (argumentsParser.isSet("log-threads"))
         {
             RLogger::getInstance().setPrintThreadIdEnabled(true);
+        }
+        if (argumentsParser.isSet("log-qt") ||
+            argumentsParser.isSet("log-ssl"))
+        {
+            RLogger::installQtMessageHandler();
+            RLogger::debug("Qt message handler installed\n");
+
+            if (argumentsParser.isSet("log-qt"))
+            {
+                QLoggingCategory::setFilterRules("qt.*=true");
+                RLogger::debug("All Qt logging enabled\n");
+            }
+            else if (argumentsParser.isSet("log-ssl"))
+            {
+                QLoggingCategory::setFilterRules(
+                    "qt.network.ssl.debug=true\n"
+                    "qt.network.ssl.info=true\n"
+                    "qt.network.ssl.warning=true\n"
+                    "qt.tlsbackend.ossl.debug=true\n"
+                    "qt.tlsbackend.ossl.info=true\n"
+                    "qt.tlsbackend.ossl.warning=true"
+                    );
+                RLogger::debug("SSL logging enabled\n");
+            }
         }
         if (argumentsParser.isSet("reset-defaults"))
         {
