@@ -141,6 +141,11 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
 
     cloudLayout->addWidget(this->cloudSyncDataDirectoryCheckBox,1,0,1,3);
 
+    this->cloudClientCertificateRenewCheckBox = new QCheckBox(tr("Renew client certificate"));
+    this->cloudClientCertificateRenewCheckBox->setChecked(this->applicationSettings->getCloudClientCertificateRenew());
+
+    cloudLayout->addWidget(this->cloudClientCertificateRenewCheckBox,2,0,1,3);
+
     QGroupBox *softwareGroupBox = new QGroupBox(tr("Software"));
     networkLayout->addWidget(softwareGroupBox);
 
@@ -202,6 +207,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->proxySettingsWidget,&RProxySettingsWidget::proxyChanged,this,&RApplicationSettingsWidget::onProxyChanged);
     QObject::connect(this->cloudRefreshTimeoutSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudRefreshTimeoutChanged);
     QObject::connect(this->cloudSyncDataDirectoryCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudSyncDataDirectoryChanged);
+    QObject::connect(this->cloudClientCertificateRenewCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudRenewClientCertificateChanged);
     QObject::connect(this->softwareSendUsageInfoCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged);
     QObject::connect(this->softwareCheckUpdatesCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged);
     QObject::connect(this->userFullNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onUserFullNameChanged);
@@ -245,6 +251,7 @@ void RApplicationSettingsWidget::setDefaultValues()
     this->proxySettingsWidget->setDefaultValues();
     this->cloudRefreshTimeoutSpin->setValue(RApplicationSettings::getDefaultCloudRefreshTimeout()/1000);
     this->cloudSyncDataDirectoryCheckBox->setCheckState(RApplicationSettings::getDefaultCloudSyncDataDirectory() ? Qt::Checked : Qt::Unchecked);
+    this->cloudClientCertificateRenewCheckBox->setCheckState(RApplicationSettings::getDefaultCloudClientCertificateRenew() ? Qt::Checked : Qt::Unchecked);
     this->softwareSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
     this->softwareCheckUpdatesCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareCheckUpdates() ? Qt::Checked : Qt::Unchecked);
     this->userFullNameEdit->setText(QString());
@@ -290,6 +297,11 @@ void RApplicationSettingsWidget::onCloudRefreshTimeoutChanged(int cloudRefreshTi
 void RApplicationSettingsWidget::onCloudSyncDataDirectoryChanged(Qt::CheckState state)
 {
     this->applicationSettings->setCloudSyncDataDirectory(state == Qt::Checked);
+}
+
+void RApplicationSettingsWidget::onCloudRenewClientCertificateChanged(Qt::CheckState state)
+{
+    this->applicationSettings->setCloudClientCertificateRenew(state == Qt::Checked);
 }
 
 void RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged(Qt::CheckState state)

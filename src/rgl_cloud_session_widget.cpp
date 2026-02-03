@@ -2,18 +2,18 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QSpinBox>
-#include <QDir>
 #include <QFileInfo>
 #include <QGroupBox>
 
 #include <rbl_error.h>
 #include <rbl_logger.h>
 
+#include <rcl_open_ssl_tool.h>
+
 #include "rgl_application_settings.h"
 #include "rgl_cloud_session_widget.h"
 #include "rgl_message_box.h"
 #include "rgl_open_ssl_csr_dialog.h"
-#include "rgl_open_ssl_tool.h"
 #include "rgl_text_browser_dialog.h"
 
 RCloudSessionWidget::RCloudSessionWidget(const RCloudSessionInfo &sessionInfo,
@@ -265,50 +265,21 @@ void RCloudSessionWidget::onPrivateConnectionTestFinished(QString message)
 
 void RCloudSessionWidget::onClientCertificateRequestClicked()
 {
-    QMap<QString,QString> subjectMap;
+    QMap<QString,QString> subjectMap = RTlsTrustStore::findSubjectFields(this->sessionInfo.getClientKeyStore().getCertificateFile());
 
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,QLocale::territoryToCode(QLocale::system().territory()));
-    subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->applicationSettings->getUserEmail());
-    subjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,"Range Software");
-    subjectMap.insert(ROpenSslTool::CertificateSubject::OrganizationUnit::key,"Cloud");
-
-    const QList<QSslCertificate> clientCertificates = QSslCertificate::fromPath(this->sessionInfo.getClientKeyStore().getCertificateFile(),QSsl::EncodingFormat::Pem);
-    if (clientCertificates.size() > 0)
+    if (subjectMap.isEmpty())
     {
-        QMap<QSslCertificate::SubjectInfo,QString> subjectInfoMap;
-        subjectInfoMap.insert(QSslCertificate::CountryName,ROpenSslTool::CertificateSubject::Country::key);
-        subjectInfoMap.insert(QSslCertificate::StateOrProvinceName,ROpenSslTool::CertificateSubject::State::key);
-        subjectInfoMap.insert(QSslCertificate::LocalityName,ROpenSslTool::CertificateSubject::Location::key);
-        subjectInfoMap.insert(QSslCertificate::Organization,ROpenSslTool::CertificateSubject::Organization::key);
-        subjectInfoMap.insert(QSslCertificate::OrganizationalUnitName,ROpenSslTool::CertificateSubject::OrganizationUnit::key);
-        subjectInfoMap.insert(QSslCertificate::CommonName,ROpenSslTool::CertificateSubject::CommonName::key);
-
-        for (auto it=subjectInfoMap.cbegin();it!=subjectInfoMap.cend();++it)
-        {
-            QStringList values = clientCertificates.at(0).subjectInfo(it.key());
-            if (values.size() > 0)
-            {
-                subjectMap.insert(it.value(),values.at(0));
-            }
-        }
+        subjectMap.insert(ROpenSslTool::CertificateSubject::Country::key,QLocale::territoryToCode(QLocale::system().territory()));
+        subjectMap.insert(ROpenSslTool::CertificateSubject::CommonName::key,this->applicationSettings->getUserEmail());
+        subjectMap.insert(ROpenSslTool::CertificateSubject::Organization::key,"Range Software");
+        subjectMap.insert(ROpenSslTool::CertificateSubject::OrganizationUnit::key,"Cloud");
     }
 
-    QString timeStamp = QDateTime::currentDateTime().toString("yyyyMMdd_hhmmss");
+    QDateTime currentDateTime = QDateTime::currentDateTime();
 
-    // Find new private key file name
-    QFileInfo privateKeyFileInfo(RApplicationSettings::getDefaultPrivateKeyPath());
-    QDir privateKeyFileDir(privateKeyFileInfo.absolutePath());
-    QString newPrivateKeyPath = privateKeyFileDir.absoluteFilePath(QString("%1-%2.%3").arg(timeStamp,privateKeyFileInfo.baseName(),privateKeyFileInfo.completeSuffix()));
-
-    // Find new csr file name
-    QFileInfo csrFileInfo(RApplicationSettings::getDefaultCsrPath());
-    QDir csrFileDir(csrFileInfo.absolutePath());
-    QString newCsrPath = csrFileDir.absoluteFilePath(QString("%1-%2.%3").arg(timeStamp,csrFileInfo.baseName(),csrFileInfo.completeSuffix()));
-
-    // Find new certificate file name
-    QFileInfo certificateFileInfo(RApplicationSettings::getDefaultCertificatePath());
-    QDir certificateFileDir(certificateFileInfo.absolutePath());
-    QString newCertificatePath = certificateFileDir.absoluteFilePath(QString("%1-%2.%3").arg(timeStamp,certificateFileInfo.baseName(),certificateFileInfo.completeSuffix()));
+    QString newPrivateKeyPath = RApplicationSettings::buildFilePathWithTimestamp(RApplicationSettings::getDefaultPrivateKeyPath(),currentDateTime);
+    QString newCsrPath = RApplicationSettings::buildFilePathWithTimestamp(RApplicationSettings::getDefaultCsrPath(),currentDateTime);
+    QString newCertificatePath = RApplicationSettings::buildFilePathWithTimestamp(RApplicationSettings::getDefaultCertificatePath(),currentDateTime);
 
     ROpenSslCsrDialog *openSslCsrDialog = new ROpenSslCsrDialog(this->connectionHandler,
                                                                 this->applicationSettings->getOpensslToolPath(),

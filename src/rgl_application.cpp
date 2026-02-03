@@ -23,6 +23,7 @@
 #include "rgl_locker_handler.h"
 #include "rgl_logger_handler.h"
 #include "rgl_message_box.h"
+#include "rgl_open_ssl_csr_task.h"
 #include "rgl_progress_handler.h"
 #include "rgl_software_manager_dialog.h"
 #include "rgl_software_update_checker.h"
@@ -156,6 +157,143 @@ void RApplication::applyFormat(RApplicationSettings::Format format)
             break;
         }
     }
+}
+
+void RApplication::updateFiles()
+{
+    RLogger::info("Preparing files update.\n");
+    RLogger::indent();
+
+    RFileUpdater *pFileUpdater = new RFileUpdater;
+
+    for (const QString &sourceName : std::as_const(this->updaterSourceDirs))
+    {
+#ifdef Q_OS_DARWIN
+        QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + "Resources" + QDir::separator() + sourceName)));
+#else
+        QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + sourceName)));
+#endif
+        QDir dataDstDir(RApplicationSettings::getAppDataDir(sourceName));
+
+        RLogger::info("Source directory: \'%s\'\n",dataSrcDir.absolutePath().toUtf8().constData());
+        RLogger::info("Destination directory: \'%s\'\n",dataDstDir.absolutePath().toUtf8().constData());
+
+        if (dataSrcDir.exists())
+        {
+            QStringList files = dataSrcDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::Readable, QDir::Name);
+            for (const QString &file : std::as_const(files))
+            {
+                RLogger::info("Adding file: \'%s\' -> \'%s\'\n",dataSrcDir.filePath(file).toUtf8().constData(),dataDstDir.filePath(file).toUtf8().constData());
+                pFileUpdater->addFile(dataSrcDir.filePath(file),dataDstDir.filePath(file));
+            }
+        }
+    }
+    RLogger::unindent();
+    RJobManager::getInstance().submit(pFileUpdater);
+}
+
+void RApplication::validateCloudClientCertificate()
+{
+    for (const QString &cloudSessionName : this->cloudSessionManager->getSessionNames())
+    {
+        RCloudSessionInfo cloudSessionInfo = this->cloudSessionManager->findSession(cloudSessionName);
+        QString clientCertificateFile = cloudSessionInfo.getClientKeyStore().getCertificateFile();
+        if (!QFileInfo::exists(clientCertificateFile))
+        {
+            continue;
+        }
+
+        QPair<QDateTime,QDateTime> clientCertificateValidity = RTlsTrustStore::findValidity(clientCertificateFile);
+        if (clientCertificateValidity.second.isNull())
+        {
+            continue;
+        }
+
+        QString clientCertificateCommonName = RTlsTrustStore::findCN(clientCertificateFile);
+        QDateTime now = QDateTime::currentDateTime();
+        QDateTime nowPlusExpiry = now.addDays(this->applicationSettings->getCloudClientCertificateExpiryDays());
+        if (clientCertificateValidity.second < now)
+        {
+            QString certificateWarningMessage = tr("Cloud client certificate has expired.")
+            + "<ul>"
+                + "<li><strong>" + tr("Session name") + ":</strong> " + cloudSessionName + "</li>"
+                + "<li><strong>" + tr("Common name") + ":</strong> " + clientCertificateCommonName + "</li>"
+                + "<li><strong>" + tr("Expiration date") + ":</strong> " + clientCertificateValidity.second.toString() + "</li>"
+                + "</ul>";
+            RMessageBox::warning(this->mainWindow,tr("Certificate has expired"), certificateWarningMessage);
+        }
+        else if (clientCertificateValidity.second < nowPlusExpiry)
+        {
+            if (this->applicationSettings->getCloudClientCertificateRenew())
+            {
+                RLogger::info("Attempting to renew Cloud client certificate.\n");
+                RCloudSessionInfo cloudSessionInfo = this->cloudSessionManager->findSession(cloudSessionName);
+                if (cloudSessionInfo.isValid())
+                {
+                    ROpenSslCsrTask *pOpenSslCsrTask = new ROpenSslCsrTask(this->applicationSettings,
+                                                                           this->cloudConnectionHandler,
+                                                                           cloudSessionInfo,
+                                                                           this->mainWindow);
+                    QObject::connect(pOpenSslCsrTask,&ROpenSslCsrTask::finished,this,&RApplication::onOpenSslCsrTaskFinished);
+                    QObject::connect(pOpenSslCsrTask,&ROpenSslCsrTask::finished,pOpenSslCsrTask,&ROpenSslCsrTask::deleteLater);
+                    QObject::connect(pOpenSslCsrTask,&ROpenSslCsrTask::failed,this,&RApplication::onOpenSslCsrTaskFailed);
+                    QObject::connect(pOpenSslCsrTask,&ROpenSslCsrTask::failed,pOpenSslCsrTask,&ROpenSslCsrTask::deleteLater);
+                }
+            }
+            else
+            {
+                QString certificateWarningMessage = tr("Cloud client certificate will soon expire.")
+                + "<ul>"
+                    + "<li><strong>" + tr("Session name") + ":</strong> " + cloudSessionName + "</li>"
+                    + "<li><strong>" + tr("Common name") + ":</strong> " + clientCertificateCommonName + "</li>"
+                    + "<li><strong>" + tr("Expiration date") + ":</strong> " + clientCertificateValidity.second.toString() + "</li>"
+                    + "</ul>";
+                RMessageBox::warning(this->mainWindow,tr("Certificate will expire"), certificateWarningMessage);
+            }
+        }
+    }
+}
+
+void RApplication::sendUsageReport(const QString &logFile) const
+{
+    if (!QFile::exists(logFile))
+    {
+        RLogger::warning("Cannot prepare a report because log file \'%s\' does not exist.\n",logFile.toUtf8().constData());
+        return;
+    }
+
+    RLogger::info("Preparing a report from the log file \'%s\'.\n",logFile.toUtf8().constData());
+
+    QFile file(logFile);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        RLogger::error("Failed to opent the log file \'%s\'.\n",logFile.toUtf8().constData());
+        return;
+    }
+
+    QString fileContent;
+    try
+    {
+        QTextStream fileStream(&file);
+        while (!fileStream.atEnd())
+        {
+            if (!fileContent.isEmpty())
+            {
+                fileContent.append('\n');
+            }
+            fileContent.append(fileStream.readLine());
+        }
+
+        RReportRecord reportRecord;
+        reportRecord.setReport(fileContent);
+        reportRecord.setComment("Report from last run");
+        RCloudReportSender::sendReport(this->applicationSettings,reportRecord);
+    }
+    catch (...)
+    {
+        RLogger::error("Unknown error while reading the log file.\n");
+    }
+    file.close();
 }
 
 void RApplication::onStarted()
@@ -304,6 +442,7 @@ void RApplication::onStarted()
         }
     }
 
+    // Register data directory to be updated in case of new software version
     this->updaterSourceDirs.append("data");
 
     // Initialize user objects
@@ -385,36 +524,11 @@ void RApplication::onStarted()
         // Newer version is being executed.
 
         // Perform files update.
-        RLogger::info("Preparing files update.\n");
-        RLogger::indent();
-
-        RFileUpdater *pFileUpdater = new RFileUpdater;
-
-        for (const QString &sourceName : std::as_const(this->updaterSourceDirs))
-        {
-#ifdef Q_OS_DARWIN
-            QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + "Resources" + QDir::separator() + sourceName)));
-#else
-            QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + sourceName)));
-#endif
-            QDir dataDstDir(RApplicationSettings::getAppDataDir(sourceName));
-
-            RLogger::info("Source directory: \'%s\'\n",dataSrcDir.absolutePath().toUtf8().constData());
-            RLogger::info("Destination directory: \'%s\'\n",dataDstDir.absolutePath().toUtf8().constData());
-
-            if (dataSrcDir.exists())
-            {
-                QStringList files = dataSrcDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::Readable, QDir::Name);
-                for (const QString &file : std::as_const(files))
-                {
-                    RLogger::info("Adding file: \'%s\' -> \'%s\'\n",dataSrcDir.filePath(file).toUtf8().constData(),dataDstDir.filePath(file).toUtf8().constData());
-                    pFileUpdater->addFile(dataSrcDir.filePath(file),dataDstDir.filePath(file));
-                }
-            }
-        }
-        RLogger::unindent();
-        RJobManager::getInstance().submit(pFileUpdater);
+        this->updateFiles();
     }
+
+    // Check client certificate validity
+    this->validateCloudClientCertificate();
 
     // Software update checker
     RSoftwareUpdateChecker *softwareUpdateChecker = new RSoftwareUpdateChecker(this->applicationSettings,this);
@@ -433,46 +547,7 @@ void RApplication::onStarted()
         if (this->applicationSettings->getSoftwareSendUsageInfo())
         {
             // Send software usage report
-            if (!QFile::exists(rotatedLogFile))
-            {
-                RLogger::warning("Cannot prepare a report because log file \'%s\' does not exist.\n",rotatedLogFile.toUtf8().constData());
-            }
-            else
-            {
-                RLogger::info("Preparing a report from the log file \'%s\'.\n",rotatedLogFile.toUtf8().constData());
-
-                QFile file(rotatedLogFile);
-                if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-                {
-                    RLogger::error("Failed to opent the log file \'%s\'.\n",rotatedLogFile.toUtf8().constData());
-                }
-                else
-                {
-                    QString fileContent;
-                    try
-                    {
-                        QTextStream fileStream(&file);
-                        while (!fileStream.atEnd())
-                        {
-                            if (!fileContent.isEmpty())
-                            {
-                                fileContent.append('\n');
-                            }
-                            fileContent.append(fileStream.readLine());
-                        }
-
-                        RReportRecord reportRecord;
-                        reportRecord.setReport(fileContent);
-                        reportRecord.setComment("Report from last run");
-                        RCloudReportSender::sendReport(this->applicationSettings,reportRecord);
-                    }
-                    catch (...)
-                    {
-                        RLogger::error("Unknown error while reading the log file.\n");
-                    }
-                    file.close();
-                }
-            }
+            this->sendUsageReport(rotatedLogFile);
         }
     }
 }
@@ -551,4 +626,14 @@ void RApplication::onSoftwareAvailable(QList<RFileInfo> fileInfoList)
     }
 
     R_LOG_TRACE_OUT;
+}
+
+void RApplication::onOpenSslCsrTaskFinished(RCloudSessionInfo sessionInfo)
+{
+    this->cloudSessionManager->insertSession(sessionInfo);
+}
+
+void RApplication::onOpenSslCsrTaskFailed(QString message)
+{
+    RLogger::error("OpenSSL CSR task has failed. %s\n",message.toUtf8().constData());
 }

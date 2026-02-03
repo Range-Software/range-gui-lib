@@ -31,6 +31,8 @@ const QString RApplicationSettings::toolbarIconSizeKey = "application/toolbarIco
 const QString RApplicationSettings::cloudRefreshTimeoutKey = "cloud/refreshTimeout";
 const QString RApplicationSettings::cloudSyncDataDirectoryKey = "cloud/syncDataDirectory";
 const QString RApplicationSettings::cloudSyncDataCachePathKey = "cloud/syncDataCachePath";
+const QString RApplicationSettings::cloudClientCertificateRenewKey = "cloud/ClientCertificateRenew";
+const QString RApplicationSettings::cloudClientCertificateExpiryDaysKey = "cloud/ClientCertificateExpiryDays";
 const QString RApplicationSettings::softwareSendUsageInfoKey = "cloud/softwareSendUsageInfo";
 const QString RApplicationSettings::softwareCheckUpdatesKey = "cloud/softwareCheckUpdates";
 const QString RApplicationSettings::proxyTypeKey = "proxy/proxyType";
@@ -300,6 +302,28 @@ void RApplicationSettings::setCloudSyncDataCachePath(const QString &cloudSyncDat
     emit this->cloudSyncDataCachePathChanged(cloudSyncDataCachePath);
 }
 
+bool RApplicationSettings::getCloudClientCertificateRenew() const
+{
+    return this->value(RApplicationSettings::cloudClientCertificateRenewKey,RApplicationSettings::getDefaultCloudClientCertificateRenew()).toBool();
+}
+
+void RApplicationSettings::setCloudClientCertificateRenew(bool cloudClientCertificateRenew)
+{
+    this->setValue(RApplicationSettings::cloudClientCertificateRenewKey, cloudClientCertificateRenew);
+    emit this->cloudClientCertificateRenewChanged(cloudClientCertificateRenew);
+}
+
+uint RApplicationSettings::getCloudClientCertificateExpiryDays() const
+{
+    return this->value(RApplicationSettings::cloudClientCertificateExpiryDaysKey,RApplicationSettings::getDefaultCloudClientCertificateExpiryDays()).toUInt();
+}
+
+void RApplicationSettings::setCloudClientCertificateExpiryDays(uint cloudClientCertificateExpiryDays)
+{
+    this->setValue(RApplicationSettings::cloudClientCertificateExpiryDaysKey, cloudClientCertificateExpiryDays);
+    emit this->cloudClientCertificateExpiryDaysChanged(cloudClientCertificateExpiryDays);
+}
+
 uint RApplicationSettings::getSoftwareSendUsageInfo() const
 {
     return this->value(RApplicationSettings::softwareSendUsageInfoKey,RApplicationSettings::getDefaultSoftwareSendUsageInfo()).toBool();
@@ -311,7 +335,7 @@ void RApplicationSettings::setSoftwareSendUsageInfo(bool cloudSendUsageInfo)
     emit this->cloudSendUsageInfoChanged(cloudSendUsageInfo);
 }
 
-uint RApplicationSettings::getSoftwareCheckUpdates() const
+bool RApplicationSettings::getSoftwareCheckUpdates() const
 {
     return this->value(RApplicationSettings::softwareCheckUpdatesKey,RApplicationSettings::getDefaultSoftwareCheckUpdates()).toBool();
 }
@@ -571,7 +595,7 @@ int RApplicationSettings::getDefaultToolbarIconSize()
 
 uint RApplicationSettings::getDefaultCloudRefreshTimeout()
 {
-    return 5000;
+    return 60000;
 }
 
 bool RApplicationSettings::getDefaultCloudSyncDataDirectory()
@@ -583,6 +607,16 @@ QString RApplicationSettings::getDefaultCloudSyncDataCachePath()
 {
     QDir tmpDir(RApplicationSettings::getTmpDir());
     return tmpDir.absoluteFilePath("cloud-sync-cache.json");
+}
+
+bool RApplicationSettings::getDefaultCloudClientCertificateRenew()
+{
+    return false;
+}
+
+uint RApplicationSettings::getDefaultCloudClientCertificateExpiryDays()
+{
+    return 30;
 }
 
 bool RApplicationSettings::getDefaultSoftwareSendUsageInfo()
@@ -646,4 +680,12 @@ QColor RApplicationSettings::getDefaultBackgroundColor(const QString &style)
     {
         return QColor(34,68,102);
     }
+}
+
+QString RApplicationSettings::buildFilePathWithTimestamp(const QString &filePath, const QDateTime &dateTime)
+{
+    QString timeStamp = dateTime.toString("yyyyMMdd_hhmmss");
+    QFileInfo fileInfo(filePath);
+    QDir fileDir(fileInfo.absolutePath());
+    return fileDir.absoluteFilePath(QString("%1-%2.%3").arg(timeStamp,fileInfo.baseName(),fileInfo.completeSuffix()));
 }

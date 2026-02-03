@@ -18,11 +18,11 @@
 
 #include <rcl_cloud_tool_action.h>
 #include <rcl_file_tools.h>
+#include <rcl_open_ssl_tool.h>
 
 #include "rgl_file_chooser_button.h"
 #include "rgl_message_box.h"
 #include "rgl_open_ssl_csr_dialog.h"
-#include "rgl_open_ssl_tool.h"
 
 ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
                                      const QString &openSslToolPath,

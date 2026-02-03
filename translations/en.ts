@@ -125,22 +125,60 @@
 <context>
     <name>RApplication</name>
     <message>
-        <location filename="../src/rgl_application.cpp" line="254"/>
+        <location filename="../src/rgl_application.cpp" line="419"/>
         <source>Application is already running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="508"/>
+        <location filename="../src/rgl_application.cpp" line="217"/>
+        <source>Cloud client certificate has expired.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="219"/>
+        <location filename="../src/rgl_application.cpp" line="247"/>
+        <source>Session name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="220"/>
+        <location filename="../src/rgl_application.cpp" line="248"/>
+        <source>Common name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="221"/>
+        <location filename="../src/rgl_application.cpp" line="249"/>
+        <source>Expiration date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="223"/>
+        <source>Certificate has expired</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="245"/>
+        <source>Cloud client certificate will soon expire.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="251"/>
+        <source>Certificate will expire</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="610"/>
         <source>Following software updates are available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="518"/>
+        <location filename="../src/rgl_application.cpp" line="620"/>
         <source>Would you like to open the software manager?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="520"/>
+        <location filename="../src/rgl_application.cpp" line="622"/>
         <source>Software updates available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,17 +186,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="542"/>
+        <location filename="../src/rgl_application_settings.cpp" line="564"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="543"/>
+        <location filename="../src/rgl_application_settings.cpp" line="565"/>
         <source>POSIX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="545"/>
+        <location filename="../src/rgl_application_settings.cpp" line="567"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -260,61 +298,66 @@
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="144"/>
+        <source>Renew client certificate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="149"/>
         <source>Software</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="150"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="155"/>
         <source>Send usage information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="155"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="160"/>
         <source>Check for software update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="165"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
         <source>Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="175"/>
         <source>Help directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="175"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="180"/>
         <source>OpenSSL tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="180"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="185"/>
         <source>OpenSSL configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="190"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="195"/>
         <source>Keyboard shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="271"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="278"/>
         <source>Language change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="271"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="278"/>
         <source>Language change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="277"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="284"/>
         <source>Format change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="277"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="284"/>
         <source>Format change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -790,7 +833,7 @@
     <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="73"/>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="111"/>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="392"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="363"/>
         <source>Certificate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -818,7 +861,7 @@
     </message>
     <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="96"/>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="333"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="304"/>
         <source>Private key</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1351,6 +1394,19 @@
     </message>
 </context>
 <context>
+    <name>ROpenSslCsrTask</name>
+    <message>
+        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="56"/>
+        <source>Failed to generate private key and CSR using OpenSSL tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="59"/>
+        <source>CSR generation failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RProxySettingsWidget</name>
     <message>
         <location filename="../src/rgl_proxy_settings_widget.cpp" line="14"/>
@@ -1507,17 +1563,17 @@
 <context>
     <name>RStyle</name>
     <message>
-        <location filename="../src/rgl_style.cpp" line="125"/>
+        <location filename="../src/rgl_style.cpp" line="43"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_style.cpp" line="129"/>
+        <location filename="../src/rgl_style.cpp" line="47"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_style.cpp" line="133"/>
+        <location filename="../src/rgl_style.cpp" line="51"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>

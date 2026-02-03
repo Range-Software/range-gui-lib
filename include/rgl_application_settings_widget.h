@@ -36,6 +36,7 @@ class RApplicationSettingsWidget : public QWidget
         RProxySettingsWidget *proxySettingsWidget;
         QSpinBox *cloudRefreshTimeoutSpin;
         QCheckBox *cloudSyncDataDirectoryCheckBox;
+        QCheckBox *cloudClientCertificateRenewCheckBox;
         QCheckBox *softwareSendUsageInfoCheckBox;
         QCheckBox *softwareCheckUpdatesCheckBox;
         QLineEdit *userFullNameEdit;
@@ -78,6 +79,9 @@ class RApplicationSettingsWidget : public QWidget
 
         //! Cloud sync data directory changed.
         void onCloudSyncDataDirectoryChanged(Qt::CheckState state);
+
+        //! Cloud renew client certificate changed.
+        void onCloudRenewClientCertificateChanged(Qt::CheckState state);
 
         //! Send software usage information.
         void onSoftwareSendUsageInfoChanged(Qt::CheckState state);

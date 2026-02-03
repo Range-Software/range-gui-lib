@@ -90,6 +90,17 @@ class RApplication : public QApplication
         //! Initialize main window and other user objects.
         virtual void finalize() = 0;
 
+    private:
+
+        //! Update files
+        void updateFiles();
+
+        //! Check cloud client certificate validity.
+        void validateCloudClientCertificate();
+
+        //! Send software usage report.
+        void sendUsageReport(const QString &logFile) const;
+
     signals:
 
         //! Application has started.
@@ -117,6 +128,12 @@ class RApplication : public QApplication
 
         //! Software is available.
         void onSoftwareAvailable(QList<RFileInfo> fileInfoList);
+
+        //! OpenSSL CSR task has finished.
+        void onOpenSslCsrTaskFinished(RCloudSessionInfo sessionInfo);
+
+        //! OpenSSL CSR task has failed.
+        void onOpenSslCsrTaskFailed(QString message);
 
 };
 

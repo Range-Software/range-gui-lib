@@ -59,6 +59,8 @@ class RApplicationSettings : public QSettings
         static const QString cloudRefreshTimeoutKey;
         static const QString cloudSyncDataDirectoryKey;
         static const QString cloudSyncDataCachePathKey;
+        static const QString cloudClientCertificateRenewKey;
+        static const QString cloudClientCertificateExpiryDaysKey;
         static const QString softwareSendUsageInfoKey;
         static const QString softwareCheckUpdatesKey;
         static const QString proxyTypeKey;
@@ -151,7 +153,7 @@ class RApplicationSettings : public QSettings
         //! Return format.
         Format getFormat() const;
 
-        //! Set newFormat.
+        //! Set new format.
         void setFormat(Format newFormat);
 
         //! Return toolbar icon size.
@@ -178,6 +180,18 @@ class RApplicationSettings : public QSettings
         //! Set cloud sync cache path.
         void setCloudSyncDataCachePath(const QString &cloudSyncDataCachePath);
 
+        //! Return cloud renew client certificate.
+        bool getCloudClientCertificateRenew() const;
+
+        //! Set cloud renew client certificate.
+        void setCloudClientCertificateRenew(bool cloudClientCertificateRenew);
+
+        //! Return number of days when to warn about expiration of cloud client certificate.
+        uint getCloudClientCertificateExpiryDays() const;
+
+        //! Set number of days when to warn about expiration of cloud client certificate.
+        void setCloudClientCertificateExpiryDays(uint cloudClientCertificateExpiryDays);
+
         //! Return software send usage information.
         uint getSoftwareSendUsageInfo() const;
 
@@ -185,7 +199,7 @@ class RApplicationSettings : public QSettings
         void setSoftwareSendUsageInfo(bool cloudSendUsageInfo);
 
         //! Return whether to check for software updates.
-        uint getSoftwareCheckUpdates() const;
+        bool getSoftwareCheckUpdates() const;
 
         //! Set to check for software updates.
         void setSoftwareCheckUpdates(bool checkSoftwareUpdates);
@@ -307,6 +321,12 @@ class RApplicationSettings : public QSettings
         //! Return default cloud sync data cache path.
         static QString getDefaultCloudSyncDataCachePath();
 
+        //! Return default cloud renew client certificate.
+        static bool getDefaultCloudClientCertificateRenew();
+
+        //! Return default number of days when to warn about expiration of cloud client certificate.
+        static uint getDefaultCloudClientCertificateExpiryDays();
+
         //! Return default cloud send usage information.
         static bool getDefaultSoftwareSendUsageInfo();
 
@@ -333,6 +353,9 @@ class RApplicationSettings : public QSettings
 
         //! Return default background color for style.
         static QColor getDefaultBackgroundColor(const QString &style);
+
+        //! Build filename containing timespamp (path/file.ext -> path/file-timestamp.ext)
+        static QString buildFilePathWithTimestamp(const QString &filePath, const QDateTime &dateTime);
 
     signals:
 
@@ -362,6 +385,12 @@ class RApplicationSettings : public QSettings
 
         //! Cloud sync data directory has changed.
         void cloudSyncDataCachePathChanged(const QString &cloudSyncDataCachePath);
+
+        //! Cloud renew client certificate changed.
+        void cloudClientCertificateRenewChanged(bool cloudClientCertificateRenew);
+
+        //! Number of days when to warn about expiration of cloud client certificate changed.
+        void cloudClientCertificateExpiryDaysChanged(bool cloudClientCertificateExpiryDays);
 
         //! Cloud send usage information has changed.
         void cloudSendUsageInfoChanged(bool cloudSenfUsageInfoChanged);

@@ -44,8 +44,6 @@ qt_add_library(range-gui-lib
         src/rgl_logger_handler.cpp
         src/rgl_message_box.cpp
         src/rgl_open_ssl_csr_dialog.cpp
-        src/rgl_open_ssl_tool.cpp
-        src/rgl_open_ssl_tool_settings.cpp
         src/rgl_progress_bar.cpp
         src/rgl_progress_dialog.cpp
         src/rgl_progress_handler.cpp
@@ -96,8 +94,6 @@ qt_add_library(range-gui-lib
         include/rgl_logger_handler.h
         include/rgl_message_box.h
         include/rgl_open_ssl_csr_dialog.h
-        include/rgl_open_ssl_tool.h
-        include/rgl_open_ssl_tool_settings.h
         include/rgl_progress_bar.h
         include/rgl_progress_dialog.h
         include/rgl_progress_handler.h
@@ -110,6 +106,7 @@ qt_add_library(range-gui-lib
         include/rgl_text_browser.h
         include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
+        include/rgl_open_ssl_csr_task.h src/rgl_open_ssl_csr_task.cpp
 )
 
 # Include directories
