@@ -134,7 +134,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
 
     cloudLayout->addWidget(new QLabel(tr("Refresh timeout") + ":"),0,0,1,1);
     cloudLayout->addWidget(this->cloudRefreshTimeoutSpin,0,1,1,1);
-    cloudLayout->addWidget(new QLabel("[seconds]"),0,2,1,1);
+    cloudLayout->addWidget(new QLabel("[" + tr("seconds") + "]"),0,2,1,1);
 
     this->cloudSyncDataDirectoryCheckBox = new QCheckBox(tr("Synchronize data directory"));
     this->cloudSyncDataDirectoryCheckBox->setChecked(this->applicationSettings->getCloudSyncDataDirectory());
@@ -145,6 +145,14 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->cloudClientCertificateRenewCheckBox->setChecked(this->applicationSettings->getCloudClientCertificateRenew());
 
     cloudLayout->addWidget(this->cloudClientCertificateRenewCheckBox,2,0,1,3);
+
+    this->cloudClientCertificateExpiryDaysSpin = new QSpinBox;
+    this->cloudClientCertificateExpiryDaysSpin->setRange(0,INT_MAX);
+    this->cloudClientCertificateExpiryDaysSpin->setValue(this->applicationSettings->getCloudClientCertificateExpiryDays());
+
+    cloudLayout->addWidget(new QLabel(tr("Days before exipiry") + ":"),3,0,1,1);
+    cloudLayout->addWidget(this->cloudClientCertificateExpiryDaysSpin,3,1,1,1);
+    cloudLayout->addWidget(new QLabel("[" + tr("days") + "]"),3,2,1,1);
 
     QGroupBox *softwareGroupBox = new QGroupBox(tr("Software"));
     networkLayout->addWidget(softwareGroupBox);
@@ -207,7 +215,8 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->proxySettingsWidget,&RProxySettingsWidget::proxyChanged,this,&RApplicationSettingsWidget::onProxyChanged);
     QObject::connect(this->cloudRefreshTimeoutSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudRefreshTimeoutChanged);
     QObject::connect(this->cloudSyncDataDirectoryCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudSyncDataDirectoryChanged);
-    QObject::connect(this->cloudClientCertificateRenewCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudRenewClientCertificateChanged);
+    QObject::connect(this->cloudClientCertificateRenewCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudClientCertificateRenewChanged);
+    QObject::connect(this->cloudClientCertificateExpiryDaysSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudClientCertificateExpiryDaysChanged);
     QObject::connect(this->softwareSendUsageInfoCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged);
     QObject::connect(this->softwareCheckUpdatesCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged);
     QObject::connect(this->userFullNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onUserFullNameChanged);
@@ -299,9 +308,14 @@ void RApplicationSettingsWidget::onCloudSyncDataDirectoryChanged(Qt::CheckState 
     this->applicationSettings->setCloudSyncDataDirectory(state == Qt::Checked);
 }
 
-void RApplicationSettingsWidget::onCloudRenewClientCertificateChanged(Qt::CheckState state)
+void RApplicationSettingsWidget::onCloudClientCertificateRenewChanged(Qt::CheckState state)
 {
     this->applicationSettings->setCloudClientCertificateRenew(state == Qt::Checked);
+}
+
+void RApplicationSettingsWidget::onCloudClientCertificateExpiryDaysChanged(int cloudClientCertificateExpiryDays)
+{
+    this->applicationSettings->setCloudClientCertificateExpiryDays(cloudClientCertificateExpiryDays);
 }
 
 void RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged(Qt::CheckState state)

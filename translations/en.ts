@@ -292,6 +292,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="137"/>
+        <source>seconds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="139"/>
         <source>Synchronize data directory</source>
         <translation type="unfinished"></translation>
@@ -302,62 +307,72 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="149"/>
-        <source>Software</source>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="153"/>
+        <source>Days before exipiry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="155"/>
+        <source>days</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="157"/>
+        <source>Software</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="163"/>
         <source>Send usage information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="160"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="168"/>
         <source>Check for software update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="178"/>
         <source>Paths</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="175"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="183"/>
         <source>Help directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="180"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="188"/>
         <source>OpenSSL tool</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="185"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="193"/>
         <source>OpenSSL configuration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="195"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="203"/>
         <source>Keyboard shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="278"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="287"/>
         <source>Language change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="278"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="287"/>
         <source>Language change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="284"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="293"/>
         <source>Format change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="284"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="293"/>
         <source>Format change requires an application restart.</source>
         <translation type="unfinished"></translation>
     </message>
