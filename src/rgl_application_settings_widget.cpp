@@ -150,7 +150,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->cloudClientCertificateExpiryDaysSpin->setRange(0,INT_MAX);
     this->cloudClientCertificateExpiryDaysSpin->setValue(this->applicationSettings->getCloudClientCertificateExpiryDays());
 
-    cloudLayout->addWidget(new QLabel(tr("Days before exipiry") + ":"),3,0,1,1);
+    cloudLayout->addWidget(new QLabel(tr("Days before expiry") + ":"),3,0,1,1);
     cloudLayout->addWidget(this->cloudClientCertificateExpiryDaysSpin,3,1,1,1);
     cloudLayout->addWidget(new QLabel("[" + tr("days") + "]"),3,2,1,1);
 

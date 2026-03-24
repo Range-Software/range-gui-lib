@@ -16,7 +16,7 @@ RKeyboardShortcutsEditorWidget::RKeyboardShortcutsEditorWidget(const RActionList
     QVBoxLayout *topLayout = new QVBoxLayout;
     this->setLayout(topLayout);
 
-    QGroupBox *keyboardShortcutsBox = new QGroupBox(tr("Keayboard Shortcuts"));
+    QGroupBox *keyboardShortcutsBox = new QGroupBox(tr("Keyboard Shortcuts"));
     topLayout->addWidget(keyboardShortcutsBox);
 
     QGridLayout *keyboardShortcutsLayout = new QGridLayout;
@@ -184,7 +184,7 @@ void RKeyboardShortcutsEditorWidget::onShortcutChanged(const QString &shortcut)
 
             QString question = tr("Shortcut")
                              + " <b>" + shortcut + "</b> "
-                             + tr("is already assigned to action")
+                             + tr("is already assigned to")
                              + previousActions
                              + QString(".<br/>")
                              + tr("Are you sure you want to reassign this shortcut?");

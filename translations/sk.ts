@@ -308,7 +308,7 @@
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="153"/>
-        <source>Days before exipiry</source>
+        <source>Days before expiry</source>
         <translation>Doba do vypršania</translation>
     </message>
     <message>
@@ -1132,7 +1132,7 @@
     <name>RKeyboardShortcutsEditorWidget</name>
     <message>
         <location filename="../src/rgl_keyboard_shortcuts_editor_widget.cpp" line="19"/>
-        <source>Keayboard Shortcuts</source>
+        <source>Keyboard Shortcuts</source>
         <translation>Klávesové skratky</translation>
     </message>
     <message>
@@ -1148,8 +1148,8 @@
     </message>
     <message>
         <location filename="../src/rgl_keyboard_shortcuts_editor_widget.cpp" line="187"/>
-        <source>is already assigned to action</source>
-        <translation>už je priradená k akcii</translation>
+        <source>is already assigned to</source>
+        <translation>už je priradená k</translation>
     </message>
     <message>
         <location filename="../src/rgl_keyboard_shortcuts_editor_widget.cpp" line="190"/>
