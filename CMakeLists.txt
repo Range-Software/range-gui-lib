@@ -11,6 +11,7 @@ qt_add_library(range-gui-lib
         src/rgl_access_owner_dialog.cpp
         src/rgl_action.cpp
         src/rgl_action_list.cpp
+        src/rgl_ai_agent_settings_widget.cpp
         src/rgl_application.cpp
         src/rgl_application_settings.cpp
         src/rgl_application_settings_dialog.cpp
@@ -61,6 +62,7 @@ qt_add_library(range-gui-lib
         include/rgl_access_owner_dialog.h
         include/rgl_action.h
         include/rgl_action_list.h
+        include/rgl_ai_agent_settings_widget.h
         include/rgl_application.h
         include/rgl_application_settings.h
         include/rgl_application_settings_dialog.h
@@ -107,6 +109,7 @@ qt_add_library(range-gui-lib
         include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
         include/rgl_open_ssl_csr_task.h src/rgl_open_ssl_csr_task.cpp
+        include/rgl_ai_agent_settings_list.h src/rgl_ai_agent_settings_list.cpp
 )
 
 # Include directories
@@ -118,6 +121,7 @@ target_include_directories(range-gui-lib
 target_link_libraries(range-gui-lib
     PUBLIC
         range-cloud-lib
+        range-ai-lib
         Qt6::Widgets
         common_defines
 )
