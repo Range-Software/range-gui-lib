@@ -13,6 +13,19 @@ RTextBrowser::RTextBrowser(bool hasClearButton, QWidget *parent)
         QIcon clearIcon(":/icons/action/pixmaps/range-clear.svg");
 
         this->clearButton = new QPushButton(clearIcon,"Clear",this);
+        this->clearButton->setAutoDefault(false);
+        this->clearButton->setStyleSheet(
+            "QPushButton {"
+            "   background-color: rgba(128, 128, 128, 60);"
+            "   border: none;"
+            "   border-radius: 4px;"
+            "   color: rgba(255, 255, 255, 100);"
+            "}"
+            "QPushButton:hover {"
+            "   background-color: rgba(128, 128, 128, 180);"
+            "   color: rgba(255, 255, 255, 255);"
+            "}"
+        );
 
         QObject::connect(this->clearButton,
                          &QPushButton::clicked,
