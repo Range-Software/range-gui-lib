@@ -17,11 +17,17 @@ class RAiAgentSettingsWidget : public QWidget
     public:
 
         //! Constructor.
-        explicit RAiAgentSettingsWidget(const RAgentSettings &settings, QWidget *parent = nullptr);
+        explicit RAiAgentSettingsWidget(const RAgentSettings &agentSettings, QWidget *parent = nullptr);
+
+    public slots:
+
+        //! Set new agentSettings.
+        void setSettings(const RAgentSettings &agentSettings);
 
     signals:
 
-        void settigsChanged(const RAgentSettings &settings);
+        void settigsChanged(const RAgentSettings &agentSettings);
+        void settigsAvailable(const RAgentSettings &agentSettings);
 
 };
 

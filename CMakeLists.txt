@@ -109,7 +109,9 @@ qt_add_library(range-gui-lib
         include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
         include/rgl_open_ssl_csr_task.h src/rgl_open_ssl_csr_task.cpp
-        include/rgl_ai_agent_settings_list.h src/rgl_ai_agent_settings_list.cpp
+        include/rgl_ai_agent_settings_list_widget.h src/rgl_ai_agent_settings_list_widget.cpp
+        include/rgl_ai_agent_settings_manager_widget.h src/rgl_ai_agent_settings_manager_widget.cpp
+        include/rgl_ai_agent_settings_manager_dialog.h src/rgl_ai_agent_settings_manager_dialog.cpp
 )
 
 # Include directories

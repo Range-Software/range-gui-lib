@@ -17,6 +17,7 @@ const QString RApplicationSettings::Language::Sk::Code = "sk";
 const QString RApplicationSettings::Language::Sk::Name = "Slovensky";
 
 const QString RApplicationSettings::cloudSessionFileName("cloudSession.json");
+const QString RApplicationSettings::aiAgentSettingsFileName("aiAgentSettings.json");
 const QString RApplicationSettings::logFileName("application.log");
 const QString RApplicationSettings::licenseFileName("LICENSE.txt");
 const QString RApplicationSettings::releaseNotesFileName("RELEASE_NOTES.txt");
@@ -62,6 +63,11 @@ void RApplicationSettings::setDirApplicationPath(const QString &applicationPath)
 QString RApplicationSettings::getCloudSessionFileName() const
 {
     return this->getSessionDir() + QDir::separator() + RApplicationSettings::cloudSessionFileName;
+}
+
+QString RApplicationSettings::getAiAgentSettingsFileName() const
+{
+    return this->getSessionDir() + QDir::separator() + RApplicationSettings::aiAgentSettingsFileName;
 }
 
 QString RApplicationSettings::getLogFileName() const
