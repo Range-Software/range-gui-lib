@@ -6,6 +6,8 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
 #include <QPushButton>
 
 RAiAgentSettingsWidget::RAiAgentSettingsWidget(const RAgentSettings &agentSettings, QWidget *parent)
@@ -39,7 +41,25 @@ RAiAgentSettingsWidget::RAiAgentSettingsWidget(const RAgentSettings &agentSettin
     QLineEdit *modelEdit = new QLineEdit;
     formLayout->addRow(tr("Model"),modelEdit);
 
-    auto setSettingsValues = [this,typeCombo,apiKeyEdit,apiUrlEdit,modelEdit](const RAgentSettings &agentSettings)
+    QDoubleSpinBox *temperatureSpin = new QDoubleSpinBox;
+    temperatureSpin->setRange(0.0,1.0);
+    temperatureSpin->setSingleStep(0.1);
+    formLayout->addRow(tr("Temperature"),temperatureSpin);
+
+    QSpinBox *maxTokensSpin = new QSpinBox;
+    maxTokensSpin->setRange(1000,1000000);
+    formLayout->addRow(tr("Max tokens"),maxTokensSpin);
+
+    QSpinBox *timeoutSpin = new QSpinBox;
+    timeoutSpin->setRange(1,3600);
+    timeoutSpin->setSuffix(" seconds");
+    formLayout->addRow(tr("Timeout"),timeoutSpin);
+
+    QSpinBox *retryCountSpin = new QSpinBox;
+    retryCountSpin->setRange(1,10);
+    formLayout->addRow(tr("Retries"),retryCountSpin);
+
+    auto setSettingsValues = [this,typeCombo,apiKeyEdit,apiUrlEdit,modelEdit,temperatureSpin,maxTokensSpin,timeoutSpin,retryCountSpin](const RAgentSettings &agentSettings)
     {
         this->settings = agentSettings;
 
@@ -53,10 +73,18 @@ RAiAgentSettingsWidget::RAiAgentSettingsWidget(const RAgentSettings &agentSettin
         apiKeyEdit->setText(agentSettings.getApiKey());
         apiUrlEdit->setText(agentSettings.getApiUrl());
         modelEdit->setText(agentSettings.getModel());
+        temperatureSpin->setValue(agentSettings.getTemperature());
+        maxTokensSpin->setValue(agentSettings.getMaxTokens());
+        timeoutSpin->setValue(agentSettings.getTimeout()/1000);
+        retryCountSpin->setValue(agentSettings.getRetryCount());
 
         apiKeyEdit->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
         apiUrlEdit->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
         modelEdit->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
+        temperatureSpin->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
+        maxTokensSpin->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
+        timeoutSpin->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
+        retryCountSpin->setDisabled(agentSettings.getType() == RAgentSettings::Type::None);
     };
 
     setSettingsValues(this->settings);
@@ -85,6 +113,21 @@ RAiAgentSettingsWidget::RAiAgentSettingsWidget(const RAgentSettings &agentSettin
 
     QObject::connect(modelEdit,&QLineEdit::textChanged,[this](const QString &text) {
         this->settings.setModel(text);
+        emit this->settigsChanged(this->settings);
+    });
+
+    QObject::connect(maxTokensSpin,&QSpinBox::valueChanged,[this](int value) {
+        this->settings.setMaxTokens(value);
+        emit this->settigsChanged(this->settings);
+    });
+
+    QObject::connect(timeoutSpin,&QSpinBox::valueChanged,[this](int value) {
+        this->settings.setTimeout(value*1000);
+        emit this->settigsChanged(this->settings);
+    });
+
+    QObject::connect(retryCountSpin,&QSpinBox::valueChanged,[this](int value) {
+        this->settings.setRetryCount(value);
         emit this->settigsChanged(this->settings);
     });
 }

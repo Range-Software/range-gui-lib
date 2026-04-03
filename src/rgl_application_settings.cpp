@@ -75,7 +75,7 @@ QString RApplicationSettings::getLogFileName() const
     return this->getLogDir() + QDir::separator() + RApplicationSettings::logFileName;
 }
 
-QString RApplicationSettings::findLicenseFileName() const
+QString RApplicationSettings::findDocFileName(const QString baseName) const
 {
     QDir dir(this->applicationDirPath);
     dir.cdUp();
@@ -83,18 +83,17 @@ QString RApplicationSettings::findLicenseFileName() const
     dir.cd("Resources");
 #endif
     dir.cd("doc");
-    return dir.filePath(RApplicationSettings::licenseFileName);
+    return dir.filePath(baseName);
+}
+
+QString RApplicationSettings::findLicenseFileName() const
+{
+    return this->findDocFileName(RApplicationSettings::licenseFileName);
 }
 
 QString RApplicationSettings::findReleaseNotesFileName() const
 {
-    QDir dir(this->applicationDirPath);
-    dir.cdUp();
-#ifdef Q_OS_DARWIN
-    dir.cd("Resources");
-#endif
-    dir.cd("doc");
-    return dir.filePath(RApplicationSettings::releaseNotesFileName);
+    return this->findDocFileName(RApplicationSettings::releaseNotesFileName);
 }
 
 QString RApplicationSettings::findOpensslConfPath() const

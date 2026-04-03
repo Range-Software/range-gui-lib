@@ -1,9 +1,7 @@
-#include <QFile>
-
 #include <rbl_error.h>
+#include <rbl_file_tools.h>
 #include <rbl_logger.h>
 
-#include <rcl_file_tools.h>
 #include <rcl_open_ssl_tool.h>
 
 #include "rgl_open_ssl_csr_task.h"
@@ -39,16 +37,11 @@ ROpenSslCsrTask::ROpenSslCsrTask(RApplicationSettings *applicationSettings,
         openSslTool.generateKey(this->clientKeyStore.getKeyFile(),this->clientKeyStore.getPassword());
         RLogger::info("Generating CSR \"%s\"\n",this->clientCsrFile.toUtf8().constData());
         openSslTool.generateCsr(this->clientKeyStore.getKeyFile(),this->clientKeyStore.getPassword(),oldClientCertificateFile,this->clientCsrFile);
-
-        QFile csrFile(this->clientCsrFile);
-        if (!csrFile.open(QIODevice::ReadOnly))
+        RLogger::debug("Reading CSR from \"%s\"\n",this->clientCsrFile.toUtf8().constData());
+        if (!RFileTools::writeBinaryFile(this->clientCsrFile,csrContent))
         {
             throw RError(RError::ReadFile,R_ERROR_REF, "Couldn't open SSL csr file \"%s\" for reading.\n", this->clientCsrFile.toUtf8().constData());
         }
-
-        RLogger::debug("Reading CSR from \"%s\"\n",this->clientCsrFile.toUtf8().constData());
-        csrContent = csrFile.readAll();
-        csrFile.close();
     }
     catch (const RError &error)
     {

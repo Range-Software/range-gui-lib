@@ -98,6 +98,9 @@ class RApplicationSettings : public QSettings
         //! Return log file name.
         QString getLogFileName() const;
 
+        //! Return document file name.
+        QString findDocFileName(const QString baseName) const;
+
         //! Return license file name.
         QString findLicenseFileName() const;
 

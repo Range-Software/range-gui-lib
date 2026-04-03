@@ -19,11 +19,9 @@ RTextBrowser::RTextBrowser(bool hasClearButton, QWidget *parent)
             "   background-color: rgba(128, 128, 128, 60);"
             "   border: none;"
             "   border-radius: 4px;"
-            "   color: rgba(255, 255, 255, 100);"
             "}"
             "QPushButton:hover {"
             "   background-color: rgba(128, 128, 128, 180);"
-            "   color: rgba(255, 255, 255, 255);"
             "}"
         );
 
