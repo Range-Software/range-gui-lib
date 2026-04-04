@@ -116,6 +116,11 @@ RAiAgentSettingsWidget::RAiAgentSettingsWidget(const RAgentSettings &agentSettin
         emit this->settigsChanged(this->settings);
     });
 
+    QObject::connect(temperatureSpin,&QDoubleSpinBox::valueChanged,[this](double value) {
+        this->settings.setTemperature(value);
+        emit this->settigsChanged(this->settings);
+    });
+
     QObject::connect(maxTokensSpin,&QSpinBox::valueChanged,[this](int value) {
         this->settings.setMaxTokens(value);
         emit this->settigsChanged(this->settings);
