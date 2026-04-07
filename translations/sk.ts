@@ -123,62 +123,151 @@
     </message>
 </context>
 <context>
+    <name>RAiAgentSettingsListWidget</name>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="41"/>
+        <source>Add</source>
+        <translation>Prodať</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="44"/>
+        <source>Remove</source>
+        <translation>Odstrániť</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="84"/>
+        <source>Invalid name</source>
+        <translation>Neplatné meno</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="84"/>
+        <source>Suggested name already exists in the list.</source>
+        <translation>Navrhnuté menu sa v zozname už vyskytuje.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="95"/>
+        <source>New AI agent</source>
+        <translation>Nový AI agent</translation>
+    </message>
+</context>
+<context>
+    <name>RAiAgentSettingsManagerDialog</name>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_manager_dialog.cpp" line="14"/>
+        <source>AI agents settings</source>
+        <translation>Nastavenia AI agentov</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_manager_dialog.cpp" line="25"/>
+        <source>Close</source>
+        <translation>Zatvoriť</translation>
+    </message>
+</context>
+<context>
+    <name>RAiAgentSettingsWidget</name>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="23"/>
+        <source>API type</source>
+        <translation>API typ</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="32"/>
+        <source>Reset</source>
+        <translation>Obnoviť</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="36"/>
+        <source>API key</source>
+        <translation>API kľúč</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="39"/>
+        <source>URL</source>
+        <translation>URL</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="42"/>
+        <source>Model</source>
+        <translation>Model</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="47"/>
+        <source>Temperature</source>
+        <translation>Teplota</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="51"/>
+        <source>Max tokens</source>
+        <translation>Max. počet tokenov</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="56"/>
+        <source>Timeout</source>
+        <translation>Časový limit</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="60"/>
+        <source>Retries</source>
+        <translation>Pokusy</translation>
+    </message>
+</context>
+<context>
     <name>RApplication</name>
     <message>
-        <location filename="../src/rgl_application.cpp" line="419"/>
+        <location filename="../src/rgl_application.cpp" line="429"/>
         <source>Application is already running</source>
         <translation>Aplikácia už beží</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="217"/>
+        <location filename="../src/rgl_application.cpp" line="227"/>
         <source>Cloud client certificate has expired.</source>
         <translation>Platnosť clientského certifikátu pre Cloud vypršala.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="219"/>
-        <location filename="../src/rgl_application.cpp" line="247"/>
+        <location filename="../src/rgl_application.cpp" line="229"/>
+        <location filename="../src/rgl_application.cpp" line="257"/>
         <source>Session name</source>
         <translation>Meno relácie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="220"/>
-        <location filename="../src/rgl_application.cpp" line="248"/>
+        <location filename="../src/rgl_application.cpp" line="230"/>
+        <location filename="../src/rgl_application.cpp" line="258"/>
         <source>Common name</source>
         <translation>Bežný názov</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="221"/>
-        <location filename="../src/rgl_application.cpp" line="249"/>
+        <location filename="../src/rgl_application.cpp" line="231"/>
+        <location filename="../src/rgl_application.cpp" line="259"/>
         <source>Expiration date</source>
         <translation>Dátum expirácie</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="223"/>
+        <location filename="../src/rgl_application.cpp" line="233"/>
         <source>Certificate has expired</source>
         <translation>Platnosť certifikátu vypršala</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="245"/>
+        <location filename="../src/rgl_application.cpp" line="255"/>
         <source>Cloud client certificate will soon expire.</source>
         <translation>Platnosť clientského certifikátu pre Cloud čoskoro vyprší.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="251"/>
+        <location filename="../src/rgl_application.cpp" line="261"/>
         <source>Certificate will expire</source>
         <translation>Platnosť certifikátu vyprší</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="610"/>
+        <location filename="../src/rgl_application.cpp" line="646"/>
         <source>Following software updates are available</source>
         <translation>Sú dostupné následujúce aktualizácie softvéru</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="620"/>
+        <location filename="../src/rgl_application.cpp" line="656"/>
         <source>Would you like to open the software manager?</source>
         <translation>Otvoriť správcu softvéru?</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="622"/>
+        <location filename="../src/rgl_application.cpp" line="658"/>
         <source>Software updates available</source>
         <translation>Sú dostupné aktualizácie softvéru</translation>
     </message>
@@ -186,17 +275,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="564"/>
+        <location filename="../src/rgl_application_settings.cpp" line="569"/>
         <source>Language</source>
         <translation>Jazyk</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="565"/>
+        <location filename="../src/rgl_application_settings.cpp" line="570"/>
         <source>POSIX</source>
         <translation>POSIX</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="567"/>
+        <location filename="../src/rgl_application_settings.cpp" line="572"/>
         <source>System</source>
         <translation>Nastavenia systému</translation>
     </message>
@@ -1411,12 +1500,12 @@
 <context>
     <name>ROpenSslCsrTask</name>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="56"/>
+        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="49"/>
         <source>Failed to generate private key and CSR using OpenSSL tool.</source>
         <translation>Vytvorenie súkromného kľúča a CSR pomocou OpenSSL nástroja zlyhalo.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="59"/>
+        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="52"/>
         <source>CSR generation failed</source>
         <translation>Vytvorenie CSR zlyhalo</translation>
     </message>

@@ -123,62 +123,151 @@
     </message>
 </context>
 <context>
+    <name>RAiAgentSettingsListWidget</name>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="41"/>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="44"/>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="84"/>
+        <source>Invalid name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="84"/>
+        <source>Suggested name already exists in the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="95"/>
+        <source>New AI agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RAiAgentSettingsManagerDialog</name>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_manager_dialog.cpp" line="14"/>
+        <source>AI agents settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_manager_dialog.cpp" line="25"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RAiAgentSettingsWidget</name>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="23"/>
+        <source>API type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="32"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="36"/>
+        <source>API key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="39"/>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="42"/>
+        <source>Model</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="47"/>
+        <source>Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="51"/>
+        <source>Max tokens</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="56"/>
+        <source>Timeout</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_agent_settings_widget.cpp" line="60"/>
+        <source>Retries</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RApplication</name>
     <message>
-        <location filename="../src/rgl_application.cpp" line="419"/>
+        <location filename="../src/rgl_application.cpp" line="429"/>
         <source>Application is already running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="217"/>
+        <location filename="../src/rgl_application.cpp" line="227"/>
         <source>Cloud client certificate has expired.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="219"/>
-        <location filename="../src/rgl_application.cpp" line="247"/>
+        <location filename="../src/rgl_application.cpp" line="229"/>
+        <location filename="../src/rgl_application.cpp" line="257"/>
         <source>Session name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="220"/>
-        <location filename="../src/rgl_application.cpp" line="248"/>
+        <location filename="../src/rgl_application.cpp" line="230"/>
+        <location filename="../src/rgl_application.cpp" line="258"/>
         <source>Common name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="221"/>
-        <location filename="../src/rgl_application.cpp" line="249"/>
+        <location filename="../src/rgl_application.cpp" line="231"/>
+        <location filename="../src/rgl_application.cpp" line="259"/>
         <source>Expiration date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="223"/>
+        <location filename="../src/rgl_application.cpp" line="233"/>
         <source>Certificate has expired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="245"/>
+        <location filename="../src/rgl_application.cpp" line="255"/>
         <source>Cloud client certificate will soon expire.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="251"/>
+        <location filename="../src/rgl_application.cpp" line="261"/>
         <source>Certificate will expire</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="610"/>
+        <location filename="../src/rgl_application.cpp" line="646"/>
         <source>Following software updates are available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="620"/>
+        <location filename="../src/rgl_application.cpp" line="656"/>
         <source>Would you like to open the software manager?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="622"/>
+        <location filename="../src/rgl_application.cpp" line="658"/>
         <source>Software updates available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -186,17 +275,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="564"/>
+        <location filename="../src/rgl_application_settings.cpp" line="569"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="565"/>
+        <location filename="../src/rgl_application_settings.cpp" line="570"/>
         <source>POSIX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="567"/>
+        <location filename="../src/rgl_application_settings.cpp" line="572"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1411,12 +1500,12 @@
 <context>
     <name>ROpenSslCsrTask</name>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="56"/>
+        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="49"/>
         <source>Failed to generate private key and CSR using OpenSSL tool.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="59"/>
+        <location filename="../src/rgl_open_ssl_csr_task.cpp" line="52"/>
         <source>CSR generation failed</source>
         <translation type="unfinished"></translation>
     </message>
