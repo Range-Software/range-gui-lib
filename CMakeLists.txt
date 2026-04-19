@@ -11,7 +11,11 @@ qt_add_library(range-gui-lib
         src/rgl_access_owner_dialog.cpp
         src/rgl_action.cpp
         src/rgl_action_list.cpp
+        src/rgl_ai_agent_settings_list_widget.cpp
+        src/rgl_ai_agent_settings_manager_dialog.cpp
+        src/rgl_ai_agent_settings_manager_widget.cpp
         src/rgl_ai_agent_settings_widget.cpp
+        src/rgl_ai_chat_widget.cpp
         src/rgl_application.cpp
         src/rgl_application_settings.cpp
         src/rgl_application_settings_dialog.cpp
@@ -45,6 +49,7 @@ qt_add_library(range-gui-lib
         src/rgl_logger_handler.cpp
         src/rgl_message_box.cpp
         src/rgl_open_ssl_csr_dialog.cpp
+        src/rgl_open_ssl_csr_task.cpp
         src/rgl_progress_bar.cpp
         src/rgl_progress_dialog.cpp
         src/rgl_progress_handler.cpp
@@ -62,7 +67,11 @@ qt_add_library(range-gui-lib
         include/rgl_access_owner_dialog.h
         include/rgl_action.h
         include/rgl_action_list.h
+        include/rgl_ai_agent_settings_list_widget.h
+        include/rgl_ai_agent_settings_manager_dialog.h
+        include/rgl_ai_agent_settings_manager_widget.h
         include/rgl_ai_agent_settings_widget.h
+        include/rgl_ai_chat_widget.h
         include/rgl_application.h
         include/rgl_application_settings.h
         include/rgl_application_settings_dialog.h
@@ -96,6 +105,7 @@ qt_add_library(range-gui-lib
         include/rgl_logger_handler.h
         include/rgl_message_box.h
         include/rgl_open_ssl_csr_dialog.h
+        include/rgl_open_ssl_csr_task.h
         include/rgl_progress_bar.h
         include/rgl_progress_dialog.h
         include/rgl_progress_handler.h
@@ -108,10 +118,6 @@ qt_add_library(range-gui-lib
         include/rgl_text_browser.h
         include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
-        include/rgl_open_ssl_csr_task.h src/rgl_open_ssl_csr_task.cpp
-        include/rgl_ai_agent_settings_list_widget.h src/rgl_ai_agent_settings_list_widget.cpp
-        include/rgl_ai_agent_settings_manager_widget.h src/rgl_ai_agent_settings_manager_widget.cpp
-        include/rgl_ai_agent_settings_manager_dialog.h src/rgl_ai_agent_settings_manager_dialog.cpp
 )
 
 # Include directories

@@ -212,6 +212,45 @@
     </message>
 </context>
 <context>
+    <name>RAiChatWidget</name>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="88"/>
+        <source>AI agent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="125"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="134"/>
+        <source>Ask your question an press Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="138"/>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="163"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="195"/>
+        <source>Waiting for an answer ... </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="218"/>
+        <source>Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="263"/>
+        <source>AI</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RApplication</name>
     <message>
         <location filename="../src/rgl_application.cpp" line="429"/>
