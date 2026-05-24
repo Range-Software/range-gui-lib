@@ -110,6 +110,9 @@ class RApplicationSettings : public QSettings
         //! Return openssl.cnf file name.
         QString findOpensslConfPath() const;
 
+        //! Return resources/doc directory path.
+        QString findDocDir() const;
+
         //! Return resources/etc directory path.
         QString findEtcDir() const;
 

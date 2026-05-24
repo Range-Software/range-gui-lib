@@ -77,12 +77,7 @@ QString RApplicationSettings::getLogFileName() const
 
 QString RApplicationSettings::findDocFileName(const QString baseName) const
 {
-    QDir dir(this->applicationDirPath);
-    dir.cdUp();
-#ifdef Q_OS_DARWIN
-    dir.cd("Resources");
-#endif
-    dir.cd("doc");
+    QDir dir(this->findDocDir());
     return dir.filePath(baseName);
 }
 
@@ -100,6 +95,16 @@ QString RApplicationSettings::findOpensslConfPath() const
 {
     QDir dir(this->findEtcDir());
     return dir.filePath(RApplicationSettings::opensslCnfFileName);
+}
+
+QString RApplicationSettings::findDocDir() const
+{
+    QDir dir(this->applicationDirPath);
+    dir.cdUp();
+#ifdef Q_OS_DARWIN
+    dir.cd("Resources");
+#endif
+    return dir.filePath("doc");
 }
 
 QString RApplicationSettings::findEtcDir() const

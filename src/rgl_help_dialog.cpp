@@ -1,12 +1,11 @@
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <QTabWidget>
 #include <QDialogButtonBox>
 #include <QDir>
 
+#include "rgl_application.h"
 #include "rgl_help_dialog.h"
 #include "rgl_help_document_widget.h"
-#include "rgl_application.h"
 #include "rgl_help_actions_widget.h"
 
 RHelpDialog::RHelpDialog(const QString &title, const QMap<QString, QString> &topics, QWidget *parent)

@@ -118,6 +118,7 @@ qt_add_library(range-gui-lib
         include/rgl_text_browser.h
         include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
+        include/rgl_release_notes_dialog.h src/rgl_release_notes_dialog.cpp
 )
 
 # Include directories
