@@ -54,6 +54,7 @@ qt_add_library(range-gui-lib
         src/rgl_progress_dialog.cpp
         src/rgl_progress_handler.cpp
         src/rgl_proxy_settings_widget.cpp
+        src/rgl_release_notes_dialog.cpp
         src/rgl_software_manager_dialog.cpp
         src/rgl_software_manager_widget.cpp
         src/rgl_software_update_checker.cpp
@@ -110,6 +111,7 @@ qt_add_library(range-gui-lib
         include/rgl_progress_dialog.h
         include/rgl_progress_handler.h
         include/rgl_proxy_settings_widget.h
+        include/rgl_release_notes_dialog.h
         include/rgl_software_manager_dialog.h
         include/rgl_software_manager_widget.h
         include/rgl_software_update_checker.h
@@ -118,7 +120,6 @@ qt_add_library(range-gui-lib
         include/rgl_text_browser.h
         include/rgl_text_browser_dialog.h
         include/rgl_tree_widget.h
-        include/rgl_release_notes_dialog.h src/rgl_release_notes_dialog.cpp
 )
 
 # Include directories
