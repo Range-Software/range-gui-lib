@@ -230,6 +230,7 @@
     </message>
     <message>
         <location filename="../src/rgl_ai_chat_widget.cpp" line="138"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="219"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
@@ -240,12 +241,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="218"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="219"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="227"/>
         <source>Me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="263"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="290"/>
         <source>AI</source>
         <translation type="unfinished"></translation>
     </message>
@@ -314,17 +320,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="569"/>
+        <location filename="../src/rgl_application_settings.cpp" line="574"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="570"/>
+        <location filename="../src/rgl_application_settings.cpp" line="575"/>
         <source>POSIX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="572"/>
+        <location filename="../src/rgl_application_settings.cpp" line="577"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1238,12 +1244,12 @@
 <context>
     <name>RHelpDialog</name>
     <message>
-        <location filename="../src/rgl_help_dialog.cpp" line="35"/>
+        <location filename="../src/rgl_help_dialog.cpp" line="34"/>
         <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_help_dialog.cpp" line="40"/>
+        <location filename="../src/rgl_help_dialog.cpp" line="39"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1584,6 +1590,19 @@
     <message>
         <location filename="../src/rgl_proxy_settings_widget.cpp" line="41"/>
         <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RReleaseNotesDialog</name>
+    <message>
+        <location filename="../src/rgl_release_notes_dialog.cpp" line="17"/>
+        <source>Release notes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_release_notes_dialog.cpp" line="29"/>
+        <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
