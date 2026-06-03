@@ -39,7 +39,8 @@
 
 ### Bug fixes
 
-- Fixed crash when reverting settings to defaults
-- Fixed default value not being applied on reset to defaults
-- Fixed software update check radio button showing wrong status
-- Fixed default format not being set correctly
+- Crash when reverting settings to defaults
+- Default value not being applied on reset to defaults
+- Software update check radio button showing wrong status
+- Default format not being set correctly
+- Incorrect signal blocking in cloud session widget when identity becomes available

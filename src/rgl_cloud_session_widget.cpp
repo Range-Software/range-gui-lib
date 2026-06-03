@@ -323,21 +323,14 @@ void RCloudSessionWidget::onIdentityAvailable(const QString &keyPath, const QStr
                   keyPath.toUtf8().constData(),
                   certificatePath.toUtf8().constData());
 
-    bool clientPrivateKeyFileButtonSignals = this->clientPrivateKeyFileButton->signalsBlocked();
-    bool clientPrivateKeyPasswordEditSignals = this->clientPrivateKeyPasswordEdit->signalsBlocked();
-    bool clientCertificateFileButtonSignals = this->clientCertificateFileButton->signalsBlocked();
-
-    this->clientPrivateKeyFileButton->blockSignals(true);
-    this->clientPrivateKeyPasswordEdit->blockSignals(true);
-    this->clientCertificateFileButton->blockSignals(true);
+    bool blocked = this->blockSignals(true);
 
     this->clientPrivateKeyFileButton->setFileName(keyPath);
     this->clientPrivateKeyPasswordEdit->setText(keyPassword);
     this->clientCertificateFileButton->setFileName(certificatePath);
 
-    this->clientPrivateKeyFileButton->blockSignals(clientPrivateKeyFileButtonSignals);
-    this->clientPrivateKeyPasswordEdit->blockSignals(clientPrivateKeyPasswordEditSignals);
-    this->clientCertificateFileButton->blockSignals(clientCertificateFileButtonSignals);
+    this->blockSignals(blocked);
+
     emit this->sessionInfoChanged(this->sessionInfo);
 }
 
