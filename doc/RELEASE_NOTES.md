@@ -1,19 +1,21 @@
 ## Version 1.0.0
 
-### AI assistant
+### Improvements
+
+#### AI assistant
 
 - Abstract AI chat widget for embedding AI conversations in the application
 - AI agent settings widget with configurable model parameters including temperature
 - AI agent configuration with file tools and extended agent settings
 
-### Certificate management
+#### Certificate management
 
 - Automatic client certificate renewal
 - Configurable days-to-expiry warning threshold
 - Improved CSR creation with predefined O and OU subject fields
 - Keystore and truststore paths replaced with dedicated configuration objects
 
-### Cloud file manager
+#### Cloud file manager
 
 - File manager improvements: sorting by filename, cache file, and auto data sync
 - GUI support for file-replace functionality
@@ -21,13 +23,13 @@
 - Sync to cloud disabled by default
 - Refresh button always enabled; removed background refresh timer
 
-### Output and logging
+#### Output and logging
 
 - Qt debug log level support added
 - Timestamps printed in output window
 - Qt library information printed on startup
 
-### User interface
+#### User interface
 
 - Color scheme support; obsolete themes removed
 - Custom progress dialog
