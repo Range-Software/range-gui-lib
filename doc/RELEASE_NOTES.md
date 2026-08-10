@@ -1,3 +1,17 @@
+## Version 1.1.0
+
+### Improvements
+
+#### Cloud AI query
+
+- `RCloudAiQueryWidget`: implemented Range Cloud AI query. The question is submitted
+  with `RCloudClient::requestAIQuery()` and the answer is fetched with
+  `RCloudClient::requestAIQueryResult()` until the query is completed. Unlike the AI
+  chat widget no AI agent is selected and no file upload is supported, only the
+  response language can be chosen
+
+---
+
 ## Version 1.0.0
 
 ### Improvements
