@@ -4,11 +4,15 @@
 
 #### Cloud AI query
 
-- `RCloudAiQueryWidget`: implemented Range Cloud AI query. The question is submitted
-  with `RCloudClient::requestAIQuery()` and the answer is fetched with
-  `RCloudClient::requestAIQueryResult()` until the query is completed. Unlike the AI
-  chat widget no AI agent is selected and no file upload is supported, only the
-  response language can be chosen
+- `RCloudAiQueryDialog` / `RCloudAiQueryWidget`: new dialog and widget asking questions
+  answered by an AI service through Range Cloud
+- Question is submitted with `RCloudClient::requestAIQuery()` and the answer is fetched
+  with `RCloudClient::requestAIQueryResult()` repeated until the query is completed
+- Unlike the AI chat widget no AI agent is selected and no file upload is supported.
+  Only the response language can be chosen, defaulting to the application language
+- Questions and answers are displayed as Markdown in a query history, answers are
+  awaited with an animated waiting message. A pending query can be canceled and
+  failed requests are reported in the query history
 
 ---
 
