@@ -60,6 +60,8 @@ RCloudAiQueryWidget::RCloudAiQueryWidget(RCloudConnectionHandler *connectionHand
     queryLayout->addWidget(this->queryEdit);
 
     this->queryButton = new QPushButton(tr("Send"));
+    this->queryButton->setAutoDefault(true);
+    this->queryButton->setDefault(true);
     queryLayout->addWidget(this->queryButton);
 
     // Result is requested only once per timeout to avoid overlapping requests.

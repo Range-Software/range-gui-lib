@@ -24,7 +24,7 @@ qt_add_library(range-gui-lib
         src/rgl_cloud_file_manager.cpp
         src/rgl_cloud_file_manager_dialog.cpp
         src/rgl_cloud_file_manager_widget.cpp
-        src/rgl_cloud_ai_query_dialog.cpp
+
         src/rgl_cloud_ai_query_widget.cpp
         src/rgl_cloud_report_sender.cpp
         src/rgl_cloud_session_dialog.cpp
@@ -83,7 +83,7 @@ qt_add_library(range-gui-lib
         include/rgl_cloud_file_manager.h
         include/rgl_cloud_file_manager_dialog.h
         include/rgl_cloud_file_manager_widget.h
-        include/rgl_cloud_ai_query_dialog.h
+
         include/rgl_cloud_ai_query_widget.h
         include/rgl_cloud_report_sender.h
         include/rgl_cloud_session_dialog.h

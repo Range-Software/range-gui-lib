@@ -512,6 +512,71 @@
     </message>
 </context>
 <context>
+    <name>RCloudAiQueryWidget</name>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="49"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="58"/>
+        <source>Ask your question an press Enter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="62"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="178"/>
+        <source>Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="141"/>
+        <source>Me</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="178"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="188"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="333"/>
+        <source>Waiting for an answer ... </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="220"/>
+        <source>AI</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="230"/>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="239"/>
+        <source>Cloud request has failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="263"/>
+        <source>Cloud has not accepted the query.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="289"/>
+        <source>Cloud does not know the submitted query.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="315"/>
+        <source>Timed out while waiting for an answer.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>RCloudConnectionHandler</name>
     <message>
         <location filename="../src/rgl_cloud_connection_handler.cpp" line="141"/>
@@ -982,7 +1047,7 @@
     <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="73"/>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="111"/>
-        <location filename="../src/rgl_cloud_session_widget.cpp" line="363"/>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="356"/>
         <source>Certificate</source>
         <translation type="unfinished"></translation>
     </message>
