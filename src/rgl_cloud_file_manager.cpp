@@ -20,6 +20,11 @@ RCloudFileManager::RCloudFileManager(RCloudConnectionHandler *connectionHandler,
     this->restartRefreshTimer(false);
 }
 
+RFileInfo RCloudFileManager::findRemoteFile(const QString &fileName) const
+{
+    return this->fileManager->findRemoteFile(fileName);
+}
+
 RFileManagerSettings RCloudFileManager::generateFileManaferSettings(const RApplicationSettings *applicationSettings)
 {
     RFileManagerSettings fileManagerSetting;

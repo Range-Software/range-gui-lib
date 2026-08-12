@@ -7,6 +7,7 @@
 #include <QMap>
 #include <QPushButton>
 #include <QScrollBar>
+#include <QStringList>
 #include <QTimer>
 
 #include <cmath>
@@ -24,6 +25,7 @@
 const int RCloudAiQueryWidget::pollInterval = 2000;
 const int RCloudAiQueryWidget::pollTimeout = 300000;
 const int RCloudAiQueryWidget::waitingInterval = 50;
+const int RCloudAiQueryWidget::maxHistoryTurns = 20;
 
 RCloudAiQueryWidget::RCloudAiQueryWidget(RCloudConnectionHandler *connectionHandler,
                                      RApplicationSettings *applicationSettings,
@@ -34,6 +36,7 @@ RCloudAiQueryWidget::RCloudAiQueryWidget(RCloudConnectionHandler *connectionHand
     , waiting{false}
     , waitingAnchor{-1}
     , waitingFadePhase{0.0}
+    , userInfoSent{false}
 {
     this->cloudClient = connectionHandler->createPrivateClient(this);
     this->cloudClient->setBlocking(false);
@@ -134,11 +137,45 @@ void RCloudAiQueryWidget::submitQuery()
         return;
     }
 
+    this->appendMarkdown(QStringLiteral("---\n**") + tr("Me") + QStringLiteral(":** *") + aiQuery.getQuestion() + QStringLiteral("*"));
+
+    this->buildQuery(aiQuery);
+
+    // Context is assembled after buildQuery, which may have dropped the history
+    // or set a context of its own.
+    QStringList contextParts;
+    if (!this->userInfoSent)
+    {
+        // Information about the user is sent only with the first query of the conversation.
+        const QString userInfo = this->buildUserInfo();
+        if (!userInfo.isEmpty())
+        {
+            contextParts.append(userInfo);
+        }
+        this->userInfoSent = true;
+    }
+    if (!aiQuery.getContext().isEmpty())
+    {
+        contextParts.append(aiQuery.getContext());
+    }
+    const QString conversationContext = this->buildContext();
+    if (!conversationContext.isEmpty())
+    {
+        contextParts.append(conversationContext);
+    }
+    if (!contextParts.isEmpty())
+    {
+        aiQuery.setContext(contextParts.join(QStringLiteral("\n\n")));
+    }
+
+    // Question is remembered after the history was built, so that a history
+    // dropped from within buildQuery does not discard the submitted question.
+    this->pendingQuestion = aiQuery.getQuestion();
+
     RCloudAIQueryRequest aiQueryRequest;
     aiQueryRequest.setApplication(QCoreApplication::applicationName());
     aiQueryRequest.setQuery(aiQuery);
 
-    this->appendMarkdown(QStringLiteral("---\n**") + tr("Me") + QStringLiteral(":** *") + aiQuery.getQuestion() + QStringLiteral("*"));
     this->queryEdit->clear();
     this->showWaitingMessage();
 
@@ -149,14 +186,83 @@ void RCloudAiQueryWidget::submitQuery()
     QTimer::singleShot(0,this,[this]() { this->setWaiting(true); });
 }
 
+void RCloudAiQueryWidget::buildQuery(RAIQuery &)
+{
+}
+
+QString RCloudAiQueryWidget::buildContext() const
+{
+    if (this->conversationHistory.isEmpty())
+    {
+        return QString();
+    }
+
+    // Context is processed by the AI service, therefore it is not translated.
+    QString context(QStringLiteral("Previous questions and answers in this conversation:\n"));
+    for (const QPair<QString,QString> &turn : std::as_const(this->conversationHistory))
+    {
+        context += QStringLiteral("\nQuestion: ") + turn.first + QStringLiteral("\nAnswer: ") + turn.second + QStringLiteral("\n");
+    }
+    return context;
+}
+
+QString RCloudAiQueryWidget::buildUserInfo() const
+{
+    QStringList userInfo;
+
+    // User information is processed by the AI service, therefore it is not translated.
+    if (const QString userFullName = this->applicationSettings->getUserFullName(); !userFullName.isEmpty())
+    {
+        userInfo.append(QStringLiteral("Name: ") + userFullName);
+    }
+    if (const QString userEmail = this->applicationSettings->getUserEmail(); !userEmail.isEmpty())
+    {
+        userInfo.append(QStringLiteral("E-mail: ") + userEmail);
+    }
+    if (const QString userTerritory = this->applicationSettings->getUserTerritory(); !userTerritory.isEmpty())
+    {
+        const QLocale::Territory territory = QLocale::codeToTerritory(userTerritory);
+        userInfo.append(QStringLiteral("Territory: ") + (territory == QLocale::AnyTerritory
+                                                             ? userTerritory
+                                                             : QLocale::territoryToString(territory)));
+    }
+
+    if (userInfo.isEmpty())
+    {
+        return QString();
+    }
+
+    return QStringLiteral("Information about the user asking the question:\n") + userInfo.join(QStringLiteral("\n"));
+}
+
+bool RCloudAiQueryWidget::hasHistory() const
+{
+    return !this->conversationHistory.isEmpty();
+}
+
+void RCloudAiQueryWidget::clearHistory()
+{
+    RLogger::info("Conversation history was cleared.\n");
+    this->conversationHistory.clear();
+    this->pendingQuestion.clear();
+    // Following query starts a new conversation and carries the user information again.
+    this->userInfoSent = false;
+}
+
 void RCloudAiQueryWidget::cancelQuery()
 {
+    if (!this->waiting)
+    {
+        return;
+    }
+
     RLogger::info("AI query was canceled.\n");
     if (this->queryId.isNull())
     {
         // Query was not acknowledged yet. Its response has to be discarded.
         this->discardedResponses++;
     }
+    this->pendingQuestion.clear();
     this->pollTimer->stop();
     this->queryId = QUuid();
     this->hideWaitingMessage();
@@ -217,12 +323,25 @@ void RCloudAiQueryWidget::finishQuery(const QString &responseMessage)
     this->queryId = QUuid();
     this->hideWaitingMessage();
     this->setWaiting(false);
+
+    if (!this->pendingQuestion.isEmpty())
+    {
+        // Only answered questions become a part of the conversation context.
+        this->conversationHistory.append(qMakePair(this->pendingQuestion,responseMessage));
+        while (this->conversationHistory.size() > RCloudAiQueryWidget::maxHistoryTurns)
+        {
+            this->conversationHistory.removeFirst();
+        }
+        this->pendingQuestion.clear();
+    }
+
     this->appendMarkdown(QStringLiteral("**") + tr("AI") + QStringLiteral(":**\n\n") + responseMessage);
 }
 
 void RCloudAiQueryWidget::failQuery(const QString &errorMessage)
 {
     RLogger::error("AI query has failed. %s\n",errorMessage.toUtf8().constData());
+    this->pendingQuestion.clear();
     this->pollTimer->stop();
     this->queryId = QUuid();
     this->hideWaitingMessage();

@@ -13,6 +13,7 @@
 #include "rgl_application_settings.h"
 #include "rgl_action_list.h"
 #include "rgl_cloud_connection_handler.h"
+#include "rgl_cloud_file_manager.h"
 
 class RApplication : public QApplication
 {
@@ -27,6 +28,8 @@ class RApplication : public QApplication
         RCloudSessionManager *cloudSessionManager;
         //! Cloud connection handler.
         RCloudConnectionHandler *cloudConnectionHandler;
+        //! Cloud file manager syncing the data directory.
+        RCloudFileManager *cloudFileManager;
         //! AI agent settings manager.
         RAgentSettingsManager *aiAgentSettingsManager;
         //! Application settings.
@@ -63,6 +66,9 @@ class RApplication : public QApplication
 
         //! Return pointer to cloud connection handler.
         RCloudConnectionHandler *getCloudConnectionHandler();
+
+        //! Return const pointer to cloud file manager.
+        const RCloudFileManager *getCloudFileManager() const;
 
         //! Return const reference to AI agent settings manager.
         const RAgentSettingsManager *getAiAgentSettingsManager() const;

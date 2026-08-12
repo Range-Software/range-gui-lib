@@ -4,15 +4,32 @@
 
 #### Cloud AI query
 
-- `RCloudAiQueryDialog` / `RCloudAiQueryWidget`: new dialog and widget asking questions
-  answered by an AI service through Range Cloud
-- Question is submitted with `RCloudClient::requestAIQuery()` and the answer is fetched
-  with `RCloudClient::requestAIQueryResult()` repeated until the query is completed
+- `RCloudAiQueryWidget`: new widget asking questions answered by an AI service through
+  Range Cloud. The question is submitted with `RCloudClient::requestAIQuery()` and the
+  answer is fetched with `RCloudClient::requestAIQueryResult()` repeated until the query
+  is completed. The hosting dialog is provided by the application
 - Unlike the AI chat widget no AI agent is selected and no file upload is supported.
   Only the response language can be chosen, defaulting to the application language
-- Questions and answers are displayed as Markdown in a query history, answers are
-  awaited with an animated waiting message. A pending query can be canceled and
-  failed requests are reported in the query history
+- Questions are submitted by pressing Enter or the default "Send" button and are
+  displayed together with the answers as Markdown in a query history. An answer is
+  awaited with an animated waiting message, a pending query can be canceled and failed
+  requests are reported in the query history
+- Conversation is preserved: up to 20 last answered questions with their answers are
+  sent back as a query context, so follow-up questions can be asked. Information about
+  the user (full name, e-mail and territory taken from `RApplicationSettings`) is sent
+  with the first query of a conversation only
+- Derived widgets fill in optional fields of the submitted query in `buildQuery()` and
+  restart the conversation with `hasHistory()` and `clearHistory()`. Public
+  `cancelQuery()` does nothing when no answer is being awaited, so a hosting dialog can
+  cancel a running query when it is being closed
+
+#### Cloud file manager
+
+- `RCloudFileManager::findRemoteFile()` returns the file info of a synchronized Cloud
+  file matching given local file name. No additional file listing is requested, so the
+  data directory synchronization is not disturbed
+- `RApplication` keeps the cloud file manager and provides it through
+  `getCloudFileManager()`
 
 ---
 

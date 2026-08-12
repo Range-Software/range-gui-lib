@@ -31,6 +31,7 @@
 
 RApplication::RApplication(int &argc, char **argv, bool initializeSettings)
     : QApplication{argc,argv}
+    , cloudFileManager{nullptr}
     , applicationSettings{nullptr}
     , actionList{nullptr}
     , mainWindow{nullptr}
@@ -76,6 +77,11 @@ RCloudSessionManager *RApplication::getCloudSessionManager()
 RCloudConnectionHandler *RApplication::getCloudConnectionHandler()
 {
     return this->cloudConnectionHandler;
+}
+
+const RCloudFileManager *RApplication::getCloudFileManager() const
+{
+    return this->cloudFileManager;
 }
 
 const RAgentSettingsManager *RApplication::getAiAgentSettingsManager() const
@@ -560,7 +566,7 @@ void RApplication::onStarted()
     QObject::connect(softwareUpdateChecker,&RSoftwareUpdateChecker::softwareAvailable,this,&RApplication::onSoftwareAvailable);
 
     // Cloud file manager
-    new RCloudFileManager(this->cloudConnectionHandler,this->applicationSettings,this);
+    this->cloudFileManager = new RCloudFileManager(this->cloudConnectionHandler,this->applicationSettings,this);
 
     if (previousLockStillValid)
     {

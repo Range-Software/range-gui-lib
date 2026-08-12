@@ -6,6 +6,8 @@
 #include <rcl_cloud_client.h>
 
 #include <QElapsedTimer>
+#include <QList>
+#include <QPair>
 #include <QTextCursor>
 #include <QUuid>
 #include <QWidget>
@@ -17,6 +19,7 @@ class QComboBox;
 class QLineEdit;
 class QPushButton;
 class QTimer;
+class RAIQuery;
 class RTextBrowser;
 
 class RCloudAiQueryWidget : public QWidget
@@ -31,6 +34,8 @@ class RCloudAiQueryWidget : public QWidget
         static const int pollTimeout;
         //! Time in milliseconds between two waiting message updates.
         static const int waitingInterval;
+        //! Maximum number of previous questions and answers kept as a conversation context.
+        static const int maxHistoryTurns;
 
         RApplicationSettings *applicationSettings;
 
@@ -65,12 +70,23 @@ class RCloudAiQueryWidget : public QWidget
         //! Waiting message fade phase.
         double waitingFadePhase;
 
+        //! Previous questions and their answers sent as a context with every query.
+        QList<QPair<QString,QString>> conversationHistory;
+        //! Question which is being answered.
+        QString pendingQuestion;
+        //! Information about the user was already sent within this conversation.
+        bool userInfoSent;
+
     public:
 
         //! Constructor.
         explicit RCloudAiQueryWidget(RCloudConnectionHandler *connectionHandler,
                                    RApplicationSettings *applicationSettings,
                                    QWidget *parent = nullptr);
+
+        //! Stop waiting for an answer and forget the submitted query.
+        //! Nothing is done if no answer is being waited for.
+        void cancelQuery();
 
     protected:
 
@@ -80,8 +96,22 @@ class RCloudAiQueryWidget : public QWidget
         //! Submit AI query.
         void submitQuery();
 
-        //! Stop waiting for an answer and forget the submitted query.
-        void cancelQuery();
+        //! Fill in optional fields of the query which is about to be submitted.
+        //! Default implementation does nothing.
+        virtual void buildQuery(RAIQuery &aiQuery);
+
+        //! Build conversation context out of previous questions and answers.
+        QString buildContext() const;
+
+        //! Build information about the user asking the question.
+        //! Empty string is returned if no such information is available.
+        QString buildUserInfo() const;
+
+        //! Return true if there are previous questions and answers.
+        bool hasHistory() const;
+
+        //! Forget all previous questions and answers.
+        void clearHistory();
 
         //! Append markdown formatted text to the query history.
         void appendMarkdown(const QString &markdown);

@@ -24,6 +24,10 @@ class RCloudFileManager : public QObject
         //! Constructor.
         explicit RCloudFileManager(RCloudConnectionHandler *connectionHandler, const RApplicationSettings *applicationSettings, QObject *parent = nullptr);
 
+        //! Find remote file matching given local file name.
+        //! Empty file info is returned if no such file is being synced.
+        RFileInfo findRemoteFile(const QString &fileName) const;
+
     private:
 
         //! Create file manager settings from application settings.

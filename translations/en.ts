@@ -259,60 +259,60 @@
 <context>
     <name>RApplication</name>
     <message>
-        <location filename="../src/rgl_application.cpp" line="429"/>
+        <location filename="../src/rgl_application.cpp" line="435"/>
         <source>Application is already running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="227"/>
+        <location filename="../src/rgl_application.cpp" line="233"/>
         <source>Cloud client certificate has expired.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="229"/>
-        <location filename="../src/rgl_application.cpp" line="257"/>
+        <location filename="../src/rgl_application.cpp" line="235"/>
+        <location filename="../src/rgl_application.cpp" line="263"/>
         <source>Session name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="230"/>
-        <location filename="../src/rgl_application.cpp" line="258"/>
+        <location filename="../src/rgl_application.cpp" line="236"/>
+        <location filename="../src/rgl_application.cpp" line="264"/>
         <source>Common name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="231"/>
-        <location filename="../src/rgl_application.cpp" line="259"/>
+        <location filename="../src/rgl_application.cpp" line="237"/>
+        <location filename="../src/rgl_application.cpp" line="265"/>
         <source>Expiration date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="233"/>
+        <location filename="../src/rgl_application.cpp" line="239"/>
         <source>Certificate has expired</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="255"/>
+        <location filename="../src/rgl_application.cpp" line="261"/>
         <source>Cloud client certificate will soon expire.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="261"/>
+        <location filename="../src/rgl_application.cpp" line="267"/>
         <source>Certificate will expire</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="646"/>
+        <location filename="../src/rgl_application.cpp" line="652"/>
         <source>Following software updates are available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="656"/>
+        <location filename="../src/rgl_application.cpp" line="662"/>
         <source>Would you like to open the software manager?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="658"/>
+        <location filename="../src/rgl_application.cpp" line="664"/>
         <source>Software updates available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -514,64 +514,64 @@
 <context>
     <name>RCloudAiQueryWidget</name>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="49"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="52"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="58"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="61"/>
         <source>Ask your question an press Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="62"/>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="178"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="65"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="284"/>
         <source>Send</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="141"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="140"/>
         <source>Me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="178"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="284"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="188"/>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="333"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="452"/>
         <source>Waiting for an answer ... </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="220"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="338"/>
         <source>AI</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="230"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="349"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="239"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="358"/>
         <source>Cloud request has failed.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="263"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="382"/>
         <source>Cloud has not accepted the query.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="289"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="408"/>
         <source>Cloud does not know the submitted query.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="315"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="434"/>
         <source>Timed out while waiting for an answer.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1802,6 +1802,14 @@
     <message>
         <location filename="../src/rgl_style.cpp" line="51"/>
         <source>System</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>RTextBrowser</name>
+    <message>
+        <location filename="../src/rgl_text_browser.cpp" line="15"/>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

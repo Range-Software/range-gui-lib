@@ -12,7 +12,7 @@ RTextBrowser::RTextBrowser(bool hasClearButton, QWidget *parent)
     {
         QIcon clearIcon(":/icons/action/pixmaps/range-clear.svg");
 
-        this->clearButton = new QPushButton(clearIcon,"Clear",this);
+        this->clearButton = new QPushButton(clearIcon,tr("Clear"),this);
         this->clearButton->setAutoDefault(false);
         this->clearButton->setStyleSheet(
             "QPushButton {"
