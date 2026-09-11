@@ -42,6 +42,14 @@ class RAction : public QAction
         //! Constructor.
         explicit RAction(const RAction::Definition &actionDefinition, QObject *parent = nullptr);
 
+        //! Create a new separator action.
+        //!
+        //! Every separator has to be an action of its own. QWidget::insertAction()
+        //! drops an action which the widget already holds before inserting it again,
+        //! so handing one and the same separator to a menu twice moves it to the end
+        //! instead of adding a second one, leaving only the last separator visible.
+        static RAction *createSeparator(QObject *parent = nullptr);
+
         //! Definition for separator action.
         static Definition definition();
 

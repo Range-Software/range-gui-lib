@@ -36,6 +36,11 @@ RAction::RAction(const Definition &actionDefinition, QObject *parent)
     }
 }
 
+RAction *RAction::createSeparator(QObject *parent)
+{
+    return new RAction(RAction::definition(),parent);
+}
+
 RAction::Definition RAction::definition()
 {
     return {

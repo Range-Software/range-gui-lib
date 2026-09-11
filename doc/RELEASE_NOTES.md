@@ -31,6 +31,14 @@
 - `RApplication` keeps the cloud file manager and provides it through
   `getCloudFileManager()`
 
+### Bug fixes
+
+- `RAction::createSeparator()` returns a new separator action, so a widget can be
+  given more than one. A single shared separator action could not be used twice
+  in the same menu, tool bar or widget: `QWidget::insertAction()` removes an
+  action the widget already holds before inserting it again, so every further
+  add moved the one separator to the end and only the last one was displayed
+
 ---
 
 ## Version 1.0.0
