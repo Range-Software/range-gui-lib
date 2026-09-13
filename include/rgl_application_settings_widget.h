@@ -33,6 +33,9 @@ class RApplicationSettingsWidget : public QWidget
         QComboBox *colorSchemeCombo;
         QComboBox *languageCombo;
         QComboBox *formatCombo;
+        //! Disable native menubar check box. Created only on platforms
+        //! providing a native menubar (macOS), nullptr otherwise.
+        QCheckBox *dontUseNativeMenuBarCheckBox;
         RProxySettingsWidget *proxySettingsWidget;
         QSpinBox *cloudRefreshTimeoutSpin;
         QCheckBox *cloudSyncDataDirectoryCheckBox;
@@ -71,6 +74,9 @@ class RApplicationSettingsWidget : public QWidget
 
         //! Format combo selection changed.
         void onFormatChanged(const QString &formatName);
+
+        //! Disable native menubar changed.
+        void onDontUseNativeMenuBarChanged(Qt::CheckState state);
 
         //! Proxy changed.
         void onProxyChanged(const RHttpProxySettings &proxySettings);

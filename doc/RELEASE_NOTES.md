@@ -31,6 +31,19 @@
 - `RApplication` keeps the cloud file manager and provides it through
   `getCloudFileManager()`
 
+#### Application settings
+
+- `RApplicationSettings` holds a new **do not use native menubar** option, stored under
+  `application/dontUseNativeMenuBar` and disabled by default. `RApplication` turns it into
+  the `Qt::AA_DontUseNativeMenuBar` application attribute before the main window is built,
+  so the menubar is drawn inside the application window instead of the system menubar
+- The option is offered in the **Appearance** tab of `RApplicationSettingsWidget` and is
+  only available on macOS, the single platform of the supported ones providing a native
+  menubar. `RApplicationSettings::isNativeMenuBarSupported()` reports the availability;
+  elsewhere the getter always returns false and the setter does nothing
+- Taking the option into account requires an application restart, which is reported the
+  same way as a language or a format change
+
 ### Bug fixes
 
 - `RAction::createSeparator()` returns a new separator action, so a widget can be

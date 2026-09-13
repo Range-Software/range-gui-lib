@@ -58,6 +58,7 @@ class RApplicationSettings : public QSettings
         static const QString languageKey;
         static const QString formatKey;
         static const QString toolbarIconSizeKey;
+        static const QString dontUseNativeMenuBarKey;
         static const QString cloudRefreshTimeoutKey;
         static const QString cloudSyncDataDirectoryKey;
         static const QString cloudSyncDataCachePathKey;
@@ -172,6 +173,17 @@ class RApplicationSettings : public QSettings
 
         //! Set toolbar icon size.
         void setToolbarIconSize(int toolbarIconSize);
+
+        //! Return whether the native (system) menubar should be disabled.
+        //! Applies only on macOS - on other platforms it is always false.
+        bool getDontUseNativeMenuBar() const;
+
+        //! Set whether the native (system) menubar should be disabled.
+        //! Applies only on macOS - on other platforms it has no effect.
+        void setDontUseNativeMenuBar(bool dontUseNativeMenuBar);
+
+        //! Return whether the native menubar setting is supported on this platform.
+        static bool isNativeMenuBarSupported();
 
         //! Return cloud refresh timeout.
         uint getCloudRefreshTimeout() const;
@@ -323,6 +335,9 @@ class RApplicationSettings : public QSettings
         //! Return default toolbar icon size.
         static int getDefaultToolbarIconSize();
 
+        //! Return default value for disabling the native menubar.
+        static bool getDefaultDontUseNativeMenuBar();
+
         //! Return default cloud refresh timeout.
         static uint getDefaultCloudRefreshTimeout();
 
@@ -384,6 +399,9 @@ class RApplicationSettings : public QSettings
 
         //! Toolbar icon size has changed.
         void toolbarIconSizeChanged(int toolbarIconSize);
+
+        //! Native menubar usage has changed.
+        void dontUseNativeMenuBarChanged(bool dontUseNativeMenuBar);
 
         //! Proxy settings has changed.
         void proxySettingsChanged(RHttpProxySettings proxySettings);

@@ -29,6 +29,7 @@ const QString RApplicationSettings::colorSchemeKey = "application/colorScheme";
 const QString RApplicationSettings::languageKey = "application/language";
 const QString RApplicationSettings::formatKey = "application/format";
 const QString RApplicationSettings::toolbarIconSizeKey = "application/toolbarIconSize";
+const QString RApplicationSettings::dontUseNativeMenuBarKey = "application/dontUseNativeMenuBar";
 const QString RApplicationSettings::cloudRefreshTimeoutKey = "cloud/refreshTimeout";
 const QString RApplicationSettings::cloudSyncDataDirectoryKey = "cloud/syncDataDirectory";
 const QString RApplicationSettings::cloudSyncDataCachePathKey = "cloud/syncDataCachePath";
@@ -277,6 +278,34 @@ void RApplicationSettings::setToolbarIconSize(int toolbarIconSize)
 {
     this->setValue(RApplicationSettings::toolbarIconSizeKey, toolbarIconSize);
     emit this->toolbarIconSizeChanged(toolbarIconSize);
+}
+
+bool RApplicationSettings::getDontUseNativeMenuBar() const
+{
+    if (!RApplicationSettings::isNativeMenuBarSupported())
+    {
+        return false;
+    }
+    return this->value(RApplicationSettings::dontUseNativeMenuBarKey,RApplicationSettings::getDefaultDontUseNativeMenuBar()).toBool();
+}
+
+void RApplicationSettings::setDontUseNativeMenuBar(bool dontUseNativeMenuBar)
+{
+    if (!RApplicationSettings::isNativeMenuBarSupported())
+    {
+        return;
+    }
+    this->setValue(RApplicationSettings::dontUseNativeMenuBarKey, dontUseNativeMenuBar);
+    emit this->dontUseNativeMenuBarChanged(dontUseNativeMenuBar);
+}
+
+bool RApplicationSettings::isNativeMenuBarSupported()
+{
+#ifdef Q_OS_DARWIN
+    return true;
+#else
+    return false;
+#endif
 }
 
 uint RApplicationSettings::getCloudRefreshTimeout() const
@@ -601,6 +630,11 @@ RApplicationSettings::Format RApplicationSettings::getDefaultFormat()
 int RApplicationSettings::getDefaultToolbarIconSize()
 {
     return 32;
+}
+
+bool RApplicationSettings::getDefaultDontUseNativeMenuBar()
+{
+    return false;
 }
 
 uint RApplicationSettings::getDefaultCloudRefreshTimeout()

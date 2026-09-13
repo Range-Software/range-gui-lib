@@ -76,6 +76,15 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->formatCombo->setCurrentIndex(this->applicationSettings->getFormat());
     appearanceLayout->addRow(tr("Formats") + ":",this->formatCombo);
 
+    this->dontUseNativeMenuBarCheckBox = nullptr;
+    if (RApplicationSettings::isNativeMenuBarSupported())
+    {
+        this->dontUseNativeMenuBarCheckBox = new QCheckBox(tr("Do not use native menubar"));
+        this->dontUseNativeMenuBarCheckBox->setToolTip(tr("Show the menubar inside the application window instead of the system menubar."));
+        this->dontUseNativeMenuBarCheckBox->setChecked(this->applicationSettings->getDontUseNativeMenuBar());
+        appearanceLayout->addRow(tr("Menubar") + ":",this->dontUseNativeMenuBarCheckBox);
+    }
+
     appearanceLayout->addRow(new QWidget);
 
     // User
@@ -212,6 +221,10 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->colorSchemeCombo,&QComboBox::currentIndexChanged,this,&RApplicationSettingsWidget::onColorSchemeChanged);
     QObject::connect(this->languageCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onLanguageChanged);
     QObject::connect(this->formatCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onFormatChanged);
+    if (this->dontUseNativeMenuBarCheckBox)
+    {
+        QObject::connect(this->dontUseNativeMenuBarCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onDontUseNativeMenuBarChanged);
+    }
     QObject::connect(this->proxySettingsWidget,&RProxySettingsWidget::proxyChanged,this,&RApplicationSettingsWidget::onProxyChanged);
     QObject::connect(this->cloudRefreshTimeoutSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudRefreshTimeoutChanged);
     QObject::connect(this->cloudSyncDataDirectoryCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onCloudSyncDataDirectoryChanged);
@@ -257,6 +270,11 @@ void RApplicationSettingsWidget::setDefaultValues()
         }
     }
 
+    if (this->dontUseNativeMenuBarCheckBox)
+    {
+        this->dontUseNativeMenuBarCheckBox->setCheckState(RApplicationSettings::getDefaultDontUseNativeMenuBar() ? Qt::Checked : Qt::Unchecked);
+    }
+
     this->proxySettingsWidget->setDefaultValues();
     this->cloudRefreshTimeoutSpin->setValue(RApplicationSettings::getDefaultCloudRefreshTimeout()/1000);
     this->cloudSyncDataDirectoryCheckBox->setCheckState(RApplicationSettings::getDefaultCloudSyncDataDirectory() ? Qt::Checked : Qt::Unchecked);
@@ -291,6 +309,12 @@ void RApplicationSettingsWidget::onFormatChanged(const QString &formatName)
 {
     this->applicationSettings->setFormat(RApplicationSettings::Format(this->formatCombo->currentIndex()));
     RMessageBox::information(this,tr("Format change"),tr("Format change requires an application restart."));
+}
+
+void RApplicationSettingsWidget::onDontUseNativeMenuBarChanged(Qt::CheckState state)
+{
+    this->applicationSettings->setDontUseNativeMenuBar(state == Qt::Checked);
+    RMessageBox::information(this,tr("Menubar change"),tr("Menubar change requires an application restart."));
 }
 
 void RApplicationSettingsWidget::onProxyChanged(const RHttpProxySettings &proxySettings)

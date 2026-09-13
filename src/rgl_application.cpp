@@ -52,6 +52,7 @@ RApplication::RApplication(int &argc, char **argv, bool initializeSettings)
     {
         this->applicationSettings = new RApplicationSettings(this);
         this->applicationSettings->setDirApplicationPath(this->applicationDirPath());
+        QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar,this->applicationSettings->getDontUseNativeMenuBar());
     }
 
     QObject::connect(this,&RApplication::started,this,&RApplication::onStarted);

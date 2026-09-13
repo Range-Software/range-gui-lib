@@ -510,6 +510,31 @@
         <source>Format change requires an application restart.</source>
         <translation>Zmena formátu vyžaduje reštart aplikácie.</translation>
     </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="82"/>
+        <source>Do not use native menubar</source>
+        <translation>Nepoužívať natívnu ponuku</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="83"/>
+        <source>Show the menubar inside the application window instead of the system menubar.</source>
+        <translation>Zobraziť ponuku v okne aplikácie namiesto systémovej ponuky.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="85"/>
+        <source>Menubar</source>
+        <translation>Ponuka</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="317"/>
+        <source>Menubar change</source>
+        <translation>Zmena ponuky</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="317"/>
+        <source>Menubar change requires an application restart.</source>
+        <translation>Zmena ponuky vyžaduje reštart aplikácie.</translation>
+    </message>
 </context>
 <context>
     <name>RCloudAiQueryWidget</name>
