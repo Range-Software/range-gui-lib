@@ -44,6 +44,17 @@
 - Taking the option into account requires an application restart, which is reported the
   same way as a language or a format change
 
+#### Command line options
+
+- `RApplication` offers two new virtual hooks so a derived application can extend the
+  command line without changing the library. `getAdditionalArgumentOptions()` returns
+  the options to be appended to the common ones, so they are validated and listed by
+  `--help` the same way, and `processAdditionalArguments()` is called with the parsed
+  arguments. Both do nothing by default
+- The hooks are called while the command line is being processed, after
+  `--reset-defaults` has been handled and before `initialize()` builds the main window,
+  so an option can influence how the user objects are built
+
 ### Bug fixes
 
 - `RAction::createSeparator()` returns a new separator action, so a widget can be

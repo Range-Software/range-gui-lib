@@ -6,6 +6,9 @@
 #include <QMainWindow>
 #include <QStringList>
 
+#include <rbl_argument_option.h>
+#include <rbl_arguments_parser.h>
+
 #include <rcl_cloud_session_manager.h>
 
 #include <rai_agent_settings_manager.h>
@@ -99,6 +102,16 @@ class RApplication : public QApplication
 
         //! Apply format.
         void applyFormat(RApplicationSettings::Format format);
+
+        //! Return application specific command line options.
+        //! The base implementation returns an empty list.
+        virtual QList<RArgumentOption> getAdditionalArgumentOptions() const;
+
+        //! Process application specific command line options.
+        //! Called right after the common options have been processed and before
+        //! initialize(), so the result can influence how user objects are built.
+        //! The base implementation does nothing.
+        virtual void processAdditionalArguments(const RArgumentsParser &argumentsParser);
 
         //! Initialize main window and other user objects.
         virtual void initialize() = 0;

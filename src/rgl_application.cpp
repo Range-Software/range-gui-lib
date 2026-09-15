@@ -313,6 +313,15 @@ void RApplication::sendUsageReport(const QString &logFile) const
     file.close();
 }
 
+QList<RArgumentOption> RApplication::getAdditionalArgumentOptions() const
+{
+    return QList<RArgumentOption>();
+}
+
+void RApplication::processAdditionalArguments(const RArgumentsParser &)
+{
+}
+
 void RApplication::onStarted()
 {
     // Process command line arguments.
@@ -325,6 +334,7 @@ void RApplication::onStarted()
         validOptions.append(RArgumentOption("log-trace",RArgumentOption::Switch,QVariant(),"Switch on trace log level",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("log-threads",RArgumentOption::Switch,QVariant(),"Enable printing thread IDs",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("reset-defaults",RArgumentOption::Switch,QVariant(),"Reset all settings to defaults",RArgumentOption::Optional,false));
+        validOptions.append(this->getAdditionalArgumentOptions());
 
         RArgumentsParser argumentsParser(RApplication::arguments(),validOptions,true);
 
@@ -382,6 +392,8 @@ void RApplication::onStarted()
         {
             this->applicationSettings->clear();
         }
+
+        this->processAdditionalArguments(argumentsParser);
 
         this->filesToLoad = argumentsParser.getFiles();
     }
