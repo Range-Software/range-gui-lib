@@ -55,6 +55,15 @@
   `--reset-defaults` has been handled and before `initialize()` builds the main window,
   so an option can influence how the user objects are built
 
+#### Store builds
+
+- `RApplication` creates no `RSoftwareUpdateChecker` when `STORE_BUILD` is defined, and
+  `RApplicationSettingsWidget` hides the matching **Check for software update** option.
+  The Apple App Store and the Microsoft Store both forbid an application from
+  downloading and installing its own updates
+- The stored setting itself is left alone, so a build without `STORE_BUILD` keeps
+  whatever the user had chosen
+
 ### Bug fixes
 
 - `RAction::createSeparator()` returns a new separator action, so a widget can be

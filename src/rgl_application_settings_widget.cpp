@@ -177,6 +177,12 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->softwareCheckUpdatesCheckBox = new QCheckBox(tr("Check for software update"));
     this->softwareCheckUpdatesCheckBox->setChecked(this->applicationSettings->getSoftwareCheckUpdates());
 
+#ifdef STORE_BUILD
+    // A store build carries no update checker, so the option would do nothing.
+    // The check box is kept alive and merely hidden, so the slots connected to
+    // it below and setDefaultValues() need no special case.
+    this->softwareCheckUpdatesCheckBox->setVisible(false);
+#endif
     softwareLayout->addWidget(this->softwareCheckUpdatesCheckBox);
 
     networkLayout->addStretch(10);

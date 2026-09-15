@@ -574,9 +574,13 @@ void RApplication::onStarted()
     // Check client certificate validity
     this->validateCloudClientCertificate();
 
+#ifndef STORE_BUILD
     // Software update checker
+    // Left out of store builds: both the Apple App Store and the Microsoft Store
+    // forbid an application from downloading and installing its own updates.
     RSoftwareUpdateChecker *softwareUpdateChecker = new RSoftwareUpdateChecker(this->applicationSettings,this);
     QObject::connect(softwareUpdateChecker,&RSoftwareUpdateChecker::softwareAvailable,this,&RApplication::onSoftwareAvailable);
+#endif
 
     // Cloud file manager
     this->cloudFileManager = new RCloudFileManager(this->cloudConnectionHandler,this->applicationSettings,this);
