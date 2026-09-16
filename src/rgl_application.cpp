@@ -322,6 +322,17 @@ void RApplication::processAdditionalArguments(const RArgumentsParser &)
 {
 }
 
+void RApplication::resetSettings()
+{
+    RLogger::info("Resetting all application settings to default values.\n");
+
+    this->applicationSettings->clear();
+    this->applicationSettings->sync();
+
+    // Re-apply the settings which have already been consumed by the constructor.
+    QCoreApplication::setAttribute(Qt::AA_DontUseNativeMenuBar,this->applicationSettings->getDontUseNativeMenuBar());
+}
+
 void RApplication::onStarted()
 {
     // Process command line arguments.
@@ -333,7 +344,7 @@ void RApplication::onStarted()
         validOptions.append(RArgumentOption("log-debug",RArgumentOption::Switch,QVariant(),"Switch on debug log level",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("log-trace",RArgumentOption::Switch,QVariant(),"Switch on trace log level",RArgumentOption::Logger,false));
         validOptions.append(RArgumentOption("log-threads",RArgumentOption::Switch,QVariant(),"Enable printing thread IDs",RArgumentOption::Logger,false));
-        validOptions.append(RArgumentOption("reset-defaults",RArgumentOption::Switch,QVariant(),"Reset all settings to defaults",RArgumentOption::Optional,false));
+        validOptions.append(RArgumentOption("reset-settings",RArgumentOption::Switch,QVariant(),"Reset all application settings to default values",RArgumentOption::Optional,false));
         validOptions.append(this->getAdditionalArgumentOptions());
 
         RArgumentsParser argumentsParser(RApplication::arguments(),validOptions,true);
@@ -388,9 +399,9 @@ void RApplication::onStarted()
                 RLogger::debug("SSL logging enabled\n");
             }
         }
-        if (argumentsParser.isSet("reset-defaults"))
+        if (argumentsParser.isSet("reset-settings"))
         {
-            this->applicationSettings->clear();
+            this->resetSettings();
         }
 
         this->processAdditionalArguments(argumentsParser);

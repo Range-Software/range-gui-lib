@@ -1,7 +1,12 @@
 #include <QSplitter>
 #include <QVBoxLayout>
+#include <QDesktopServices>
 #include <QFile>
 #include <QDir>
+#include <QScrollBar>
+#include <QSignalBlocker>
+#include <QTextBlock>
+#include <QTextCursor>
 
 #include <rbl_logger.h>
 
@@ -10,6 +15,7 @@
 
 RDocumentWidget::RDocumentWidget(const QString &searchPath, const QString &defaultFileName, QWidget *parent)
     : QWidget{parent}
+    , markdownDocument{false}
 {
     if (!defaultFileName.isEmpty())
     {
@@ -33,11 +39,41 @@ RDocumentWidget::RDocumentWidget(const QString &searchPath, const QString &defau
     this->textBrowser->setSearchPaths(QStringList() << searchPath);
     this->textBrowser->setReadOnly(true);
     this->textBrowser->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Expanding);
+    // The documents are handed to the browser as content and not as a source,
+    // so it can resolve neither a relative link nor a Markdown heading anchor
+    // on its own. Every link is followed here instead.
+    this->textBrowser->setOpenLinks(false);
     splitter->addWidget(this->textBrowser);
+
+    QObject::connect(this->textBrowser,&QTextBrowser::anchorClicked,this,&RDocumentWidget::onAnchorClicked);
 
     splitter->setStretchFactor(1,1);
 
     this->loadFile(this->defaultFileName);
+}
+
+QString RDocumentWidget::anchorId(const QString &text)
+{
+    QString id;
+    id.reserve(text.size());
+
+    for (const QChar &character : text)
+    {
+        if (character.isLetterOrNumber())
+        {
+            id.append(character.toLower());
+        }
+        else if (character == QLatin1Char('-') || character == QLatin1Char('_'))
+        {
+            id.append(character);
+        }
+        else if (character.isSpace())
+        {
+            id.append(QLatin1Char('-'));
+        }
+    }
+
+    return id;
 }
 
 void RDocumentWidget::addListItem(QIcon icon, const QString &text, const QString &fileName)
@@ -57,6 +93,10 @@ void RDocumentWidget::addListItem(const QString &text, const QString &fileName)
 
 void RDocumentWidget::loadFile(const QString &fileName)
 {
+    this->currentFileName.clear();
+    this->markdownDocument = false;
+    this->anchorPositions.clear();
+
     if (fileName.isEmpty())
     {
         this->textBrowser->clear();
@@ -80,6 +120,7 @@ void RDocumentWidget::loadFile(const QString &fileName)
             if (fileInfo.suffix().toLower() == "md")
             {
                 this->textBrowser->setMarkdown(fileContent);
+                this->markdownDocument = true;
             }
             else if (fileInfo.suffix().toLower() == "html" ||
                      fileInfo.suffix().toLower() == "htm")
@@ -91,7 +132,93 @@ void RDocumentWidget::loadFile(const QString &fileName)
                 this->textBrowser->setText(fileContent);
             }
             file.close();
+
+            this->currentFileName = fileInfo.absoluteFilePath();
+
+            if (this->markdownDocument)
+            {
+                this->findAnchors();
+            }
         }
+    }
+}
+
+void RDocumentWidget::findAnchors()
+{
+    this->anchorPositions.clear();
+
+    const QTextDocument *document = this->textBrowser->document();
+
+    for (QTextBlock block = document->begin(); block.isValid(); block = block.next())
+    {
+        if (block.blockFormat().headingLevel() <= 0)
+        {
+            continue;
+        }
+
+        const QString id = RDocumentWidget::anchorId(block.text());
+        if (id.isEmpty())
+        {
+            continue;
+        }
+
+        // Headings repeating the same text are numbered the way the usual
+        // Markdown renderers number them, so that the second one can be linked.
+        QString uniqueId(id);
+        for (uint i=1;this->anchorPositions.contains(uniqueId);i++)
+        {
+            uniqueId = id + QLatin1Char('-') + QString::number(i);
+        }
+
+        this->anchorPositions.insert(uniqueId,block.position());
+    }
+}
+
+bool RDocumentWidget::scrollToDocumentAnchor(const QString &anchor)
+{
+    if (anchor.isEmpty())
+    {
+        QScrollBar *scrollBar = this->textBrowser->verticalScrollBar();
+        scrollBar->setValue(scrollBar->minimum());
+        return true;
+    }
+
+    if (!this->markdownDocument)
+    {
+        // An HTML document carries its own named anchors and the browser
+        // resolves them itself.
+        this->textBrowser->scrollToAnchor(anchor);
+        return true;
+    }
+
+    const auto iterator = this->anchorPositions.constFind(anchor);
+    if (iterator == this->anchorPositions.constEnd())
+    {
+        return false;
+    }
+
+    QTextCursor cursor(this->textBrowser->document());
+    cursor.setPosition(iterator.value());
+
+    // Moving to the end of the document first leaves the heading at the top of
+    // the viewport rather than at its bottom edge.
+    this->textBrowser->moveCursor(QTextCursor::End);
+    this->textBrowser->setTextCursor(cursor);
+
+    return true;
+}
+
+void RDocumentWidget::selectListItem(const QString &fileName)
+{
+    const QString filePath(QFileInfo(fileName).absoluteFilePath());
+
+    QSignalBlocker blocker(this->listWidget);
+
+    for (int i=0;i<this->listWidget->count();i++)
+    {
+        QListWidgetItem *item = this->listWidget->item(i);
+        const QString itemFilePath(QFileInfo(item->data(Qt::UserRole).toString()).absoluteFilePath());
+        item->setSelected(itemFilePath == filePath);
     }
 }
 
@@ -106,5 +233,68 @@ void RDocumentWidget::onListSelectionChanged()
     else
     {
         this->loadFile(selectedItems.at(0)->data(Qt::UserRole).toString());
+    }
+}
+
+void RDocumentWidget::onAnchorClicked(const QUrl &url)
+{
+    if (url.isEmpty())
+    {
+        return;
+    }
+
+    // Anything carrying a scheme of its own - http, https, mailto - leads out
+    // of the document set and belongs to whichever application the desktop has
+    // registered for it.
+    if (!url.scheme().isEmpty() && url.scheme().compare(QLatin1String("file"),Qt::CaseInsensitive) != 0)
+    {
+        if (!QDesktopServices::openUrl(url))
+        {
+            RLogger::warning("Failed to open the link \"%s\" in an external application.\n",
+                             url.toString().toUtf8().constData());
+        }
+        return;
+    }
+
+    const QString path(url.scheme().isEmpty() ? url.path() : url.toLocalFile());
+    const QString anchor(url.fragment());
+
+    // A link with no path points inside the document which is already shown.
+    if (path.isEmpty())
+    {
+        if (!this->scrollToDocumentAnchor(anchor))
+        {
+            RLogger::warning("Document \"%s\" contains no heading matching the link \"#%s\".\n",
+                             this->currentFileName.toUtf8().constData(),
+                             anchor.toUtf8().constData());
+        }
+        return;
+    }
+
+    // Everything else is another document of the same set, named relative to
+    // the one which is shown.
+    QString fileName(path);
+    if (QFileInfo(path).isRelative())
+    {
+        const QString baseDirPath(this->currentFileName.isEmpty()
+                                  ? QDir::currentPath()
+                                  : QFileInfo(this->currentFileName).absolutePath());
+        fileName = QDir::cleanPath(QDir(baseDirPath).filePath(path));
+    }
+
+    if (!QFileInfo::exists(fileName))
+    {
+        RLogger::warning("Link \"%s\" points to a document which does not exist - \"%s\".\n",
+                         url.toString().toUtf8().constData(),
+                         fileName.toUtf8().constData());
+        return;
+    }
+
+    this->loadFile(fileName);
+    this->selectListItem(fileName);
+
+    if (!anchor.isEmpty())
+    {
+        this->scrollToDocumentAnchor(anchor);
     }
 }

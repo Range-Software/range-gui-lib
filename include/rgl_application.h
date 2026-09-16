@@ -113,6 +113,13 @@ class RApplication : public QApplication
         //! The base implementation does nothing.
         virtual void processAdditionalArguments(const RArgumentsParser &argumentsParser);
 
+        //! Reset all application settings to their default values.
+        //! Called when the --reset-settings command line option is given, before
+        //! initialize() builds the main window. The base implementation discards the
+        //! stored settings and re-applies those the constructor has already consumed.
+        //! A derived application overriding it has to call the base implementation.
+        virtual void resetSettings();
+
         //! Initialize main window and other user objects.
         virtual void initialize() = 0;
 

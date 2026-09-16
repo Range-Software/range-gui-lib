@@ -52,8 +52,38 @@
   `--help` the same way, and `processAdditionalArguments()` is called with the parsed
   arguments. Both do nothing by default
 - The hooks are called while the command line is being processed, after
-  `--reset-defaults` has been handled and before `initialize()` builds the main window,
+  `--reset-settings` has been handled and before `initialize()` builds the main window,
   so an option can influence how the user objects are built
+- `--reset-settings` resets all application settings to their default values. The
+  stored settings are discarded and written out right away, so the reset survives even
+  if the application does not exit cleanly. It replaces `--reset-defaults`, which has
+  been removed
+- The reset is performed by the new `RApplication::resetSettings()` virtual hook, which
+  also re-applies the settings the constructor has already consumed. A derived
+  application overrides it to re-apply its own settings derived state and has to call
+  the base implementation
+
+#### Documents and help
+
+- Links in a document shown by `RDocumentWidget` are followed, which they were not
+  before. A document is handed to the text browser as content rather than as a
+  source, so the browser could resolve neither a relative link nor a heading anchor
+  and a click did nothing. The widget now switches `setOpenLinks()` off and follows
+  every link itself
+- A link into the document which is shown (`#some-heading`) scrolls the browser to
+  that heading. Markdown headings carry no named anchor of their own, so the widget
+  reads the headings of the document and derives the anchor of each one the way the
+  usual Markdown renderers do - lower-cased, punctuation dropped, spaces turned into
+  hyphens, repeated headings numbered. The heading is left at the top of the viewport
+- A link carrying a scheme of its own - `http`, `https`, `mailto` - is handed to
+  `QDesktopServices::openUrl()`, which opens it in the external web browser or
+  whichever application the desktop has registered for it
+- A link naming another document of the same set, which is how every help index page
+  is written, loads that document and selects its entry in the chapter list. A
+  fragment given with it is scrolled to once the document is loaded. The path is
+  resolved against the directory of the document which is shown
+- An unresolved link is reported in the log instead of being followed into an empty
+  view
 
 #### Store builds
 
