@@ -1,6 +1,7 @@
 #include <QDir>
 
 #include "rgl_help_actions_widget.h"
+#include "rgl_icon.h"
 
 RHelpActionsWidget::RHelpActionsWidget(const RActionList *actionList, const QString &searchPath, QWidget *parent)
     : RDocumentWidget(searchPath,"action_index.md",parent)
@@ -19,7 +20,7 @@ RHelpActionsWidget::RHelpActionsWidget(const RActionList *actionList, const QStr
         QIcon icon;
         if (action->icon().isNull())
         {
-            icon = QIcon(":/icons/general/pixmaps/range-generic_action.svg");
+            icon = RIcon::fromFile(":/icons/general/pixmaps/range-generic_action.svg");
         }
         else
         {

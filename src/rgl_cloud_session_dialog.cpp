@@ -3,6 +3,7 @@
 
 #include "rgl_cloud_session_widget.h"
 #include "rgl_cloud_session_dialog.h"
+#include "rgl_icon.h"
 
 RCloudSessionDialog::RCloudSessionDialog(const RCloudSessionInfo &sessionInfo,
                                          RCloudConnectionHandler *connectionHandler,
@@ -11,8 +12,8 @@ RCloudSessionDialog::RCloudSessionDialog(const RCloudSessionInfo &sessionInfo,
     : QDialog{parent}
     , sessionInfo{sessionInfo}
 {
-    QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
-    QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
+    QIcon cancelIcon = RIcon::fromFile(":/icons/action/pixmaps/range-cancel.svg");
+    QIcon okIcon = RIcon::fromFile(":/icons/action/pixmaps/range-ok.svg");
 
     this->setWindowTitle(tr("Cloud session"));
 

@@ -42,6 +42,7 @@ qt_add_library(range-gui-lib
         src/rgl_help_dialog.cpp
         src/rgl_help_document_widget.cpp
         src/rgl_html_viewer.cpp
+        src/rgl_icon.cpp
         src/rgl_keyboard_shortcut_line_edit.cpp
         src/rgl_keyboard_shortcuts_editor_widget.cpp
         src/rgl_label_widget.cpp
@@ -101,6 +102,7 @@ qt_add_library(range-gui-lib
         include/rgl_help_dialog.h
         include/rgl_help_document_widget.h
         include/rgl_html_viewer.h
+        include/rgl_icon.h
         include/rgl_keyboard_shortcut_line_edit.h
         include/rgl_keyboard_shortcuts_editor_widget.h
         include/rgl_label_widget.h

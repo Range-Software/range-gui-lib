@@ -4,11 +4,12 @@
 
 #include "rgl_document_dialog.h"
 #include "rgl_document_widget.h"
+#include "rgl_icon.h"
 
 RDocumentDialog::RDocumentDialog(const QString &title, QMap<QString, QString> helpPaths, QWidget *parent)
     : QDialog{parent}
 {
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->setWindowTitle(title);
     this->resize(1300,700);

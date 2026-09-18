@@ -9,12 +9,13 @@
 
 #include "rgl_first_run_dialog.h"
 #include "rgl_application.h"
+#include "rgl_icon.h"
 
 RFirstRunDialog::RFirstRunDialog(QWidget *parent)
     : QDialog(parent)
 {
-    QIcon startIcon(":/icons/application/pixmaps/range-startup.svg");
-    QIcon rangeIcon(":/icons/logos/pixmaps/range-app.svg");
+    QIcon startIcon = RIcon::fromFile(":/icons/application/pixmaps/range-startup.svg");
+    QIcon rangeIcon = RIcon::fromFile(":/icons/logos/pixmaps/range-app.svg");
 
     this->setWindowTitle(tr("First run"));
 

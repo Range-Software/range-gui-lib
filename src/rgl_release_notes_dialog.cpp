@@ -6,13 +6,14 @@
 #include <QPushButton>
 #include <QDialogButtonBox>
 #include <QDir>
+#include "rgl_icon.h"
 
 RReleaseNotesDialog::RReleaseNotesDialog(QWidget *parent)
     : QDialog{parent}
 {
     QString releaseNotesPath = RApplication::instance()->getApplicationSettings()->findDocDir();
 
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->setWindowTitle(tr("Release notes"));
     this->resize(1300,700);

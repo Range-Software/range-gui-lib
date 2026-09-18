@@ -1,6 +1,7 @@
 #include <QFontDatabase>
 
 #include "rgl_text_browser.h"
+#include "rgl_icon.h"
 
 RTextBrowser::RTextBrowser(bool hasClearButton, QWidget *parent)
   : QTextBrowser(parent)
@@ -10,7 +11,7 @@ RTextBrowser::RTextBrowser(bool hasClearButton, QWidget *parent)
 
     if (this->hasClearButton)
     {
-        QIcon clearIcon(":/icons/action/pixmaps/range-clear.svg");
+        QIcon clearIcon = RIcon::fromFile(":/icons/action/pixmaps/range-clear.svg");
 
         this->clearButton = new QPushButton(clearIcon,tr("Clear"),this);
         this->clearButton->setAutoDefault(false);

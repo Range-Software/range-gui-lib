@@ -7,6 +7,7 @@
 //#include <rbl_logger.h>
 
 #include "rgl_file_chooser_button.h"
+#include "rgl_icon.h"
 
 RFileChooserButton::RFileChooserButton(const QString &labelText,
                                        Type type,
@@ -38,7 +39,7 @@ RFileChooserButton::RFileChooserButton(const QString &labelText,
         iconName = QIcon::ThemeIcon::FolderOpen;
     }
 
-    QIcon iconClear(":/icons/action/pixmaps/range-clear.svg");
+    QIcon iconClear = RIcon::fromFile(":/icons/action/pixmaps/range-clear.svg");
 
     if (!labelText.isEmpty())
     {

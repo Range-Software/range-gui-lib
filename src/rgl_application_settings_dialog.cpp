@@ -4,12 +4,13 @@
 
 #include "rgl_application_settings_dialog.h"
 #include "rgl_application_settings_widget.h"
+#include "rgl_icon.h"
 
 RApplicationSettingsDialog::RApplicationSettingsDialog(RApplicationSettings *mainSettings, QWidget *parent)
     : QDialog(parent)
 {
-    QIcon defaultIcon(":/icons/action/pixmaps/range-undo.svg");
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon defaultIcon = RIcon::fromFile(":/icons/action/pixmaps/range-undo.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->setWindowTitle(tr("Application settings"));
 

@@ -6,12 +6,13 @@
 #include <QDialogButtonBox>
 
 #include "rgl_log_browser_dialog.h"
+#include "rgl_icon.h"
 
 RLogBrowserDialog::RLogBrowserDialog(const QString &logFileName, QWidget *parent) :
     QDialog(parent)
 {
-    QIcon clearIcon(":/icons/action/pixmaps/range-clear.svg");
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon clearIcon = RIcon::fromFile(":/icons/action/pixmaps/range-clear.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->setWindowTitle(tr("Log file viewer"));
 

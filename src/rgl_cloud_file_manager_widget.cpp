@@ -18,6 +18,7 @@
 #include "rgl_cloud_file_manager_widget.h"
 #include "rgl_message_box.h"
 #include "rgl_progress_dialog.h"
+#include "rgl_icon.h"
 
 RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connectionHandler,
                                                  RApplicationSettings *applicationSettings,
@@ -32,13 +33,13 @@ RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connec
     this->cloudClient = connectionHandler->createPrivateClient(this);
     this->cloudClient->setBlocking(false);
 
-    QIcon removeIcon(":/icons/cloud/pixmaps/range-remove.svg");
-    QIcon refreshIcon(":/icons/cloud/pixmaps/range-refresh.svg");
-    QIcon downloadIcon(":/icons/cloud/pixmaps/range-download.svg");
-    QIcon uploadIcon(":/icons/cloud/pixmaps/range-upload.svg");
-    QIcon replaceIcon(":/icons/cloud/pixmaps/range-upload_replace.svg");
-    QIcon updateIcon(":/icons/cloud/pixmaps/range-upload_update.svg");
-    QIcon accessRightsIcon(":/icons/cloud/pixmaps/range-access_rights.svg");
+    QIcon removeIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-remove.svg");
+    QIcon refreshIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-refresh.svg");
+    QIcon downloadIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-download.svg");
+    QIcon uploadIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-upload.svg");
+    QIcon replaceIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-upload_replace.svg");
+    QIcon updateIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-upload_update.svg");
+    QIcon accessRightsIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-access_rights.svg");
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);

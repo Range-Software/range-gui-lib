@@ -4,11 +4,12 @@
 
 #include "rgl_software_manager_dialog.h"
 #include "rgl_software_manager_widget.h"
+#include "rgl_icon.h"
 
 RSoftwareManagerDialog::RSoftwareManagerDialog(const RApplicationSettings *applicationSettings, QWidget *parent)
     : QDialog{parent}
 {
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->setWindowTitle(tr("Software manager"));
 

@@ -6,14 +6,15 @@
 #include <QDialogButtonBox>
 
 #include "rgl_file_tags_dialog.h"
+#include "rgl_icon.h"
 
 RFileTagsDialog::RFileTagsDialog(const RFileInfo &fileInfo, QWidget *parent)
     : QDialog{parent}
     , tags{fileInfo.getTags()}
 {
-    QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
-    QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
-    QIcon addIcon(":/icons/action/pixmaps/range-add.svg");
+    QIcon cancelIcon = RIcon::fromFile(":/icons/action/pixmaps/range-cancel.svg");
+    QIcon okIcon = RIcon::fromFile(":/icons/action/pixmaps/range-ok.svg");
+    QIcon addIcon = RIcon::fromFile(":/icons/action/pixmaps/range-add.svg");
 
     this->setWindowTitle(tr("Cloud file tags"));
 

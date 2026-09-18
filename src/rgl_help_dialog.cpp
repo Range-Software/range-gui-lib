@@ -7,13 +7,14 @@
 #include "rgl_help_dialog.h"
 #include "rgl_help_document_widget.h"
 #include "rgl_help_actions_widget.h"
+#include "rgl_icon.h"
 
 RHelpDialog::RHelpDialog(const QString &title, const QMap<QString, QString> &topics, QWidget *parent)
     : QDialog{parent}
     , helpPath{RApplication::instance()->getApplicationSettings()->getHelpDir()}
     , languageCode{RApplication::instance()->getApplicationSettings()->getLanguageCode()}
 {
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->setWindowTitle(title);
     this->resize(1300,700);

@@ -6,6 +6,7 @@
 
 #include "rgl_text_browser.h"
 #include "rgl_text_browser_dialog.h"
+#include "rgl_icon.h"
 
 RTextBrowserDialog::RTextBrowserDialog(const QString &title,
                                        const QString &desc,
@@ -13,7 +14,7 @@ RTextBrowserDialog::RTextBrowserDialog(const QString &title,
                                        QWidget *parent)
     : QDialog(parent)
 {
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     this->resize(700,500);
 

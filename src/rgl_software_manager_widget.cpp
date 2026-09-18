@@ -11,6 +11,7 @@
 #include "rgl_message_box.h"
 #include "rgl_progress_dialog.h"
 #include "rgl_software_manager_widget.h"
+#include "rgl_icon.h"
 
 RSoftwareManagerWidget::RSoftwareManagerWidget(const RApplicationSettings *applicationSettings, QWidget *parent)
     : QWidget{parent}
@@ -59,7 +60,7 @@ RSoftwareManagerWidget::RSoftwareManagerWidget(const RApplicationSettings *appli
 
     buttonsLayout->addWidget(new QWidget, 1);
 
-    QIcon downloadIcon(":/icons/cloud/pixmaps/range-download.svg");
+    QIcon downloadIcon = RIcon::fromFile(":/icons/cloud/pixmaps/range-download.svg");
 
     this->installButton = new QPushButton(downloadIcon,tr("Download and install"));
     this->installButton->setDisabled(true);

@@ -5,13 +5,14 @@
 #include <QDialogButtonBox>
 
 #include "rgl_access_owner_dialog.h"
+#include "rgl_icon.h"
 
 RAccessOwnerDialog::RAccessOwnerDialog(const QUuid &id, const QString &name, const RAccessOwner &accessOwner, QWidget *parent)
     : QDialog{parent}
     , accessOwner{accessOwner}
 {
-    QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
-    QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
+    QIcon cancelIcon = RIcon::fromFile(":/icons/action/pixmaps/range-cancel.svg");
+    QIcon okIcon = RIcon::fromFile(":/icons/action/pixmaps/range-ok.svg");
 
     this->setWindowTitle(tr("Access owner"));
 

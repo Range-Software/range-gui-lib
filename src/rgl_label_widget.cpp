@@ -2,13 +2,14 @@
 #include <QLabel>
 
 #include "rgl_label_widget.h"
+#include "rgl_icon.h"
 
 RLabelWidget::RLabelWidget(const QString &text, const QVariant &data, bool hideCloseButton, QWidget *parent)
     : QWidget(parent)
     , data(data)
     , hideCloseButton(hideCloseButton)
 {
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
 
     QHBoxLayout *mainLayout = new QHBoxLayout;
     this->setLayout(mainLayout);

@@ -85,6 +85,22 @@
 - An unresolved link is reported in the log instead of being followed into an empty
   view
 
+#### Icons
+
+- `RIcon::fromFile()` creates an icon which follows the colour scheme. When a file of
+  the same name exists in a `dark` sub-directory next to the given one - for
+  `:/icons/action/pixmaps/range-ok.svg` that is
+  `:/icons/action/pixmaps/dark/range-ok.svg` - the icon paints the dark variant while
+  the application palette is dark and the given file otherwise. Without a dark variant
+  a plain `QIcon` of the given file is returned
+- The variant is chosen each time the icon is painted, so icons already shown switch
+  as soon as the colour scheme changes. A palette counts as dark when its window
+  colour is darker than its window text colour, which also covers styles that ignore
+  the requested colour scheme. `RIcon::isDarkPalette()` and
+  `RIcon::toDarkFileName()` expose both rules
+- Every icon of the library, including those of actions created by `RAction`, is
+  loaded through `RIcon::fromFile()`
+
 #### Store builds
 
 - `RApplication` creates no `RSoftwareUpdateChecker` when `STORE_BUILD` is defined, and

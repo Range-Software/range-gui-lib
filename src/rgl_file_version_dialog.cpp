@@ -5,13 +5,14 @@
 #include <QDialogButtonBox>
 
 #include "rgl_file_version_dialog.h"
+#include "rgl_icon.h"
 
 RFileVersionDialog::RFileVersionDialog(const RFileInfo &fileInfo, QWidget *parent)
     : QDialog{parent}
     , version{fileInfo.getVersion()}
 {
-    QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
-    QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
+    QIcon cancelIcon = RIcon::fromFile(":/icons/action/pixmaps/range-cancel.svg");
+    QIcon okIcon = RIcon::fromFile(":/icons/action/pixmaps/range-ok.svg");
 
     this->setWindowTitle(tr("Cloud file version"));
 

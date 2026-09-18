@@ -5,12 +5,13 @@
 #include <QHBoxLayout>
 #include <QListWidget>
 #include <QPushButton>
+#include "rgl_icon.h"
 
 RAiAgentSettingsListWidget::RAiAgentSettingsListWidget(RAgentSettingsManager *aiSettingsManager, QWidget *parent)
     : QWidget{parent}
 {
-    QIcon addIcon(":/icons/action/pixmaps/range-add.svg");
-    QIcon removeIcon(":/icons/action/pixmaps/range-remove.svg");
+    QIcon addIcon = RIcon::fromFile(":/icons/action/pixmaps/range-add.svg");
+    QIcon removeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-remove.svg");
 
     QVBoxLayout *mainLayout = new QVBoxLayout;
     this->setLayout(mainLayout);

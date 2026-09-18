@@ -5,6 +5,7 @@
 #include <QDialogButtonBox>
 
 #include "rgl_access_mode_dialog.h"
+#include "rgl_icon.h"
 
 RAccessModeDialog::RAccessModeDialog(const QUuid &id, const QString &name, const RAccessMode &accessMode, RAccessMode::ModeMask filter, QWidget *parent)
     : QDialog{parent}
@@ -12,8 +13,8 @@ RAccessModeDialog::RAccessModeDialog(const QUuid &id, const QString &name, const
 {
     this->validAccesses = RAccessModeDialog::accessModeMaskToCloudAccessList(filter);
 
-    QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
-    QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
+    QIcon cancelIcon = RIcon::fromFile(":/icons/action/pixmaps/range-cancel.svg");
+    QIcon okIcon = RIcon::fromFile(":/icons/action/pixmaps/range-ok.svg");
 
     this->setWindowTitle(tr("Access mode"));
 

@@ -2,6 +2,7 @@
 #include <rbl_tool_task.h>
 
 #include "rgl_action.h"
+#include "rgl_icon.h"
 
 RAction::RAction(const Definition &actionDefinition, QObject *parent)
     : QAction{parent}
@@ -20,7 +21,7 @@ RAction::RAction(const Definition &actionDefinition, QObject *parent)
         this->setShortcut(actionDefinition.shortCut);
         if (!actionDefinition.icon.isEmpty())
         {
-            this->setIcon(QIcon(actionDefinition.icon));
+            this->setIcon(RIcon::fromFile(actionDefinition.icon));
             this->setIconVisibleInMenu(true);
         }
         this->setMenuRole(actionDefinition.menuRole);

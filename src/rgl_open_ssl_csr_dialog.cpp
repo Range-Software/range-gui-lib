@@ -23,6 +23,7 @@
 #include "rgl_file_chooser_button.h"
 #include "rgl_message_box.h"
 #include "rgl_open_ssl_csr_dialog.h"
+#include "rgl_icon.h"
 
 ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
                                      const QString &openSslToolPath,
@@ -48,11 +49,11 @@ ROpenSslCsrDialog::ROpenSslCsrDialog(RCloudConnectionHandler *connectionHandler,
     QObject::connect(this->publicCloudClient,&RCloudClient::signedCertificateAvailable,this,&ROpenSslCsrDialog::onSignedCertificate);
     QObject::connect(this->publicCloudClient,&RCloudClient::userRegistered,this,&ROpenSslCsrDialog::onUserRegistered);
 
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
-    QIcon generateIcon(":/icons/file/pixmaps/range-new.svg");
-    QIcon directRequestIcon(":/icons/action/pixmaps/range-add.svg");
-    QIcon emailRequestIcon(":/icons/action/pixmaps/range-add.svg");
-    QIcon registerUserIcon(":/icons/action/pixmaps/range-new.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
+    QIcon generateIcon = RIcon::fromFile(":/icons/file/pixmaps/range-new.svg");
+    QIcon directRequestIcon = RIcon::fromFile(":/icons/action/pixmaps/range-add.svg");
+    QIcon emailRequestIcon = RIcon::fromFile(":/icons/action/pixmaps/range-add.svg");
+    QIcon registerUserIcon = RIcon::fromFile(":/icons/action/pixmaps/range-new.svg");
 
 
     this->setWindowTitle(tr("OpenSSL certificate signing request"));

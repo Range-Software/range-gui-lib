@@ -13,6 +13,7 @@
 
 #include "rgl_message_box.h"
 #include "rgl_text_browser.h"
+#include "rgl_icon.h"
 
 RMessageBox::RMessageBox(QWidget *parent,
                          const QIcon &icon,
@@ -139,8 +140,8 @@ RMessageBox::StandardButton RMessageBox::warning(QWidget *parent, const QString 
 
 RMessageBox::StandardButton RMessageBox::quit(QWidget *parent, const QString &text)
 {
-    QIcon cancelIcon(":/icons/action/pixmaps/range-cancel.svg");
-    QIcon quitIcon(":/icons/application/pixmaps/range-quit.svg");
+    QIcon cancelIcon = RIcon::fromFile(":/icons/action/pixmaps/range-cancel.svg");
+    QIcon quitIcon = RIcon::fromFile(":/icons/application/pixmaps/range-quit.svg");
 
     QDialog dialog(parent);
     dialog.setWindowTitle(tr("Quit?"));

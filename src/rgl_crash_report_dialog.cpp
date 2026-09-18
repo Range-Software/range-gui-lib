@@ -12,6 +12,7 @@
 
 #include "rgl_crash_report_dialog.h"
 #include "rgl_message_box.h"
+#include "rgl_icon.h"
 
 RCrashReportDialog::RCrashReportDialog(RApplicationSettings *applicationSettings,
                                        const QString &logFile,
@@ -25,8 +26,8 @@ RCrashReportDialog::RCrashReportDialog(RApplicationSettings *applicationSettings
 
     bool hasLogFile = QFile::exists(logFile);
 
-    QIcon closeIcon(":/icons/action/pixmaps/range-close.svg");
-    QIcon okIcon(":/icons/action/pixmaps/range-ok.svg");
+    QIcon closeIcon = RIcon::fromFile(":/icons/action/pixmaps/range-close.svg");
+    QIcon okIcon = RIcon::fromFile(":/icons/action/pixmaps/range-ok.svg");
 
     this->setWindowTitle(tr("Crash report"));
     this->resize(900,600);
