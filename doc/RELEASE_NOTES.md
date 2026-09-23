@@ -84,6 +84,15 @@
   resolved against the directory of the document which is shown
 - An unresolved link is reported in the log instead of being followed into an empty
   view
+- The chapter list of `RDocumentWidget` is explicitly single selection.
+  `RDocumentWidget::setSelectionRequired()` keeps exactly one chapter selected at all
+  times: when enabled it selects the chapter of the document which is shown, or the
+  first one, and a deselection - a Ctrl+click on the selected chapter - is undone
+  with the document left as it is. A link to a document no chapter points to leaves
+  the selection where it is
+- `RReleaseNotesDialog` requires the selection, so it opens on the first chapter
+  instead of an empty view - its index names no main document - and always shows
+  one of them
 
 #### Icons
 

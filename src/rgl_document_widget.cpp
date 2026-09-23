@@ -16,6 +16,8 @@
 RDocumentWidget::RDocumentWidget(const QString &searchPath, const QString &defaultFileName, QWidget *parent)
     : QWidget{parent}
     , markdownDocument{false}
+    , selectionRequired{false}
+    , lastSelectedRow{-1}
 {
     if (!defaultFileName.isEmpty())
     {
@@ -30,6 +32,7 @@ RDocumentWidget::RDocumentWidget(const QString &searchPath, const QString &defau
     mainLayout->addWidget(splitter);
 
     this->listWidget = new QListWidget;
+    this->listWidget->setSelectionMode(QAbstractItemView::SingleSelection);
     this->listWidget->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Expanding);
     splitter->addWidget(this->listWidget);
 
@@ -74,6 +77,30 @@ QString RDocumentWidget::anchorId(const QString &text)
     }
 
     return id;
+}
+
+void RDocumentWidget::setSelectionRequired(bool selectionRequired)
+{
+    this->selectionRequired = selectionRequired;
+
+    if (!this->selectionRequired || this->listWidget->count() == 0 || !this->listWidget->selectedItems().isEmpty())
+    {
+        return;
+    }
+
+    int row = 0;
+    const QString filePath(QFileInfo(this->currentFileName).absoluteFilePath());
+    for (int i=0;i<this->listWidget->count() && !this->currentFileName.isEmpty();i++)
+    {
+        if (QFileInfo(this->listWidget->item(i)->data(Qt::UserRole).toString()).absoluteFilePath() == filePath)
+        {
+            row = i;
+            break;
+        }
+    }
+
+    // Selecting through the current item loads its document.
+    this->listWidget->setCurrentRow(row);
 }
 
 void RDocumentWidget::addListItem(QIcon icon, const QString &text, const QString &fileName)
@@ -212,13 +239,32 @@ void RDocumentWidget::selectListItem(const QString &fileName)
 {
     const QString filePath(QFileInfo(fileName).absoluteFilePath());
 
+    int row = -1;
+    for (int i=0;i<this->listWidget->count();i++)
+    {
+        const QString itemFilePath(QFileInfo(this->listWidget->item(i)->data(Qt::UserRole).toString()).absoluteFilePath());
+        if (itemFilePath == filePath)
+        {
+            row = i;
+            break;
+        }
+    }
+
+    // A document no item points to leaves a required selection where it is.
+    if (row < 0 && this->selectionRequired)
+    {
+        return;
+    }
+
     QSignalBlocker blocker(this->listWidget);
 
     for (int i=0;i<this->listWidget->count();i++)
     {
-        QListWidgetItem *item = this->listWidget->item(i);
-        const QString itemFilePath(QFileInfo(item->data(Qt::UserRole).toString()).absoluteFilePath());
-        item->setSelected(itemFilePath == filePath);
+        this->listWidget->item(i)->setSelected(i == row);
+    }
+    if (row >= 0)
+    {
+        this->lastSelectedRow = row;
     }
 }
 
@@ -228,10 +274,20 @@ void RDocumentWidget::onListSelectionChanged()
 
     if (selectedItems.size() == 0)
     {
+        if (this->selectionRequired && this->lastSelectedRow >= 0 && this->lastSelectedRow < this->listWidget->count())
+        {
+            // Deselecting - a Ctrl+click on the selected item - is undone, and
+            // the document which is shown stays.
+            QSignalBlocker blocker(this->listWidget);
+            this->listWidget->item(this->lastSelectedRow)->setSelected(true);
+            return;
+        }
+        this->lastSelectedRow = -1;
         this->loadFile(this->defaultFileName);
     }
     else
     {
+        this->lastSelectedRow = this->listWidget->row(selectedItems.at(0));
         this->loadFile(selectedItems.at(0)->data(Qt::UserRole).toString());
     }
 }

@@ -22,6 +22,8 @@ RReleaseNotesDialog::RReleaseNotesDialog(QWidget *parent)
     this->setLayout(mainLayout);
 
     RHelpDocumentWidget *helpDocumentWidget = new RHelpDocumentWidget(releaseNotesPath,"RELEASE_NOTES.json");
+    // One topic is shown at all times - the first one when the dialog opens.
+    helpDocumentWidget->setSelectionRequired(true);
     mainLayout->addWidget(helpDocumentWidget);
 
     QDialogButtonBox *buttonBox = new QDialogButtonBox;

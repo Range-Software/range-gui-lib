@@ -31,6 +31,10 @@ class RDocumentWidget : public QWidget
         //! named anchor of their own, so the links pointing at them have to be
         //! resolved here.
         QMap<QString,int> anchorPositions;
+        //! Whether one list item has to be selected at all times.
+        bool selectionRequired;
+        //! Row of the list item which was selected last.
+        int lastSelectedRow;
 
     public:
 
@@ -41,6 +45,11 @@ class RDocumentWidget : public QWidget
         //! Lower-cased, punctuation dropped and spaces turned into hyphens -
         //! the convention the usual Markdown renderers follow.
         static QString anchorId(const QString &text);
+
+        //! Require exactly one list item to be selected at all times.
+        //! When enabled and nothing is selected yet, the item showing the
+        //! current document is selected, or the first one if there is none.
+        void setSelectionRequired(bool selectionRequired);
 
     protected:
 
