@@ -1,8 +1,11 @@
 #ifndef RGL_DOCUMENT_WIDGET_H
 #define RGL_DOCUMENT_WIDGET_H
 
+#include <QHash>
 #include <QMap>
+#include <QSizeF>
 #include <QString>
+#include <QTimer>
 #include <QUrl>
 #include <QWidget>
 #include <QListWidget>
@@ -35,6 +38,13 @@ class RDocumentWidget : public QWidget
         bool selectionRequired;
         //! Row of the list item which was selected last.
         int lastSelectedRow;
+        //! Natural size of every image of the current document, keyed by the
+        //! name the document refers to it by.
+        QHash<QString,QSizeF> imageSizes;
+        //! Width the images of the current document were fitted to last.
+        qreal fittedImageWidth;
+        //! Timer delaying the image fitting until resizing settles.
+        QTimer *fitImagesTimer;
 
     public:
 
@@ -65,6 +75,17 @@ class RDocumentWidget : public QWidget
         //! Find the headings of the current Markdown document and store the
         //! anchor of each one.
         void findAnchors();
+
+        //! Scale every image of the current document wider than the text
+        //! browser down to its width, and every other back to its natural size.
+        void fitImages();
+
+        //! Return the natural size of given image of the current document.
+        //! An empty size is returned if the image cannot be loaded.
+        QSizeF findImageSize(const QString &name);
+
+        //! Filter events of the text browser viewport.
+        bool eventFilter(QObject *watched, QEvent *event) override;
 
         //! Scroll the text browser to given anchor of the current document.
         //! An empty anchor scrolls to the top. Returns false if the document

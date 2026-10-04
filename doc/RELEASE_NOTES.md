@@ -93,6 +93,11 @@
 - `RReleaseNotesDialog` requires the selection, so it opens on the first chapter
   instead of an empty view - its index names no main document - and always shows
   one of them
+- Images in a document shown by `RDocumentWidget` fit the width of the text browser.
+  An image wider than the browser is scaled down to its width keeping its aspect
+  ratio, and one which fits is shown at its natural size, so no horizontal scroll bar
+  is needed to see a whole picture. The images are refitted whenever the browser is
+  resized, once the resizing settles, so dragging the splitter stays smooth
 
 #### Icons
 

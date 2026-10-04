@@ -1,12 +1,19 @@
+#include <algorithm>
+#include <cmath>
+
 #include <QSplitter>
 #include <QVBoxLayout>
 #include <QDesktopServices>
 #include <QFile>
 #include <QDir>
+#include <QImage>
+#include <QPixmap>
 #include <QScrollBar>
 #include <QSignalBlocker>
 #include <QTextBlock>
 #include <QTextCursor>
+#include <QTextFragment>
+#include <QTextImageFormat>
 
 #include <rbl_logger.h>
 
@@ -18,6 +25,7 @@ RDocumentWidget::RDocumentWidget(const QString &searchPath, const QString &defau
     , markdownDocument{false}
     , selectionRequired{false}
     , lastSelectedRow{-1}
+    , fittedImageWidth{-1.0}
 {
     if (!defaultFileName.isEmpty())
     {
@@ -49,6 +57,14 @@ RDocumentWidget::RDocumentWidget(const QString &searchPath, const QString &defau
     splitter->addWidget(this->textBrowser);
 
     QObject::connect(this->textBrowser,&QTextBrowser::anchorClicked,this,&RDocumentWidget::onAnchorClicked);
+
+    // Images are refitted once the viewport stops changing its size, so that
+    // dragging the splitter does not relayout the document on every pixel.
+    this->fitImagesTimer = new QTimer(this);
+    this->fitImagesTimer->setSingleShot(true);
+    this->fitImagesTimer->setInterval(50);
+    QObject::connect(this->fitImagesTimer,&QTimer::timeout,this,&RDocumentWidget::fitImages);
+    this->textBrowser->viewport()->installEventFilter(this);
 
     splitter->setStretchFactor(1,1);
 
@@ -123,6 +139,8 @@ void RDocumentWidget::loadFile(const QString &fileName)
     this->currentFileName.clear();
     this->markdownDocument = false;
     this->anchorPositions.clear();
+    this->imageSizes.clear();
+    this->fittedImageWidth = -1.0;
 
     if (fileName.isEmpty())
     {
@@ -166,6 +184,8 @@ void RDocumentWidget::loadFile(const QString &fileName)
             {
                 this->findAnchors();
             }
+
+            this->fitImages();
         }
     }
 }
@@ -199,6 +219,106 @@ void RDocumentWidget::findAnchors()
 
         this->anchorPositions.insert(uniqueId,block.position());
     }
+}
+
+void RDocumentWidget::fitImages()
+{
+    QTextDocument *document = this->textBrowser->document();
+
+    // A few pixels are spared so that an image as wide as the viewport does
+    // not bring up the horizontal scroll bar.
+    const qreal availableWidth = std::floor(this->textBrowser->viewport()->width() - 2.0 * document->documentMargin() - 4.0);
+    if (availableWidth <= 0.0 || availableWidth == this->fittedImageWidth)
+    {
+        return;
+    }
+    this->fittedImageWidth = availableWidth;
+
+    // Fragments are collected first, as changing their format while walking
+    // the blocks would invalidate the iterators.
+    QList<QTextFragment> imageFragments;
+    for (QTextBlock block = document->begin(); block.isValid(); block = block.next())
+    {
+        for (QTextBlock::iterator iterator = block.begin(); !iterator.atEnd(); ++iterator)
+        {
+            const QTextFragment fragment = iterator.fragment();
+            if (fragment.isValid() && fragment.charFormat().isImageFormat())
+            {
+                imageFragments.append(fragment);
+            }
+        }
+    }
+
+    if (imageFragments.isEmpty())
+    {
+        return;
+    }
+
+    QTextCursor cursor(document);
+    cursor.beginEditBlock();
+    for (const QTextFragment &fragment : std::as_const(imageFragments))
+    {
+        QTextImageFormat format = fragment.charFormat().toImageFormat();
+
+        const QSizeF imageSize = this->findImageSize(format.name());
+        if (imageSize.isEmpty())
+        {
+            continue;
+        }
+
+        // With the height left out the image keeps its aspect ratio.
+        const qreal width = std::min(imageSize.width(),availableWidth);
+        if (format.width() == width && !format.hasProperty(QTextFormat::ImageHeight))
+        {
+            continue;
+        }
+        format.setWidth(width);
+        format.clearProperty(QTextFormat::ImageHeight);
+
+        cursor.setPosition(fragment.position());
+        cursor.setPosition(fragment.position() + fragment.length(),QTextCursor::KeepAnchor);
+        cursor.setCharFormat(format);
+    }
+    cursor.endEditBlock();
+}
+
+QSizeF RDocumentWidget::findImageSize(const QString &name)
+{
+    const auto iterator = this->imageSizes.constFind(name);
+    if (iterator != this->imageSizes.constEnd())
+    {
+        return iterator.value();
+    }
+
+    // The browser hands over images it loads from a file as raw data.
+    const QVariant resource = this->textBrowser->document()->resource(QTextDocument::ImageResource,QUrl(name));
+
+    QSizeF imageSize;
+    if (resource.typeId() == QMetaType::QImage)
+    {
+        imageSize = resource.value<QImage>().deviceIndependentSize();
+    }
+    else if (resource.typeId() == QMetaType::QPixmap)
+    {
+        imageSize = resource.value<QPixmap>().deviceIndependentSize();
+    }
+    else if (resource.typeId() == QMetaType::QByteArray)
+    {
+        imageSize = QImage::fromData(resource.toByteArray()).deviceIndependentSize();
+    }
+
+    this->imageSizes.insert(name,imageSize);
+
+    return imageSize;
+}
+
+bool RDocumentWidget::eventFilter(QObject *watched, QEvent *event)
+{
+    if (watched == this->textBrowser->viewport() && event->type() == QEvent::Resize)
+    {
+        this->fitImagesTimer->start();
+    }
+    return QWidget::eventFilter(watched,event);
 }
 
 bool RDocumentWidget::scrollToDocumentAnchor(const QString &anchor)
