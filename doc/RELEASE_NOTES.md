@@ -98,6 +98,10 @@
   ratio, and one which fits is shown at its natural size, so no horizontal scroll bar
   is needed to see a whole picture. The images are refitted whenever the browser is
   resized, once the resizing settles, so dragging the splitter stays smooth
+- `RTextBrowser::addCornerWidget()` places widgets in the top right corner, left of
+  the clear button, styled like it. Spin box arrows are drawn with
+  `range-spin_up.svg` and `range-spin_down.svg` from the action icons and follow the
+  colour scheme
 
 #### Icons
 
