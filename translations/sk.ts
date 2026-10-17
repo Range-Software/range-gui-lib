@@ -142,7 +142,7 @@
     <message>
         <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="84"/>
         <source>Suggested name already exists in the list.</source>
-        <translation>Navrhnuté menu sa v zozname už vyskytuje.</translation>
+        <translation>Navrhnuté meno sa v zozname už vyskytuje.</translation>
     </message>
     <message>
         <location filename="../src/rgl_ai_agent_settings_list_widget.cpp" line="95"/>
@@ -478,7 +478,7 @@
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="197"/>
         <source>OpenSSL tool</source>
-        <translation>OpenSSL nástoj</translation>
+        <translation>OpenSSL nástroj</translation>
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="202"/>
@@ -872,7 +872,7 @@
     <message>
         <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="568"/>
         <source>Local file remove has failed.</source>
-        <translation>Odstránenie lokálneho súbory sa nepodarilo.</translation>
+        <translation>Odstránenie lokálneho súboru sa nepodarilo.</translation>
     </message>
     <message>
         <location filename="../src/rgl_cloud_file_manager_widget.cpp" line="588"/>
@@ -1140,7 +1140,7 @@
     <message>
         <location filename="../src/rgl_crash_report_dialog.cpp" line="31"/>
         <source>Crash report</source>
-        <translation>Nalásenie havárie</translation>
+        <translation>Nahlásenie havárie</translation>
     </message>
     <message>
         <location filename="../src/rgl_crash_report_dialog.cpp" line="44"/>
@@ -1579,7 +1579,7 @@
     <message>
         <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="404"/>
         <source>Do you want to apply newly generated key and signed certificate?</source>
-        <translation>Naozaj chceťe použiť novovygenerovaný kľúč a podpísaný certifikát?</translation>
+        <translation>Naozaj chcete použiť novovygenerovaný kľúč a podpísaný certifikát?</translation>
     </message>
     <message>
         <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="407"/>
@@ -1799,7 +1799,7 @@
     <message>
         <location filename="../src/rgl_software_manager_widget.cpp" line="225"/>
         <source>Would you like to install downloaded software file?</source>
-        <translation>Chcete inštalovať stiahnuý softvérový súbor?</translation>
+        <translation>Chcete inštalovať stiahnutý softvérový súbor?</translation>
     </message>
     <message>
         <location filename="../src/rgl_software_manager_widget.cpp" line="226"/>
