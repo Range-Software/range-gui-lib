@@ -266,7 +266,7 @@
     <message>
         <location filename="../src/rgl_application.cpp" line="234"/>
         <source>Cloud client certificate has expired.</source>
-        <translation>Platnosť clientského certifikátu pre Cloud vypršala.</translation>
+        <translation>Platnosť klientského certifikátu pre Cloud vypršala.</translation>
     </message>
     <message>
         <location filename="../src/rgl_application.cpp" line="236"/>
@@ -294,7 +294,7 @@
     <message>
         <location filename="../src/rgl_application.cpp" line="262"/>
         <source>Cloud client certificate will soon expire.</source>
-        <translation>Platnosť clientského certifikátu pre Cloud čoskoro vyprší.</translation>
+        <translation>Platnosť klientského certifikátu pre Cloud čoskoro vyprší.</translation>
     </message>
     <message>
         <location filename="../src/rgl_application.cpp" line="268"/>
@@ -438,7 +438,7 @@
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="153"/>
         <source>Renew client certificate</source>
-        <translation>Obnovovať clientský certifikát</translation>
+        <translation>Obnovovať klientský certifikát</translation>
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="162"/>
@@ -463,7 +463,7 @@
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="177"/>
         <source>Check for software update</source>
-        <translation>Overovanie aktualizácie softwéru</translation>
+        <translation>Overovanie aktualizácie softvéru</translation>
     </message>
     <message>
         <location filename="../src/rgl_application_settings_widget.cpp" line="187"/>
@@ -1538,7 +1538,7 @@
     <message>
         <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="315"/>
         <source>Following fields must not be empty</source>
-        <translation>Následujúce hodnoty nesmú byť prázdne</translation>
+        <translation>Nasledujúce hodnoty nesmú byť prázdne</translation>
     </message>
     <message>
         <location filename="../src/rgl_open_ssl_csr_dialog.cpp" line="321"/>
@@ -1789,7 +1789,7 @@
     <message>
         <location filename="../src/rgl_software_manager_widget.cpp" line="171"/>
         <source>Expected tags</source>
-        <translation>Očákávané značky</translation>
+        <translation>Očakávané značky</translation>
     </message>
     <message>
         <location filename="../src/rgl_software_manager_widget.cpp" line="212"/>

@@ -22,7 +22,42 @@ class RApplicationSettings : public QSettings
                 static const QString Code;
                 static const QString Name;
             };
+            struct Uk
+            {
+                static const QString Code;
+                static const QString Name;
+            };
             struct Sk
+            {
+                static const QString Code;
+                static const QString Name;
+            };
+            struct Cs
+            {
+                static const QString Code;
+                static const QString Name;
+            };
+            struct De
+            {
+                static const QString Code;
+                static const QString Name;
+            };
+            struct It
+            {
+                static const QString Code;
+                static const QString Name;
+            };
+            struct Fr
+            {
+                static const QString Code;
+                static const QString Name;
+            };
+            struct Es
+            {
+                static const QString Code;
+                static const QString Name;
+            };
+            struct Pl
             {
                 static const QString Code;
                 static const QString Name;

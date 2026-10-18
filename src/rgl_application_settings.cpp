@@ -13,8 +13,22 @@
 
 const QString RApplicationSettings::Language::En::Code = "en";
 const QString RApplicationSettings::Language::En::Name = "English";
+const QString RApplicationSettings::Language::Uk::Code = "uk";
+const QString RApplicationSettings::Language::Uk::Name = "Українська";
 const QString RApplicationSettings::Language::Sk::Code = "sk";
 const QString RApplicationSettings::Language::Sk::Name = "Slovensky";
+const QString RApplicationSettings::Language::Cs::Code = "cs";
+const QString RApplicationSettings::Language::Cs::Name = "Česky";
+const QString RApplicationSettings::Language::De::Code = "de";
+const QString RApplicationSettings::Language::De::Name = "Deutsch";
+const QString RApplicationSettings::Language::It::Code = "it";
+const QString RApplicationSettings::Language::It::Name = "Italiano";
+const QString RApplicationSettings::Language::Fr::Code = "fr";
+const QString RApplicationSettings::Language::Fr::Name = "Français";
+const QString RApplicationSettings::Language::Es::Code = "es";
+const QString RApplicationSettings::Language::Es::Name = "Español";
+const QString RApplicationSettings::Language::Pl::Code = "pl";
+const QString RApplicationSettings::Language::Pl::Name = "Polski";
 
 const QString RApplicationSettings::cloudSessionFileName("cloudSession.json");
 const QString RApplicationSettings::aiAgentSettingsFileName("aiAgentSettings.json");
@@ -530,16 +544,30 @@ QList<Qt::ColorScheme> RApplicationSettings::getColorSchemes()
 QStringList RApplicationSettings::getLanguageCodes()
 {
     QStringList languageCodes;
+    languageCodes.append(RApplicationSettings::Language::Cs::Code);
+    languageCodes.append(RApplicationSettings::Language::De::Code);
     languageCodes.append(RApplicationSettings::Language::En::Code);
+    languageCodes.append(RApplicationSettings::Language::Es::Code);
+    languageCodes.append(RApplicationSettings::Language::Fr::Code);
+    languageCodes.append(RApplicationSettings::Language::It::Code);
+    languageCodes.append(RApplicationSettings::Language::Pl::Code);
     languageCodes.append(RApplicationSettings::Language::Sk::Code);
+    languageCodes.append(RApplicationSettings::Language::Uk::Code);
     return languageCodes;
 }
 
 QStringList RApplicationSettings::getLanguageNames()
 {
     QStringList languageNames;
+    languageNames.append(RApplicationSettings::Language::Cs::Name);
+    languageNames.append(RApplicationSettings::Language::De::Name);
     languageNames.append(RApplicationSettings::Language::En::Name);
+    languageNames.append(RApplicationSettings::Language::Es::Name);
+    languageNames.append(RApplicationSettings::Language::Fr::Name);
+    languageNames.append(RApplicationSettings::Language::It::Name);
+    languageNames.append(RApplicationSettings::Language::Pl::Name);
     languageNames.append(RApplicationSettings::Language::Sk::Name);
+    languageNames.append(RApplicationSettings::Language::Uk::Name);
     return languageNames;
 }
 
@@ -549,9 +577,37 @@ QString RApplicationSettings::languageNameToCode(const QString &languageName)
     {
         return RApplicationSettings::Language::En::Code;
     }
+    else if (languageName == RApplicationSettings::Language::Uk::Name)
+    {
+        return RApplicationSettings::Language::Uk::Code;
+    }
     else if (languageName == RApplicationSettings::Language::Sk::Name)
     {
         return RApplicationSettings::Language::Sk::Code;
+    }
+    else if (languageName == RApplicationSettings::Language::Cs::Name)
+    {
+        return RApplicationSettings::Language::Cs::Code;
+    }
+    else if (languageName == RApplicationSettings::Language::De::Name)
+    {
+        return RApplicationSettings::Language::De::Code;
+    }
+    else if (languageName == RApplicationSettings::Language::It::Name)
+    {
+        return RApplicationSettings::Language::It::Code;
+    }
+    else if (languageName == RApplicationSettings::Language::Fr::Name)
+    {
+        return RApplicationSettings::Language::Fr::Code;
+    }
+    else if (languageName == RApplicationSettings::Language::Es::Name)
+    {
+        return RApplicationSettings::Language::Es::Code;
+    }
+    else if (languageName == RApplicationSettings::Language::Pl::Name)
+    {
+        return RApplicationSettings::Language::Pl::Code;
     }
     return RApplicationSettings::getDefaultLanguageCode();
 }
@@ -562,9 +618,37 @@ QLocale::Language RApplicationSettings::languageCodeToLanguage(const QString &la
     {
         return QLocale::C;
     }
+    else if (languageCode == RApplicationSettings::Language::Uk::Code)
+    {
+        return QLocale::Ukrainian;
+    }
     else if (languageCode == RApplicationSettings::Language::Sk::Code)
     {
         return QLocale::Slovak;
+    }
+    else if (languageCode == RApplicationSettings::Language::Cs::Code)
+    {
+        return QLocale::Czech;
+    }
+    else if (languageCode == RApplicationSettings::Language::De::Code)
+    {
+        return QLocale::German;
+    }
+    else if (languageCode == RApplicationSettings::Language::It::Code)
+    {
+        return QLocale::Italian;
+    }
+    else if (languageCode == RApplicationSettings::Language::Fr::Code)
+    {
+        return QLocale::French;
+    }
+    else if (languageCode == RApplicationSettings::Language::Es::Code)
+    {
+        return QLocale::Spanish;
+    }
+    else if (languageCode == RApplicationSettings::Language::Pl::Code)
+    {
+        return QLocale::Polish;
     }
     return QLocale::C;
 }

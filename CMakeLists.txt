@@ -151,5 +151,12 @@ qt_add_translations(range-gui-lib
     TS_FILES
         translations/en.ts
         translations/sk.ts
+        translations/uk.ts
+        translations/cs.ts
+        translations/de.ts
+        translations/it.ts
+        translations/fr.ts
+        translations/es.ts
+        translations/pl.ts
     RESOURCE_PREFIX /i18n/range-gui-lib
 )
