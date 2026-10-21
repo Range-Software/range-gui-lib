@@ -316,6 +316,26 @@
         <source>Software updates available</source>
         <translation>Mises à jour logicielles disponibles</translation>
     </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="238"/>
+        <source>Following directory is empty</source>
+        <translation>Le répertoire suivant est vide</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="242"/>
+        <source>It can be repopulated with files which are provided with the software installation</source>
+        <translation>Il peut être de nouveau rempli avec les fichiers fournis avec l'installation du logiciel</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="246"/>
+        <source>Would you like to repopulate it?</source>
+        <translation>Voulez-vous le remplir de nouveau ?</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application.cpp" line="247"/>
+        <source>Empty directory</source>
+        <translation>Répertoire vide</translation>
+    </message>
 </context>
 <context>
     <name>RApplicationSettings</name>

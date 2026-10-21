@@ -2,6 +2,7 @@
 #define RGL_APPLICATION_H
 
 #include <QApplication>
+#include <QDir>
 #include <QLockFile>
 #include <QMainWindow>
 #include <QStringList>
@@ -128,8 +129,14 @@ class RApplication : public QApplication
 
     private:
 
+        //! Return system directory from which files of given source name are copied.
+        QDir findUpdaterSourceDir(const QString &sourceName) const;
+
         //! Update files
-        void updateFiles();
+        void updateFiles(const QStringList &sourceNames);
+
+        //! Offer to repopulate empty user directories from the system location.
+        void checkEmptyDirectories();
 
         //! Check cloud client certificate validity.
         void validateCloudClientCertificate();

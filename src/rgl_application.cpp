@@ -176,20 +176,25 @@ void RApplication::applyFormat(RApplicationSettings::Format format)
     }
 }
 
-void RApplication::updateFiles()
+QDir RApplication::findUpdaterSourceDir(const QString &sourceName) const
+{
+#ifdef Q_OS_DARWIN
+    return QDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + "Resources" + QDir::separator() + sourceName)));
+#else
+    return QDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + sourceName)));
+#endif
+}
+
+void RApplication::updateFiles(const QStringList &sourceNames)
 {
     RLogger::info("Preparing files update.\n");
     RLogger::indent();
 
     RFileUpdater *pFileUpdater = new RFileUpdater;
 
-    for (const QString &sourceName : std::as_const(this->updaterSourceDirs))
+    for (const QString &sourceName : sourceNames)
     {
-#ifdef Q_OS_DARWIN
-        QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + "Resources" + QDir::separator() + sourceName)));
-#else
-        QDir dataSrcDir(QDir::cleanPath(QDir(this->applicationDirPath()).filePath(QString("..") + QDir::separator() + sourceName)));
-#endif
+        QDir dataSrcDir(this->findUpdaterSourceDir(sourceName));
         QDir dataDstDir(RApplicationSettings::getAppDataDir(sourceName));
 
         RLogger::info("Source directory: \'%s\'\n",dataSrcDir.absolutePath().toUtf8().constData());
@@ -207,6 +212,48 @@ void RApplication::updateFiles()
     }
     RLogger::unindent();
     RJobManager::getInstance().submit(pFileUpdater);
+}
+
+void RApplication::checkEmptyDirectories()
+{
+    QStringList sourceNames;
+
+    for (const QString &sourceName : std::as_const(this->updaterSourceDirs))
+    {
+        QDir dataSrcDir(this->findUpdaterSourceDir(sourceName));
+        QDir dataDstDir(RApplicationSettings::getAppDataDir(sourceName));
+
+        if (!dataSrcDir.exists() || dataSrcDir.entryList(QDir::Files | QDir::NoDotAndDotDot | QDir::Readable).isEmpty())
+        {
+            // Nothing to repopulate from.
+            continue;
+        }
+        if (!dataDstDir.isEmpty())
+        {
+            continue;
+        }
+
+        RLogger::info("Directory \'%s\' is empty.\n",dataDstDir.absolutePath().toUtf8().constData());
+
+        QString messageStr = tr("Following directory is empty") + ":"
+                           + QString("<ul>")
+                           + "<li><tt>" + QDir::toNativeSeparators(dataDstDir.absolutePath()) + "</tt></li>"
+                           + QString("</ul>")
+                           + tr("It can be repopulated with files which are provided with the software installation") + ":"
+                           + QString("<ul>")
+                           + "<li><tt>" + QDir::toNativeSeparators(dataSrcDir.absolutePath()) + "</tt></li>"
+                           + QString("</ul>")
+                           + "<strong>" + tr("Would you like to repopulate it?") + "</strong>";
+        if (RMessageBox::question(this->mainWindow,tr("Empty directory"),messageStr) == RMessageBox::Yes)
+        {
+            sourceNames.append(sourceName);
+        }
+    }
+
+    if (!sourceNames.isEmpty())
+    {
+        this->updateFiles(sourceNames);
+    }
 }
 
 void RApplication::validateCloudClientCertificate()
@@ -579,7 +626,12 @@ void RApplication::onStarted()
         // Newer version is being executed.
 
         // Perform files update.
-        this->updateFiles();
+        this->updateFiles(this->updaterSourceDirs);
+    }
+    else
+    {
+        // Offer to repopulate directories which user has emptied.
+        this->checkEmptyDirectories();
     }
 
     // Check client certificate validity
