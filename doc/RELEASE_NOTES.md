@@ -1,35 +1,30 @@
-## Version 1.1.0
+## Version 1.2.0
 
 ### Improvements
 
-#### Cloud AI query
+#### Languages
 
-- `RCloudAiQueryWidget`: new widget asking questions answered by an AI service through
-  Range Cloud. The question is submitted with `RCloudClient::requestAIQuery()` and the
-  answer is fetched with `RCloudClient::requestAIQueryResult()` repeated until the query
-  is completed. The hosting dialog is provided by the application
-- Unlike the AI chat widget no AI agent is selected and no file upload is supported.
-  Only the response language can be chosen, defaulting to the application language
-- Questions are submitted by pressing Enter or the default "Send" button and are
-  displayed together with the answers as Markdown in a query history. An answer is
-  awaited with an animated waiting message, a pending query can be canceled and failed
-  requests are reported in the query history
-- Conversation is preserved: up to 20 last answered questions with their answers are
-  sent back as a query context, so follow-up questions can be asked. Information about
-  the user (full name, e-mail and territory taken from `RApplicationSettings`) is sent
-  with the first query of a conversation only
-- Derived widgets fill in optional fields of the submitted query in `buildQuery()` and
-  restart the conversation with `hasHistory()` and `clearHistory()`. Public
-  `cancelQuery()` does nothing when no answer is being awaited, so a hosting dialog can
-  cancel a running query when it is being closed
+- The user interface is translated to Czech, German, Spanish, French, Italian, Polish
+  and Ukrainian in addition to English and Slovak. `RApplicationSettings::Language`
+  holds the code and the native name of each language and all of them are offered in
+  the language selection of the application settings
+- Translation files of all languages are part of the library and are kept up to date
+  with the strings of the library
 
-#### Cloud file manager
+#### Data directories
 
-- `RCloudFileManager::findRemoteFile()` returns the file info of a synchronized Cloud
-  file matching given local file name. No additional file listing is requested, so the
-  data directory synchronization is not disturbed
-- `RApplication` keeps the cloud file manager and provides it through
-  `getCloudFileManager()`
+- Directories registered for update from the software installation (e.g. the data
+  directory) which the user has emptied are offered to be repopulated with the files
+  provided with the installation. The check runs at start up when no newer version of
+  the software is being run, which would update the files anyway, and a directory is
+  only offered when the installation provides files for it
+- A directory which did not exist and is created at start up is populated from the
+  installation right away, without asking. `RApplicationSettings::getDir()` records the
+  directories it creates during the session and `RApplicationSettings::isDirCreated()`
+  reports them
+- `RApplication::findUpdaterSourceDir()` returns the installation directory files of
+  given source name are copied from, and `RApplication::updateFiles()` takes the list of
+  source names to update
 
 #### Application settings
 
@@ -135,6 +130,42 @@
   in the same menu, tool bar or widget: `QWidget::insertAction()` removes an
   action the widget already holds before inserting it again, so every further
   add moved the one separator to the end and only the last one was displayed
+- Corrected Slovak translation of several strings
+
+---
+
+## Version 1.1.0
+
+### Improvements
+
+#### Cloud AI query
+
+- `RCloudAiQueryWidget`: new widget asking questions answered by an AI service through
+  Range Cloud. The question is submitted with `RCloudClient::requestAIQuery()` and the
+  answer is fetched with `RCloudClient::requestAIQueryResult()` repeated until the query
+  is completed. The hosting dialog is provided by the application
+- Unlike the AI chat widget no AI agent is selected and no file upload is supported.
+  Only the response language can be chosen, defaulting to the application language
+- Questions are submitted by pressing Enter or the default "Send" button and are
+  displayed together with the answers as Markdown in a query history. An answer is
+  awaited with an animated waiting message, a pending query can be canceled and failed
+  requests are reported in the query history
+- Conversation is preserved: up to 20 last answered questions with their answers are
+  sent back as a query context, so follow-up questions can be asked. Information about
+  the user (full name, e-mail and territory taken from `RApplicationSettings`) is sent
+  with the first query of a conversation only
+- Derived widgets fill in optional fields of the submitted query in `buildQuery()` and
+  restart the conversation with `hasHistory()` and `clearHistory()`. Public
+  `cancelQuery()` does nothing when no answer is being awaited, so a hosting dialog can
+  cancel a running query when it is being closed
+
+#### Cloud file manager
+
+- `RCloudFileManager::findRemoteFile()` returns the file info of a synchronized Cloud
+  file matching given local file name. No additional file listing is requested, so the
+  data directory synchronization is not disturbed
+- `RApplication` keeps the cloud file manager and provides it through
+  `getCloudFileManager()`
 
 ---
 
