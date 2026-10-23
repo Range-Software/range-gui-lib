@@ -3,6 +3,7 @@
 
 #include <QSettings>
 #include <QString>
+#include <QSet>
 #include <QLocale>
 
 #include <rbl_version.h>
@@ -112,6 +113,9 @@ class RApplicationSettings : public QSettings
         static const QString opensslToolPathKey;
         static const QString opensslConfPathKey;
 
+        //! Directories created during this session.
+        static QSet<QString> createdDirs;
+
         //! Application path.
         QString applicationDirPath;
         //! Stored version.
@@ -172,6 +176,9 @@ class RApplicationSettings : public QSettings
 
         //! Return and construct directory path.
         static QString getDir(const QString &topDir, const QString &subDir);
+
+        //! Check if given directory was created during this session.
+        static bool isDirCreated(const QString &dirPath);
 
         //! Return const reference to help directory.
         QString getHelpDir() const;

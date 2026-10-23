@@ -62,6 +62,8 @@ const QString RApplicationSettings::userTerritoryKey = "user/territory";
 const QString RApplicationSettings::opensslToolPathKey = "tools/opensslToolPath";
 const QString RApplicationSettings::opensslConfPathKey = "tools/opensslConfPath";
 
+QSet<QString> RApplicationSettings::createdDirs;
+
 RApplicationSettings::RApplicationSettings(QObject *parent)
     : QSettings(parent)
 {
@@ -215,6 +217,10 @@ QString RApplicationSettings::getDir(const QString &topDir, const QString &subDi
         {
             RLogger::error("Failed to create a directory \'%s\'\n",fullPath.toUtf8().constData());
         }
+        else
+        {
+            RApplicationSettings::createdDirs.insert(QDir::cleanPath(QDir(fullPath).absolutePath()));
+        }
     }
     if (!dir.cd(subDir))
     {
@@ -224,6 +230,11 @@ QString RApplicationSettings::getDir(const QString &topDir, const QString &subDi
     }
 
     return dir.path();
+}
+
+bool RApplicationSettings::isDirCreated(const QString &dirPath)
+{
+    return RApplicationSettings::createdDirs.contains(QDir::cleanPath(QDir(dirPath).absolutePath()));
 }
 
 QString RApplicationSettings::getHelpDir() const

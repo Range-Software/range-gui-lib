@@ -233,6 +233,14 @@ void RApplication::checkEmptyDirectories()
             continue;
         }
 
+        if (RApplicationSettings::isDirCreated(dataDstDir.absolutePath()))
+        {
+            // Directory did not exist, populate it without asking.
+            RLogger::info("Directory \'%s\' was created.\n",dataDstDir.absolutePath().toUtf8().constData());
+            sourceNames.append(sourceName);
+            continue;
+        }
+
         RLogger::info("Directory \'%s\' is empty.\n",dataDstDir.absolutePath().toUtf8().constData());
 
         QString messageStr = tr("Following directory is empty") + ":"
