@@ -83,6 +83,8 @@ class RApplicationSettings : public QSettings
         static const QString logFileName;
         //! License file name without path.
         static const QString licenseFileName;
+        //! Privacy policy file name without path.
+        static const QString privacyPolicyFileName;
         //! Release notes file name without path.
         static const QString releaseNotesFileName;
         //! OpenSSL configuration file name without path.
@@ -143,6 +145,9 @@ class RApplicationSettings : public QSettings
 
         //! Return license file name.
         QString findLicenseFileName() const;
+
+        //! Return privacy policy file name.
+        QString findPrivacyPolicyFileName() const;
 
         //! Return release notes file name.
         QString findReleaseNotesFileName() const;

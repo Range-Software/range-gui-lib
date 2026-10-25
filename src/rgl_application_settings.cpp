@@ -34,6 +34,7 @@ const QString RApplicationSettings::cloudSessionFileName("cloudSession.json");
 const QString RApplicationSettings::aiAgentSettingsFileName("aiAgentSettings.json");
 const QString RApplicationSettings::logFileName("application.log");
 const QString RApplicationSettings::licenseFileName("LICENSE.txt");
+const QString RApplicationSettings::privacyPolicyFileName("PRIVACY_POLICY.txt");
 const QString RApplicationSettings::releaseNotesFileName("RELEASE_NOTES.txt");
 const QString RApplicationSettings::opensslCnfFileName("openssl.cnf");
 
@@ -101,6 +102,11 @@ QString RApplicationSettings::findDocFileName(const QString baseName) const
 QString RApplicationSettings::findLicenseFileName() const
 {
     return this->findDocFileName(RApplicationSettings::licenseFileName);
+}
+
+QString RApplicationSettings::findPrivacyPolicyFileName() const
+{
+    return this->findDocFileName(RApplicationSettings::privacyPolicyFileName);
 }
 
 QString RApplicationSettings::findReleaseNotesFileName() const
