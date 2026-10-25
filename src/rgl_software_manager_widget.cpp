@@ -185,8 +185,10 @@ void RSoftwareManagerWidget::onAllSoftwareBoxToggled(bool checked)
     for (int i=this->cloudFilesWidget->topLevelItemCount()-1; i>=0; i--)
     {
         QStringList tags = this->cloudFilesWidget->topLevelItem(i)->text(ColumnTags).split(',');
+        RVersion version(this->cloudFilesWidget->topLevelItem(i)->text(ColumnVersion));
 
-        bool itemIsHidden = false;
+        // Unless all software is requested, hide versions not newer than the running one
+        bool itemIsHidden = (!checked && version <= RVendor::version());
         for (const QString &expectedTag : std::as_const(expectedTags))
         {
             if (!tags.contains(expectedTag))
