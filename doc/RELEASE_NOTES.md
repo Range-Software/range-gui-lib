@@ -1,3 +1,30 @@
+## Version 1.3.0
+
+### Improvements
+
+#### Desktop services
+
+- `RDesktopServices::openDirectory()` opens a directory in the file browser of the
+  operating system (Finder on macOS, File Explorer on Windows, the file manager on
+  Linux). The URL is built with `QUrl::fromLocalFile()`, so Windows drive letters and
+  paths containing spaces or non-ASCII characters are handled on every platform
+
+#### Data directories
+
+- `RApplicationSettings::isSandboxed()` reports whether the application runs inside
+  the macOS App Sandbox (Mac App Store)
+
+### Bug fixes
+
+- A sandboxed application could not create or write to its directories.
+  `RApplicationSettings::getAppHomeDir()` placed them in the user's Documents folder,
+  which the sandbox only exposes as a link from the container and does not allow
+  to be written to. A sandboxed application now uses Application Support inside its
+  container, `~/Library/Containers/<bundle identifier>/Data/Library/Application Support/<family name>/<short name>`.
+  Applications which are not sandboxed keep using the Documents folder
+
+---
+
 ## Version 1.2.0
 
 ### Improvements

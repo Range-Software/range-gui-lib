@@ -30,6 +30,7 @@ qt_add_library(range-gui-lib
         src/rgl_cloud_session_dialog.cpp
         src/rgl_cloud_session_widget.cpp
         src/rgl_crash_report_dialog.cpp
+        src/rgl_desktop_services.cpp
         src/rgl_document_dialog.cpp
         src/rgl_document_widget.cpp
         src/rgl_file_chooser_button.cpp
@@ -90,6 +91,7 @@ qt_add_library(range-gui-lib
         include/rgl_cloud_session_dialog.h
         include/rgl_cloud_session_widget.h
         include/rgl_crash_report_dialog.h
+        include/rgl_desktop_services.h
         include/rgl_document_dialog.h
         include/rgl_document_widget.h
         include/rgl_file_chooser_button.h

@@ -494,9 +494,25 @@ QString RApplicationSettings::getHomeDir()
     return QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
 }
 
+bool RApplicationSettings::isSandboxed()
+{
+#ifdef Q_OS_DARWIN
+    // Set by macOS for every process running inside an App Sandbox container.
+    return qEnvironmentVariableIsSet("APP_SANDBOX_CONTAINER_ID");
+#else
+    return false;
+#endif
+}
+
 QString RApplicationSettings::getAppHomeDir()
 {
-    return RApplicationSettings::getDir(RApplicationSettings::getDir(QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),RVendor::familyName()),RVendor::shortName());
+    // Sandboxed application has no write access to the user's Documents directory
+    // (the container's Documents is only a link to it), therefore the application
+    // home directory is placed into Application Support inside the container.
+    QStandardPaths::StandardLocation topLocation = RApplicationSettings::isSandboxed()
+                                                   ? QStandardPaths::GenericDataLocation
+                                                   : QStandardPaths::DocumentsLocation;
+    return RApplicationSettings::getDir(RApplicationSettings::getDir(QStandardPaths::writableLocation(topLocation),RVendor::familyName()),RVendor::shortName());
 }
 
 QString RApplicationSettings::getAppDataDir(const QString &subDir)

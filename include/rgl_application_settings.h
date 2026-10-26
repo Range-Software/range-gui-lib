@@ -313,7 +313,12 @@ class RApplicationSettings : public QSettings
         //! Return users home directory path.
         static QString getHomeDir();
 
+        //! Return true if application runs inside a sandbox (Mac App Store).
+        static bool isSandboxed();
+
         //! Return users application home directory path.
+        //! Sandboxed application uses Application Support directory inside its
+        //! container instead of the users Documents directory.
         static QString getAppHomeDir();
 
         //! Return users application data directory path.
