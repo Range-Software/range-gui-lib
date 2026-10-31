@@ -20,6 +20,18 @@
 #include "rgl_progress_dialog.h"
 #include "rgl_icon.h"
 
+static QString fileMessage(const QString &message, const RFileInfo &fileInfo)
+{
+    return message
+           + "<br/><tt>" + fileInfo.getPath().toHtmlEscaped() + "</tt>"
+           + " (" + fileInfo.getId().toString(QUuid::WithoutBraces) + ")";
+}
+
+static QString fileMessage(const QString &message, const QString &fileName)
+{
+    return message + "<br/><tt>" + fileName.toHtmlEscaped() + "</tt>";
+}
+
 RCloudFileManagerWidget::RCloudFileManagerWidget(RCloudConnectionHandler *connectionHandler,
                                                  RApplicationSettings *applicationSettings,
                                                  bool allowDirectorySelector,
@@ -784,7 +796,7 @@ void RCloudFileManagerWidget::onFileListAvailable(QList<RFileInfo> fileInfoList)
 void RCloudFileManagerWidget::onFileUploaded(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file uploaded \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File uploaded"),tr("File was uploaded successfully."));
+    RMessageBox::information(this,tr("File uploaded"),fileMessage(tr("File was uploaded successfully."),fileInfo));
     this->refreshCloudFiles();
 }
 
@@ -793,56 +805,56 @@ void RCloudFileManagerWidget::onFileReplaced(std::tuple<RFileInfo, QList<RFileIn
     RLogger::info("Cloud file replaced \'%s\' (%d files were removed)\n",
                   std::get<0>(fileInfoList).getPath().toUtf8().constData(),
                   std::get<1>(fileInfoList).size());
-    RMessageBox::information(this,tr("File uploaded"),tr("File was uploaded successfully."));
+    RMessageBox::information(this,tr("File uploaded"),fileMessage(tr("File was uploaded successfully."),std::get<0>(fileInfoList)));
     this->refreshCloudFiles();
 }
 
 void RCloudFileManagerWidget::onFileUpdated(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file updated \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File updated"),tr("File was updated successfully."));
+    RMessageBox::information(this,tr("File updated"),fileMessage(tr("File was updated successfully."),fileInfo));
     this->refreshCloudFiles();
 }
 
 void RCloudFileManagerWidget::onFileAccessModeUpdated(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file access mode updated \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File access mode updated"),tr("File access mode was updated successfully."));
+    RMessageBox::information(this,tr("File access mode updated"),fileMessage(tr("File access mode was updated successfully."),fileInfo));
     this->refreshCloudFiles();
 }
 
 void RCloudFileManagerWidget::onFileAccessOwnerUpdated(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file access owner updated \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File access owner updated"),tr("File access owner was updated successfully."));
+    RMessageBox::information(this,tr("File access owner updated"),fileMessage(tr("File access owner was updated successfully."),fileInfo));
     this->refreshCloudFiles();
 }
 
 void RCloudFileManagerWidget::onFileVersionUpdated(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file version updated \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File version updated"),tr("File version was updated successfully."));
+    RMessageBox::information(this,tr("File version updated"),fileMessage(tr("File version was updated successfully."),fileInfo));
     this->refreshCloudFiles();
 }
 
 void RCloudFileManagerWidget::onFileTagsUpdated(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file tags updated \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File tags updated"),tr("File tags were updated successfully."));
+    RMessageBox::information(this,tr("File tags updated"),fileMessage(tr("File tags were updated successfully."),fileInfo));
     this->refreshCloudFiles();
 }
 
 void RCloudFileManagerWidget::onFileDownloaded(QString fileName)
 {
     RLogger::info("Cloud file downloaded \'%s\'\n",fileName.toUtf8().constData());
-    RMessageBox::information(this,tr("File downloaded"),tr("File was downloaded successfully."));
+    RMessageBox::information(this,tr("File downloaded"),fileMessage(tr("File was downloaded successfully."),fileName));
     RCloudFileManagerWidget::populateLocalFiles(this->localDirectoryPath,this->localFilesWidget);
 }
 
 void RCloudFileManagerWidget::onFileRemoved(RFileInfo fileInfo)
 {
     RLogger::info("Cloud file removed \'%s\'\n",fileInfo.getPath().toUtf8().constData());
-    RMessageBox::information(this,tr("File removed"),tr("File was removed successfully."));
+    RMessageBox::information(this,tr("File removed"),fileMessage(tr("File was removed successfully."),fileInfo));
 
     this->refreshCloudFiles();
 }

@@ -1,3 +1,15 @@
+## Version 1.3.1
+
+### Improvements
+
+#### Cloud file manager
+
+- Confirmation messages shown after a file operation name the affected file.
+  Cloud files are shown with their path and identifier (upload, replace, update,
+  access mode, access owner, version, tags and remove), downloaded files with their
+  local file name. File names are HTML-escaped, so names containing characters
+  such as `<` or `&` are displayed correctly
+
 ## Version 1.3.0
 
 ### Improvements
