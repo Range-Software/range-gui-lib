@@ -10,6 +10,13 @@
   local file name. File names are HTML-escaped, so names containing characters
   such as `<` or `&` are displayed correctly
 
+#### Application settings
+
+- The *OpenSSL tool* and *OpenSSL configuration* paths are hidden when keys and
+  certificate signing requests are generated without the `openssl` tool
+  (`ROpenSslTool::isToolRequired()`, macOS builds of range-cloud-lib with
+  `RANGE_NATIVE_KEY_TOOL`)
+
 ## Version 1.3.0
 
 ### Improvements

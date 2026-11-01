@@ -11,6 +11,7 @@
 #include <QStandardPaths>
 
 #include <rbl_logger.h>
+#include <rcl_open_ssl_tool.h>
 
 #include "rgl_application_settings_widget.h"
 #include "rgl_application.h"
@@ -209,6 +210,10 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->opensslConfFileButton->setFileName(this->applicationSettings->getOpensslConfPath());
     this->opensslConfFileButton->setSearchDirectory(this->applicationSettings->findEtcDir());
     pathsLayout->addWidget(this->opensslConfFileButton);
+
+    // Keys and CSRs are generated without the openssl tool
+    this->opensslToolFileButton->setVisible(ROpenSslTool::isToolRequired());
+    this->opensslConfFileButton->setVisible(ROpenSslTool::isToolRequired());
 
     pathsLayout->addStretch(10);
 
