@@ -81,6 +81,7 @@ RHttpClientSettings RCloudConnectionHandler::createPublicHttpClientSettings(cons
     publicHttpClientSettings.setTimeout(sessionInfo.getTimeout());
     publicHttpClientSettings.setProxySettings(proxySettings);
     publicHttpClientSettings.setTlsTrustStore(sessionInfo.getHostTrustStore());
+    publicHttpClientSettings.setVerification(sessionInfo.getVerification());
 
     return publicHttpClientSettings;
 }
@@ -93,6 +94,7 @@ RHttpClientSettings RCloudConnectionHandler::createPrivateHttpClientSettings(con
     privateHttpClientSettings.setProxySettings(proxySettings);
     privateHttpClientSettings.setTlsKeyStore(sessionInfo.getClientKeyStore());
     privateHttpClientSettings.setTlsTrustStore(sessionInfo.getHostTrustStore());
+    privateHttpClientSettings.setVerification(sessionInfo.getVerification());
 
     return privateHttpClientSettings;
 }

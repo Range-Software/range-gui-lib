@@ -1109,6 +1109,41 @@
         <translation>Poslať testovací požiadavok na verejný Cloud</translation>
     </message>
     <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verification</source>
+        <translation>Overenie</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Full verification</source>
+        <translation>Úplné overenie</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority and that host name matches the name in host certificate</source>
+        <translation>Overiť, či je certifikát hostiteľa vydaný dôveryhodnou certifikačnou autoritou a či sa názov hostiteľa zhoduje s názvom v certifikáte hostiteľa</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Trusted certificate only (skip host name)</source>
+        <translation>Iba dôveryhodný certifikát (bez overenia názvu hostiteľa)</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority, host name is not verified</source>
+        <translation>Overiť, či je certifikát hostiteľa vydaný dôveryhodnou certifikačnou autoritou, názov hostiteľa sa neoveruje</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>No verification</source>
+        <translation>Bez overenia</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Host certificate is not verified, identity of the host is not guaranteed</source>
+        <translation>Certifikát hostiteľa sa neoveruje, identita hostiteľa nie je zaručená</translation>
+    </message>
+    <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="86"/>
         <source>Send test request to private Cloud</source>
         <translation>Poslať testovací požiadavok na súkromný Cloud</translation>

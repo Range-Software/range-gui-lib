@@ -1108,6 +1108,41 @@
             <source>Send test request to public Cloud</source>
             <translation>Надіслати тестовий запит у публічну хмару</translation>
         </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verification</source>
+        <translation>Перевірка</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Full verification</source>
+        <translation>Повна перевірка</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority and that host name matches the name in host certificate</source>
+        <translation>Перевіряти, чи сертифікат хоста видано довіреним центром сертифікації та чи ім'я хоста збігається з ім'ям у сертифікаті хоста</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Trusted certificate only (skip host name)</source>
+        <translation>Лише довірений сертифікат (без імені хоста)</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority, host name is not verified</source>
+        <translation>Перевіряти, чи сертифікат хоста видано довіреним центром сертифікації, ім'я хоста не перевіряється</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>No verification</source>
+        <translation>Без перевірки</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Host certificate is not verified, identity of the host is not guaranteed</source>
+        <translation>Сертифікат хоста не перевіряється, ідентичність хоста не гарантована</translation>
+    </message>
         <message>
             <location filename="../src/rgl_cloud_session_widget.cpp" line="86"/>
             <source>Send test request to private Cloud</source>

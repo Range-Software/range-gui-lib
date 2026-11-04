@@ -1109,6 +1109,41 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Full verification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority and that host name matches the name in host certificate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Trusted certificate only (skip host name)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority, host name is not verified</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>No verification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Host certificate is not verified, identity of the host is not guaranteed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="86"/>
         <source>Send test request to private Cloud</source>
         <translation type="unfinished"></translation>

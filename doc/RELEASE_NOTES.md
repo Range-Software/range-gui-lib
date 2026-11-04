@@ -17,6 +17,16 @@
   (`ROpenSslTool::isToolRequired()`, macOS builds of range-cloud-lib with
   `RANGE_NATIVE_KEY_TOOL`)
 
+#### Cloud sessions
+
+- New *Verification* setting of the Cloud host in the session manager
+  (`RCloudSessionWidget`): *Full verification* (default), *Trusted certificate only
+  (skip host name)* and *No verification*. `RCloudConnectionHandler` passes it to
+  the public and the private Cloud clients and to the connection tests. Each option
+  explains in its tooltip what is verified. Translated to all supported languages
+
+---
+
 ## Version 1.3.0
 
 ### Improvements

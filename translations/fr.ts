@@ -1109,6 +1109,41 @@
         <translation>Envoyer une requête de test au Cloud public</translation>
     </message>
     <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verification</source>
+        <translation>Vérification</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Full verification</source>
+        <translation>Vérification complète</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority and that host name matches the name in host certificate</source>
+        <translation>Vérifier que le certificat de l'hôte est émis par une autorité de certification de confiance et que le nom d'hôte correspond au nom du certificat de l'hôte</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Trusted certificate only (skip host name)</source>
+        <translation>Certificat de confiance uniquement (sans nom d'hôte)</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Verify that host certificate is issued by a trusted certificate authority, host name is not verified</source>
+        <translation>Vérifier que le certificat de l'hôte est émis par une autorité de certification de confiance, le nom d'hôte n'est pas vérifié</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>No verification</source>
+        <translation>Aucune vérification</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_session_widget.cpp" line="83"/>
+        <source>Host certificate is not verified, identity of the host is not guaranteed</source>
+        <translation>Le certificat de l'hôte n'est pas vérifié, l'identité de l'hôte n'est pas garantie</translation>
+    </message>
+    <message>
         <location filename="../src/rgl_cloud_session_widget.cpp" line="86" />
         <source>Send test request to private Cloud</source>
         <translation>Envoyer une requête de test au Cloud privé</translation>

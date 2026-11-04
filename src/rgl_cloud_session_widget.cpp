@@ -80,6 +80,16 @@ RCloudSessionWidget::RCloudSessionWidget(const RCloudSessionInfo &sessionInfo,
     QPushButton *hostCertificateViewButton = new QPushButton(tr("View"));
     hostCertificateLayout->addWidget(hostCertificateViewButton);
 
+    this->verificationCombo = new QComboBox;
+    this->verificationCombo->addItem(tr("Full verification"),RHttpClientSettings::FullVerification);
+    this->verificationCombo->setItemData(0,tr("Verify that host certificate is issued by a trusted certificate authority and that host name matches the name in host certificate"),Qt::ToolTipRole);
+    this->verificationCombo->addItem(tr("Trusted certificate only (skip host name)"),RHttpClientSettings::CertificateVerification);
+    this->verificationCombo->setItemData(1,tr("Verify that host certificate is issued by a trusted certificate authority, host name is not verified"),Qt::ToolTipRole);
+    this->verificationCombo->addItem(tr("No verification"),RHttpClientSettings::NoVerification);
+    this->verificationCombo->setItemData(2,tr("Host certificate is not verified, identity of the host is not guaranteed"),Qt::ToolTipRole);
+    this->verificationCombo->setCurrentIndex(this->verificationCombo->findData(this->sessionInfo.getVerification()));
+    hostLayout->addRow(tr("Verification") + ":", this->verificationCombo);
+
     QPushButton *testPublicRequestButton = new QPushButton(tr("Send test request to public Cloud"));
     hostLayout->addRow(testPublicRequestButton);
 
@@ -127,6 +137,7 @@ RCloudSessionWidget::RCloudSessionWidget(const RCloudSessionInfo &sessionInfo,
     QObject::connect(this->privatePortSpin,&QSpinBox::valueChanged,this,&RCloudSessionWidget::onPrivatePortChanged);
     QObject::connect(this->timeoutSpin,&QSpinBox::valueChanged,this,&RCloudSessionWidget::onTimeoutChanged);
     QObject::connect(this->hostCertificateFileButton,&RFileChooserButton::fileNameChanged,this,&RCloudSessionWidget::onHostCertificateFileChanged);
+    QObject::connect(this->verificationCombo,&QComboBox::currentIndexChanged,this,&RCloudSessionWidget::onVerificationChanged);
     QObject::connect(this->clientPrivateKeyFileButton,&RFileChooserButton::fileNameChanged,this,&RCloudSessionWidget::onClientPrivateKeyFileChanged);
     QObject::connect(this->clientPrivateKeyPasswordEdit,&QLineEdit::textChanged,this,&RCloudSessionWidget::onClientPrivateKeyPasswordChanged);
     QObject::connect(this->clientCertificateFileButton,&RFileChooserButton::fileNameChanged,this,&RCloudSessionWidget::onClientCertificateFileChanged);
@@ -157,6 +168,7 @@ void RCloudSessionWidget::setSessionInfo(const RCloudSessionInfo &sessionInfo)
     this->privatePortSpin->setValue(sessionInfo.getPrivatePort());
     this->timeoutSpin->setValue(sessionInfo.getTimeout());
     this->hostCertificateFileButton->setFileName(sessionInfo.getHostTrustStore().getCertificateFile());
+    this->verificationCombo->setCurrentIndex(this->verificationCombo->findData(sessionInfo.getVerification()));
     this->clientPrivateKeyFileButton->setFileName(sessionInfo.getClientKeyStore().getKeyFile());
     this->clientPrivateKeyPasswordEdit->setText(sessionInfo.getClientKeyStore().getPassword());
     this->clientCertificateFileButton->setFileName(sessionInfo.getClientKeyStore().getCertificateFile());
@@ -198,6 +210,12 @@ void RCloudSessionWidget::onHostCertificateFileChanged(const QString &fileName)
     RTlsTrustStore trustStore = this->sessionInfo.getHostTrustStore();
     trustStore.setCertificateFile(fileName);
     this->sessionInfo.setHostTrustStore(trustStore);
+    emit this->sessionInfoChanged(this->sessionInfo);
+}
+
+void RCloudSessionWidget::onVerificationChanged(int index)
+{
+    this->sessionInfo.setVerification(RHttpClientSettings::Verification(this->verificationCombo->itemData(index).toInt()));
     emit this->sessionInfoChanged(this->sessionInfo);
 }
 

@@ -1,6 +1,7 @@
 #ifndef RGL_CLOUD_SESSION_WIDGET_H
 #define RGL_CLOUD_SESSION_WIDGET_H
 
+#include <QComboBox>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QSpinBox>
@@ -47,6 +48,9 @@ class RCloudSessionWidget : public QWidget
 
         //! Host certificate button.
         RFileChooserButton *hostCertificateFileButton;
+
+        //! Host certificate verification combo box.
+        QComboBox *verificationCombo;
 
         //! Private key file button.
         RFileChooserButton *clientPrivateKeyFileButton;
@@ -95,6 +99,9 @@ class RCloudSessionWidget : public QWidget
 
         //! CA Certificate file name changed.
         void onHostCertificateFileChanged(const QString &fileName);
+
+        //! Host certificate verification changed.
+        void onVerificationChanged(int index);
 
         //! Private key file name changed.
         void onClientPrivateKeyFileChanged(const QString &fileName);
