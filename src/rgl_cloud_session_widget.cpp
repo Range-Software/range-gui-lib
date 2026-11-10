@@ -2,7 +2,6 @@
 #include <QFormLayout>
 #include <QLineEdit>
 #include <QSpinBox>
-#include <QFileInfo>
 #include <QGroupBox>
 
 #include <rbl_error.h>

@@ -1,7 +1,6 @@
 #ifndef RGL_HELP_DOCUMENT_WIDGET_H
 #define RGL_HELP_DOCUMENT_WIDGET_H
 
-#include <QMap>
 #include <QString>
 
 #include "rgl_document_widget.h"

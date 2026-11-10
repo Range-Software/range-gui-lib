@@ -1,6 +1,5 @@
 #include <QVBoxLayout>
 #include <QFormLayout>
-#include <QSpinBox>
 #include <QLabel>
 #include <QGroupBox>
 #include <QDialogButtonBox>

@@ -1,7 +1,6 @@
 #include <QVBoxLayout>
 #include <QIcon>
 #include <QLabel>
-#include <QFile>
 #include <QPushButton>
 #include <QDialogButtonBox>
 

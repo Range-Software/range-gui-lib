@@ -4,7 +4,6 @@
 
 #include <QVBoxLayout>
 #include <QSplitter>
-#include <QListWidgetItem>
 
 RAiAgentSettingsManagerWidget::RAiAgentSettingsManagerWidget(RAgentSettingsManager *aiAgentSettingsManager, QWidget *parent)
     : QWidget{parent}

@@ -25,6 +25,13 @@
   the public and the private Cloud clients and to the connection tests. Each option
   explains in its tooltip what is verified. Translated to all supported languages
 
+#### Includes
+
+- `rgl_application.h` forward declares `RActionList`, `RCloudConnectionHandler`,
+  `RCloudFileManager` and `RCloudSessionManager` instead of including their headers,
+  and unused includes are removed from public headers and source files. Code that
+  received these headers through this library has to include them directly
+
 ---
 
 ## Version 1.3.0

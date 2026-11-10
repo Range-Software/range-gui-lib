@@ -1,6 +1,3 @@
-#include <QDateTime>
-#include <QDir>
-#include <QFileInfo>
 #include <QFormLayout>
 #include <QGroupBox>
 #include <QLabel>

@@ -1,5 +1,4 @@
 #include <QHeaderView>
-#include <QAction>
 
 #include "rgl_tree_widget.h"
 

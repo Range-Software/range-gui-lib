@@ -17,7 +17,6 @@
 
 #include <rai_agent.h>
 
-#include <rgl_message_box.h>
 #include <rgl_text_browser.h>
 
 RAiChatWidget::~RAiChatWidget()

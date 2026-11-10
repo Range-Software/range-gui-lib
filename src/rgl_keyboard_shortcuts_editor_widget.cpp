@@ -3,8 +3,6 @@
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QLabel>
-#include <QPushButton>
-#include <QMessageBox>
 
 #include "rgl_keyboard_shortcuts_editor_widget.h"
 #include "rgl_message_box.h"

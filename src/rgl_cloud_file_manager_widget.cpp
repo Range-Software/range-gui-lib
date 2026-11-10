@@ -5,10 +5,10 @@
 #include <QMenu>
 #include <QDir>
 #include <QTimer>
-#include <QLocale>
 
 #include <rbl_logger.h>
 #include <rbl_utils.h>
+#include <rbl_tool_task.h>
 
 #include "rgl_access_owner_dialog.h"
 #include "rgl_access_mode_dialog.h"

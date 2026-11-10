@@ -7,8 +7,6 @@
 #include <QCheckBox>
 #include <QLineEdit>
 
-#include <rcl_cloud_client.h>
-
 #include "rgl_application_settings.h"
 #include "rgl_file_chooser_button.h"
 #include "rgl_keyboard_shortcuts_editor_widget.h"

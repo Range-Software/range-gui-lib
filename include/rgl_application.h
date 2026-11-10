@@ -10,14 +10,16 @@
 #include <rbl_argument_option.h>
 #include <rbl_arguments_parser.h>
 
-#include <rcl_cloud_session_manager.h>
-
 #include <rai_agent_settings_manager.h>
+#include <rcl_file_info.h>
+#include <rcl_cloud_session_info.h>
 
 #include "rgl_application_settings.h"
-#include "rgl_action_list.h"
-#include "rgl_cloud_connection_handler.h"
-#include "rgl_cloud_file_manager.h"
+
+class RActionList;
+class RCloudConnectionHandler;
+class RCloudFileManager;
+class RCloudSessionManager;
 
 class RApplication : public QApplication
 {

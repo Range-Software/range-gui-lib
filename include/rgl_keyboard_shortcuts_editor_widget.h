@@ -2,7 +2,6 @@
 #define RGL_KEYBOARD_SHORTCUTS_EDITOR_WIDGET_H
 
 #include <QTreeWidget>
-#include <QLineEdit>
 
 #include "rgl_action_list.h"
 #include "rgl_keyboard_shortcut_line_edit.h"

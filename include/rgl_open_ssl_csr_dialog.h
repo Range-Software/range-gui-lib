@@ -2,7 +2,6 @@
 #define RGL_OPEN_SSL_CSR_DIALOG_H
 
 #include <QDialog>
-#include <QObject>
 #include <QLineEdit>
 #include <QPushButton>
 

@@ -14,7 +14,6 @@
 #include <rbl_job_manager.h>
 #include <rbl_logger.h>
 #include <rbl_utils.h>
-#include <rbl_version.h>
 
 #include "rgl_application.h"
 #include "rgl_cloud_file_manager.h"

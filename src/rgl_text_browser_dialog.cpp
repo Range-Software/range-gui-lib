@@ -1,7 +1,6 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QPushButton>
-#include <QTextBrowser>
 #include <QDialogButtonBox>
 
 #include "rgl_text_browser.h"

@@ -5,7 +5,6 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QDialogButtonBox>
-#include <QDir>
 #include "rgl_icon.h"
 
 RReleaseNotesDialog::RReleaseNotesDialog(QWidget *parent)

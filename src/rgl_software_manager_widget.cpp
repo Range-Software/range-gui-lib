@@ -7,6 +7,7 @@
 #include <rbl_utils.h>
 
 #include <rcl_cloud_session_manager.h>
+#include <rbl_tool_task.h>
 
 #include "rgl_message_box.h"
 #include "rgl_progress_dialog.h"

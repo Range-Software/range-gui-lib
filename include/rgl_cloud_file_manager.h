@@ -1,8 +1,6 @@
 #ifndef RGL_CLOUD_FILE_MANAGER_H
 #define RGL_CLOUD_FILE_MANAGER_H
 
-#include <QTimer>
-
 #include <rcl_file_manager.h>
 
 #include "rgl_application_settings.h"

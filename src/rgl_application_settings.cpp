@@ -1,6 +1,5 @@
 #include <QStyleFactory>
 #include <QDir>
-#include <QDesktopServices>
 #include <QImageWriter>
 #include <QStandardPaths>
 #include <QGuiApplication>
