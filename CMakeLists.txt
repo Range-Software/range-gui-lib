@@ -59,9 +59,12 @@ qt_add_library(range-gui-lib
         src/rgl_progress_handler.cpp
         src/rgl_proxy_settings_widget.cpp
         src/rgl_release_notes_dialog.cpp
+        src/rgl_ribbon_bar.cpp
+        src/rgl_ribbon_group.cpp
         src/rgl_software_manager_dialog.cpp
         src/rgl_software_manager_widget.cpp
         src/rgl_software_update_checker.cpp
+        src/rgl_split_tool_button.cpp
         src/rgl_style.cpp
         src/rgl_territory_combo_box.cpp
         src/rgl_text_browser.cpp
@@ -120,9 +123,12 @@ qt_add_library(range-gui-lib
         include/rgl_progress_handler.h
         include/rgl_proxy_settings_widget.h
         include/rgl_release_notes_dialog.h
+        include/rgl_ribbon_bar.h
+        include/rgl_ribbon_group.h
         include/rgl_software_manager_dialog.h
         include/rgl_software_manager_widget.h
         include/rgl_software_update_checker.h
+        include/rgl_split_tool_button.h
         include/rgl_style.h
         include/rgl_territory_combo_box.h
         include/rgl_text_browser.h

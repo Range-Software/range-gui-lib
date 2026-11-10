@@ -2,6 +2,14 @@
 
 ### Improvements
 
+#### Ribbon and tool bar widgets
+
+- New `RRibbonBar` and `RRibbonGroup` widgets provide a ribbon with tabbed pages of grouped
+  buttons. Buttons present existing actions, so text, enabled state and shortcuts stay
+  managed by the actions. Pages can be collapsed and scroll when they do not fit
+- New `RSplitToolButton` triggers one of given actions and offers the others in a
+  drop-down list. It can remember the last used action
+
 #### Cloud file manager
 
 - Confirmation messages shown after a file operation name the affected file.
