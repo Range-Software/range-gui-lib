@@ -6,7 +6,8 @@
 
 - New `RRibbonBar` and `RRibbonGroup` widgets provide a ribbon with tabbed pages of grouped
   buttons. Buttons present existing actions, so text, enabled state and shortcuts stay
-  managed by the actions. Pages can be collapsed and scroll when they do not fit
+  managed by the actions. Pages can be collapsed and scroll when they do not fit. Compact
+  mode shows all buttons small in two rows and hides group titles
 - New `RSplitToolButton` triggers one of given actions and offers the others in a
   drop-down list. It can remember the last used action
 

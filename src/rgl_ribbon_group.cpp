@@ -9,13 +9,14 @@
 
 //! Number of small buttons stacked in one column.
 static constexpr int smallButtonsInColumn = 3;
+//! Number of small buttons stacked in one column of compact group.
+static constexpr int compactButtonsInColumn = 2;
 
 RRibbonGroup::RRibbonGroup(const QString &title, QWidget *parent)
     : QWidget(parent)
-    , nextColumn(0)
-    , nextSmallRow(0)
     , largeIconSize(32)
     , smallIconSize(18)
+    , compact(false)
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
     mainLayout->setContentsMargins(2,0,2,0);
@@ -27,26 +28,26 @@ RRibbonGroup::RRibbonGroup(const QString &title, QWidget *parent)
     this->buttonsLayout->setVerticalSpacing(0);
     mainLayout->addLayout(this->buttonsLayout,1);
 
-    QLabel *titleLabel = new QLabel(title);
-    titleLabel->setAlignment(Qt::AlignCenter);
-    titleLabel->setEnabled(false);
-    QFont titleFont(titleLabel->font());
+    this->titleLabel = new QLabel(title);
+    this->titleLabel->setAlignment(Qt::AlignCenter);
+    this->titleLabel->setEnabled(false);
+    QFont titleFont(this->titleLabel->font());
     titleFont.setPointSizeF(titleFont.pointSizeF()*0.85);
-    titleLabel->setFont(titleFont);
-    mainLayout->addWidget(titleLabel);
+    this->titleLabel->setFont(titleFont);
+    mainLayout->addWidget(this->titleLabel);
 }
 
 QToolButton *RRibbonGroup::addLargeAction(QAction *action, const QString &label)
 {
     QToolButton *button = this->createActionButton(action,label);
-    this->placeLargeButton(button);
+    this->addButton(button,true);
     return button;
 }
 
 QToolButton *RRibbonGroup::addSmallAction(QAction *action, const QString &label)
 {
     QToolButton *button = this->createActionButton(action,label);
-    this->placeSmallButton(button);
+    this->addButton(button,false);
     return button;
 }
 
@@ -59,7 +60,7 @@ QToolButton *RRibbonGroup::addLargeSplitAction(QAction *action, const QList<QAct
     button->setMenu(menu);
     button->setPopupMode(QToolButton::MenuButtonPopup);
 
-    this->placeLargeButton(button);
+    this->addButton(button,true);
     return button;
 }
 
@@ -72,7 +73,7 @@ QToolButton *RRibbonGroup::addSmallMenu(const QString &label, const QIcon &icon,
     button->setMenu(menu);
     button->setPopupMode(QToolButton::InstantPopup);
 
-    this->placeSmallButton(button);
+    this->addButton(button,false);
     return button;
 }
 
@@ -80,15 +81,14 @@ void RRibbonGroup::setIconSizes(int largeIconSize, int smallIconSize)
 {
     this->largeIconSize = largeIconSize;
     this->smallIconSize = smallIconSize;
+    this->arrangeButtons();
+}
 
-    for (QToolButton *button : std::as_const(this->largeButtons))
-    {
-        button->setIconSize(QSize(largeIconSize,largeIconSize));
-    }
-    for (QToolButton *button : std::as_const(this->smallButtons))
-    {
-        button->setIconSize(QSize(smallIconSize,smallIconSize));
-    }
+void RRibbonGroup::setCompact(bool compact)
+{
+    this->compact = compact;
+    this->titleLabel->setVisible(!compact);
+    this->arrangeButtons();
 }
 
 QToolButton *RRibbonGroup::createActionButton(QAction *action, const QString &label)
@@ -105,31 +105,51 @@ QToolButton *RRibbonGroup::createActionButton(QAction *action, const QString &la
     return button;
 }
 
-void RRibbonGroup::placeLargeButton(QToolButton *button)
+void RRibbonGroup::addButton(QToolButton *button, bool large)
 {
-    if (this->nextSmallRow > 0)
-    {
-        this->nextSmallRow = 0;
-        this->nextColumn++;
-    }
-
-    button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
-    button->setIconSize(QSize(this->largeIconSize,this->largeIconSize));
-    button->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
-    this->buttonsLayout->addWidget(button,0,this->nextColumn++,smallButtonsInColumn,1);
-    this->largeButtons.append(button);
+    this->items.append({button,large});
+    this->arrangeButtons();
 }
 
-void RRibbonGroup::placeSmallButton(QToolButton *button)
+void RRibbonGroup::arrangeButtons()
 {
-    button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
-    button->setIconSize(QSize(this->smallIconSize,this->smallIconSize));
-    this->buttonsLayout->addWidget(button,this->nextSmallRow,this->nextColumn,Qt::AlignLeft);
-    this->smallButtons.append(button);
-
-    if (++this->nextSmallRow == smallButtonsInColumn)
+    for (const Item &item : std::as_const(this->items))
     {
-        this->nextSmallRow = 0;
-        this->nextColumn++;
+        this->buttonsLayout->removeWidget(item.button);
+    }
+
+    const int buttonsInColumn = this->compact ? compactButtonsInColumn : smallButtonsInColumn;
+    int column = 0;
+    int row = 0;
+
+    for (const Item &item : std::as_const(this->items))
+    {
+        if (item.large && !this->compact)
+        {
+            // Large button starts a new column.
+            if (row > 0)
+            {
+                row = 0;
+                column++;
+            }
+
+            item.button->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+            item.button->setIconSize(QSize(this->largeIconSize,this->largeIconSize));
+            item.button->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Expanding);
+            this->buttonsLayout->addWidget(item.button,0,column++,buttonsInColumn,1);
+        }
+        else
+        {
+            item.button->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
+            item.button->setIconSize(QSize(this->smallIconSize,this->smallIconSize));
+            item.button->setSizePolicy(QSizePolicy::Fixed,QSizePolicy::Fixed);
+            this->buttonsLayout->addWidget(item.button,row,column,Qt::AlignLeft);
+
+            if (++row == buttonsInColumn)
+            {
+                row = 0;
+                column++;
+            }
+        }
     }
 }

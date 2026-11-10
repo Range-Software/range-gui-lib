@@ -41,6 +41,8 @@ class RRibbonBar : public QWidget
         QList<QToolButton*> headerButtons;
         //! Size of icons on large buttons.
         int largeIconSize;
+        //! True if the ribbon is compact.
+        bool compact;
         //! True if pages are collapsed.
         bool collapsed;
         //! True if last click on a tab has expanded collapsed pages.
@@ -86,6 +88,12 @@ class RRibbonBar : public QWidget
         //! Set size of icons on large buttons, all other sizes follow it.
         void setIconSize(int iconSize);
 
+        //! Return true if the ribbon is compact.
+        bool isCompact() const;
+
+        //! Set whether the ribbon is compact, which takes less vertical space.
+        void setCompact(bool compact);
+
     protected:
 
         //! Widget has been resized.
@@ -96,6 +104,12 @@ class RRibbonBar : public QWidget
 
         //! Create icon button for the line with tabs.
         QToolButton *createHeaderButton();
+
+        //! Return vertical margin of pages.
+        int findPageMargin() const;
+
+        //! Refresh layouts of pages after their buttons have changed.
+        void refreshPages();
 
         //! Update height of pages so that all of them fit and switching them does not move the view below.
         void updatePagesHeight();

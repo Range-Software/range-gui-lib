@@ -18,6 +18,7 @@
 RRibbonBar::RRibbonBar(QWidget *parent)
     : QWidget(parent)
     , largeIconSize(32)
+    , compact(false)
     , collapsed(false)
     , expandedByTabClick(false)
     , ignoreTabClick(false)
@@ -111,7 +112,7 @@ int RRibbonBar::addPage(const QString &title)
 {
     QWidget *page = new QWidget;
     QHBoxLayout *pageLayout = new QHBoxLayout(page);
-    pageLayout->setContentsMargins(4,2,4,2);
+    pageLayout->setContentsMargins(4,this->findPageMargin(),4,this->findPageMargin());
     pageLayout->setSpacing(4);
     pageLayout->addStretch(1);
 
@@ -145,6 +146,7 @@ RRibbonGroup *RRibbonBar::addGroup(int pagePosition, const QString &title)
 
     RRibbonGroup *group = new RRibbonGroup(title,page);
     group->setIconSizes(this->largeIconSize,this->findSmallIconSize());
+    group->setCompact(this->compact);
     pageLayout->insertWidget(layoutPosition,group);
     this->groups.append(group);
 
@@ -191,6 +193,37 @@ void RRibbonBar::setIconSize(int iconSize)
         button->setIconSize(QSize(smallIconSize,smallIconSize));
     }
 
+    this->refreshPages();
+}
+
+bool RRibbonBar::isCompact() const
+{
+    return this->compact;
+}
+
+void RRibbonBar::setCompact(bool compact)
+{
+    this->compact = compact;
+
+    for (RRibbonGroup *group : std::as_const(this->groups))
+    {
+        group->setCompact(compact);
+    }
+    for (int i=0;i<this->pages->count();i++)
+    {
+        qobject_cast<QScrollArea*>(this->pages->widget(i))->widget()->layout()->setContentsMargins(4,this->findPageMargin(),4,this->findPageMargin());
+    }
+
+    this->refreshPages();
+}
+
+int RRibbonBar::findPageMargin() const
+{
+    return this->compact ? 0 : 2;
+}
+
+void RRibbonBar::refreshPages()
+{
     // Size hints of nested layouts are refreshed only when layouts are activated, starting from the innermost.
     for (RRibbonGroup *group : std::as_const(this->groups))
     {
