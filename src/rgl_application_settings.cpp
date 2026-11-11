@@ -203,7 +203,7 @@ QStringList RApplicationSettings::getSupportedDocumentFormats()
     formats.append("txt");
     formats.append("log");
     formats.append("pdf");
-    formats.append("odf");
+    formats.append("odt");
     formats.append("md");
     formats.append("html");
 

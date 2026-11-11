@@ -41,6 +41,12 @@
   and unused includes are removed from public headers and source files. Code that
   received these headers through this library has to include them directly
 
+### Bug fixes
+
+- **RApplicationSettings::getSupportedDocumentFormats()** listed `odf`, the
+  extension of OpenDocument formulas, instead of `odt` for OpenDocument texts, so
+  text documents such as reports were not found
+
 ---
 
 ## Version 1.3.0
