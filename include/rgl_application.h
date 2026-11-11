@@ -151,6 +151,10 @@ class RApplication : public QApplication
         //! Application has started.
         void started();
 
+        //! Application style or color scheme has been applied. Widgets with a
+        //! style of their own are not notified by Qt and should rebuild it.
+        void styleApplied();
+
     protected slots:
 
         //! Catch started signal.

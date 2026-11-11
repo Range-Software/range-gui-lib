@@ -710,6 +710,7 @@ void RApplication::onAboutToQuit()
 void RApplication::onStyleChanged(const QString &styleName)
 {
     RStyle::applyStyle(styleName,this->applicationSettings->getColorScheme());
+    emit this->styleApplied();
 }
 
 void RApplication::onColorSchemeChanged(Qt::ColorScheme colorScheme)
@@ -720,6 +721,7 @@ void RApplication::onColorSchemeChanged(Qt::ColorScheme colorScheme)
         styleName = this->applicationSettings->getStyle();
     }
     RStyle::applyStyle(styleName,colorScheme);
+    emit this->styleApplied();
 }
 
 void RApplication::onLanguageChanged(const QString &languageCode)

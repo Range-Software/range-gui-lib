@@ -43,6 +43,9 @@
 
 ### Bug fixes
 
+- New signal **RApplication::styleApplied()** is emitted after the application
+  style or color scheme has been applied. Qt does not notify widgets which have
+  a style of their own, so they can rebuild it on this signal
 - **RApplicationSettings::getSupportedDocumentFormats()** listed `odf`, the
   extension of OpenDocument formulas, instead of `odt` for OpenDocument texts, so
   text documents such as reports were not found
