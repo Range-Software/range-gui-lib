@@ -27,7 +27,9 @@ void RProgressBar::stopPulse(void)
 
 void RProgressBar::setValue(int value)
 {
-    this->setFormat(this->message + " (" + QString::number(value) + " %)");
+    this->setFormat(this->minimum() == 0 && this->maximum() == 0
+                    ? this->message
+                    : this->message + " (" + QString::number(value) + " %)");
     this->QProgressBar::setValue(value);
 }
 

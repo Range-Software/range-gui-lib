@@ -43,6 +43,8 @@
 
 ### Bug fixes
 
+- **RProgressBar** displays only its status text while pulsing, instead of appending
+  a misleading `0%`
 - New signal **RApplication::styleApplied()** is emitted after the application
   style or color scheme has been applied. Qt does not notify widgets which have
   a style of their own, so they can rebuild it on this signal
