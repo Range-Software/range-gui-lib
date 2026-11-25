@@ -516,6 +516,9 @@ void RApplication::onStarted()
         return;
     }
 
+    // Move certificates and sessions out of the (possibly synchronized) application home directory.
+    RApplicationSettings::migrateLocalDataDirs();
+
     // Initialize session
     this->cloudSessionManager = new RCloudSessionManager(this);
 

@@ -51,15 +51,22 @@
 - **RApplicationSettings::getSupportedDocumentFormats()** listed `odf`, the
   extension of OpenDocument formulas, instead of `odt` for OpenDocument texts, so
   text documents such as reports were not found
-- **RApplicationSettings::getTmpDir()** and **getLogDir()** were placed in the
-  application home directory in `Documents`, which may be synchronized across
-  devices (e.g. iCloud). The lock file, the Cloud file synchronization cache and
-  the logs describe a single device, so sharing them mixed up the state of
-  several devices. They are now placed in the new
-  **RApplicationSettings::getAppLocalDir()** (`Application Support` on macOS,
-  `AppData/Local` on Windows, `~/.local/share` on Linux), which is never
-  synchronized. Sandboxed applications keep using their container. New
-  **getAppLocalDataDir()** returns a subdirectory of it
+- **RApplicationSettings::getTmpDir()**, **getLogDir()**, **getCertDir()** and
+  **getSessionDir()** were placed in the application home directory in
+  `Documents`, which may be synchronized across devices (e.g. iCloud). The lock
+  file, the Cloud file synchronization cache, the logs, private keys,
+  certificates and Cloud sessions describe a single device, so sharing them
+  mixed up the state of several devices and spread private keys to all of them.
+  They are now placed in the new **RApplicationSettings::getAppLocalDir()**
+  (`Application Support` on macOS, `AppData/Local` on Windows, `~/.local/share`
+  on Linux), which is never synchronized. Sandboxed applications keep using
+  their container. New **getAppLocalDataDir()** returns a subdirectory of it
+- New **RApplicationSettings::migrateLocalDataDirs()**, called by
+  **RApplication** at start, copies certificates and sessions from the old
+  location when the new directories are empty, and changes paths to the old
+  certificate directory stored in session files to the new one. The old files
+  are left in place, so other devices can migrate them as well. Both directories
+  are made readable by the owner only
 
 ---
 

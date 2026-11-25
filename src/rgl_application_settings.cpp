@@ -1,5 +1,10 @@
 #include <QStyleFactory>
 #include <QDir>
+#include <QDirIterator>
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QImageWriter>
 #include <QStandardPaths>
 #include <QGuiApplication>
@@ -541,7 +546,8 @@ QString RApplicationSettings::getDataDir()
 
 QString RApplicationSettings::getCertDir()
 {
-    return RApplicationSettings::getAppDataDir("cert");
+    // Private keys and certificates belong to this device only.
+    return RApplicationSettings::getAppLocalDataDir("cert");
 }
 
 QString RApplicationSettings::getDocDir()
@@ -568,7 +574,144 @@ QString RApplicationSettings::getTmpDir()
 
 QString RApplicationSettings::getSessionDir()
 {
-    return RApplicationSettings::getAppDataDir("session");
+    // Sessions refer to private keys and certificates of this device.
+    return RApplicationSettings::getAppLocalDataDir("session");
+}
+
+//! Replace old directory prefix in all string values of given JSON value.
+static QJsonValue replaceJsonPathPrefix(const QJsonValue &value, const QString &oldPrefix, const QString &newPrefix, bool &changed)
+{
+    if (value.isString())
+    {
+        QString path = value.toString();
+        if (path == oldPrefix || path.startsWith(oldPrefix + QLatin1Char('/')))
+        {
+            changed = true;
+            return QJsonValue(newPrefix + path.mid(oldPrefix.length()));
+        }
+        return value;
+    }
+    if (value.isObject())
+    {
+        QJsonObject object = value.toObject();
+        for (auto it = object.begin(); it != object.end(); ++it)
+        {
+            it.value() = replaceJsonPathPrefix(it.value(),oldPrefix,newPrefix,changed);
+        }
+        return object;
+    }
+    if (value.isArray())
+    {
+        QJsonArray array = value.toArray();
+        for (qsizetype i = 0; i < array.size(); i++)
+        {
+            array[i] = replaceJsonPathPrefix(array.at(i),oldPrefix,newPrefix,changed);
+        }
+        return array;
+    }
+    return value;
+}
+
+//! Copy all files from old directory to new one if new one is empty.
+//! Return true if files were copied.
+static bool copyDirIfEmpty(const QString &oldDirPath, const QString &newDirPath)
+{
+    QDir oldDir(oldDirPath);
+    QDir newDir(newDirPath);
+
+    if (!oldDir.exists() || oldDir.isEmpty() || !newDir.isEmpty())
+    {
+        return false;
+    }
+
+    RLogger::info("Copying directory \'%s\' to \'%s\'\n",oldDirPath.toUtf8().constData(),newDirPath.toUtf8().constData());
+
+    QDirIterator it(oldDirPath,QDir::Files | QDir::Hidden | QDir::NoDotAndDotDot,QDirIterator::Subdirectories);
+    while (it.hasNext())
+    {
+        QString oldFilePath = it.next();
+        QString newFilePath = newDir.absoluteFilePath(oldDir.relativeFilePath(oldFilePath));
+
+        if (!QDir().mkpath(QFileInfo(newFilePath).absolutePath()))
+        {
+            RLogger::error("Failed to create a directory \'%s\'\n",QFileInfo(newFilePath).absolutePath().toUtf8().constData());
+            continue;
+        }
+        if (!QFile::copy(oldFilePath,newFilePath))
+        {
+            RLogger::error("Failed to copy file \'%s\' to \'%s\'\n",oldFilePath.toUtf8().constData(),newFilePath.toUtf8().constData());
+            continue;
+        }
+        // Keep permissions (private keys must stay readable by the owner only).
+        QFile::setPermissions(newFilePath,QFile::permissions(oldFilePath));
+    }
+    return true;
+}
+
+void RApplicationSettings::migrateLocalDataDirs()
+{
+    QString homeDir = QDir::cleanPath(RApplicationSettings::getAppHomeDir());
+    QString localDir = QDir::cleanPath(RApplicationSettings::getAppLocalDir());
+
+    QString newCertDir = QDir::cleanPath(RApplicationSettings::getCertDir());
+    QString newSessionDir = QDir::cleanPath(RApplicationSettings::getSessionDir());
+
+    // Certificates and sessions are readable by the owner only.
+    const QFile::Permissions ownerOnly = QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner;
+    QFile::setPermissions(newCertDir,ownerOnly);
+    QFile::setPermissions(newSessionDir,ownerOnly);
+
+    if (homeDir == localDir)
+    {
+        // Application home directory is already local (sandboxed application).
+        return;
+    }
+
+    // Do not create old directories - only existing ones are migrated.
+    QString oldCertDir = QDir(homeDir).absoluteFilePath("cert");
+    QString oldSessionDir = QDir(homeDir).absoluteFilePath("session");
+
+    copyDirIfEmpty(oldCertDir,newCertDir);
+
+    if (copyDirIfEmpty(oldSessionDir,newSessionDir))
+    {
+        // Session files refer to certificates in the old directory.
+        QDirIterator it(newSessionDir,{"*.json"},QDir::Files,QDirIterator::Subdirectories);
+        while (it.hasNext())
+        {
+            QString filePath = it.next();
+            QFile file(filePath);
+            if (!file.open(QIODevice::ReadOnly))
+            {
+                continue;
+            }
+            QJsonParseError parseError;
+            QJsonDocument document = QJsonDocument::fromJson(file.readAll(),&parseError);
+            file.close();
+            if (parseError.error != QJsonParseError::NoError)
+            {
+                continue;
+            }
+
+            bool changed = false;
+            QJsonValue value = replaceJsonPathPrefix(document.isArray() ? QJsonValue(document.array()) : QJsonValue(document.object()),oldCertDir,newCertDir,changed);
+            if (!changed)
+            {
+                continue;
+            }
+
+            QFile::Permissions permissions = file.permissions();
+            if (!file.open(QIODevice::WriteOnly | QIODevice::Truncate))
+            {
+                RLogger::error("Failed to update certificate paths in session file \'%s\'\n",filePath.toUtf8().constData());
+                continue;
+            }
+            file.write(value.isArray() ? QJsonDocument(value.toArray()).toJson() : QJsonDocument(value.toObject()).toJson());
+            file.close();
+            file.setPermissions(permissions);
+            RLogger::info("Certificate paths in session file \'%s\' were moved to \'%s\'\n",filePath.toUtf8().constData(),newCertDir.toUtf8().constData());
+        }
+    }
 }
 
 QStringList RApplicationSettings::getStyles()

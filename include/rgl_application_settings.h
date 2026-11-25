@@ -353,6 +353,13 @@ class RApplicationSettings : public QSettings
         //! Return users session directory path.
         static QString getSessionDir();
 
+        //! Move device specific directories (certificates and sessions) out of the application home directory.
+        //! Earlier versions kept them in the application home directory in users Documents, which may be
+        //! synchronized across devices (e.g. iCloud). If the local directory is empty, files from the old
+        //! location are copied there and paths to the old certificate directory stored in session files are
+        //! changed to the new one. Old files are left in place, other devices may still use them.
+        static void migrateLocalDataDirs();
+
         //! Return list of styles.
         static QStringList getStyles();
 
