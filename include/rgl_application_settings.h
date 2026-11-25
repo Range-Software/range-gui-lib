@@ -324,6 +324,14 @@ class RApplicationSettings : public QSettings
         //! Return users application data directory path.
         static QString getAppDataDir(const QString &subDir);
 
+        //! Return users application local (device specific) directory path.
+        //! Unlike application home directory (users Documents) it is never synchronized
+        //! across devices (e.g. iCloud), therefore it holds device specific state.
+        static QString getAppLocalDir();
+
+        //! Return users application local (device specific) data directory path.
+        static QString getAppLocalDataDir(const QString &subDir);
+
         //! Return users data directory path.
         static QString getDataDir();
 

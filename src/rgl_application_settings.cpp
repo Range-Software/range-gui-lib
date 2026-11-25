@@ -519,6 +519,21 @@ QString RApplicationSettings::getAppDataDir(const QString &subDir)
     return RApplicationSettings::getDir(RApplicationSettings::getAppHomeDir(),subDir);
 }
 
+QString RApplicationSettings::getAppLocalDir()
+{
+    if (RApplicationSettings::isSandboxed())
+    {
+        // Sandboxed application home directory is already local (Application Support inside the container).
+        return RApplicationSettings::getAppHomeDir();
+    }
+    return RApplicationSettings::getDir(RApplicationSettings::getDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation),RVendor::familyName()),RVendor::shortName());
+}
+
+QString RApplicationSettings::getAppLocalDataDir(const QString &subDir)
+{
+    return RApplicationSettings::getDir(RApplicationSettings::getAppLocalDir(),subDir);
+}
+
 QString RApplicationSettings::getDataDir()
 {
     return RApplicationSettings::getAppDataDir("data");
@@ -541,12 +556,14 @@ QString RApplicationSettings::getEtcDir()
 
 QString RApplicationSettings::getLogDir()
 {
-    return RApplicationSettings::getAppDataDir("log");
+    // Logs describe this device only.
+    return RApplicationSettings::getAppLocalDataDir("log");
 }
 
 QString RApplicationSettings::getTmpDir()
 {
-    return RApplicationSettings::getAppDataDir("tmp");
+    // Temporary files (lock file, cloud sync cache, ...) describe this device only.
+    return RApplicationSettings::getAppLocalDataDir("tmp");
 }
 
 QString RApplicationSettings::getSessionDir()
