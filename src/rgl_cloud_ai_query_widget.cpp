@@ -58,7 +58,7 @@ RCloudAiQueryWidget::RCloudAiQueryWidget(RCloudConnectionHandler *connectionHand
     mainLayout->addLayout(queryLayout);
 
     this->queryEdit = new QLineEdit;
-    this->queryEdit->setPlaceholderText(tr("Ask your question an press Enter"));
+    this->queryEdit->setPlaceholderText(tr("Ask your question and press Enter"));
     this->queryEdit->setClearButtonEnabled(true);
     queryLayout->addWidget(this->queryEdit);
 

@@ -130,7 +130,7 @@ RAiChatWidget::RAiChatWidget(RAgentSettingsManager *aiAgentSettingsManager,
     mainLayout->addLayout(queryLayout);
 
     QLineEdit *queryEdit = new QLineEdit;
-    queryEdit->setPlaceholderText(tr("Ask your question an press Enter"));
+    queryEdit->setPlaceholderText(tr("Ask your question and press Enter"));
     queryEdit->setClearButtonEnabled(true);
     queryLayout->addWidget(queryEdit);
 

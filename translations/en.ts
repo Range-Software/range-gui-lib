@@ -225,7 +225,7 @@
     </message>
     <message>
         <location filename="../src/rgl_ai_chat_widget.cpp" line="133"/>
-        <source>Ask your question an press Enter</source>
+        <source>Ask your question and press Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -302,17 +302,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="739"/>
+        <location filename="../src/rgl_application.cpp" line="744"/>
         <source>Following software updates are available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="749"/>
+        <location filename="../src/rgl_application.cpp" line="754"/>
         <source>Would you like to open the software manager?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application.cpp" line="751"/>
+        <location filename="../src/rgl_application.cpp" line="756"/>
         <source>Software updates available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -340,17 +340,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="719"/>
+        <location filename="../src/rgl_application_settings.cpp" line="879"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="720"/>
+        <location filename="../src/rgl_application_settings.cpp" line="880"/>
         <source>POSIX</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="722"/>
+        <location filename="../src/rgl_application_settings.cpp" line="882"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -565,7 +565,7 @@
     </message>
     <message>
         <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="61"/>
-        <source>Ask your question an press Enter</source>
+        <source>Ask your question and press Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1754,13 +1754,13 @@
 <context>
     <name>RRibbonBar</name>
     <message>
-        <location filename="../src/rgl_ribbon_bar.cpp" line="59"/>
-        <location filename="../src/rgl_ribbon_bar.cpp" line="177"/>
+        <location filename="../src/rgl_ribbon_bar.cpp" line="60"/>
+        <location filename="../src/rgl_ribbon_bar.cpp" line="179"/>
         <source>Collapse the ribbon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/rgl_ribbon_bar.cpp" line="177"/>
+        <location filename="../src/rgl_ribbon_bar.cpp" line="179"/>
         <source>Expand the ribbon</source>
         <translation type="unfinished"></translation>
     </message>
