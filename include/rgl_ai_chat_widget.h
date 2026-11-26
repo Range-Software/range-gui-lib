@@ -16,9 +16,12 @@ class RAiChatWidget : public QWidget
 
     QThread *agentThread = nullptr;
     RAgentSettingsManager *agentSettingsManager = nullptr;
-    const RApplicationSettings *appSettings = nullptr;
+    RApplicationSettings *appSettings = nullptr;
 
     void onAgentSelected(const QString &name);
+
+    //! Ask the user for permission to send data to the selected AI agent.
+    bool requestDataSharingConsent();
 
 protected:
 
@@ -38,7 +41,7 @@ public:
 
     //! Constructor.
     explicit RAiChatWidget(RAgentSettingsManager *aiAgentSettingsManager,
-                           const RApplicationSettings *applicationSettings,
+                           RApplicationSettings *applicationSettings,
                            const QString &initialAgent = QString(),
                            const QString &initialLanguage = QString(),
                            QWidget *parent = nullptr);

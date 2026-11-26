@@ -214,46 +214,74 @@
 <context>
     <name>RAiChatWidget</name>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="87"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="60"/>
+        <source>your question and the open family tree, including names, sex, dates and places of birth and death, and relations. Pictures and notes are not sent.</source>
+        <translation>ваше запитання та відкрите родинне дерево, зокрема імена, стать, дати й місця народження та смерті, а також зв&apos;язки. Зображення та нотатки не надсилаються.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="109"/>
         <source>AI agent</source>
         <translation>ШІ агент</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="124"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="146"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="133"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="155"/>
         <source>Ask your question and press Enter</source>
         <translation>Поставте своє запитання та натисніть Enter</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="137"/>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="218"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="159"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="240"/>
         <source>Send</source>
         <translation>Надіслати</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="162"/>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="194"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="184"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="216"/>
         <source>Waiting for an answer ... </source>
         <translation>Чекаю на відповідь...</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="218"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="240"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="226"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="249"/>
         <source>Me</source>
         <translation>Я</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="289"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="312"/>
         <source>AI</source>
         <translation>ШІ</translation>
+    </message>
+</context>
+<context>
+    <name>RAiConsent</name>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="18"/>
+        <source>To answer your question, the following data will be sent to &lt;b&gt;%1&lt;/b&gt;:</source>
+        <translation>Щоб відповісти на ваше запитання, до &lt;b&gt;%1&lt;/b&gt; буде надіслано такі дані:</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="20"/>
+        <source>This data may include personal information about you and the people in your family tree. It is processed under the privacy policy and terms of that service.</source>
+        <translation>Ці дані можуть містити персональну інформацію про вас і людей у вашому родинному дереві. Вони обробляються відповідно до політики конфіденційності та умов цього сервісу.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="21"/>
+        <source>Do you agree to send this data?</source>
+        <translation>Ви погоджуєтеся надіслати ці дані?</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="23"/>
+        <source>Share data with AI service?</source>
+        <translation>Поділитися даними з ШІ сервісом?</translation>
     </message>
 </context>
 <context>
@@ -340,17 +368,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="879"/>
+        <location filename="../src/rgl_application_settings.cpp" line="908"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="880"/>
+        <location filename="../src/rgl_application_settings.cpp" line="909"/>
         <source>POSIX</source>
         <translation>POSIX</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="882"/>
+        <location filename="../src/rgl_application_settings.cpp" line="911"/>
         <source>System</source>
         <translation>Система</translation>
     </message>
@@ -376,182 +404,197 @@
 <context>
     <name>RApplicationSettingsWidget</name>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="31"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="32"/>
         <source>Appearance</source>
         <translation>Зовнішній вигляд</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="46"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="47"/>
         <source>Style</source>
         <translation>Стиль</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="67"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="68"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="75"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="76"/>
         <source>Formats</source>
         <translation>Формати</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="97"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="98"/>
         <source>Jon Smith</source>
         <translation>Джон Сміт</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="99"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="100"/>
         <source>Full name</source>
         <translation>Повне ім&apos;я</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="91"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="92"/>
         <source>User</source>
         <translation>Користувач</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="55"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="56"/>
         <source>Color scheme</source>
         <translation>Колірна схема</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="108"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="109"/>
         <source>E-mail</source>
         <translation>Електронна пошта</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="111"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="112"/>
         <source>Country</source>
         <translation>Країна</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="118"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="119"/>
         <source>Network</source>
         <translation>Мережа</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="123"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="124"/>
         <source>Network proxy</source>
         <translation>Мережевий проксі</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="132"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="133"/>
         <source>Cloud</source>
         <translation>Хмара</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="142"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="143"/>
         <source>Refresh timeout</source>
         <translation>Час очікування оновлення</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="144"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="145"/>
         <source>seconds</source>
         <translation>секунд</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="146"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="147"/>
         <source>Synchronize data directory</source>
         <translation>Синхронізувати каталог даних</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="151"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="152"/>
         <source>Renew client certificate</source>
         <translation>Поновити сертифікат клієнта</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="160"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="161"/>
         <source>Days before expiry</source>
         <translation>днів до закінчення терміну дії</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="162"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="163"/>
         <source>days</source>
         <translation>днів</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="164"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="165"/>
         <source>Software</source>
         <translation>Програмне забезпечення</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="171"/>
         <source>Send usage information</source>
         <translation>Надіслати інформацію про використання</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="175"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="176"/>
         <source>Check for software update</source>
         <translation>Перевірте наявність оновлення програмного забезпечення</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="191"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="187"/>
+        <source>AI services</source>
+        <translation>ШІ сервіси</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="193"/>
+        <source>Before data is sent to an AI service for the first time, you are asked for permission. Withdraw all given permissions to be asked again.</source>
+        <translation>Перед першим надсиланням даних до ШІ сервісу у вас буде запитано дозвіл. Відкличте всі надані дозволи, щоб запит з&apos;явився знову.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="197"/>
+        <source>Withdraw AI data sharing permissions</source>
+        <translation>Відкликати дозволи на передавання даних ШІ</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="206"/>
         <source>Paths</source>
         <translation>Шляхи</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="196"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="211"/>
         <source>Help directory</source>
         <translation>Довідковий каталог</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="201"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="216"/>
         <source>OpenSSL tool</source>
         <translation>Інструмент OpenSSL</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="206"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="221"/>
         <source>OpenSSL configuration</source>
         <translation>Конфігурація OpenSSL</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="220"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="235"/>
         <source>Keyboard shortcuts</source>
         <translation>Комбінації клавіш</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="313"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="330"/>
         <source>Language change</source>
         <translation>Зміна мови</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="313"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="330"/>
         <source>Language change requires an application restart.</source>
         <translation>Зміна мови вимагає перезапуску програми.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="319"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="336"/>
         <source>Format change</source>
         <translation>Зміна формату</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="319"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="336"/>
         <source>Format change requires an application restart.</source>
         <translation>Для зміни формату потрібно перезапустити програму.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="80"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="81"/>
         <source>Do not use native menubar</source>
         <translation>Не використовуйте рідну панель меню</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="81"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="82"/>
         <source>Show the menubar inside the application window instead of the system menubar.</source>
         <translation>Показувати панель меню всередині вікна програми замість системної панелі меню.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="83"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="84"/>
         <source>Menubar</source>
         <translation>Рядок меню</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="325"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="342"/>
         <source>Menubar change</source>
         <translation>Зміна панелі меню</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="325"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="342"/>
         <source>Menubar change requires an application restart.</source>
         <translation>Для зміни панелі меню потрібен перезапуск програми.</translation>
     </message>
@@ -559,64 +602,74 @@
 <context>
     <name>RCloudAiQueryWidget</name>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="52"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="53"/>
         <source>Language</source>
         <translation>Мова</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="61"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="62"/>
         <source>Ask your question and press Enter</source>
         <translation>Поставте своє запитання та натисніть Enter</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="65"/>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="284"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="66"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
         <source>Send</source>
         <translation>Надіслати</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="140"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="144"/>
+        <source>Range Cloud AI service</source>
+        <translation>ШІ сервіс Range Cloud</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="145"/>
+        <source>your question, the family tree file stored in Range Cloud, and your name, e-mail address and territory from the application settings.</source>
+        <translation>ваше запитання, файл родинного дерева, збережений у Range Cloud, а також ваше ім&apos;я, адреса електронної пошти та країна з налаштувань програми.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="150"/>
         <source>Me</source>
         <translation>Я</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="284"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="452"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="304"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="462"/>
         <source>Waiting for an answer ... </source>
         <translation>Чекаю на відповідь...</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="338"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="348"/>
         <source>AI</source>
         <translation>ШІ</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="349"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="359"/>
         <source>Error</source>
         <translation>Помилка</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="358"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="368"/>
         <source>Cloud request has failed.</source>
         <translation>Хмарний запит не виконано.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="382"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="392"/>
         <source>Cloud has not accepted the query.</source>
         <translation>Хмара не прийняла запит.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="408"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="418"/>
         <source>Cloud does not know the submitted query.</source>
         <translation>Cloud не знає поданого запиту.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="434"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="444"/>
         <source>Timed out while waiting for an answer.</source>
         <translation>Час очікування минув під час очікування відповіді.</translation>
     </message>

@@ -214,46 +214,74 @@
 <context>
     <name>RAiChatWidget</name>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="87"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="60"/>
+        <source>your question and the open family tree, including names, sex, dates and places of birth and death, and relations. Pictures and notes are not sent.</source>
+        <translation>Ihre Frage und der geöffnete Stammbaum, einschließlich Namen, Geschlecht, Geburts- und Sterbedaten und -orten sowie Beziehungen. Bilder und Notizen werden nicht gesendet.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="109"/>
         <source>AI agent</source>
         <translation>KI-Agent</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="124"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="146"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="133"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="155"/>
         <source>Ask your question and press Enter</source>
         <translation>Stellen Sie Ihre Frage und drücken Sie Enter</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="137"/>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="218"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="159"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="240"/>
         <source>Send</source>
         <translation>Senden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="162"/>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="194"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="184"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="216"/>
         <source>Waiting for an answer ... </source>
         <translation>Warte auf Antwort ... </translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="218"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="240"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="226"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="249"/>
         <source>Me</source>
         <translation>Ich</translation>
     </message>
     <message>
-        <location filename="../src/rgl_ai_chat_widget.cpp" line="289"/>
+        <location filename="../src/rgl_ai_chat_widget.cpp" line="312"/>
         <source>AI</source>
         <translation>KI</translation>
+    </message>
+</context>
+<context>
+    <name>RAiConsent</name>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="18"/>
+        <source>To answer your question, the following data will be sent to &lt;b&gt;%1&lt;/b&gt;:</source>
+        <translation>Um Ihre Frage zu beantworten, werden folgende Daten an &lt;b&gt;%1&lt;/b&gt; gesendet:</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="20"/>
+        <source>This data may include personal information about you and the people in your family tree. It is processed under the privacy policy and terms of that service.</source>
+        <translation>Diese Daten können personenbezogene Informationen über Sie und die Personen in Ihrem Stammbaum enthalten. Sie werden gemäß der Datenschutzerklärung und den Bedingungen dieses Dienstes verarbeitet.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="21"/>
+        <source>Do you agree to send this data?</source>
+        <translation>Stimmen Sie dem Senden dieser Daten zu?</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_ai_consent.cpp" line="23"/>
+        <source>Share data with AI service?</source>
+        <translation>Daten mit KI-Dienst teilen?</translation>
     </message>
 </context>
 <context>
@@ -340,17 +368,17 @@
 <context>
     <name>RApplicationSettings</name>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="879"/>
+        <location filename="../src/rgl_application_settings.cpp" line="908"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="880"/>
+        <location filename="../src/rgl_application_settings.cpp" line="909"/>
         <source>POSIX</source>
         <translation>POSIX</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings.cpp" line="882"/>
+        <location filename="../src/rgl_application_settings.cpp" line="911"/>
         <source>System</source>
         <translation>System</translation>
     </message>
@@ -376,182 +404,197 @@
 <context>
     <name>RApplicationSettingsWidget</name>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="31"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="32"/>
         <source>Appearance</source>
         <translation>Darstellung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="46"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="47"/>
         <source>Style</source>
         <translation>Stil</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="67"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="68"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="75"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="76"/>
         <source>Formats</source>
         <translation>Formate</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="97"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="98"/>
         <source>Jon Smith</source>
         <translation>Max Mustermann</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="99"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="100"/>
         <source>Full name</source>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="91"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="92"/>
         <source>User</source>
         <translation>Benutzer</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="55"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="56"/>
         <source>Color scheme</source>
         <translation>Farbschema</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="108"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="109"/>
         <source>E-mail</source>
         <translation>E-Mail</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="111"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="112"/>
         <source>Country</source>
         <translation>Land</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="118"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="119"/>
         <source>Network</source>
         <translation>Netzwerk</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="123"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="124"/>
         <source>Network proxy</source>
         <translation>Netzwerk-Proxy</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="132"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="133"/>
         <source>Cloud</source>
         <translation>Cloud</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="142"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="143"/>
         <source>Refresh timeout</source>
         <translation>Aktualisierungs-Zeitlimit</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="144"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="145"/>
         <source>seconds</source>
         <translation>Sekunden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="146"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="147"/>
         <source>Synchronize data directory</source>
         <translation>Datenverzeichnis synchronisieren</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="151"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="152"/>
         <source>Renew client certificate</source>
         <translation>Client-Zertifikat erneuern</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="160"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="161"/>
         <source>Days before expiry</source>
         <translation>Tage vor Ablauf</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="162"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="163"/>
         <source>days</source>
         <translation>Tage</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="164"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="165"/>
         <source>Software</source>
         <translation>Software</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="170"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="171"/>
         <source>Send usage information</source>
         <translation>Nutzungsinformationen senden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="175"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="176"/>
         <source>Check for software update</source>
         <translation>Nach Softwareaktualisierungen suchen</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="191"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="187"/>
+        <source>AI services</source>
+        <translation>KI-Dienste</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="193"/>
+        <source>Before data is sent to an AI service for the first time, you are asked for permission. Withdraw all given permissions to be asked again.</source>
+        <translation>Bevor zum ersten Mal Daten an einen KI-Dienst gesendet werden, werden Sie um Erlaubnis gebeten. Widerrufen Sie alle erteilten Erlaubnisse, um erneut gefragt zu werden.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="197"/>
+        <source>Withdraw AI data sharing permissions</source>
+        <translation>Erlaubnisse zur Datenweitergabe an KI widerrufen</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="206"/>
         <source>Paths</source>
         <translation>Pfade</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="196"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="211"/>
         <source>Help directory</source>
         <translation>Hilfeverzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="201"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="216"/>
         <source>OpenSSL tool</source>
         <translation>OpenSSL-Werkzeug</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="206"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="221"/>
         <source>OpenSSL configuration</source>
         <translation>OpenSSL-Konfiguration</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="220"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="235"/>
         <source>Keyboard shortcuts</source>
         <translation>Tastenkürzel</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="313"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="330"/>
         <source>Language change</source>
         <translation>Sprachänderung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="313"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="330"/>
         <source>Language change requires an application restart.</source>
         <translation>Die Sprachänderung erfordert einen Neustart der Anwendung.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="319"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="336"/>
         <source>Format change</source>
         <translation>Formatänderung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="319"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="336"/>
         <source>Format change requires an application restart.</source>
         <translation>Die Formatänderung erfordert einen Neustart der Anwendung.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="80"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="81"/>
         <source>Do not use native menubar</source>
         <translation>Keine native Menüleiste verwenden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="81"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="82"/>
         <source>Show the menubar inside the application window instead of the system menubar.</source>
         <translation>Die Menüleiste im Anwendungsfenster statt in der Systemmenüleiste anzeigen.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="83"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="84"/>
         <source>Menubar</source>
         <translation>Menüleiste</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="325"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="342"/>
         <source>Menubar change</source>
         <translation>Menüleistenänderung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="325"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="342"/>
         <source>Menubar change requires an application restart.</source>
         <translation>Die Menüleistenänderung erfordert einen Neustart der Anwendung.</translation>
     </message>
@@ -559,64 +602,74 @@
 <context>
     <name>RCloudAiQueryWidget</name>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="52"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="53"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="61"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="62"/>
         <source>Ask your question and press Enter</source>
         <translation>Stellen Sie Ihre Frage und drücken Sie Enter</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="65"/>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="284"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="66"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
         <source>Send</source>
         <translation>Senden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="140"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="144"/>
+        <source>Range Cloud AI service</source>
+        <translation>KI-Dienst von Range Cloud</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="145"/>
+        <source>your question, the family tree file stored in Range Cloud, and your name, e-mail address and territory from the application settings.</source>
+        <translation>Ihre Frage, die in Range Cloud gespeicherte Stammbaumdatei sowie Ihr Name, Ihre E-Mail-Adresse und Ihr Land aus den Anwendungseinstellungen.</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="150"/>
         <source>Me</source>
         <translation>Ich</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="284"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="294"/>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="452"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="304"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="462"/>
         <source>Waiting for an answer ... </source>
         <translation>Warte auf Antwort ... </translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="338"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="348"/>
         <source>AI</source>
         <translation>KI</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="349"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="359"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="358"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="368"/>
         <source>Cloud request has failed.</source>
         <translation>Die Cloud-Anfrage ist fehlgeschlagen.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="382"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="392"/>
         <source>Cloud has not accepted the query.</source>
         <translation>Die Cloud hat die Anfrage nicht angenommen.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="408"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="418"/>
         <source>Cloud does not know the submitted query.</source>
         <translation>Die Cloud kennt die gesendete Anfrage nicht.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="434"/>
+        <location filename="../src/rgl_cloud_ai_query_widget.cpp" line="444"/>
         <source>Timed out while waiting for an answer.</source>
         <translation>Zeitüberschreitung beim Warten auf eine Antwort.</translation>
     </message>

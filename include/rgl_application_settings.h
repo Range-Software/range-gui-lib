@@ -104,6 +104,7 @@ class RApplicationSettings : public QSettings
         static const QString cloudClientCertificateExpiryDaysKey;
         static const QString softwareSendUsageInfoKey;
         static const QString softwareCheckUpdatesKey;
+        static const QString aiDataSharingConsentKey;
         static const QString proxyTypeKey;
         static const QString proxyHostKey;
         static const QString proxyPortKey;
@@ -267,6 +268,18 @@ class RApplicationSettings : public QSettings
 
         //! Set software send usage information.
         void setSoftwareSendUsageInfo(bool cloudSendUsageInfo);
+
+        //! Return whether the user agreed to share data with the given AI service.
+        bool getAiDataSharingConsent(const QString &serviceId) const;
+
+        //! Set whether the user agreed to share data with the given AI service.
+        void setAiDataSharingConsent(const QString &serviceId, bool consent);
+
+        //! Return true if the user agreed to share data with at least one AI service.
+        bool hasAiDataSharingConsent() const;
+
+        //! Withdraw all permissions to share data with AI services.
+        void clearAiDataSharingConsent();
 
         //! Return whether to check for software updates.
         bool getSoftwareCheckUpdates() const;

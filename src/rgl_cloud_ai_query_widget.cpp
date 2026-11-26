@@ -19,6 +19,7 @@
 #include <rcl_ai_query.h>
 #include <rcl_cloud_ai_query_request.h>
 
+#include "rgl_ai_consent.h"
 #include "rgl_cloud_ai_query_widget.h"
 #include "rgl_text_browser.h"
 
@@ -133,6 +134,15 @@ void RCloudAiQueryWidget::submitQuery()
     aiQuery.setLanguage(this->languageCombo->currentText());
 
     if (aiQuery.isEmpty())
+    {
+        return;
+    }
+
+    if (!RAiConsent::request(this,
+                             this->applicationSettings,
+                             QStringLiteral("range-cloud"),
+                             tr("Range Cloud AI service"),
+                             tr("your question, the family tree file stored in Range Cloud, and your name, e-mail address and territory from the application settings.")))
     {
         return;
     }

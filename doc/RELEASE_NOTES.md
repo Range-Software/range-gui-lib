@@ -1,3 +1,30 @@
+## Version 1.3.3
+
+### Improvements
+
+- New **RAiConsent::request()** asks the user for permission before personal data
+  is sent to an AI service for the first time. The dialog names the service and
+  lists the data to be sent. The answer is remembered per service in the new
+  **RApplicationSettings::getAiDataSharingConsent()** and
+  **setAiDataSharingConsent()**; declining sends nothing
+- **RAiChatWidget** asks for permission before the first question is sent to an AI
+  agent. Permission is bound to the host of the agent's API URL, so pointing an
+  agent to another service asks again. The widget now takes a non-const
+  **RApplicationSettings** pointer
+- **RCloudAiQueryWidget** asks for permission before the first query is sent to
+  Range Cloud, naming the family tree file and the user's name, e-mail address
+  and territory which are sent along
+- New "AI services" group on the "Network" tab of **RApplicationSettingsWidget**
+  withdraws all given permissions, so the user is asked again. Restoring default
+  settings withdraws them as well. New
+  **RApplicationSettings::hasAiDataSharingConsent()** and
+  **clearAiDataSharingConsent()**
+- In store builds (`STORE_BUILD`) sending of usage information is turned off by
+  default and is sent only after the user turns it on
+- New texts are translated into all supported languages
+
+---
+
 ## Version 1.3.2
 
 ### Bug fixes

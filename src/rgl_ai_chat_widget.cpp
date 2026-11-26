@@ -11,12 +11,14 @@
 #include <QScrollBar>
 #include <QElapsedTimer>
 #include <QTimer>
+#include <QUrl>
 
 #include <cmath>
 #include <memory>
 
 #include <rai_agent.h>
 
+#include <rgl_ai_consent.h>
 #include <rgl_text_browser.h>
 
 RAiChatWidget::~RAiChatWidget()
@@ -40,6 +42,26 @@ void RAiChatWidget::onAgentSelected(const QString &name)
     }, Qt::QueuedConnection);
 }
 
+bool RAiChatWidget::requestDataSharingConsent()
+{
+    const QString name = this->aiAgentCombo->currentText();
+    if (name.isEmpty())
+    {
+        return false;
+    }
+    const RAgentSettings agentSettings = this->agentSettingsManager->findSettings(name);
+
+    // Consent is bound to the server which receives the data, so that pointing
+    // an existing agent to a different service asks again.
+    const QString host = QUrl(agentSettings.getApiUrl()).host();
+    const QString serviceId = host.isEmpty() ? QStringLiteral("agent-type-%1").arg(static_cast<int>(agentSettings.getType())) : host;
+    const QString serviceName = host.isEmpty() ? name : name + " (" + host + ")";
+
+    const QString sharedData = tr("your question and the open family tree, including names, sex, dates and places of birth and death, and relations. Pictures and notes are not sent.");
+
+    return RAiConsent::request(this,this->appSettings,serviceId,serviceName,sharedData);
+}
+
 void RAiChatWidget::applyCurrentAgent()
 {
     const QString name = this->aiAgentCombo->currentText();
@@ -50,7 +72,7 @@ void RAiChatWidget::applyCurrentAgent()
 }
 
 RAiChatWidget::RAiChatWidget(RAgentSettingsManager *aiAgentSettingsManager,
-                             const RApplicationSettings *applicationSettings,
+                             RApplicationSettings *applicationSettings,
                              const QString &initialAgent,
                              const QString &initialLanguage,
                              QWidget *parent)
@@ -223,6 +245,7 @@ RAiChatWidget::RAiChatWidget(RAgentSettingsManager *aiAgentSettingsManager,
     {
         QString text = queryEdit->text();
         if (text.isEmpty()) return;
+        if (!this->requestDataSharingConsent()) return;
         appendMarkdown(QStringLiteral("---\n**") + tr("Me") + QStringLiteral(":** *") + text + QStringLiteral("*"));
         queryEdit->clear();
         showWaiting();

@@ -56,6 +56,7 @@ const QString RApplicationSettings::cloudClientCertificateRenewKey = "cloud/Clie
 const QString RApplicationSettings::cloudClientCertificateExpiryDaysKey = "cloud/ClientCertificateExpiryDays";
 const QString RApplicationSettings::softwareSendUsageInfoKey = "cloud/softwareSendUsageInfo";
 const QString RApplicationSettings::softwareCheckUpdatesKey = "cloud/softwareCheckUpdates";
+const QString RApplicationSettings::aiDataSharingConsentKey = "ai/dataSharingConsent";
 const QString RApplicationSettings::proxyTypeKey = "proxy/proxyType";
 const QString RApplicationSettings::proxyHostKey = "proxy/proxyHost";
 const QString RApplicationSettings::proxyPortKey = "proxy/proxyPort";
@@ -407,6 +408,34 @@ void RApplicationSettings::setSoftwareSendUsageInfo(bool cloudSendUsageInfo)
 {
     this->setValue(RApplicationSettings::softwareSendUsageInfoKey, cloudSendUsageInfo);
     emit this->cloudSendUsageInfoChanged(cloudSendUsageInfo);
+}
+
+bool RApplicationSettings::getAiDataSharingConsent(const QString &serviceId) const
+{
+    return this->value(RApplicationSettings::aiDataSharingConsentKey + "/" + serviceId,false).toBool();
+}
+
+void RApplicationSettings::setAiDataSharingConsent(const QString &serviceId, bool consent)
+{
+    this->setValue(RApplicationSettings::aiDataSharingConsentKey + "/" + serviceId, consent);
+}
+
+bool RApplicationSettings::hasAiDataSharingConsent() const
+{
+    const QString prefix = RApplicationSettings::aiDataSharingConsentKey + "/";
+    for (const QString &key : this->allKeys())
+    {
+        if (key.startsWith(prefix) && this->value(key).toBool())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void RApplicationSettings::clearAiDataSharingConsent()
+{
+    this->remove(RApplicationSettings::aiDataSharingConsentKey);
 }
 
 bool RApplicationSettings::getSoftwareCheckUpdates() const
@@ -941,7 +970,13 @@ uint RApplicationSettings::getDefaultCloudClientCertificateExpiryDays()
 
 bool RApplicationSettings::getDefaultSoftwareSendUsageInfo()
 {
+#ifdef STORE_BUILD
+    // Store guidelines require consent before any data is collected, therefore
+    // the usage information is sent only after the user has turned it on.
+    return false;
+#else
     return true;
+#endif
 }
 
 bool RApplicationSettings::getDefaultSoftwareCheckUpdates()

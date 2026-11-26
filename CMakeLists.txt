@@ -16,6 +16,7 @@ qt_add_library(range-gui-lib
         src/rgl_ai_agent_settings_manager_widget.cpp
         src/rgl_ai_agent_settings_widget.cpp
         src/rgl_ai_chat_widget.cpp
+        src/rgl_ai_consent.cpp
         src/rgl_application.cpp
         src/rgl_application_settings.cpp
         src/rgl_application_settings_dialog.cpp
@@ -80,6 +81,7 @@ qt_add_library(range-gui-lib
         include/rgl_ai_agent_settings_manager_widget.h
         include/rgl_ai_agent_settings_widget.h
         include/rgl_ai_chat_widget.h
+        include/rgl_ai_consent.h
         include/rgl_application.h
         include/rgl_application_settings.h
         include/rgl_application_settings_dialog.h

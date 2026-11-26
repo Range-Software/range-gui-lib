@@ -2,6 +2,7 @@
 #include <QGroupBox>
 #include <QLabel>
 #include <QLineEdit>
+#include <QPushButton>
 #include <QSpinBox>
 #include <QComboBox>
 #include <QTabWidget>
@@ -183,6 +184,20 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
 #endif
     softwareLayout->addWidget(this->softwareCheckUpdatesCheckBox);
 
+    QGroupBox *aiGroupBox = new QGroupBox(tr("AI services"));
+    networkLayout->addWidget(aiGroupBox);
+
+    QVBoxLayout *aiLayout = new QVBoxLayout;
+    aiGroupBox->setLayout(aiLayout);
+
+    QLabel *aiConsentLabel = new QLabel(tr("Before data is sent to an AI service for the first time, you are asked for permission. Withdraw all given permissions to be asked again."));
+    aiConsentLabel->setWordWrap(true);
+    aiLayout->addWidget(aiConsentLabel);
+
+    this->aiConsentClearButton = new QPushButton(tr("Withdraw AI data sharing permissions"));
+    this->aiConsentClearButton->setEnabled(this->applicationSettings->hasAiDataSharingConsent());
+    aiLayout->addWidget(this->aiConsentClearButton,0,Qt::AlignLeft);
+
     networkLayout->addStretch(10);
 
     // Paths
@@ -240,6 +255,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->cloudClientCertificateExpiryDaysSpin,&QSpinBox::valueChanged,this,&RApplicationSettingsWidget::onCloudClientCertificateExpiryDaysChanged);
     QObject::connect(this->softwareSendUsageInfoCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged);
     QObject::connect(this->softwareCheckUpdatesCheckBox,&QCheckBox::checkStateChanged,this,&RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged);
+    QObject::connect(this->aiConsentClearButton,&QPushButton::clicked,this,&RApplicationSettingsWidget::onAiConsentClearClicked);
     QObject::connect(this->userFullNameEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onUserFullNameChanged);
     QObject::connect(this->userEmailEdit,&QLineEdit::textChanged,this,&RApplicationSettingsWidget::onUserEmailChanged);
     QObject::connect(this->userTerritoryCombo,&RTerritoryComboBox::territorrySelected,this,&RApplicationSettingsWidget::onUserTerritorySelected);
@@ -289,6 +305,7 @@ void RApplicationSettingsWidget::setDefaultValues()
     this->cloudClientCertificateRenewCheckBox->setCheckState(RApplicationSettings::getDefaultCloudClientCertificateRenew() ? Qt::Checked : Qt::Unchecked);
     this->softwareSendUsageInfoCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareSendUsageInfo() ? Qt::Checked : Qt::Unchecked);
     this->softwareCheckUpdatesCheckBox->setCheckState(RApplicationSettings::getDefaultSoftwareCheckUpdates() ? Qt::Checked : Qt::Unchecked);
+    this->onAiConsentClearClicked();
     this->userFullNameEdit->setText(QString());
     this->userEmailEdit->setText(QString());
     this->userTerritoryCombo->setCurrentTerritoryCode(RApplicationSettings::getDefaultUserTerritory());
@@ -358,6 +375,12 @@ void RApplicationSettingsWidget::onSoftwareSendUsageInfoChanged(Qt::CheckState s
 void RApplicationSettingsWidget::onSoftwareCheckUpdatesChanged(Qt::CheckState state)
 {
     this->applicationSettings->setSoftwareCheckUpdates(state == Qt::Checked);
+}
+
+void RApplicationSettingsWidget::onAiConsentClearClicked()
+{
+    this->applicationSettings->clearAiDataSharingConsent();
+    this->aiConsentClearButton->setEnabled(false);
 }
 
 void RApplicationSettingsWidget::onUserFullNameChanged(const QString &userFullName)

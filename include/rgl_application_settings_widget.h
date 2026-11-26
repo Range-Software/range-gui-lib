@@ -6,6 +6,7 @@
 #include <QSpinBox>
 #include <QCheckBox>
 #include <QLineEdit>
+#include <QPushButton>
 
 #include "rgl_application_settings.h"
 #include "rgl_file_chooser_button.h"
@@ -41,6 +42,7 @@ class RApplicationSettingsWidget : public QWidget
         QSpinBox *cloudClientCertificateExpiryDaysSpin;
         QCheckBox *softwareSendUsageInfoCheckBox;
         QCheckBox *softwareCheckUpdatesCheckBox;
+        QPushButton *aiConsentClearButton;
         QLineEdit *userFullNameEdit;
         QLineEdit *userEmailEdit;
         RTerritoryComboBox *userTerritoryCombo;
@@ -96,6 +98,9 @@ class RApplicationSettingsWidget : public QWidget
 
         //! Check software updates.
         void onSoftwareCheckUpdatesChanged(Qt::CheckState state);
+
+        //! Withdraw all permissions to share data with AI services.
+        void onAiConsentClearClicked();
 
         //! User full name changed.
         void onUserFullNameChanged(const QString &userFullName);
