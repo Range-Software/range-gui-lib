@@ -1,3 +1,30 @@
+## Version 1.3.2
+
+### Bug fixes
+
+- **RProgressBar** displays only its status text while pulsing, instead of appending
+  a misleading `0%`
+- **RApplicationSettings::getTmpDir()**, **getLogDir()**, **getCertDir()** and
+  **getSessionDir()** were placed in the application home directory in
+  `Documents`, which may be synchronized across devices (e.g. iCloud). The lock
+  file, the Cloud file synchronization cache, the logs, private keys,
+  certificates and Cloud sessions describe a single device, so sharing them
+  mixed up the state of several devices and spread private keys to all of them.
+  They are now placed in the new **RApplicationSettings::getAppLocalDir()**
+  (`Application Support` on macOS, `AppData/Local` on Windows, `~/.local/share`
+  on Linux), which is never synchronized. Sandboxed applications keep using
+  their container. New **getAppLocalDataDir()** returns a subdirectory of it
+- New **RApplicationSettings::migrateLocalDataDirs()**, called by
+  **RApplication** at start, copies certificates and sessions from the old
+  location when the new directories are empty, and changes paths to the old
+  certificate directory stored in session files to the new one. The old files
+  are left in place, so other devices can migrate them as well. Both directories
+  are made readable by the owner only
+- The placeholder text of **RAiChatWidget** and **RCloudAiQueryWidget** read "Ask
+  your question an press Enter" instead of "Ask your question and press Enter"
+
+---
+
 ## Version 1.3.1
 
 ### Improvements
@@ -43,30 +70,12 @@
 
 ### Bug fixes
 
-- **RProgressBar** displays only its status text while pulsing, instead of appending
-  a misleading `0%`
 - New signal **RApplication::styleApplied()** is emitted after the application
   style or color scheme has been applied. Qt does not notify widgets which have
   a style of their own, so they can rebuild it on this signal
 - **RApplicationSettings::getSupportedDocumentFormats()** listed `odf`, the
   extension of OpenDocument formulas, instead of `odt` for OpenDocument texts, so
   text documents such as reports were not found
-- **RApplicationSettings::getTmpDir()**, **getLogDir()**, **getCertDir()** and
-  **getSessionDir()** were placed in the application home directory in
-  `Documents`, which may be synchronized across devices (e.g. iCloud). The lock
-  file, the Cloud file synchronization cache, the logs, private keys,
-  certificates and Cloud sessions describe a single device, so sharing them
-  mixed up the state of several devices and spread private keys to all of them.
-  They are now placed in the new **RApplicationSettings::getAppLocalDir()**
-  (`Application Support` on macOS, `AppData/Local` on Windows, `~/.local/share`
-  on Linux), which is never synchronized. Sandboxed applications keep using
-  their container. New **getAppLocalDataDir()** returns a subdirectory of it
-- New **RApplicationSettings::migrateLocalDataDirs()**, called by
-  **RApplication** at start, copies certificates and sessions from the old
-  location when the new directories are empty, and changes paths to the old
-  certificate directory stored in session files to the new one. The old files
-  are left in place, so other devices can migrate them as well. Both directories
-  are made readable by the owner only
 
 ---
 
