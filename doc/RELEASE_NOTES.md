@@ -1,3 +1,13 @@
+## Version 1.3.5
+
+### Bug fixes
+
+- **RApplicationSettingsWidget** hid "Check for software update" in every build,
+  not only in store builds (`STORE_BUILD`), because the guard around hiding it was
+  commented out
+
+---
+
 ## Version 1.3.4
 
 ### Improvements
