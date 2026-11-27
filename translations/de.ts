@@ -404,92 +404,87 @@
 <context>
     <name>RApplicationSettingsWidget</name>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="32"/>
-        <source>Appearance</source>
-        <translation>Darstellung</translation>
-    </message>
-    <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="47"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="54"/>
         <source>Style</source>
         <translation>Stil</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="68"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="75"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="76"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="83"/>
         <source>Formats</source>
         <translation>Formate</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="98"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="104"/>
         <source>Jon Smith</source>
         <translation>Max Mustermann</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="100"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="106"/>
         <source>Full name</source>
         <translation>Vollständiger Name</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="92"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="97"/>
         <source>User</source>
         <translation>Benutzer</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="56"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="63"/>
         <source>Color scheme</source>
         <translation>Farbschema</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="109"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="115"/>
         <source>E-mail</source>
         <translation>E-Mail</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="112"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="118"/>
         <source>Country</source>
         <translation>Land</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="119"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="123"/>
         <source>Network</source>
         <translation>Netzwerk</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="124"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="129"/>
         <source>Network proxy</source>
         <translation>Netzwerk-Proxy</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="133"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="138"/>
         <source>Cloud</source>
         <translation>Cloud</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="143"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="149"/>
         <source>Refresh timeout</source>
         <translation>Aktualisierungs-Zeitlimit</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="145"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="146"/>
         <source>seconds</source>
         <translation>Sekunden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="147"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="151"/>
         <source>Synchronize data directory</source>
         <translation>Datenverzeichnis synchronisieren</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="152"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="156"/>
         <source>Renew client certificate</source>
         <translation>Client-Zertifikat erneuern</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="161"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="167"/>
         <source>Days before expiry</source>
         <translation>Tage vor Ablauf</translation>
     </message>
@@ -499,102 +494,112 @@
         <translation>Tage</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="165"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="38"/>
+        <source>General</source>
+        <translation>Allgemein</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="180"/>
+        <source>Privacy</source>
+        <translation>Datenschutz</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="186"/>
         <source>Software</source>
         <translation>Software</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="171"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="192"/>
         <source>Send usage information</source>
         <translation>Nutzungsinformationen senden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="176"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="197"/>
         <source>Check for software update</source>
         <translation>Nach Softwareaktualisierungen suchen</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="187"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="208"/>
         <source>AI services</source>
         <translation>KI-Dienste</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="193"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="214"/>
         <source>Before data is sent to an AI service for the first time, you are asked for permission. Withdraw all given permissions to be asked again.</source>
         <translation>Bevor zum ersten Mal Daten an einen KI-Dienst gesendet werden, werden Sie um Erlaubnis gebeten. Widerrufen Sie alle erteilten Erlaubnisse, um erneut gefragt zu werden.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="197"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="218"/>
         <source>Withdraw AI data sharing permissions</source>
         <translation>Erlaubnisse zur Datenweitergabe an KI widerrufen</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="206"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="227"/>
         <source>Paths</source>
         <translation>Pfade</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="211"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="233"/>
         <source>Help directory</source>
         <translation>Hilfeverzeichnis</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="216"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="238"/>
         <source>OpenSSL tool</source>
         <translation>OpenSSL-Werkzeug</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="221"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="243"/>
         <source>OpenSSL configuration</source>
         <translation>OpenSSL-Konfiguration</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="235"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="257"/>
         <source>Keyboard shortcuts</source>
         <translation>Tastenkürzel</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="330"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="364"/>
         <source>Language change</source>
         <translation>Sprachänderung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="330"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="364"/>
         <source>Language change requires an application restart.</source>
         <translation>Die Sprachänderung erfordert einen Neustart der Anwendung.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="336"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="370"/>
         <source>Format change</source>
         <translation>Formatänderung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="336"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="370"/>
         <source>Format change requires an application restart.</source>
         <translation>Die Formatänderung erfordert einen Neustart der Anwendung.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="81"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="88"/>
         <source>Do not use native menubar</source>
         <translation>Keine native Menüleiste verwenden</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="82"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="89"/>
         <source>Show the menubar inside the application window instead of the system menubar.</source>
         <translation>Die Menüleiste im Anwendungsfenster statt in der Systemmenüleiste anzeigen.</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="84"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="91"/>
         <source>Menubar</source>
         <translation>Menüleiste</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="342"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="376"/>
         <source>Menubar change</source>
         <translation>Menüleistenänderung</translation>
     </message>
     <message>
-        <location filename="../src/rgl_application_settings_widget.cpp" line="342"/>
+        <location filename="../src/rgl_application_settings_widget.cpp" line="376"/>
         <source>Menubar change requires an application restart.</source>
         <translation>Die Menüleistenänderung erfordert einen Neustart der Anwendung.</translation>
     </message>
@@ -1756,37 +1761,42 @@
 <context>
     <name>RProxySettingsWidget</name>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="14"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="16"/>
         <source>No proxy</source>
         <translation>Kein Proxy</translation>
     </message>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="15"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="17"/>
         <source>System</source>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="16"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="18"/>
         <source>Manual</source>
         <translation>Manuell</translation>
     </message>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="29"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="21"/>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="31"/>
         <source>Host</source>
         <translation>Host</translation>
     </message>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="34"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="32"/>
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="37"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="41"/>
         <source>User</source>
         <translation>Benutzer</translation>
     </message>
     <message>
-        <location filename="../src/rgl_proxy_settings_widget.cpp" line="41"/>
+        <location filename="../src/rgl_proxy_settings_widget.cpp" line="49"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>

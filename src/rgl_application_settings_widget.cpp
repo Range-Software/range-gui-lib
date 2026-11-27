@@ -5,7 +5,9 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QComboBox>
-#include <QTabWidget>
+#include <QListWidget>
+#include <QStackedWidget>
+#include <QStyle>
 #include <QStandardPaths>
 
 #include <rbl_logger.h>
@@ -20,19 +22,24 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     : QWidget{parent}
     , applicationSettings{applicationSettings}
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    QHBoxLayout *mainLayout = new QHBoxLayout;
+    mainLayout->setContentsMargins(0,0,0,0);
     this->setLayout(mainLayout);
 
-    this->tabWidget = new QTabWidget;
-    mainLayout->addWidget(this->tabWidget);
+    this->pageList = new QListWidget;
+    mainLayout->addWidget(this->pageList);
 
-    // Appearance
+    this->pageStack = new QStackedWidget;
+    mainLayout->addWidget(this->pageStack,1);
 
-    QWidget *apperanceWidget = new QWidget;
-    this->tabWidget->addTab(apperanceWidget,tr("Appearance"));
+    // General
 
-    QFormLayout *appearanceLayout = new QFormLayout;
-    apperanceWidget->setLayout(appearanceLayout);
+    QWidget *generalWidget = new QWidget;
+    this->addPage(generalWidget,tr("General"));
+
+    QFormLayout *generalLayout = new QFormLayout;
+    generalLayout->setContentsMargins(0,0,0,0);
+    generalWidget->setLayout(generalLayout);
 
     QStringList styles(RApplicationSettings::getStyles());
     this->styleCombo = new QComboBox;
@@ -44,7 +51,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
             this->styleCombo->setCurrentIndex(i);
         }
     }
-    appearanceLayout->addRow(tr("Style") + ":",this->styleCombo);
+    generalLayout->addRow(tr("Style") + ":",this->styleCombo);
 
     QList<Qt::ColorScheme> colorSchemes(RApplicationSettings::getColorSchemes());
     this->colorSchemeCombo = new QComboBox;
@@ -53,7 +60,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
         this->colorSchemeCombo->addItem(RStyle::colorSchemeToText(colorSchemes.at(i)),int(colorSchemes.at(i)));
     }
     this->colorSchemeCombo->setCurrentIndex(int(this->applicationSettings->getColorScheme()));
-    appearanceLayout->addRow(tr("Color scheme") + ":",this->colorSchemeCombo);
+    generalLayout->addRow(tr("Color scheme") + ":",this->colorSchemeCombo);
 
     QStringList languageNames(RApplicationSettings::getLanguageNames());
     this->languageCombo = new QComboBox;
@@ -65,7 +72,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
             this->languageCombo->setCurrentIndex(i);
         }
     }
-    appearanceLayout->addRow(tr("Language") + ":",this->languageCombo);
+    generalLayout->addRow(tr("Language") + ":",this->languageCombo);
 
     this->formatCombo = new QComboBox;
     for (int i=0;i<RApplicationSettings::Format::nFormats;i++)
@@ -73,7 +80,7 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
         this->formatCombo->addItem(RApplicationSettings::formatToName(RApplicationSettings::Format(i)),RApplicationSettings::formatToCode(RApplicationSettings::Format(i)));
     }
     this->formatCombo->setCurrentIndex(this->applicationSettings->getFormat());
-    appearanceLayout->addRow(tr("Formats") + ":",this->formatCombo);
+    generalLayout->addRow(tr("Formats") + ":",this->formatCombo);
 
     this->dontUseNativeMenuBarCheckBox = nullptr;
     if (RApplicationSettings::isNativeMenuBarSupported())
@@ -81,17 +88,16 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
         this->dontUseNativeMenuBarCheckBox = new QCheckBox(tr("Do not use native menubar"));
         this->dontUseNativeMenuBarCheckBox->setToolTip(tr("Show the menubar inside the application window instead of the system menubar."));
         this->dontUseNativeMenuBarCheckBox->setChecked(this->applicationSettings->getDontUseNativeMenuBar());
-        appearanceLayout->addRow(tr("Menubar") + ":",this->dontUseNativeMenuBarCheckBox);
+        generalLayout->addRow(tr("Menubar") + ":",this->dontUseNativeMenuBarCheckBox);
     }
-
-    appearanceLayout->addRow(new QWidget);
 
     // User
 
     QWidget *userWidget = new QWidget;
-    this->tabWidget->addTab(userWidget,tr("User"));
+    this->addPage(userWidget,tr("User"));
 
     QFormLayout *userLayout = new QFormLayout;
+    userLayout->setContentsMargins(0,0,0,0);
     userWidget->setLayout(userLayout);
 
     this->userFullNameEdit = new QLineEdit(this->applicationSettings->getUserFullName());
@@ -111,14 +117,13 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->userTerritoryCombo = new RTerritoryComboBox(this->applicationSettings->getUserTerritory());
     userLayout->addRow(tr("Country") + ":",this->userTerritoryCombo);
 
-    userLayout->addRow(new QWidget);
-
     // Network
 
     QWidget *networkWidget = new QWidget;
-    this->tabWidget->addTab(networkWidget,tr("Network"));
+    this->addPage(networkWidget,tr("Network"));
 
     QVBoxLayout *networkLayout = new QVBoxLayout;
+    networkLayout->setContentsMargins(0,0,0,0);
     networkWidget->setLayout(networkLayout);
 
     QGroupBox *proxyGroupBox = new QGroupBox(tr("Network proxy"));
@@ -133,37 +138,53 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QGroupBox *cloudGroupBox = new QGroupBox(tr("Cloud"));
     networkLayout->addWidget(cloudGroupBox);
 
-    QGridLayout *cloudLayout = new QGridLayout;
+    QFormLayout *cloudLayout = new QFormLayout;
     cloudGroupBox->setLayout(cloudLayout);
 
     this->cloudRefreshTimeoutSpin = new QSpinBox;
     this->cloudRefreshTimeoutSpin->setRange(0,INT_MAX);
+    this->cloudRefreshTimeoutSpin->setSuffix(" " + tr("seconds"));
     this->cloudRefreshTimeoutSpin->setValue(this->applicationSettings->getCloudRefreshTimeout()/1000);
 
-    cloudLayout->addWidget(new QLabel(tr("Refresh timeout") + ":"),0,0,1,1);
-    cloudLayout->addWidget(this->cloudRefreshTimeoutSpin,0,1,1,1);
-    cloudLayout->addWidget(new QLabel("[" + tr("seconds") + "]"),0,2,1,1);
+    cloudLayout->addRow(tr("Refresh timeout") + ":",this->cloudRefreshTimeoutSpin);
 
     this->cloudSyncDataDirectoryCheckBox = new QCheckBox(tr("Synchronize data directory"));
     this->cloudSyncDataDirectoryCheckBox->setChecked(this->applicationSettings->getCloudSyncDataDirectory());
 
-    cloudLayout->addWidget(this->cloudSyncDataDirectoryCheckBox,1,0,1,3);
+    cloudLayout->addRow(this->cloudSyncDataDirectoryCheckBox);
 
     this->cloudClientCertificateRenewCheckBox = new QCheckBox(tr("Renew client certificate"));
     this->cloudClientCertificateRenewCheckBox->setChecked(this->applicationSettings->getCloudClientCertificateRenew());
 
-    cloudLayout->addWidget(this->cloudClientCertificateRenewCheckBox,2,0,1,3);
+    cloudLayout->addRow(this->cloudClientCertificateRenewCheckBox);
 
     this->cloudClientCertificateExpiryDaysSpin = new QSpinBox;
     this->cloudClientCertificateExpiryDaysSpin->setRange(0,INT_MAX);
+    this->cloudClientCertificateExpiryDaysSpin->setSuffix(" " + tr("days"));
     this->cloudClientCertificateExpiryDaysSpin->setValue(this->applicationSettings->getCloudClientCertificateExpiryDays());
 
-    cloudLayout->addWidget(new QLabel(tr("Days before expiry") + ":"),3,0,1,1);
-    cloudLayout->addWidget(this->cloudClientCertificateExpiryDaysSpin,3,1,1,1);
-    cloudLayout->addWidget(new QLabel("[" + tr("days") + "]"),3,2,1,1);
+    // Indented so it reads as a sub-option of the renew check box above it.
+    this->cloudClientCertificateExpiryDaysLabel = new QLabel(tr("Days before expiry") + ":");
+    this->cloudClientCertificateExpiryDaysLabel->setIndent(this->style()->pixelMetric(QStyle::PM_IndicatorWidth) + this->style()->pixelMetric(QStyle::PM_CheckBoxLabelSpacing));
+
+    cloudLayout->addRow(this->cloudClientCertificateExpiryDaysLabel,this->cloudClientCertificateExpiryDaysSpin);
+
+    this->cloudClientCertificateExpiryDaysLabel->setEnabled(this->cloudClientCertificateRenewCheckBox->isChecked());
+    this->cloudClientCertificateExpiryDaysSpin->setEnabled(this->cloudClientCertificateRenewCheckBox->isChecked());
+
+    networkLayout->addStretch(10);
+
+    // Privacy
+
+    QWidget *privacyWidget = new QWidget;
+    this->addPage(privacyWidget,tr("Privacy"));
+
+    QVBoxLayout *privacyLayout = new QVBoxLayout;
+    privacyLayout->setContentsMargins(0,0,0,0);
+    privacyWidget->setLayout(privacyLayout);
 
     QGroupBox *softwareGroupBox = new QGroupBox(tr("Software"));
-    networkLayout->addWidget(softwareGroupBox);
+    privacyLayout->addWidget(softwareGroupBox);
 
     QVBoxLayout *softwareLayout = new QVBoxLayout;
     softwareGroupBox->setLayout(softwareLayout);
@@ -176,16 +197,16 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->softwareCheckUpdatesCheckBox = new QCheckBox(tr("Check for software update"));
     this->softwareCheckUpdatesCheckBox->setChecked(this->applicationSettings->getSoftwareCheckUpdates());
 
-#ifdef STORE_BUILD
+//ifdef STORE_BUILD
     // A store build carries no update checker, so the option would do nothing.
     // The check box is kept alive and merely hidden, so the slots connected to
     // it below and setDefaultValues() need no special case.
     this->softwareCheckUpdatesCheckBox->setVisible(false);
-#endif
+//endif
     softwareLayout->addWidget(this->softwareCheckUpdatesCheckBox);
 
     QGroupBox *aiGroupBox = new QGroupBox(tr("AI services"));
-    networkLayout->addWidget(aiGroupBox);
+    privacyLayout->addWidget(aiGroupBox);
 
     QVBoxLayout *aiLayout = new QVBoxLayout;
     aiGroupBox->setLayout(aiLayout);
@@ -198,14 +219,15 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     this->aiConsentClearButton->setEnabled(this->applicationSettings->hasAiDataSharingConsent());
     aiLayout->addWidget(this->aiConsentClearButton,0,Qt::AlignLeft);
 
-    networkLayout->addStretch(10);
+    privacyLayout->addStretch(10);
 
     // Paths
 
     QWidget *pathsWidget = new QWidget;
-    this->tabWidget->addTab(pathsWidget,tr("Paths"));
+    this->addPage(pathsWidget,tr("Paths"));
 
     QVBoxLayout *pathsLayout = new QVBoxLayout;
+    pathsLayout->setContentsMargins(0,0,0,0);
     pathsWidget->setLayout(pathsLayout);
 
     this->helpDirectoryButton = new RFileChooserButton(tr("Help directory") + ":",RFileChooserButton::Directory);
@@ -232,14 +254,20 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     // Keyboard shortcuts
 
     QWidget *keyboardShortcusWidget = new QWidget;
-    this->tabWidget->addTab(keyboardShortcusWidget,tr("Keyboard shortcuts"));
+    this->addPage(keyboardShortcusWidget,tr("Keyboard shortcuts"));
 
     QVBoxLayout *keyboardShortcutsLayout = new QVBoxLayout;
+    keyboardShortcutsLayout->setContentsMargins(0,0,0,0);
     keyboardShortcusWidget->setLayout(keyboardShortcutsLayout);
 
     this->keyboardShortcutsEdirotWidget = new RKeyboardShortcutsEditorWidget(RApplication::instance()->getActionList());
     keyboardShortcutsLayout->addWidget(this->keyboardShortcutsEdirotWidget);
 
+    // Wide enough for the longest page name, so none is cut off.
+    this->pageList->setFixedWidth(this->pageList->sizeHintForColumn(0) + 2 * this->pageList->frameWidth() + 24);
+    this->pageList->setCurrentRow(0);
+
+    QObject::connect(this->pageList,&QListWidget::currentRowChanged,this->pageStack,&QStackedWidget::setCurrentIndex);
     QObject::connect(this->styleCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onStyleChanged);
     QObject::connect(this->colorSchemeCombo,&QComboBox::currentIndexChanged,this,&RApplicationSettingsWidget::onColorSchemeChanged);
     QObject::connect(this->languageCombo,&QComboBox::currentTextChanged,this,&RApplicationSettingsWidget::onLanguageChanged);
@@ -263,6 +291,12 @@ RApplicationSettingsWidget::RApplicationSettingsWidget(RApplicationSettings *app
     QObject::connect(this->opensslToolFileButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onOpensslToolFileChanged);
     QObject::connect(this->opensslConfFileButton,&RFileChooserButton::fileNameChanged,this,&RApplicationSettingsWidget::onOpensslConfFileChanged);
     QObject::connect(this->keyboardShortcutsEdirotWidget,&RKeyboardShortcutsEditorWidget::shortcutChanged,this,&RApplicationSettingsWidget::onKeyboardShortcutChanged);
+}
+
+void RApplicationSettingsWidget::addPage(QWidget *pageWidget, const QString &title)
+{
+    this->pageList->addItem(title);
+    this->pageStack->addWidget(pageWidget);
 }
 
 void RApplicationSettingsWidget::setDefaultValues()
@@ -360,6 +394,8 @@ void RApplicationSettingsWidget::onCloudSyncDataDirectoryChanged(Qt::CheckState 
 void RApplicationSettingsWidget::onCloudClientCertificateRenewChanged(Qt::CheckState state)
 {
     this->applicationSettings->setCloudClientCertificateRenew(state == Qt::Checked);
+    this->cloudClientCertificateExpiryDaysLabel->setEnabled(state == Qt::Checked);
+    this->cloudClientCertificateExpiryDaysSpin->setEnabled(state == Qt::Checked);
 }
 
 void RApplicationSettingsWidget::onCloudClientCertificateExpiryDaysChanged(int cloudClientCertificateExpiryDays)

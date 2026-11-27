@@ -32,4 +32,6 @@ RApplicationSettingsDialog::RApplicationSettingsDialog(RApplicationSettings *mai
     QObject::connect(buttonBox,&QDialogButtonBox::accepted,this,&QDialog::close);
 
     QObject::connect(defaultButton,&QPushButton::clicked,applicationSettingsWidget,&RApplicationSettingsWidget::setDefaultValues);
+
+    this->resize(this->sizeHint().expandedTo(QSize(760,480)));
 }

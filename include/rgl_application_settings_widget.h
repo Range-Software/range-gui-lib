@@ -1,7 +1,9 @@
 #ifndef RGL_APPLICATION_SETTINGS_WIDGET_H
 #define RGL_APPLICATION_SETTINGS_WIDGET_H
 
-#include <QTabWidget>
+#include <QListWidget>
+#include <QStackedWidget>
+#include <QLabel>
 #include <QComboBox>
 #include <QSpinBox>
 #include <QCheckBox>
@@ -25,8 +27,10 @@ class RApplicationSettingsWidget : public QWidget
 
         bool enableUserInfo;
 
-        //! Tab widget.
-        QTabWidget *tabWidget;
+        //! List of settings pages.
+        QListWidget *pageList;
+        //! Stack of settings pages, one per item in the page list.
+        QStackedWidget *pageStack;
 
         QComboBox *styleCombo;
         QComboBox *colorSchemeCombo;
@@ -39,6 +43,7 @@ class RApplicationSettingsWidget : public QWidget
         QSpinBox *cloudRefreshTimeoutSpin;
         QCheckBox *cloudSyncDataDirectoryCheckBox;
         QCheckBox *cloudClientCertificateRenewCheckBox;
+        QLabel *cloudClientCertificateExpiryDaysLabel;
         QSpinBox *cloudClientCertificateExpiryDaysSpin;
         QCheckBox *softwareSendUsageInfoCheckBox;
         QCheckBox *softwareCheckUpdatesCheckBox;
@@ -55,6 +60,11 @@ class RApplicationSettingsWidget : public QWidget
 
         //! Constructor.
         explicit RApplicationSettingsWidget(RApplicationSettings *applicationSettings, QWidget *parent = nullptr);
+
+    protected:
+
+        //! Add settings page.
+        void addPage(QWidget *pageWidget, const QString &title);
 
     public slots:
 

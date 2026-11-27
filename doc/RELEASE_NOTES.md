@@ -1,3 +1,24 @@
+## Version 1.3.4
+
+### Improvements
+
+- **RApplicationSettingsDialog** is easier to read. Its pages are listed on the
+  left side instead of in tabs, so no page name is cut off, and the dialog opens
+  at least 760 × 480 pixels large
+  - "Appearance" is renamed to "General"
+  - New "Privacy" page holds "Send usage information", "Check for software
+    update" and the "AI services" group, which were on the "Network" page
+  - "Network proxy" puts the host and the port on one line and has no inner
+    frame. Units of the Cloud refresh timeout and the certificate expiry are
+    shown in their spin boxes, and the expiry is enabled only when the client
+    certificate is renewed
+  - The protected **RApplicationSettingsWidget::tabWidget** is replaced by
+    **pageList** and **pageStack**; **RProxySettingsWidget::formGroupBox** is
+    removed
+- New texts are translated into all supported languages
+
+---
+
 ## Version 1.3.3
 
 ### Improvements

@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QComboBox>
-#include <QGroupBox>
 #include <QLineEdit>
 #include <QSpinBox>
 
@@ -20,8 +19,6 @@ class RProxySettingsWidget : public QWidget
 
         //! Type combo box.
         QComboBox *typeCombo;
-        //! Form group box.
-        QGroupBox *formGroupBox;
         //! Host line edit.
         QLineEdit *hostEdit;
         //! Port spin box.
@@ -30,6 +27,8 @@ class RProxySettingsWidget : public QWidget
         QLineEdit *userEdit;
         //! Password line edit.
         QLineEdit *passwordEdit;
+        //! Widgets used only by a manual proxy.
+        QList<QWidget*> manualProxyWidgets;
 
     public:
 
@@ -40,6 +39,9 @@ class RProxySettingsWidget : public QWidget
 
         //! Convert proxy type to combo box index.
         static int proxyTypeToComboIndex(RHttpProxySettings::Type type);
+
+        //! Enable or disable widgets used only by a manual proxy.
+        void setManualProxyEnabled(bool enabled);
 
     public slots:
 
